@@ -7,7 +7,7 @@
 <style>
 :root{--bg:#eef1f6;--panel:#fff;--bot:#e8edf7;--user:#d7f0e4;--text:#1c2430;--muted:#6b7280;--accent:#3451b2;--line:#d9dee8}
 *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text)}
-.wrap{width:min(480px,100%);margin:0 auto;min-height:100vh;display:flex;flex-direction:column;background:var(--panel);border-left:1px solid var(--line);border-right:1px solid var(--line)}
+.wrap{width:min(480px,100%);max-width:100%;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;background:var(--panel);border-left:1px solid var(--line);border-right:1px solid var(--line);min-width:0}
 .head{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:center}
 .avatar{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#7aa2ff,#3451b2)}
 .head h1{margin:0;font-size:1rem} .head p{margin:0;color:var(--muted);font-size:.82rem}
@@ -17,9 +17,9 @@
 .actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
 .actions button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;cursor:pointer;font:inherit}
 .actions button:hover{border-color:var(--accent);color:var(--accent)}
-.composer{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line)}
-.composer input{flex:1;padding:11px 12px;border-radius:12px;border:1px solid var(--line);font:inherit}
-.composer button{padding:11px 14px;border:0;border-radius:12px;background:var(--accent);color:#fff;font-weight:600;cursor:pointer}
+.composer{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line);min-width:0}
+.composer input{flex:1 1 auto;min-width:0;width:100%;padding:11px 12px;border-radius:12px;border:1px solid var(--line);font:inherit}
+.composer button{flex:0 0 auto;padding:11px 14px;border:0;border-radius:12px;background:var(--accent);color:#fff;font-weight:600;cursor:pointer}
 .note{padding:8px 16px 14px;color:var(--muted);font-size:.8rem}
 </style>
 </head>

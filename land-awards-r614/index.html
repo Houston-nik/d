@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Производство наград</title>
+<style>
+:root, [data-theme="light"] {
+  --bg:#f6f7f9; --surface:#fff; --text:#1a1d24; --muted:#5c6570;
+  --accent:#2f6fed; --accent2:#1e4fbf; --border:#e2e6ee; --hero1:#dbe7ff; --hero2:#f0f4ff;
+  --ok:#1a7f4b; --shadow:0 8px 28px rgba(26,29,36,.08);
+}
+[data-theme="dark"] {
+  --bg:#0f1218; --surface:#1a1f2b; --text:#eef1f6; --muted:#9aa3b2;
+  --accent:#5b8cff; --accent2:#3d6fe0; --border:#2a3142; --hero1:#1a2440; --hero2:#121826;
+  --ok:#3dd68c; --shadow:0 8px 28px rgba(0,0,0,.35);
+}
+[data-theme="warm"] {
+  --bg:#faf6f1; --surface:#fffdf9; --text:#2a2118; --muted:#7a6a5a;
+  --accent:#c45c26; --accent2:#9a4418; --border:#eadfce; --hero1:#f3e2cf; --hero2:#faf3ea;
+  --ok:#2f7a4a; --shadow:0 8px 28px rgba(42,33,24,.08);
+}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+a{color:inherit;text-decoration:none} img{max-width:100%}
+.wrap{width:min(1120px,92%);margin:0 auto}
+.top{position:sticky;top:0;z-index:40;backdrop-filter:blur(10px);background:color-mix(in srgb,var(--surface) 88%,transparent);border-bottom:1px solid var(--border)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:16px}
+.logo{font-weight:700;font-size:1.05rem}
+.nav links,.nav-links{display:flex;gap:18px;flex-wrap:wrap;font-size:.95rem;color:var(--muted)}
+.nav-links a:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:12px;border:0;background:var(--accent);color:#fff;font-weight:600;cursor:pointer;font-size:1rem}
+.btn:hover{background:var(--accent2)} .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+.themes{display:flex;gap:6px} .themes button{width:28px;height:28px;border-radius:999px;border:2px solid var(--border);cursor:pointer}
+.themes .t-light{background:#fff} .themes .t-dark{background:#1a1f2b} .themes .t-warm{background:#c45c26}
+.hero{padding:64px 0 48px;background:linear-gradient(135deg,var(--hero1),var(--hero2))}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center}
+@media(max-width:800px){.hero-grid{grid-template-columns:1fr}.nav-links{display:none}}
+.badge{display:inline-block;padding:6px 10px;border-radius:999px;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent);font-size:.85rem;font-weight:600;margin-bottom:14px}
+h1{font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.15;margin:0 0 14px}
+.lead{color:var(--muted);font-size:1.08rem;margin:0 0 22px;max-width:38ch}
+.hero-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:22px;box-shadow:var(--shadow)}
+.hero-art{height:220px;border-radius:16px;background:
+  linear-gradient(135deg,color-mix(in srgb,var(--accent) 55%,#fff),color-mix(in srgb,var(--accent2) 70%,#222)),
+  radial-gradient(circle at 30% 20%,rgba(255,255,255,.35),transparent 45%);margin-bottom:14px}
+.hero-card ul{margin:0;padding-left:18px;color:var(--muted)}
+section{padding:56px 0} h2{font-size:1.7rem;margin:0 0 8px} .sub{color:var(--muted);margin:0 0 28px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:800px){.grid3{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:20px;box-shadow:var(--shadow)}
+.card h3{margin:0 0 8px;font-size:1.1rem} .card p{margin:0;color:var(--muted)}
+.price{font-size:1.35rem;font-weight:700;margin:12px 0 4px;color:var(--accent)}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:800px){.gallery{grid-template-columns:1fr 1fr}}
+.shot{aspect-ratio:4/3;border-radius:14px;border:1px solid var(--border)}
+.shot.a{background:linear-gradient(145deg,#c9d7f5,#7ea0e8)} .shot.b{background:linear-gradient(145deg,#d8cfc3,#a8896a)}
+.shot.c{background:linear-gradient(145deg,#cfe8d8,#6faf8a)} .shot.d{background:linear-gradient(145deg,#e8d2cf,#c27a72)}
+.shot span{display:flex;height:100%;align-items:flex-end;padding:12px;color:#fff;font-weight:600;text-shadow:0 1px 4px rgba(0,0,0,.35)}
+.faq details{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:10px}
+.faq summary{cursor:pointer;font-weight:600} .faq p{margin:10px 0 0;color:var(--muted)}
+form{display:grid;gap:12px} label{font-size:.9rem;color:var(--muted)}
+input,textarea,select{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--bg);color:var(--text);font:inherit}
+.note{font-size:.85rem;color:var(--muted)} .okmsg{display:none;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok);font-weight:600}
+.sticky-call{position:fixed;right:18px;bottom:18px;z-index:50;box-shadow:var(--shadow)}
+.contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px}
+@media(max-width:800px){.contact-grid{grid-template-columns:1fr}}
+footer{padding:28px 0 80px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--border)}
+.ex{font-size:.75rem;color:var(--muted);opacity:.85}
+</style>
+</head>
+<body data-theme="dark">
+<header class="top">
+  <div class="wrap nav">
+    <div class="logo" id="logo">Студия</div>
+    <nav class="nav-links">
+      <a href="#services">Услуги</a>
+      <a href="#prices">Цены</a>
+      <a href="#works">Работы</a>
+      <a href="#faq">Вопросы</a>
+      <a href="#contact">Заявка</a>
+    </nav>
+    <div class="themes" title="Варианты оформления">
+      <button class="t-light" type="button" data-theme-btn="light" aria-label="Светлая"></button>
+      <button class="t-dark" type="button" data-theme-btn="dark" aria-label="Тёмная"></button>
+      <button class="t-warm" type="button" data-theme-btn="warm" aria-label="Тёплая"></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="badge" id="badge">Локальный сервис</div>
+      <h1 id="headline">Страница услуг, которая приводит заявки</h1>
+      <p class="lead" id="lead">Текст оффера</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="btn" href="#contact" id="ctaPrimary">Оставить заявку</a>
+        <a class="btn ghost" href="tel:" id="ctaPhone">Позвонить</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-art"></div>
+      <ul id="heroPoints"></ul>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <h2>Услуги</h2>
+    <p class="sub" id="servicesSub">Что делаем</p>
+    <div class="grid3" id="servicesGrid"></div>
+  </div>
+</section>
+
+<section id="prices" style="background:color-mix(in srgb,var(--surface) 70%,var(--bg))">
+  <div class="wrap">
+    <h2>Пакеты</h2>
+    <p class="sub">Ориентиры для демо. Финальная смета после замера.</p>
+    <div class="grid3" id="pricesGrid"></div>
+  </div>
+</section>
+
+<section id="works">
+  <div class="wrap">
+    <h2>До и после</h2>
+    <p class="sub">Заглушки градиентами. Под заказ подставим реальные фото.</p>
+    <div class="gallery" id="gallery"></div>
+  </div>
+</section>
+
+<section id="reviews" style="background:color-mix(in srgb,var(--surface) 70%,var(--bg))">
+  <div class="wrap">
+    <h2>Отзывы</h2>
+    <p class="sub ex">Примерные формулировки для демо. Не настоящие отзывы.</p>
+    <div class="grid3" id="reviewsGrid"></div>
+  </div>
+</section>
+
+<section id="faq" class="faq">
+  <div class="wrap">
+    <h2>Вопросы</h2>
+    <p class="sub">Коротко по делу</p>
+    <div id="faqList"></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <h2>Оставить заявку</h2>
+      <p class="sub">Форма только для демо. Данные никуда не уходят.</p>
+      <form id="leadForm" class="card">
+        <div><label for="name">Имя</label><input id="name" name="name" required placeholder="Как к вам обращаться"></div>
+        <div><label for="phone">Телефон</label><input id="phone" name="phone" required placeholder="+7 ..."></div>
+        <div><label for="msg">Комментарий</label><textarea id="msg" name="msg" rows="3" placeholder="Площадь, район, срок"></textarea></div>
+        <button class="btn" type="submit">Отправить заявку</button>
+        <div class="okmsg" id="okmsg">Заявка отправлена (демо)</div>
+        <p class="note">Нажимая кнопку, вы соглашаетесь на обратный звонок.</p>
+      </form>
+    </div>
+    <div class="card">
+      <h3 id="contactTitle">Контакты</h3>
+      <p id="contactText" style="color:var(--muted)"></p>
+      <p style="margin-top:16px"><strong id="contactPhone"></strong></p>
+      <p class="note" id="contactCity"></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" id="footerText">Демо шаблон. </div>
+</footer>
+
+<a class="btn sticky-call" id="stickyCall" href="tel:">Позвонить</a>
+
+<script>
+/* ========== CONFIG: меняйте только этот блок под заказ ========== */
+const CONFIG = {
+  businessName: "Ваш бизнес",
+  niche: "Услуги для клиентов",
+  city: "Ваш город",
+  phone: "+7 (900) 000-00-00",
+  phoneHref: "tel:+79000000000",
+  badge: "Локальный бизнес",
+  headline: "Страница услуг, которая приводит заявки",
+  lead: "Понятный оффер, услуги и цены на одном экране. Клиент видит, чем вы полезны, и оставляет заявку.",
+  ctaPrimary: "Оставить заявку",
+  heroPoints: [
+    "Оффер и выгоды сразу",
+    "Услуги и цены без лишнего",
+    "Заявка за 1 минуту"
+  ],
+  servicesSub: "Основные направления",
+  services: [
+    {title: "Услуга 1", text: "Кратко, что входит и какую задачу клиента закрывает."},
+    {title: "Услуга 2", text: "Кратко, что входит и какую задачу клиента закрывает."},
+    {title: "Услуга 3", text: "Кратко, что входит и какую задачу клиента закрывает."}
+  ],
+  packages: [
+    {title: "Базовый", price: "от … ₽", text: "Стартовый набор под задачу."},
+    {title: "Стандарт", price: "от … ₽", text: "Оптимальный вариант для большинства клиентов."},
+    {title: "Под ключ", price: "от … ₽", text: "Полный цикл без лишних хлопот."}
+  ],
+  gallery: [
+    {cls:"a", label:"Пример 1"},
+    {cls:"b", label:"Пример 2"},
+    {cls:"c", label:"Пример 3"},
+    {cls:"d", label:"Пример 4"}
+  ],
+  reviews: [
+    {name:"Клиент", text:"Пример отзыва для демо. Подставим ваши формулировки."},
+    {name:"Клиент", text:"Пример отзыва для демо. Подставим ваши формулировки."},
+    {name:"Клиент", text:"Пример отзыва для демо. Подставим ваши формулировки."}
+  ],
+  faq: [
+    {q:"Сколько длится работа?", a:"Срок согласуем после короткого брифа."},
+    {q:"Как проходит оплата?", a:"По договору или через сделку площадки, этапы заранее."},
+    {q:"Можно ли правки?", a:"Да, обычно два круга правок входят в цену."}
+  ],
+  contactTitle: "Связаться",
+  contactText: "Оставьте заявку или позвоните. Ответим в рабочее время.",
+  footer: "© Демо шаблон для отклика. "
+};
+/* ========== /CONFIG ========== */
+Object.assign(CONFIG, {
+  "businessName": "Производство наград",
+  "niche": "Призы и награды от производителя",
+  "city": "Россия",
+  "phone": "+7 (900) 000-00-00",
+  "phoneHref": "tel:+79000000000",
+  "badge": "Производитель",
+  "headline": "Эксклюзивные награды от производителя",
+  "lead": "Кубки, статуэтки и памятные награды, которые мы делаем сами: от эскиза до готового изделия.",
+  "ctaPrimary": "Запросить расчёт",
+  "heroPoints": ["Собственное производство", "Эксклюзивный дизайн под событие", "Тираж от одной штуки"],
+  "servicesSub": "Что изготавливаем",
+  "services": [
+    {"title": "Кубки и статуэтки", "text": "Изготовление по вашему эскизу или по готовому каталогу."},
+    {"title": "Корпоративные награды", "text": "Для сотрудников, партнёров и ежегодных церемоний."},
+    {"title": "Памятные знаки", "text": "Медали, плакетки и знаки к юбилеям и соревнованиям."}
+  ],
+  "packages": [
+    {"title": "Одно изделие", "price": "от 2 500 ₽", "text": "Кубок или статуэтка по эскизу, тираж от 1 штуки."},
+    {"title": "Корпоративный набор", "price": "от 18 000 ₽", "text": "Серия наград в одном стиле для события."},
+    {"title": "Тираж под ключ", "price": "от 45 000 ₽", "text": "Дизайн, производство и упаковка всей партии."}
+  ],
+  "gallery": [
+    {"cls": "a", "label": "Кубки"},
+    {"cls": "b", "label": "Статуэтки"},
+    {"cls": "c", "label": "Медали"},
+    {"cls": "d", "label": "Плакетки"}
+  ],
+  "reviews": [
+    {"name": "Организатор турнира", "text": "Нужны были кубки к финалу за две недели. В макете так выглядит блок отзывов: сроки и вид изделия согласуем после брифа."},
+    {"name": "HR компании", "text": "Ежегодные награды сотрудникам в едином стиле. Тексты здесь для структуры главной, не публичная рекомендация."},
+    {"name": "Спортивный клуб", "text": "Медали и кубки одной серией. Подставим ваши формулировки и фото готовых работ."}
+  ],
+  "faq": [
+    {"q": "Можно ли заказать одну штуку?", "a": "Да, тираж считаем от одного изделия."},
+    {"q": "Делаете по нашему эскизу?", "a": "Да, рисуем свой вариант или повторяем ваш макет."},
+    {"q": "Сколько занимает производство?", "a": "Ориентир — от нескольких дней на одно изделие, тираж согласуем отдельно."}
+  ],
+  "contactTitle": "Расчёт награды",
+  "contactText": "Опишите событие, тираж и срок. Ответим с ориентиром по стоимости.",
+  "footer": "© Производство наград. Макет главной страницы для согласования дизайна."
+})
+
+function $(id){return document.getElementById(id)}
+function fill(){
+  document.title = CONFIG.businessName + " · демо";
+  $("logo").textContent = CONFIG.businessName;
+  $("badge").textContent = CONFIG.badge;
+  $("headline").textContent = CONFIG.headline;
+  $("lead").textContent = CONFIG.lead;
+  $("ctaPrimary").textContent = CONFIG.ctaPrimary;
+  $("ctaPhone").textContent = CONFIG.phone;
+  $("ctaPhone").href = CONFIG.phoneHref;
+  $("stickyCall").href = CONFIG.phoneHref;
+  $("stickyCall").textContent = "Позвонить";
+  $("heroPoints").innerHTML = CONFIG.heroPoints.map(x=>"<li>"+x+"</li>").join("");
+  $("servicesSub").textContent = CONFIG.servicesSub;
+  $("servicesGrid").innerHTML = CONFIG.services.map(s=>`<article class="card"><h3>${s.title}</h3><p>${s.text}</p></article>`).join("");
+  $("pricesGrid").innerHTML = CONFIG.packages.map(p=>`<article class="card"><h3>${p.title}</h3><div class="price">${p.price}</div><p>${p.text}</p></article>`).join("");
+  $("gallery").innerHTML = CONFIG.gallery.map(g=>`<div class="shot ${g.cls}"><span>${g.label}</span></div>`).join("");
+  $("reviewsGrid").innerHTML = CONFIG.reviews.map(r=>`<article class="card"><h3>${r.name}</h3><p>${r.text}</p><p class="ex">Формулировка для макета, не отзыв с производства</p></article>`).join("");
+  $("faqList").innerHTML = CONFIG.faq.map(f=>`<details><summary>${f.q}</summary><p>${f.a}</p></details>`).join("");
+  $("contactTitle").textContent = CONFIG.contactTitle;
+  $("contactText").textContent = CONFIG.contactText;
+  $("contactPhone").textContent = CONFIG.phone;
+  $("contactCity").textContent = CONFIG.city + " · " + CONFIG.niche;
+  $("footerText").textContent = CONFIG.footer;
+}
+fill();
+document.querySelectorAll("[data-theme-btn]").forEach(btn=>{
+  btn.addEventListener("click",()=>document.body.setAttribute("data-theme", btn.getAttribute("data-theme-btn")));
+});
+$("leadForm").addEventListener("submit", e=>{
+  e.preventDefault();
+  $("okmsg").style.display="block";
+  e.target.reset();
+});
+</script>
+</body>
+</html>

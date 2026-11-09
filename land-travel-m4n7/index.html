@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Online Travel — семейные туры из Москвы</title>
+<link rel="stylesheet" href="https://static.tildacdn.pub/css/fonts-tildasans.css">
+<style>
+:root{
+  --bg:#fff; --bg2:#f6f5f2; --text:#1f2328; --muted:#6b7280;
+  --accent:#f26b1d; --accent2:#d65a12; --ink:#111; --line:#e8e4dc;
+  --ok:#1a7f4b; --navy:#16324f; --shadow:0 10px 30px rgba(31,35,40,.08);
+  --r:20px; --wrap:1180px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;overflow-x:hidden}
+body{font-family:"TildaSans",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);background:var(--bg);line-height:1.55}
+img{max-width:100%;display:block;height:auto}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit}
+.wrap{width:min(var(--wrap),92%);margin:0 auto}
+.ex{font-size:.75rem;color:var(--muted)}
+.top{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
+.logo{font-weight:700;font-size:1.15rem;letter-spacing:-.02em}
+.logo span{color:var(--accent)}
+.nav-actions{display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;border-radius:var(--r);border:3px solid var(--accent);background:var(--accent);color:#fff;font-weight:600;font-size:16px;cursor:pointer;transition:.2s}
+.btn:hover{background:var(--accent2);border-color:var(--accent2)}
+.btn.ghost{background:#fff;color:var(--accent)}
+.btn.sm{padding:10px 16px;font-size:15px}
+.menu-btn{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 14px;cursor:pointer;font-weight:600}
+.drawer{display:none;position:absolute;right:4%;top:64px;width:min(320px,92vw);background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:12px}
+.drawer.open{display:block}
+.drawer a{display:block;padding:12px 14px;border-radius:10px;color:var(--text)}
+.drawer a:hover{background:var(--bg2)}
+.hero{position:relative;min-height:70vh;display:flex;align-items:center;color:#fff;background:#16324f center/cover no-repeat}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,23,32,.55),rgba(15,23,32,.62))}
+.hero .wrap{position:relative;z-index:1;padding:72px 0 56px}
+.hero h1{font-size:clamp(1.8rem,4.4vw,3.1rem);line-height:1.12;letter-spacing:-.03em;margin:0 0 14px;max-width:18ch}
+.hero .lead{font-size:1.15rem;max-width:36ch;margin:0 0 28px;color:rgba(255,255,255,.9)}
+.usps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0 0;max-width:820px}
+.usp{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:14px 16px;font-size:.95rem}
+.usp b{display:block;margin-bottom:4px}
+section{padding:72px 0}
+h2{font-size:clamp(1.55rem,3vw,2.15rem);letter-spacing:-.03em;margin:0 0 10px;color:var(--ink)}
+.sub{color:var(--muted);margin:0 0 32px;max-width:560px}
+.search{background:var(--bg2)}
+.search-box{background:#fff;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+.fields{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+label{display:block;font-size:.86rem;color:var(--muted);margin-bottom:6px}
+input,select{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--text)}
+.stars{display:flex;gap:10px;flex-wrap:wrap}
+.stars label{display:flex;align-items:center;gap:6px;margin:0;color:var(--text);font-size:.95rem}
+.counters{display:flex;gap:16px;flex-wrap:wrap}
+.counter{display:flex;align-items:center;gap:10px}
+.counter button{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:18px}
+.results{display:none;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.results.show{display:grid}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+.card .ph{aspect-ratio:16/10;background:#ddd center/cover no-repeat}
+.card .body{padding:16px 18px 18px}
+.card h3{margin:0 0 8px;font-size:1.08rem}
+.card p{margin:0 0 10px;color:var(--muted);font-size:.95rem}
+.price{font-weight:700;color:var(--accent);margin:0 0 12px}
+.about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:36px;align-items:start}
+.about p{color:var(--muted);font-size:1.05rem}
+.stats{display:grid;gap:16px}
+.stat{background:var(--bg2);border-radius:18px;padding:20px}
+.stat b{display:block;font-size:2.4rem;line-height:1;letter-spacing:-.04em;color:var(--accent)}
+.dest-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.dest{position:relative;min-height:320px;border-radius:22px;overflow:hidden;color:#fff;background:#222 center/cover no-repeat}
+.dest::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,.7))}
+.dest .in{position:absolute;left:18px;right:18px;bottom:18px;z-index:1}
+.dest h3{margin:0 0 8px;font-size:1.2rem}
+.dest ul{margin:0 0 12px;padding-left:18px;font-size:.92rem}
+.promos{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.promo .ph{aspect-ratio:16/11;background:#ccc center/cover no-repeat}
+.badge{display:inline-block;background:var(--accent);color:#fff;border-radius:999px;padding:4px 10px;font-size:.8rem;font-weight:700;margin-bottom:8px}
+.visa{background:var(--bg2)}
+details.acc{background:#fff;border-radius:16px;padding:16px 18px;margin-bottom:10px;border:1px solid var(--line)}
+details.acc summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary::after{content:"+";color:var(--accent);font-size:1.3rem}
+details.acc[open] summary::after{content:"−"}
+details.acc p{margin:12px 0 0;color:var(--muted)}
+.posts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.post .ph{aspect-ratio:16/10;background:#ddd center/cover no-repeat}
+.lead-sec{position:relative;color:#fff;background:#16324f center/cover no-repeat}
+.lead-sec::before{content:"";position:absolute;inset:0;background:rgba(15,23,32,.62)}
+.lead-box{position:relative;z-index:1;display:grid;grid-template-columns:1fr .9fr;gap:28px;align-items:center}
+.form{background:#fff;color:var(--text);border-radius:22px;padding:22px;display:grid;gap:12px}
+.okmsg{display:none;padding:12px;border-radius:12px;background:#e7f6ee;color:var(--ok);font-weight:600}
+.reviews{background:var(--bg2)}
+.carousel{display:flex;gap:16px;overflow:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
+.rev{min-width:min(340px,86vw);scroll-snap-align:start;background:#fff;border-radius:18px;padding:20px;border:1px solid var(--line)}
+.rev .stars-row{color:#e2a10b;margin:6px 0}
+.contacts-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:20px}
+.map{min-height:280px;border-radius:22px;background:
+  linear-gradient(#d9e6d2 1px,transparent 1px) 0 0/40px 40px,
+  linear-gradient(90deg,#d9e6d2 1px,transparent 1px) 0 0/40px 40px,
+  #eef3ea;position:relative;border:1px solid var(--line)}
+.pin{position:absolute;left:46%;top:48%;width:18px;height:18px;background:var(--accent);border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 6px 16px rgba(0,0,0,.2)}
+.contact-card{background:var(--bg2);border-radius:22px;padding:24px}
+.soc{display:flex;gap:10px;margin-top:14px}
+.soc span{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:.8rem;font-weight:700}
+footer{padding:28px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+.ft{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.modal{display:none;position:fixed;inset:0;z-index:80;background:rgba(17,17,17,.55);padding:24px 12px;overflow:auto}
+.modal.open{display:block}
+.modal-card{width:min(560px,100%);margin:40px auto;background:#fff;border-radius:24px;overflow:hidden}
+.modal-card .ph{aspect-ratio:16/8;background:#ccc center/cover no-repeat}
+.modal-card .pad{padding:22px}
+.modal-card h3{margin:0 0 8px}
+.close{float:right;border:0;background:transparent;font-size:28px;cursor:pointer;line-height:1}
+.quiz-step{display:none}.quiz-step.on{display:block}
+.qopts{display:grid;gap:8px;margin:14px 0}
+.qopts button{text-align:left;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:#fff;cursor:pointer}
+.qopts button:hover,.qopts button.sel{border-color:var(--accent);background:#fff5ee}
+@media(max-width:960px){
+  .usps,.fields,.results,.dest-grid,.promos,.posts,.about-grid,.lead-box,.contacts-grid{grid-template-columns:1fr}
+  .results.show,.dest-grid{grid-template-columns:1fr 1fr}
+  section{padding:52px 0}
+}
+@media(max-width:640px){
+  .results.show,.dest-grid,.promos,.posts{grid-template-columns:1fr}
+  .hero{min-height:auto}
+  .usps{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<script>
+const CONFIG = {
+  brand: "Online Travel",
+  city: "Москва",
+  tagline: "Ваше приключение начинается с одного клика",
+  headline: "Разработаем незабываемое семейное приключение под любые требования за 24 часа",
+  phone: "+7 (495) 000-00-00",
+  email: "hello@example.com",
+  address: "г. Москва, пример адреса (уточняется с заказчиком)",
+  hours: "Пн–Пт, 10:00–19:00 (пример)",
+  heroImage: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1800&q=80",
+  leadImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80",
+  usps: [
+    {title: "Рядом 24/7", text: "Круглосуточная поддержка и помощь в любое время суток."},
+    {title: "Вся семья", text: "Туристические туры для всей семьи с полным юридическим и визовым сопровождением."},
+    {title: "Гарантия возврата", text: "Единственное в Москве агентство с гарантией полного возврата средств за 24 часа до вылета."}
+  ],
+  destinations: [
+    {name:"Туры в Турцию", resorts:"Анталья, Кемер, Сиде, Белек", img:"https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=900&q=80"},
+    {name:"Туры в Египет", resorts:"Хургада, Шарм-эль-Шейх, Марса-Алам", img:"https://images.unsplash.com/photo-1539768942893-daf53e448371?auto=format&fit=crop&w=900&q=80"},
+    {name:"Туры в Таиланд", resorts:"Пхукет, Паттайя, Самуи", img:"https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=900&q=80"},
+    {name:"Туры по России", resorts:"Сочи, Карелия, Байкал, Казань", img:"https://images.unsplash.com/photo-1513326738677-b964603b136d?auto=format&fit=crop&w=900&q=80"}
+  ],
+  offers: [
+    {title:"Семейный отель, Анталья 5*", dates:"12–22 июня (пример)", price:"от 148 000 ₽ / семья (пример)", img:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80"},
+    {title:"Хургада, первый берег 4*", dates:"3–10 июля (пример)", price:"от 96 500 ₽ / семья (пример)", img:"https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=900&q=80"},
+    {title:"Пхукет, вилла у моря 5*", dates:"20–30 августа (пример)", price:"от 189 000 ₽ / семья (пример)", img:"https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80"}
+  ],
+  promos: [
+    {badge:"Скидка 30%", extra:"Не упусти возможность, осталось 6 мест", title:"Тур в Китай + тематический парк в Шанхае", text:"Захватывающее путешествие навстречу чудесам! Погрузитесь в тысячелетнюю историю Поднебесной, а затем в волшебство самого футуристичного тематического парка города. Две мечты — один тур!", img:"https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1000&q=80"},
+    {badge:"Скидка 15%", extra:"", title:"Тур в Таиланд с посещением слоновьей фермы в подарок", text:"Мечтаете об отдыхе, наполненном не только пляжным релаксом, но и искренними эмоциями? При бронировании этого тура вы получаете в подарок посещение этичной слоновьей фермы, где о животных заботятся с любовью.", img:"https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=1000&q=80"},
+    {badge:"При бронировании до 1 февраля", extra:"", title:"Тур в Дубай с посещением сафари-парка в подарок", text:"Хотите получить от Дубая абсолютно всё? Мы соединили символы его роскошного будущего и путешествие в мир природы. При бронировании дарим день в знаменитом сафари-парке — зелёном оазисе, где живут тысячи животных.", img:"https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1000&q=80"}
+  ],
+  visas: [
+    {title:"Визовая поддержка", text:"Подберем нужный тип визы, поможем с анкетой, запишем в консульство или визовый центр. Работаем с любыми странами: от Шенгена до экзотики."},
+    {title:"Проверка документов", text:"Пришлете сканы — мы проверим сроки, ошибки в имени, правильность заполнения. Чтобы на границе не было сюрпризов."},
+    {title:"Переводы и апостиль", text:"Организуем нотариальные переводы паспортов, свидетельств и других документов по требованиям посольства."},
+    {title:"Страховка без подводных камней", text:"Подберем полис, который реально покрывает риски."}
+  ],
+  articles: [
+    {title:"Как выбрать первый семейный тур", text:"На что смотреть в отеле с детьми: питание, мелкие бассейны, трансфер и тихий район.", img:"https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=900&q=80"},
+    {title:"Виза и загранпаспорт: чек-лист", text:"Какие сроки закладывать и какие мелочи чаще всего останавливают на границе.", img:"https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=900&q=80"},
+    {title:"Куда лететь с детьми зимой", text:"Тёплые направления, где удобно семьям, и как не переплатить в высокий сезон.", img:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80"}
+  ],
+  reviews: [
+    {name:"Анна К.", text:"Подобрали тур за сутки: отель с детским клубом и прямым перелётом. Спокойно улетели всей семьёй."},
+    {name:"Михаил П.", text:"Помогли с визами и страховкой. На все вопросы отвечали и ночью перед вылетом."},
+    {name:"Елена С.", text:"Меняли даты за два дня до вылета — вернули деньги по гарантии и сразу собрали новый вариант."},
+    {name:"Игорь В.", text:"Честные отели, без сюрпризов на месте. Детям понравилось, нам — спокойствие."}
+  ],
+  nav: [
+    ["#search","Подбор тура"],["#about","О нас"],["#dest","Направления"],["#promo","Акции"],
+    ["#visa","Визы"],["#blog","Статьи"],["#reviews","Отзывы"],["#contacts","Контакты"]
+  ]
+};
+</script>
+
+<header class="top">
+  <div class="wrap nav">
+    <a class="logo" href="#top" id="logo"></a>
+    <div class="nav-actions">
+      <button class="menu-btn" type="button" id="menuBtn" aria-expanded="false">Меню</button>
+      <button class="btn sm" type="button" data-open-quiz>Подобрать тур</button>
+    </div>
+  </div>
+  <nav class="drawer" id="drawer" hidden></nav>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <h1 id="headline"></h1>
+    <p class="lead" id="lead"></p>
+    <button class="btn" type="button" data-open-quiz>Подобрать тур</button>
+    <div class="usps" id="usps"></div>
+  </div>
+</section>
+
+<section class="search" id="search">
+  <div class="wrap">
+    <h2>Поиск туров от всех туроператоров</h2>
+    <p class="sub">Заполните поля — покажем примеры предложений. Форма ничего не отправляет.</p>
+    <form class="search-box" id="searchForm">
+      <div class="fields">
+        <div><label for="dateFrom">Дата отъезда</label><input id="dateFrom" type="date" required></div>
+        <div><label for="dateTo">Дата приезда</label><input id="dateTo" type="date" required></div>
+        <div>
+          <label for="destInput">Направление: страна / курорт / отель</label>
+          <input id="destInput" list="destList" placeholder="Например, Турция или Кемер" required>
+          <datalist id="destList">
+            <option value="Турция"></option><option value="Египет"></option>
+            <option value="Таиланд"></option><option value="Россия"></option>
+            <option value="Китай"></option><option value="Дубай"></option>
+          </datalist>
+        </div>
+        <div>
+          <label>Звёздность отеля</label>
+          <div class="stars">
+            <label><input type="checkbox" name="star" value="3" checked> 3*</label>
+            <label><input type="checkbox" name="star" value="4" checked> 4*</label>
+            <label><input type="checkbox" name="star" value="5" checked> 5*</label>
+          </div>
+        </div>
+        <div>
+          <label for="meal">Тип питания</label>
+          <select id="meal">
+            <option>Всё включено</option>
+            <option>Завтрак</option>
+            <option>Полупансион</option>
+            <option>Без питания</option>
+          </select>
+        </div>
+        <div>
+          <label>Туристы</label>
+          <div class="counters">
+            <div class="counter"><span>Взрослые: <b id="adVal">2</b></span>
+              <button type="button" data-c="ad" data-d="-1">−</button>
+              <button type="button" data-c="ad" data-d="1">+</button></div>
+            <div class="counter"><span>Дети: <b id="chVal">1</b></span>
+              <button type="button" data-c="ch" data-d="-1">−</button>
+              <button type="button" data-c="ch" data-d="1">+</button></div>
+          </div>
+        </div>
+      </div>
+      <p style="margin:18px 0 0"><button class="btn" type="submit">Найти</button></p>
+    </form>
+    <div class="results" id="results"></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <h2>О нас — ваш семейный отдых начинается здесь</h2>
+      <p>Здравствуйте! Мы — команда туристического агентства «Online Travel» в Москве. И мы знаем один секрет: идеальный семейный отдых — это не просто поездка. Это момент, когда родители могут выдохнуть, а дети — широко раскрыть глаза от восторга. Это история, которую вы будете рассказывать снова и снова.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b data-count="45">0</b> Более 45 направлений для отдыха с детьми. <span class="ex">пример</span></div>
+      <div class="stat"><b data-count="500">0</b> Каждый год мы помогаем отправиться в отпуск более чем 500 московским семьям. Нас рекомендуют друзьям, потому что мы не продаём путёвки — мы дарим уверенность и спокойствие. Ваше доверие — наш главный капитал. <span class="ex">пример</span></div>
+      <div class="stat"><b data-count="104">0</b> Более 104 туров уже ждут своих путешественников. <span class="ex">пример</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="dest" style="background:var(--bg2)">
+  <div class="wrap">
+    <h2>Популярные направления</h2>
+    <p class="sub">Четыре направления из задания. Кнопка открывает форму программы тура.</p>
+    <div class="dest-grid" id="destGrid"></div>
+  </div>
+</section>
+
+<section id="promo">
+  <div class="wrap">
+    <h2>Акции</h2>
+    <p class="sub">Три предложения. Цифры и наличие мест — пример для макета.</p>
+    <div class="promos" id="promoGrid"></div>
+  </div>
+</section>
+
+<section class="visa" id="visa">
+  <div class="wrap">
+    <h2>Визы и документы без головной боли</h2>
+    <p class="sub">Оформление визы, проверка загранпаспорта, нотариальные доверенности, страховка для шенгена — этот список способен испортить настроение ещё до начала путешествия. Для нас это рутина, которую мы щёлкаем как орешки.</p>
+    <div id="visaList"></div>
+  </div>
+</section>
+
+<section id="blog">
+  <div class="wrap">
+    <h2>Полезные статьи</h2>
+    <p class="sub">Статичные превью для демо. Полные тексты подставим из вашего блога.</p>
+    <div class="posts" id="blogGrid"></div>
+  </div>
+</section>
+
+<section class="lead-sec" id="discount">
+  <div class="wrap lead-box">
+    <div>
+      <h2 style="color:#fff">Оставь заявку и получи скидку 15% до конца дня</h2>
+      <p class="ex" style="color:rgba(255,255,255,.8)">Пример формулировки акции. Форма никуда не отправляет данные.</p>
+    </div>
+    <form class="form" id="discountForm">
+      <div><label for="dn">Имя</label><input id="dn" name="name" required autocomplete="name"></div>
+      <div><label for="dp">Телефон</label><input id="dp" name="phone" required inputmode="tel" placeholder="+7 (___) ___-__-__"></div>
+      <button class="btn" type="submit">Получить скидку 15%</button>
+      <div class="okmsg" id="discountOk">Заявка принята (демо). Мы никуда её не отправляли.</div>
+    </form>
+  </div>
+</section>
+
+<section class="reviews" id="reviews">
+  <div class="wrap">
+    <h2>Отзывы наших клиентов</h2>
+    <p class="sub">Примеры формулировок для макета, не скриншоты реальных отзывов и не чужие бренды.</p>
+    <div class="carousel" id="revTrack"></div>
+  </div>
+</section>
+
+<section id="contacts">
+  <div class="wrap">
+    <h2>Контакты</h2>
+    <p class="sub">Адрес, телефон и почта — заглушки. Подставим данные заказчика.</p>
+    <div class="contacts-grid">
+      <div class="contact-card">
+        <p id="addr"></p>
+        <p><a id="phoneLink"></a></p>
+        <p><a id="mailLink"></a></p>
+        <p class="ex" id="hours"></p>
+        <div class="soc" aria-label="Мессенджеры">
+          <span title="Telegram">TG</span>
+          <span title="Чат">Чат</span>
+        </div>
+      </div>
+      <div class="map" aria-label="Карта, пример"><div class="pin"></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap ft">
+    <div><b id="ftBrand"></b><div class="ex">Семейные туры. Макет первых экранов.</div></div>
+    <div>Фото: Unsplash, подписаны как примеры. Цифры и отзывы — пример.</div>
+  </div>
+</footer>
+
+<div class="modal" id="popup" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="ph" id="popImg"></div>
+    <div class="pad">
+      <button class="close" type="button" data-close>&times;</button>
+      <h3 id="popTitle"></h3>
+      <p class="ex" id="popLead"></p>
+      <p>Оставьте свои полное имя и номер телефона, и мы вам перезвоним.</p>
+      <form id="popForm" class="form" style="padding:0;box-shadow:none">
+        <div><label>Полное имя</label><input name="fullname" required></div>
+        <div><label>Номер телефона</label><input name="phone" required class="phone" placeholder="+7 (___) ___-__-__"></div>
+        <button class="btn" type="submit" id="popBtn">Отправить</button>
+        <div class="okmsg" id="popOk">Спасибо! Сообщение показано только здесь, данные никуда не ушли.</div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="quiz" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="pad">
+      <button class="close" type="button" data-close>&times;</button>
+      <h3>Подберём семейный тур</h3>
+      <p class="ex">Короткий квиз. Ответы остаются только в браузере.</p>
+      <div class="quiz-step on" data-step="0">
+        <p>Куда хотите?</p>
+        <div class="qopts">
+          <button type="button" data-next>Море и пляж с детьми</button>
+          <button type="button" data-next>Экскурсии и города</button>
+          <button type="button" data-next>По России</button>
+        </div>
+      </div>
+      <div class="quiz-step" data-step="1">
+        <p>На сколько примерно дней?</p>
+        <div class="qopts">
+          <button type="button" data-next>7–8 ночей</button>
+          <button type="button" data-next>10–12 ночей</button>
+          <button type="button" data-next>Пока не решили</button>
+        </div>
+      </div>
+      <div class="quiz-step" data-step="2">
+        <form id="quizForm" class="form" style="padding:0">
+          <div><label>Имя</label><input name="name" required></div>
+          <div><label>Телефон</label><input name="phone" required class="phone" placeholder="+7 (___) ___-__-__"></div>
+          <button class="btn" type="submit">Получить подборку</button>
+          <div class="okmsg" id="quizOk">Готово (демо). Подборку покажем на живом сайте.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const C = CONFIG;
+  document.getElementById('logo').textContent = C.brand;
+  document.getElementById('ftBrand').textContent = C.brand;
+  document.getElementById('headline').textContent = C.headline;
+  document.getElementById('lead').textContent = C.tagline;
+  document.querySelector('.hero').style.backgroundImage = 'url('+C.heroImage+')';
+  document.querySelector('.lead-sec').style.backgroundImage = 'url('+C.leadImage+')';
+  document.getElementById('usps').innerHTML = C.usps.map(u => '<div class="usp"><b>'+u.title+'</b>'+u.text+'</div>').join('');
+  const drawer = document.getElementById('drawer');
+  drawer.innerHTML = C.nav.map(([h,t]) => '<a href="'+h+'">'+t+'</a>').join('');
+  document.getElementById('destGrid').innerHTML = C.destinations.map((d,i) =>
+    '<article class="dest" style="background-image:url('+d.img+')"><div class="in"><h3>'+d.name+'</h3><ul><li>'+d.resorts+'</li></ul><button class="btn sm" data-dest="'+i+'">Подробней</button></div></article>'
+  ).join('');
+  document.getElementById('promoGrid').innerHTML = C.promos.map((p,i) =>
+    '<article class="card promo"><div class="ph" style="background-image:url('+p.img+')"></div><div class="body"><span class="badge">'+p.badge+'</span>'+(p.extra?'<div class="ex">'+p.extra+'</div>':'')+'<h3>'+p.title+'</h3><p>'+p.text+'</p><button class="btn sm" data-promo="'+i+'">Узнать цену</button></div></article>'
+  ).join('');
+  document.getElementById('visaList').innerHTML = C.visas.map(v =>
+    '<details class="acc"><summary>'+v.title+'</summary><p>'+v.text+'</p></details>'
+  ).join('');
+  document.getElementById('blogGrid').innerHTML = C.articles.map(a =>
+    '<article class="card post"><div class="ph" style="background-image:url('+a.img+')"></div><div class="body"><h3>'+a.title+'</h3><p>'+a.text+'</p><a href="#blog">Читать далее</a></div></article>'
+  ).join('');
+  document.getElementById('revTrack').innerHTML = C.reviews.map(r =>
+    '<article class="rev"><b>'+r.name+'</b><div class="stars-row">★★★★★</div><p>'+r.text+'</p><div class="ex">пример</div></article>'
+  ).join('');
+  document.getElementById('results').innerHTML = C.offers.map(o =>
+    '<article class="card"><div class="ph" style="background-image:url('+o.img+')"></div><div class="body"><h3>'+o.title+'</h3><p>'+o.dates+'</p><div class="price">'+o.price+'</div><button class="btn sm ghost" type="button" data-open-quiz>Подробнее</button></div></article>'
+  ).join('');
+  document.getElementById('addr').textContent = C.address;
+  const pl = document.getElementById('phoneLink'); pl.textContent = C.phone; pl.href = 'tel:'+C.phone.replace(/[^\d+]/g,'');
+  const ml = document.getElementById('mailLink'); ml.textContent = C.email; ml.href = 'mailto:'+C.email;
+  document.getElementById('hours').textContent = C.hours;
+
+  const menuBtn = document.getElementById('menuBtn');
+  menuBtn.addEventListener('click', () => {
+    const open = drawer.classList.toggle('open');
+    drawer.hidden = !open;
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  drawer.addEventListener('click', e => {
+    if (e.target.tagName === 'A') { drawer.classList.remove('open'); drawer.hidden = true; menuBtn.setAttribute('aria-expanded','false'); }
+  });
+
+  let ad = 2, ch = 1;
+  document.querySelectorAll('[data-c]').forEach(b => b.addEventListener('click', () => {
+    const d = +b.dataset.d;
+    if (b.dataset.c === 'ad') ad = Math.max(1, ad + d);
+    else ch = Math.max(0, ch + d);
+    document.getElementById('adVal').textContent = ad;
+    document.getElementById('chVal').textContent = ch;
+  }));
+  document.getElementById('searchForm').addEventListener('submit', e => {
+    e.preventDefault();
+    document.getElementById('results').classList.add('show');
+    document.getElementById('results').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+
+  const mask = input => {
+    input.addEventListener('input', () => {
+      let d = input.value.replace(/\D/g,'').replace(/^8/,'7');
+      if (!d.startsWith('7')) d = '7' + d;
+      d = d.slice(0,11);
+      let r = '+7';
+      if (d.length > 1) r += ' (' + d.slice(1,4);
+      if (d.length >= 4) r += ') ' + d.slice(4,7);
+      if (d.length >= 7) r += '-' + d.slice(7,9);
+      if (d.length >= 9) r += '-' + d.slice(9,11);
+      input.value = r;
+    });
+  };
+  document.querySelectorAll('input[name="phone"], #dp, .phone').forEach(mask);
+
+  const popup = document.getElementById('popup');
+  const quiz = document.getElementById('quiz');
+  function openModal(el){ el.classList.add('open'); }
+  function closeModal(el){ el.classList.remove('open'); }
+  document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => {
+    closeModal(popup); closeModal(quiz);
+  }));
+  [popup, quiz].forEach(m => m.addEventListener('click', e => { if (e.target === m) closeModal(m); }));
+  document.querySelectorAll('[data-open-quiz]').forEach(b => b.addEventListener('click', () => {
+    quiz.querySelectorAll('.quiz-step').forEach((s,i)=>s.classList.toggle('on', i===0));
+    openModal(quiz);
+  }));
+  document.querySelectorAll('[data-next]').forEach(b => b.addEventListener('click', () => {
+    const cur = quiz.querySelector('.quiz-step.on');
+    const next = cur.nextElementSibling;
+    if (next && next.classList.contains('quiz-step')) { cur.classList.remove('on'); next.classList.add('on'); }
+  }));
+  function openPop(kind, i){
+    const item = kind === 'dest' ? C.destinations[i] : C.promos[i];
+    document.getElementById('popImg').style.backgroundImage = 'url('+item.img+')';
+    document.getElementById('popTitle').textContent = kind === 'dest' ? 'Узнать программу тура' : 'Узнать стоимость тура';
+    document.getElementById('popLead').textContent = item.name || item.title;
+    document.getElementById('popBtn').textContent = kind === 'dest' ? 'Узнать программу' : 'Узнать стоимость тура';
+    document.getElementById('popOk').style.display = 'none';
+    openModal(popup);
+  }
+  document.getElementById('destGrid').addEventListener('click', e => {
+    const b = e.target.closest('[data-dest]'); if (b) openPop('dest', +b.dataset.dest);
+  });
+  document.getElementById('promoGrid').addEventListener('click', e => {
+    const b = e.target.closest('[data-promo]'); if (b) openPop('promo', +b.dataset.promo);
+  });
+  function demoSubmit(form, ok){
+    form.addEventListener('submit', e => { e.preventDefault(); ok.style.display = 'block'; setTimeout(() => { if (form.id==='popForm') closeModal(popup); }, 900); });
+  }
+  demoSubmit(document.getElementById('popForm'), document.getElementById('popOk'));
+  demoSubmit(document.getElementById('discountForm'), document.getElementById('discountOk'));
+  demoSubmit(document.getElementById('quizForm'), document.getElementById('quizOk'));
+
+  const nums = document.querySelectorAll('[data-count]');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      const el = en.target; const end = +el.dataset.count; let n = 0;
+      const step = Math.max(1, Math.round(end/40));
+      const t = setInterval(() => { n = Math.min(end, n+step); el.textContent = n; if (n>=end) clearInterval(t); }, 20);
+      io.unobserve(el);
+    });
+  }, {threshold:.4});
+  nums.forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>

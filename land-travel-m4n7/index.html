@@ -8,9 +8,10 @@
 <link rel="stylesheet" href="https://static.tildacdn.pub/css/fonts-tildasans.css">
 <style>
 :root{
-  --bg:#fff; --bg2:#f6f5f2; --text:#1f2328; --muted:#6b7280;
-  --accent:#f26b1d; --accent2:#d65a12; --ink:#111; --line:#e8e4dc;
-  --ok:#1a7f4b; --navy:#16324f; --shadow:0 10px 30px rgba(31,35,40,.08);
+  --bg:#fff; --bg2:#eef6fb; --text:#1f2a37; --muted:#5b6b7c;
+  --accent:#f26b1d; --accent2:#d65a12; --ink:#0f2740; --line:#d7e6f0;
+  --ok:#1a7f4b; --navy:#0e4d6e; --sky:#2f7fb8; --sand:#f7f1e8;
+  --shadow:0 10px 30px rgba(14,77,110,.10);
   --r:20px; --wrap:1180px;
 }
 *{box-sizing:border-box}
@@ -35,18 +36,19 @@ button,input,select{font:inherit}
 .drawer.open{display:block}
 .drawer a{display:block;padding:12px 14px;border-radius:10px;color:var(--text)}
 .drawer a:hover{background:var(--bg2)}
-.hero{position:relative;min-height:70vh;display:flex;align-items:center;color:#fff;background:#16324f center/cover no-repeat}
-.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,23,32,.55),rgba(15,23,32,.62))}
+.hero{position:relative;min-height:70vh;display:flex;align-items:center;color:#fff;background:var(--navy) center/cover no-repeat}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,77,110,.45),rgba(15,40,58,.62))}
 .hero .wrap{position:relative;z-index:1;padding:72px 0 56px}
 .hero h1{font-size:clamp(1.8rem,4.4vw,3.1rem);line-height:1.12;letter-spacing:-.03em;margin:0 0 14px;max-width:18ch}
 .hero .lead{font-size:1.15rem;max-width:36ch;margin:0 0 28px;color:rgba(255,255,255,.9)}
 .usps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0 0;max-width:820px}
 .usp{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:14px 16px;font-size:.95rem}
+.usp .ico{display:inline-flex;width:34px;height:34px;align-items:center;justify-content:center;border-radius:12px;background:rgba(255,255,255,.18);margin-bottom:8px;font-size:1.1rem}
 .usp b{display:block;margin-bottom:4px}
 section{padding:72px 0}
 h2{font-size:clamp(1.55rem,3vw,2.15rem);letter-spacing:-.03em;margin:0 0 10px;color:var(--ink)}
 .sub{color:var(--muted);margin:0 0 32px;max-width:560px}
-.search{background:var(--bg2)}
+.search{background:linear-gradient(180deg,#eef6fb,#f7f1e8)}
 .search-box{background:#fff;border-radius:24px;padding:22px;box-shadow:var(--shadow)}
 .fields{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
 label{display:block;font-size:.86rem;color:var(--muted);margin-bottom:6px}
@@ -87,8 +89,8 @@ details.acc[open] summary::after{content:"−"}
 details.acc p{margin:12px 0 0;color:var(--muted)}
 .posts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .post .ph{aspect-ratio:16/10;background:#ddd center/cover no-repeat}
-.lead-sec{position:relative;color:#fff;background:#16324f center/cover no-repeat}
-.lead-sec::before{content:"";position:absolute;inset:0;background:rgba(15,23,32,.62)}
+.lead-sec{position:relative;color:#fff;background:var(--navy) center/cover no-repeat}
+.lead-sec::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,77,110,.72),rgba(47,127,184,.55))}
 .lead-box{position:relative;z-index:1;display:grid;grid-template-columns:1fr .9fr;gap:28px;align-items:center}
 .form{background:#fff;color:var(--text);border-radius:22px;padding:22px;display:grid;gap:12px}
 .okmsg{display:none;padding:12px;border-radius:12px;background:#e7f6ee;color:var(--ok);font-weight:600}
@@ -98,9 +100,9 @@ details.acc p{margin:12px 0 0;color:var(--muted)}
 .rev .stars-row{color:#e2a10b;margin:6px 0}
 .contacts-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:20px}
 .map{min-height:280px;border-radius:22px;background:
-  linear-gradient(#d9e6d2 1px,transparent 1px) 0 0/40px 40px,
-  linear-gradient(90deg,#d9e6d2 1px,transparent 1px) 0 0/40px 40px,
-  #eef3ea;position:relative;border:1px solid var(--line)}
+  linear-gradient(#cfe6f4 1px,transparent 1px) 0 0/40px 40px,
+  linear-gradient(90deg,#cfe6f4 1px,transparent 1px) 0 0/40px 40px,
+  #e7f3fa;position:relative;border:1px solid var(--line)}
 .pin{position:absolute;left:46%;top:48%;width:18px;height:18px;background:var(--accent);border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 6px 16px rgba(0,0,0,.2)}
 .contact-card{background:var(--bg2);border-radius:22px;padding:24px}
 .soc{display:flex;gap:10px;margin-top:14px}
@@ -144,9 +146,9 @@ const CONFIG = {
   heroImage: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1800&q=80",
   leadImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80",
   usps: [
-    {title: "Рядом 24/7", text: "Круглосуточная поддержка и помощь в любое время суток."},
-    {title: "Вся семья", text: "Туристические туры для всей семьи с полным юридическим и визовым сопровождением."},
-    {title: "Гарантия возврата", text: "Единственное в Москве агентство с гарантией полного возврата средств за 24 часа до вылета."}
+    {icon: "🛟", title: "Рядом 24/7", text: "Круглосуточная поддержка и помощь в любое время суток."},
+    {icon: "👨‍👩‍👧‍👦", title: "Вся семья", text: "Туристические туры для всей семьи с полным юридическим и визовым сопровождением."},
+    {icon: "✈️", title: "Гарантия возврата", text: "Единственное в Москве агентство с гарантией полного возврата средств за 24 часа до вылета."}
   ],
   destinations: [
     {name:"Туры в Турцию", resorts:"Анталья, Кемер, Сиде, Белек", img:"https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=900&q=80"},
@@ -339,9 +341,9 @@ const CONFIG = {
         <p><a id="phoneLink"></a></p>
         <p><a id="mailLink"></a></p>
         <p class="ex" id="hours"></p>
-        <div class="soc" aria-label="Мессенджеры">
-          <span title="Telegram">TG</span>
-          <span title="Чат">Чат</span>
+        <div class="soc" aria-label="Мессенджеры для связи по туру">
+          <span title="Telegram">✈ TG</span>
+          <span title="WhatsApp">WA</span>
         </div>
       </div>
       <div class="map" aria-label="Карта"><div class="pin"></div></div>
@@ -379,26 +381,47 @@ const CONFIG = {
     <div class="pad">
       <button class="close" type="button" data-close>&times;</button>
       <h3>Подберём семейный тур</h3>
-      <p class="ex">Короткий квиз из трёх шагов.</p>
+      <p class="ex">Четыре коротких вопроса — и менеджер соберёт варианты отдыха.</p>
       <div class="quiz-step on" data-step="0">
-        <p>Куда хотите?</p>
+        <p>Куда хотите поехать?</p>
         <div class="qopts">
           <button type="button" data-next>Море и пляж с детьми</button>
           <button type="button" data-next>Экскурсии и города</button>
           <button type="button" data-next>По России</button>
+          <button type="button" data-next>Пока выбираем направление</button>
         </div>
       </div>
       <div class="quiz-step" data-step="1">
-        <p>На сколько примерно дней?</p>
+        <p>Когда планируете вылет?</p>
         <div class="qopts">
-          <button type="button" data-next>7–8 ночей</button>
-          <button type="button" data-next>10–12 ночей</button>
-          <button type="button" data-next>Пока не решили</button>
+          <button type="button" data-next>В ближайший месяц</button>
+          <button type="button" data-next>Через 1–3 месяца</button>
+          <button type="button" data-next>К каникулам / праздникам</button>
+          <button type="button" data-next>Даты гибкие</button>
         </div>
       </div>
       <div class="quiz-step" data-step="2">
+        <p>С кем едете?</p>
+        <div class="qopts">
+          <button type="button" data-next>Семья с детьми</button>
+          <button type="button" data-next>Только взрослые</button>
+          <button type="button" data-next>Большая компания</button>
+          <button type="button" data-next>Пока считаем состав</button>
+        </div>
+      </div>
+      <div class="quiz-step" data-step="3">
+        <p>Какой бюджет на семью?</p>
+        <div class="qopts">
+          <button type="button" data-next>До 100 000 ₽</button>
+          <button type="button" data-next>100–180 000 ₽</button>
+          <button type="button" data-next>от 180 000 ₽</button>
+          <button type="button" data-next>Подскажите оптимальный</button>
+        </div>
+      </div>
+      <div class="quiz-step" data-step="4">
         <form id="quizForm" class="form" style="padding:0">
-          <div><label>Имя</label><input name="name" required></div>
+          <p>Куда отправить подборку туров?</p>
+          <div><label>Имя</label><input name="name" required autocomplete="name"></div>
           <div><label>Телефон</label><input name="phone" required class="phone" placeholder="+7 (___) ___-__-__"></div>
           <button class="btn" type="submit">Получить подборку</button>
           <div class="okmsg" id="quizOk">Спасибо, менеджер свяжется с вами</div>
@@ -417,7 +440,7 @@ const CONFIG = {
   document.getElementById('lead').textContent = C.tagline;
   document.querySelector('.hero').style.backgroundImage = 'url('+C.heroImage+')';
   document.querySelector('.lead-sec').style.backgroundImage = 'url('+C.leadImage+')';
-  document.getElementById('usps').innerHTML = C.usps.map(u => '<div class="usp"><b>'+u.title+'</b>'+u.text+'</div>').join('');
+  document.getElementById('usps').innerHTML = C.usps.map(u => '<div class="usp"><div class="ico" aria-hidden="true">'+(u.icon||'🌍')+'</div><b>'+u.title+'</b>'+u.text+'</div>').join('');
   const drawer = document.getElementById('drawer');
   drawer.innerHTML = C.nav.map(([h,t]) => '<a href="'+h+'">'+t+'</a>').join('');
   document.getElementById('destGrid').innerHTML = C.destinations.map((d,i) =>
@@ -436,7 +459,7 @@ const CONFIG = {
     '<article class="rev"><b>'+r.name+'</b><div class="stars-row">★★★★★</div><p>'+r.text+'</p></article>'
   ).join('');
   document.getElementById('results').innerHTML = C.offers.map(o =>
-    '<article class="card"><div class="ph" style="background-image:url('+o.img+')"></div><div class="body"><h3>'+o.title+'</h3><p>'+o.dates+'</p><div class="price">'+o.price+'</div><button class="btn sm ghost" type="button" data-open-quiz>Подробнее</button></div></article>'
+    '<article class="card"><div class="ph" style="background-image:url('+o.img+')"></div><div class="body"><h3>'+o.title+'</h3><p>'+o.dates+'</p><div class="price">'+o.price+'</div><button class="btn sm ghost" type="button" data-open-quiz>Забронировать</button></div></article>'
   ).join('');
   document.getElementById('addr').textContent = C.address;
   const pl = document.getElementById('phoneLink'); pl.textContent = C.phone; pl.href = 'tel:'+C.phone.replace(/[^\d+]/g,'');

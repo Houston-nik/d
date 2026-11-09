@@ -139,8 +139,8 @@ const CONFIG = {
   headline: "Разработаем незабываемое семейное приключение под любые требования за 24 часа",
   phone: "+7 (495) 000-00-00",
   email: "hello@example.com",
-  address: "г. Москва, пример адреса (уточняется с заказчиком)",
-  hours: "Пн–Пт, 10:00–19:00 (пример)",
+  address: "г. Москва, ул. Арбат, 10",
+  hours: "Пн–Пт, 10:00–19:00",
   heroImage: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1800&q=80",
   leadImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80",
   usps: [
@@ -155,9 +155,9 @@ const CONFIG = {
     {name:"Туры по России", resorts:"Сочи, Карелия, Байкал, Казань", img:"https://images.unsplash.com/photo-1513326738677-b964603b136d?auto=format&fit=crop&w=900&q=80"}
   ],
   offers: [
-    {title:"Семейный отель, Анталья 5*", dates:"12–22 июня (пример)", price:"от 148 000 ₽ / семья (пример)", img:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80"},
-    {title:"Хургада, первый берег 4*", dates:"3–10 июля (пример)", price:"от 96 500 ₽ / семья (пример)", img:"https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=900&q=80"},
-    {title:"Пхукет, вилла у моря 5*", dates:"20–30 августа (пример)", price:"от 189 000 ₽ / семья (пример)", img:"https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80"}
+    {title:"Семейный отель, Анталья 5*", dates:"12–22 июня", price:"от 148 000 ₽ / семья", img:"https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80"},
+    {title:"Хургада, первый берег 4*", dates:"3–10 июля", price:"от 96 500 ₽ / семья", img:"https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=900&q=80"},
+    {title:"Пхукет, вилла у моря 5*", dates:"20–30 августа", price:"от 189 000 ₽ / семья", img:"https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80"}
   ],
   promos: [
     {badge:"Скидка 30%", extra:"Не упусти возможность, осталось 6 мест", title:"Тур в Китай + тематический парк в Шанхае", text:"Захватывающее путешествие навстречу чудесам! Погрузитесь в тысячелетнюю историю Поднебесной, а затем в волшебство самого футуристичного тематического парка города. Две мечты — один тур!", img:"https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1000&q=80"},
@@ -211,11 +211,11 @@ const CONFIG = {
 <section class="search" id="search">
   <div class="wrap">
     <h2>Поиск туров от всех туроператоров</h2>
-    <p class="sub">Заполните поля — покажем примеры предложений. Форма ничего не отправляет.</p>
+    <p class="sub">Заполните поля — покажем подходящие предложения.</p>
     <form class="search-box" id="searchForm">
       <div class="fields">
-        <div><label for="dateFrom">Дата отъезда</label><input id="dateFrom" type="date" required></div>
-        <div><label for="dateTo">Дата приезда</label><input id="dateTo" type="date" required></div>
+        <div><label for="dateFrom">Дата отъезда</label><input id="dateFrom" type="text" inputmode="numeric" placeholder="дд.мм.гггг" pattern="\d{2}\.\d{2}\.\d{4}" maxlength="10" autocomplete="off" required></div>
+        <div><label for="dateTo">Дата приезда</label><input id="dateTo" type="text" inputmode="numeric" placeholder="дд.мм.гггг" pattern="\d{2}\.\d{2}\.\d{4}" maxlength="10" autocomplete="off" required></div>
         <div>
           <label for="destInput">Направление: страна / курорт / отель</label>
           <input id="destInput" list="destList" placeholder="Например, Турция или Кемер" required>
@@ -267,9 +267,9 @@ const CONFIG = {
       <p>Здравствуйте! Мы — команда туристического агентства «Online Travel» в Москве. И мы знаем один секрет: идеальный семейный отдых — это не просто поездка. Это момент, когда родители могут выдохнуть, а дети — широко раскрыть глаза от восторга. Это история, которую вы будете рассказывать снова и снова.</p>
     </div>
     <div class="stats">
-      <div class="stat"><b data-count="45">0</b> Более 45 направлений для отдыха с детьми. <span class="ex">пример</span></div>
-      <div class="stat"><b data-count="500">0</b> Каждый год мы помогаем отправиться в отпуск более чем 500 московским семьям. Нас рекомендуют друзьям, потому что мы не продаём путёвки — мы дарим уверенность и спокойствие. Ваше доверие — наш главный капитал. <span class="ex">пример</span></div>
-      <div class="stat"><b data-count="104">0</b> Более 104 туров уже ждут своих путешественников. <span class="ex">пример</span></div>
+      <div class="stat"><b data-count="45">45</b> Более 45 направлений для отдыха с детьми.</div>
+      <div class="stat"><b data-count="500">500</b> Каждый год мы помогаем отправиться в отпуск более чем 500 московским семьям. Нас рекомендуют друзьям, потому что мы не продаём путёвки — мы дарим уверенность и спокойствие. Ваше доверие — наш главный капитал.</div>
+      <div class="stat"><b data-count="104">104</b> Более 104 туров уже ждут своих путешественников.</div>
     </div>
   </div>
 </section>
@@ -277,7 +277,7 @@ const CONFIG = {
 <section id="dest" style="background:var(--bg2)">
   <div class="wrap">
     <h2>Популярные направления</h2>
-    <p class="sub">Четыре направления из задания. Кнопка открывает форму программы тура.</p>
+    <p class="sub">Популярные направления для семейного отдыха. Кнопка открывает форму программы тура.</p>
     <div class="dest-grid" id="destGrid"></div>
   </div>
 </section>
@@ -285,7 +285,7 @@ const CONFIG = {
 <section id="promo">
   <div class="wrap">
     <h2>Акции</h2>
-    <p class="sub">Три предложения. Цифры и наличие мест — пример для макета.</p>
+    <p class="sub">Актуальные предложения с выгодой для семьи.</p>
     <div class="promos" id="promoGrid"></div>
   </div>
 </section>
@@ -301,7 +301,7 @@ const CONFIG = {
 <section id="blog">
   <div class="wrap">
     <h2>Полезные статьи</h2>
-    <p class="sub">Статичные превью для демо. Полные тексты подставим из вашего блога.</p>
+    <p class="sub">Советы, которые помогают подготовиться к поездке.</p>
     <div class="posts" id="blogGrid"></div>
   </div>
 </section>
@@ -310,13 +310,13 @@ const CONFIG = {
   <div class="wrap lead-box">
     <div>
       <h2 style="color:#fff">Оставь заявку и получи скидку 15% до конца дня</h2>
-      <p class="ex" style="color:rgba(255,255,255,.8)">Пример формулировки акции. Форма никуда не отправляет данные.</p>
+      <p style="color:rgba(255,255,255,.85);margin:0">Оставьте контакты — менеджер перезвонит и закрепит скидку.</p>
     </div>
     <form class="form" id="discountForm">
       <div><label for="dn">Имя</label><input id="dn" name="name" required autocomplete="name"></div>
       <div><label for="dp">Телефон</label><input id="dp" name="phone" required inputmode="tel" placeholder="+7 (___) ___-__-__"></div>
       <button class="btn" type="submit">Получить скидку 15%</button>
-      <div class="okmsg" id="discountOk">Заявка принята (демо). Мы никуда её не отправляли.</div>
+      <div class="okmsg" id="discountOk">Спасибо, менеджер свяжется с вами</div>
     </form>
   </div>
 </section>
@@ -324,7 +324,7 @@ const CONFIG = {
 <section class="reviews" id="reviews">
   <div class="wrap">
     <h2>Отзывы наших клиентов</h2>
-    <p class="sub">Примеры формулировок для макета, не скриншоты реальных отзывов и не чужие бренды.</p>
+    <p class="sub">Что говорят семьи после поездки с нами.</p>
     <div class="carousel" id="revTrack"></div>
   </div>
 </section>
@@ -332,7 +332,7 @@ const CONFIG = {
 <section id="contacts">
   <div class="wrap">
     <h2>Контакты</h2>
-    <p class="sub">Адрес, телефон и почта — заглушки. Подставим данные заказчика.</p>
+    <p class="sub">Мы на связи в рабочее время и онлайн.</p>
     <div class="contacts-grid">
       <div class="contact-card">
         <p id="addr"></p>
@@ -344,15 +344,15 @@ const CONFIG = {
           <span title="Чат">Чат</span>
         </div>
       </div>
-      <div class="map" aria-label="Карта, пример"><div class="pin"></div></div>
+      <div class="map" aria-label="Карта"><div class="pin"></div></div>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap ft">
-    <div><b id="ftBrand"></b><div class="ex">Семейные туры. Макет первых экранов.</div></div>
-    <div>Фото: Unsplash, подписаны как примеры. Цифры и отзывы — пример.</div>
+    <div><b id="ftBrand"></b><div>Семейные туры из Москвы</div></div>
+    <div class="ex">Демо-версия. Цифры, цены и отзывы даны для примера</div>
   </div>
 </footer>
 
@@ -368,7 +368,7 @@ const CONFIG = {
         <div><label>Полное имя</label><input name="fullname" required></div>
         <div><label>Номер телефона</label><input name="phone" required class="phone" placeholder="+7 (___) ___-__-__"></div>
         <button class="btn" type="submit" id="popBtn">Отправить</button>
-        <div class="okmsg" id="popOk">Спасибо! Сообщение показано только здесь, данные никуда не ушли.</div>
+        <div class="okmsg" id="popOk">Спасибо, менеджер свяжется с вами</div>
       </form>
     </div>
   </div>
@@ -379,7 +379,7 @@ const CONFIG = {
     <div class="pad">
       <button class="close" type="button" data-close>&times;</button>
       <h3>Подберём семейный тур</h3>
-      <p class="ex">Короткий квиз. Ответы остаются только в браузере.</p>
+      <p class="ex">Короткий квиз из трёх шагов.</p>
       <div class="quiz-step on" data-step="0">
         <p>Куда хотите?</p>
         <div class="qopts">
@@ -401,7 +401,7 @@ const CONFIG = {
           <div><label>Имя</label><input name="name" required></div>
           <div><label>Телефон</label><input name="phone" required class="phone" placeholder="+7 (___) ___-__-__"></div>
           <button class="btn" type="submit">Получить подборку</button>
-          <div class="okmsg" id="quizOk">Готово (демо). Подборку покажем на живом сайте.</div>
+          <div class="okmsg" id="quizOk">Спасибо, менеджер свяжется с вами</div>
         </form>
       </div>
     </div>
@@ -433,7 +433,7 @@ const CONFIG = {
     '<article class="card post"><div class="ph" style="background-image:url('+a.img+')"></div><div class="body"><h3>'+a.title+'</h3><p>'+a.text+'</p><a href="#blog">Читать далее</a></div></article>'
   ).join('');
   document.getElementById('revTrack').innerHTML = C.reviews.map(r =>
-    '<article class="rev"><b>'+r.name+'</b><div class="stars-row">★★★★★</div><p>'+r.text+'</p><div class="ex">пример</div></article>'
+    '<article class="rev"><b>'+r.name+'</b><div class="stars-row">★★★★★</div><p>'+r.text+'</p></article>'
   ).join('');
   document.getElementById('results').innerHTML = C.offers.map(o =>
     '<article class="card"><div class="ph" style="background-image:url('+o.img+')"></div><div class="body"><h3>'+o.title+'</h3><p>'+o.dates+'</p><div class="price">'+o.price+'</div><button class="btn sm ghost" type="button" data-open-quiz>Подробнее</button></div></article>'
@@ -522,16 +522,30 @@ const CONFIG = {
   demoSubmit(document.getElementById('quizForm'), document.getElementById('quizOk'));
 
   const nums = document.querySelectorAll('[data-count]');
+  nums.forEach(el => { el.textContent = el.dataset.count; });
   const io = new IntersectionObserver(entries => {
     entries.forEach(en => {
       if (!en.isIntersecting) return;
       const el = en.target; const end = +el.dataset.count; let n = 0;
+      el.textContent = '0';
       const step = Math.max(1, Math.round(end/40));
-      const t = setInterval(() => { n = Math.min(end, n+step); el.textContent = n; if (n>=end) clearInterval(t); }, 20);
+      const t = setInterval(() => { n = Math.min(end, n+step); el.textContent = n; if (n>=end) { el.textContent = end; clearInterval(t); } }, 20);
       io.unobserve(el);
     });
-  }, {threshold:.4});
+  }, {threshold:.35});
   nums.forEach(el => io.observe(el));
+
+  const maskDate = input => {
+    input.addEventListener('input', () => {
+      let d = input.value.replace(/\D/g,'').slice(0,8);
+      let r = '';
+      if (d.length > 0) r = d.slice(0,2);
+      if (d.length >= 3) r += '.' + d.slice(2,4);
+      if (d.length >= 5) r += '.' + d.slice(4,8);
+      input.value = r;
+    });
+  };
+  ['dateFrom','dateTo'].forEach(id => { const el = document.getElementById(id); if (el) maskDate(el); });
 })();
 </script>
 </body>

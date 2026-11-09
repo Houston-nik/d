@@ -43,7 +43,7 @@ button,input,select{font:inherit}
 .hero .lead{font-size:1.15rem;max-width:36ch;margin:0 0 28px;color:rgba(255,255,255,.9)}
 .usps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0 0;max-width:820px}
 .usp{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:14px 16px;font-size:.95rem}
-.usp .ico{display:inline-flex;width:34px;height:34px;align-items:center;justify-content:center;border-radius:12px;background:rgba(255,255,255,.18);margin-bottom:8px;font-size:1.1rem}
+.usp .ico{display:inline-flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:12px;background:rgba(255,255,255,.96);color:var(--accent);box-shadow:0 6px 16px rgba(15,40,58,.18);margin-bottom:10px}.usp .ico svg{width:22px;height:22px;display:block}
 .usp b{display:block;margin-bottom:4px}
 section{padding:72px 0}
 h2{font-size:clamp(1.55rem,3vw,2.15rem);letter-spacing:-.03em;margin:0 0 10px;color:var(--ink)}
@@ -97,7 +97,7 @@ details.acc p{margin:12px 0 0;color:var(--muted)}
 .reviews{background:var(--bg2)}
 .carousel{display:flex;gap:16px;overflow:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
 .rev{min-width:min(340px,86vw);scroll-snap-align:start;background:#fff;border-radius:18px;padding:20px;border:1px solid var(--line)}
-.rev .stars-row{color:#e2a10b;margin:6px 0}
+.rev .stars-row{color:#e2a10b;margin:6px 0;display:flex;gap:2px}.rev .stars-row svg{width:14px;height:14px;display:block}
 .contacts-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:20px}
 .map{min-height:280px;border-radius:22px;background:
   linear-gradient(#cfe6f4 1px,transparent 1px) 0 0/40px 40px,
@@ -106,7 +106,7 @@ details.acc p{margin:12px 0 0;color:var(--muted)}
 .pin{position:absolute;left:46%;top:48%;width:18px;height:18px;background:var(--accent);border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 6px 16px rgba(0,0,0,.2)}
 .contact-card{background:var(--bg2);border-radius:22px;padding:24px}
 .soc{display:flex;gap:10px;margin-top:14px}
-.soc span{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:.8rem;font-weight:700}
+.soc span{display:inline-flex;align-items:center;justify-content:center;gap:4px;width:auto;min-width:42px;height:42px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:.8rem;font-weight:700;color:var(--navy)}.soc span svg{width:16px;height:16px;display:block;color:var(--sky)}
 footer{padding:28px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
 .ft{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .modal{display:none;position:fixed;inset:0;z-index:80;background:rgba(17,17,17,.55);padding:24px 12px;overflow:auto}
@@ -146,9 +146,9 @@ const CONFIG = {
   heroImage: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1800&q=80",
   leadImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80",
   usps: [
-    {icon: "🛟", title: "Рядом 24/7", text: "Круглосуточная поддержка и помощь в любое время суток."},
-    {icon: "👨‍👩‍👧‍👦", title: "Вся семья", text: "Туристические туры для всей семьи с полным юридическим и визовым сопровождением."},
-    {icon: "✈️", title: "Гарантия возврата", text: "Единственное в Москве агентство с гарантией полного возврата средств за 24 часа до вылета."}
+    {icon: "headset", title: "Рядом 24/7", text: "Круглосуточная поддержка и помощь в любое время суток."},
+    {icon: "users", title: "Вся семья", text: "Туристические туры для всей семьи с полным юридическим и визовым сопровождением."},
+    {icon: "shield", title: "Гарантия возврата", text: "Единственное в Москве агентство с гарантией полного возврата средств за 24 часа до вылета."}
   ],
   destinations: [
     {name:"Туры в Турцию", resorts:"Анталья, Кемер, Сиде, Белек", img:"https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=900&q=80"},
@@ -342,7 +342,7 @@ const CONFIG = {
         <p><a id="mailLink"></a></p>
         <p class="ex" id="hours"></p>
         <div class="soc" aria-label="Мессенджеры для связи по туру">
-          <span title="Telegram">✈ TG</span>
+          <span title="Telegram" aria-label="Telegram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M223.69,42.18l-58.22,192a8,8,0,0,1-14.92,1.25L108,148,20.58,105.45a8,8,0,0,1,1.25-14.92l192-58.22A8,8,0,0,1,223.69,42.18Z" opacity="0.2"/><path d="M227.32,28.68a16,16,0,0,0-15.66-4.08l-.15,0L19.57,82.84a16,16,0,0,0-2.49,29.8L102,154l41.3,84.87A15.86,15.86,0,0,0,157.74,248q.69,0,1.38-.06a15.88,15.88,0,0,0,14-11.51l58.2-191.94c0-.05,0-.1,0-.15A16,16,0,0,0,227.32,28.68ZM157.83,231.85l-.05.14,0-.07-40.06-82.3,48-48a8,8,0,0,0-11.31-11.31l-48,48L24.08,98.25l-.07,0,.14,0L216,40Z"/></svg>TG</span>
           <span title="WhatsApp">WA</span>
         </div>
       </div>
@@ -432,6 +432,13 @@ const CONFIG = {
 </div>
 
 <script>
+const ICONS = {
+  // Phosphor Icons duotone, MIT — https://phosphoricons.com / https://github.com/phosphor-icons/core
+  headset: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M80,144v40a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V128H64A16,16,0,0,1,80,144Zm112-16a16,16,0,0,0-16,16v40a16,16,0,0,0,16,16h32V128Z" opacity="0.2"></path><path d="M201.89,54.66A104.08,104.08,0,0,0,24,128v56a24,24,0,0,0,24,24H64a24,24,0,0,0,24-24V144a24,24,0,0,0-24-24H40.36A88.12,88.12,0,0,1,190.54,65.93,87.39,87.39,0,0,1,215.65,120H192a24,24,0,0,0-24,24v40a24,24,0,0,0,24,24h24a24,24,0,0,1-24,24H136a8,8,0,0,0,0,16h56a40,40,0,0,0,40-40V128A103.41,103.41,0,0,0,201.89,54.66ZM64,136a8,8,0,0,1,8,8v40a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V136Zm128,56a8,8,0,0,1-8-8V144a8,8,0,0,1,8-8h24v56Z"></path></svg>',
+  users: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M168,144a40,40,0,1,1-40-40A40,40,0,0,1,168,144ZM64,56A32,32,0,1,0,96,88,32,32,0,0,0,64,56Zm128,0a32,32,0,1,0,32,32A32,32,0,0,0,192,56Z" opacity="0.2"></path><path d="M244.8,150.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,128a8,8,0,0,1,0-16,24,24,0,1,0-23.24-30,8,8,0,1,1-15.5-4A40,40,0,1,1,219,117.51a67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,244.8,150.4ZM190.92,212a8,8,0,1,1-13.85,8,57,57,0,0,0-98.15,0,8,8,0,1,1-13.84-8,72.06,72.06,0,0,1,33.74-29.92,48,48,0,1,1,58.36,0A72.06,72.06,0,0,1,190.92,212ZM128,176a32,32,0,1,0-32-32A32,32,0,0,0,128,176ZM72,120a8,8,0,0,0-8-8A24,24,0,1,1,87.24,82a8,8,0,1,0,15.5-4A40,40,0,1,0,37,117.51,67.94,67.94,0,0,0,9.6,139.19a8,8,0,1,0,12.8,9.61A51.6,51.6,0,0,1,64,128,8,8,0,0,0,72,120Z"></path></svg>',
+  shield: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M216,56v56c0,96-88,120-88,120S40,208,40,112V56a8,8,0,0,1,8-8H208A8,8,0,0,1,216,56Z" opacity="0.2"></path><path d="M208,40H48A16,16,0,0,0,32,56v56c0,52.72,25.52,84.67,46.93,102.19,23.06,18.86,46,25.26,47,25.53a8,8,0,0,0,4.2,0c1-.27,23.91-6.67,47-25.53C198.48,196.67,224,164.72,224,112V56A16,16,0,0,0,208,40Zm0,72c0,37.07-13.66,67.16-40.6,89.42A129.3,129.3,0,0,1,128,223.62a128.25,128.25,0,0,1-38.92-21.81C61.82,179.51,48,149.3,48,112l0-56,160,0ZM82.34,141.66a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32l-56,56a8,8,0,0,1-11.32,0Z"></path></svg>',
+  star: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M229.06,108.79l-48.7,42,14.88,62.79a8.4,8.4,0,0,1-12.52,9.17L128,189.09,73.28,222.74a8.4,8.4,0,0,1-12.52-9.17l14.88-62.79-48.7-42A8.46,8.46,0,0,1,31.73,94L95.64,88.8l24.62-59.6a8.36,8.36,0,0,1,15.48,0l24.62,59.6L224.27,94A8.46,8.46,0,0,1,229.06,108.79Z" opacity="0.2"/><path d="M239.18,97.26A16.38,16.38,0,0,0,224.92,86l-59-4.76L143.14,26.15a16.36,16.36,0,0,0-30.27,0L90.11,81.23,31.08,86a16.46,16.46,0,0,0-9.37,28.86l45,38.83L53,211.75a16.38,16.38,0,0,0,24.5,17.82L128,198.49l50.53,31.08A16.4,16.4,0,0,0,203,211.75l-13.76-58.07,45-38.83A16.43,16.43,0,0,0,239.18,97.26Zm-15.34,5.47-48.7,42a8,8,0,0,0-2.56,7.91l14.88,62.8a.37.37,0,0,1-.17.48c-.18.14-.23.11-.38,0l-54.72-33.65a8,8,0,0,0-8.38,0L69.09,215.94c-.15.09-.19.12-.38,0a.37.37,0,0,1-.17-.48l14.88-62.8a8,8,0,0,0-2.56-7.91l-48.7-42c-.12-.1-.23-.19-.13-.5s.18-.27.33-.29l63.92-5.16A8,8,0,0,0,103,91.86l24.62-59.61c.08-.17.11-.25.35-.25s.27.08.35.25L153,91.86a8,8,0,0,0,6.75,4.92l63.92,5.16c.15,0,.24,0,.33.29S224,102.63,223.84,102.73Z"/></svg>'
+};
 (function(){
   const C = CONFIG;
   document.getElementById('logo').textContent = C.brand;
@@ -440,7 +447,7 @@ const CONFIG = {
   document.getElementById('lead').textContent = C.tagline;
   document.querySelector('.hero').style.backgroundImage = 'url('+C.heroImage+')';
   document.querySelector('.lead-sec').style.backgroundImage = 'url('+C.leadImage+')';
-  document.getElementById('usps').innerHTML = C.usps.map(u => '<div class="usp"><div class="ico" aria-hidden="true">'+(u.icon||'🌍')+'</div><b>'+u.title+'</b>'+u.text+'</div>').join('');
+  document.getElementById('usps').innerHTML = C.usps.map(u => '<div class="usp"><div class="ico" aria-hidden="true">'+(ICONS[u.icon]||'')+'</div><b>'+u.title+'</b>'+u.text+'</div>').join('');
   const drawer = document.getElementById('drawer');
   drawer.innerHTML = C.nav.map(([h,t]) => '<a href="'+h+'">'+t+'</a>').join('');
   document.getElementById('destGrid').innerHTML = C.destinations.map((d,i) =>
@@ -456,7 +463,7 @@ const CONFIG = {
     '<article class="card post"><div class="ph" style="background-image:url('+a.img+')"></div><div class="body"><h3>'+a.title+'</h3><p>'+a.text+'</p><a href="#blog">Читать далее</a></div></article>'
   ).join('');
   document.getElementById('revTrack').innerHTML = C.reviews.map(r =>
-    '<article class="rev"><b>'+r.name+'</b><div class="stars-row">★★★★★</div><p>'+r.text+'</p></article>'
+    '<article class="rev"><b>'+r.name+'</b><div class="stars-row" aria-label="5 из 5">'+ICONS.star.repeat(5)+'</div><p>'+r.text+'</p></article>'
   ).join('');
   document.getElementById('results').innerHTML = C.offers.map(o =>
     '<article class="card"><div class="ph" style="background-image:url('+o.img+')"></div><div class="body"><h3>'+o.title+'</h3><p>'+o.dates+'</p><div class="price">'+o.price+'</div><button class="btn sm ghost" type="button" data-open-quiz>Забронировать</button></div></article>'

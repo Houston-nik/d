@@ -1,0 +1,33 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Юнит-экономика · демо</title>
+<style>
+body{margin:0;font:15px Inter,system-ui;background:#0f1218;color:#eef1f6}
+.wrap{max-width:1000px;width:100%;margin:0 auto;padding:24px;box-sizing:border-box}
+h1{font-size:1.4rem;margin:0 0 8px} .muted{color:#9aa3b2}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0}
+@media(max-width:800px){.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.grid{grid-template-columns:1fr}}
+.card{background:#1a1f2b;border:1px solid #2a3142;border-radius:12px;padding:16px;overflow-wrap:anywhere}
+.card b{display:block;font-size:1.3rem;margin-top:6px}
+.table-wrap{width:100%;max-width:100%;overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:36rem} td,th{padding:10px;border-bottom:1px solid #2a3142;text-align:left;white-space:nowrap}
+.ok{color:#3dd68c}.bad{color:#ff7b7b}
+.note{margin-top:16px;color:#9aa3b2;font-size:.9rem}
+</style></head><body><div class="wrap">
+<h1>Юнит-экономика селлера · демо</h1>
+<p class="muted">Выдуманные данные. Пример работы / демо.</p>
+<div class="grid">
+<div class="card">Маржа <b class="ok">18 %</b></div>
+<div class="card">ROI рекламы <b>2.4×</b></div>
+<div class="card">Точка безубыточности <b>42 шт</b></div>
+<div class="card">Чистая на SKU <b>312 ₽</b></div>
+</div>
+<div class="table-wrap">
+<table><thead><tr><th>SKU</th><th>Цена</th><th>Себест.</th><th>Комиссия+логистика</th><th>Реклама</th><th>Маржа</th></tr></thead>
+<tbody>
+<tr><td>Кроссовки A</td><td>4 990</td><td>2 100</td><td>1 120</td><td>480</td><td class="ok">26 %</td></tr>
+<tr><td>Кроссовки B</td><td>3 490</td><td>1 800</td><td>980</td><td>520</td><td class="bad">5 %</td></tr>
+<tr><td>Слипоны C</td><td>2 290</td><td>900</td><td>640</td><td>210</td><td class="ok">24 %</td></tr>
+</tbody></table>
+</div>
+<p class="note">© Пример работы / демо. Без клиентских данных.</p>
+</div></body></html>

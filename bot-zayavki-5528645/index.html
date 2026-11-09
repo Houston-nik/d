@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Демо чат бота записи</title>
+<style>
+:root{--bg:#eef1f6;--panel:#fff;--bot:#e8edf7;--user:#d7f0e4;--text:#1c2430;--muted:#6b7280;--accent:#3451b2;--line:#d9dee8}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text)}
+.wrap{width:min(480px,100%);max-width:100%;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;background:var(--panel);border-left:1px solid var(--line);border-right:1px solid var(--line);min-width:0}
+.head{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:center}
+.avatar{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#7aa2ff,#3451b2)}
+.head h1{margin:0;font-size:1rem} .head p{margin:0;color:var(--muted);font-size:.82rem}
+.chat{flex:1;padding:16px;overflow:auto;display:flex;flex-direction:column;gap:10px;background:#f7f8fb}
+.bubble{max-width:88%;padding:10px 12px;border-radius:14px;white-space:pre-wrap;line-height:1.4;font-size:.95rem}
+.bubble.bot{align-self:flex-start;background:var(--bot)} .bubble.user{align-self:flex-end;background:var(--user)}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.actions button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;cursor:pointer;font:inherit}
+.actions button:hover{border-color:var(--accent);color:var(--accent)}
+.composer{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line);min-width:0}
+.composer input{flex:1 1 auto;min-width:0;width:100%;padding:11px 12px;border-radius:12px;border:1px solid var(--line);font:inherit}
+.composer button{flex:0 0 auto;padding:11px 14px;border:0;border-radius:12px;background:var(--accent);color:#fff;font-weight:600;cursor:pointer}
+.note{padding:8px 16px 14px;color:var(--muted);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div class="avatar"></div>
+    <div>
+      <h1 id="biz">Бот записи</h1>
+      <p>Демо сценарий. Не мессенджер бренд.</p>
+    </div>
+  </div>
+  <div class="chat" id="chat"></div>
+  <div class="composer">
+    <input id="input" placeholder="Текст ответа" disabled>
+    <button id="send" type="button" disabled>Отправить</button>
+  </div>
+  <div class="note">Локальный макет для клиента. Боевой бот: bot.py + config.yaml.</div>
+</div>
+<script>
+/* CONFIG синхронизируйте с config.yaml при кастомизации */
+const CONFIG = {
+  business_name: "Студия ДомМастер",
+  welcome: "Здравствуйте! Это демо бот записи. Выберите пункт меню.",
+  menu: [
+    {id:"services", title:"Услуги"},
+    {id:"book", title:"Запись"},
+    {id:"faq", title:"Вопросы"},
+    {id:"contact", title:"Контакты"}
+  ],
+  services: [
+    {id:"measure", title:"Замер"},
+    {id:"cosmetic", title:"Консультация по косметике"},
+    {id:"turnkey", title:"Расчёт ремонта под ключ"}
+  ],
+  dates: ["Завтра", "Послезавтра", "В течение недели"],
+  times: ["10:00", "12:00", "15:00", "18:00"],
+  faq: [
+    {q:"Это демо?", a:"Да. Сценарий записи для показа клиенту."},
+    {q:"Как проходит замер?", a:"Мастер приезжает в согласованное окно."}
+  ],
+  contacts: "Телефон: +7 (495) 000-00-00. Город: Москва и МО.",
+  thanks: "Заявка принята. Мы свяжемся для подтверждения."
+};
+
+Object.assign(CONFIG, {});
+const chat = document.getElementById("chat");
+const input = document.getElementById("input");
+const sendBtn = document.getElementById("send");
+document.getElementById("biz").textContent = CONFIG.business_name;
+let mode = "menu";
+const lead = {};
+
+function add(text, who="bot", actions){
+  const el = document.createElement("div");
+  el.className = "bubble " + who;
+  el.textContent = text;
+  if(actions && actions.length){
+    const box = document.createElement("div");
+    box.className = "actions";
+    actions.forEach(a=>{
+      const b = document.createElement("button");
+      b.type="button"; b.textContent=a.title;
+      b.onclick=()=>a.onClick();
+      box.appendChild(b);
+    });
+    el.appendChild(box);
+  }
+  chat.appendChild(el);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function setTyping(on){
+  input.disabled = !on; sendBtn.disabled = !on;
+  if(on) input.focus();
+}
+
+function showMenu(){
+  mode = "menu"; setTyping(false);
+  add(CONFIG.welcome, "bot", CONFIG.menu.map(m=>({
+    title:m.title, onClick:()=>handleMenu(m.id)
+  })));
+}
+
+function handleMenu(id){
+  if(id==="services"){
+    add("Услуги", "user");
+    add(CONFIG.services.map(s=>"• "+s.title).join("\n"));
+    showMenu();
+  } else if(id==="faq"){
+    add("Вопросы", "user");
+    add(CONFIG.faq.map(f=>"Вопрос: "+f.q+"\nОтвет: "+f.a).join("\n\n"));
+    showMenu();
+  } else if(id==="contact"){
+    add("Контакты", "user");
+    add(CONFIG.contacts); showMenu();
+  } else if(id==="book"){
+    add("Запись", "user");
+    add("Выберите услугу:", "bot", CONFIG.services.map(s=>({
+      title:s.title, onClick:()=>pickService(s)
+    })));
+  }
+}
+
+function pickService(s){
+  lead.service = s.title; add(s.title,"user");
+  add("Выберите день:", "bot", CONFIG.dates.map(d=>({
+    title:d, onClick:()=>pickDate(d)
+  })));
+}
+function pickDate(d){
+  lead.date=d; add(d,"user");
+  add("Выберите время:", "bot", CONFIG.times.map(t=>({
+    title:t, onClick:()=>pickTime(t)
+  })));
+}
+function pickTime(t){
+  lead.time=t; add(t,"user");
+  add("Напишите ваше имя:"); mode="name"; setTyping(true);
+}
+function submitText(){
+  const v = input.value.trim(); if(!v) return;
+  add(v,"user"); input.value="";
+  if(mode==="name"){ lead.name=v; add("Укажите телефон:"); mode="phone"; }
+  else if(mode==="phone"){
+    lead.phone=v; setTyping(false); mode="done";
+    add(CONFIG.thanks + "\n\n" + lead.service + ", " + lead.date + ", " + lead.time);
+    showMenu();
+  }
+}
+sendBtn.onclick = submitText;
+input.addEventListener("keydown", e=>{ if(e.key==="Enter"){ e.preventDefault(); submitText(); }});
+showMenu();
+</script>
+</body>
+</html>

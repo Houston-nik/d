@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Landing page demo</title>
+<style>
+:root, [data-theme="light"] {
+  --bg:#f6f7f9; --surface:#fff; --text:#1a1d24; --muted:#5c6570;
+  --accent:#2f6fed; --accent2:#1e4fbf; --border:#e2e6ee; --hero1:#dbe7ff; --hero2:#f0f4ff;
+  --ok:#1a7f4b; --shadow:0 8px 28px rgba(26,29,36,.08);
+}
+[data-theme="dark"] {
+  --bg:#0f1218; --surface:#1a1f2b; --text:#eef1f6; --muted:#9aa3b2;
+  --accent:#5b8cff; --accent2:#3d6fe0; --border:#2a3142; --hero1:#1a2440; --hero2:#121826;
+  --ok:#3dd68c; --shadow:0 8px 28px rgba(0,0,0,.35);
+}
+[data-theme="warm"] {
+  --bg:#faf6f1; --surface:#fffdf9; --text:#2a2118; --muted:#7a6a5a;
+  --accent:#c45c26; --accent2:#9a4418; --border:#eadfce; --hero1:#f3e2cf; --hero2:#faf3ea;
+  --ok:#2f7a4a; --shadow:0 8px 28px rgba(42,33,24,.08);
+}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+a{color:inherit;text-decoration:none} img{max-width:100%}
+.wrap{width:min(1120px,92%);margin:0 auto}
+.top{position:sticky;top:0;z-index:40;backdrop-filter:blur(10px);background:color-mix(in srgb,var(--surface) 88%,transparent);border-bottom:1px solid var(--border)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:16px}
+.logo{font-weight:700;font-size:1.05rem}
+.nav links,.nav-links{display:flex;gap:18px;flex-wrap:wrap;font-size:.95rem;color:var(--muted)}
+.nav-links a:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:12px;border:0;background:var(--accent);color:#fff;font-weight:600;cursor:pointer;font-size:1rem}
+.btn:hover{background:var(--accent2)} .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+.themes{display:flex;gap:6px} .themes button{width:28px;height:28px;border-radius:999px;border:2px solid var(--border);cursor:pointer}
+.themes .t-light{background:#fff} .themes .t-dark{background:#1a1f2b} .themes .t-warm{background:#c45c26}
+.hero{padding:64px 0 48px;background:linear-gradient(135deg,var(--hero1),var(--hero2))}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center}
+@media(max-width:800px){.hero-grid{grid-template-columns:1fr}.nav-links{display:none}}
+.badge{display:inline-block;padding:6px 10px;border-radius:999px;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent);font-size:.85rem;font-weight:600;margin-bottom:14px}
+h1{font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.15;margin:0 0 14px}
+.lead{color:var(--muted);font-size:1.08rem;margin:0 0 22px;max-width:38ch}
+.hero-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:22px;box-shadow:var(--shadow)}
+.hero-art{height:220px;border-radius:16px;background:
+  linear-gradient(135deg,color-mix(in srgb,var(--accent) 55%,#fff),color-mix(in srgb,var(--accent2) 70%,#222)),
+  radial-gradient(circle at 30% 20%,rgba(255,255,255,.35),transparent 45%);margin-bottom:14px}
+.hero-card ul{margin:0;padding-left:18px;color:var(--muted)}
+section{padding:56px 0} h2{font-size:1.7rem;margin:0 0 8px} .sub{color:var(--muted);margin:0 0 28px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:800px){.grid3{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:20px;box-shadow:var(--shadow)}
+.card h3{margin:0 0 8px;font-size:1.1rem} .card p{margin:0;color:var(--muted)}
+.price{font-size:1.35rem;font-weight:700;margin:12px 0 4px;color:var(--accent)}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:800px){.gallery{grid-template-columns:1fr 1fr}}
+.shot{aspect-ratio:4/3;border-radius:14px;border:1px solid var(--border)}
+.shot.a{background:linear-gradient(145deg,#c9d7f5,#7ea0e8)} .shot.b{background:linear-gradient(145deg,#d8cfc3,#a8896a)}
+.shot.c{background:linear-gradient(145deg,#cfe8d8,#6faf8a)} .shot.d{background:linear-gradient(145deg,#e8d2cf,#c27a72)}
+.shot span{display:flex;height:100%;align-items:flex-end;padding:12px;color:#fff;font-weight:600;text-shadow:0 1px 4px rgba(0,0,0,.35)}
+.faq details{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:10px}
+.faq summary{cursor:pointer;font-weight:600} .faq p{margin:10px 0 0;color:var(--muted)}
+form{display:grid;gap:12px} label{font-size:.9rem;color:var(--muted)}
+input,textarea,select{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--bg);color:var(--text);font:inherit}
+.note{font-size:.85rem;color:var(--muted)} .okmsg{display:none;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok);font-weight:600}
+.sticky-call{position:fixed;right:18px;bottom:18px;z-index:50;box-shadow:var(--shadow)}
+footer{padding:28px 0 80px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--border)}
+.ex{font-size:.75rem;color:var(--muted);opacity:.85}
+</style>
+</head>
+<body data-theme="light">
+<header class="top">
+  <div class="wrap nav">
+    <div class="logo" id="logo">Studio</div>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#prices">Prices</a>
+      <a href="#works">Work</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Request</a>
+    </nav>
+    <div class="themes" title="Style options">
+      <button class="t-light" type="button" data-theme-btn="light" aria-label="Light"></button>
+      <button class="t-dark" type="button" data-theme-btn="dark" aria-label="Dark"></button>
+      <button class="t-warm" type="button" data-theme-btn="warm" aria-label="Warm"></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="badge" id="badge">Local service</div>
+      <h1 id="headline">A service page that brings requests</h1>
+      <p class="lead" id="lead">Offer text</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="btn" href="#contact" id="ctaPrimary">Request a quote</a>
+        <a class="btn ghost" href="tel:" id="ctaPhone">Call</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-art"></div>
+      <ul id="heroPoints"></ul>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <h2>Services</h2>
+    <p class="sub" id="servicesSub">What we do</p>
+    <div class="grid3" id="servicesGrid"></div>
+  </div>
+</section>
+
+<section id="prices" style="background:color-mix(in srgb,var(--surface) 70%,var(--bg))">
+  <div class="wrap">
+    <h2>Packages</h2>
+    <p class="sub">Sample prices for the demo. Final quote after a short brief.</p>
+    <div class="grid3" id="pricesGrid"></div>
+  </div>
+</section>
+
+<section id="works">
+  <div class="wrap">
+    <h2>Before and after</h2>
+    <p class="sub">Sample gallery. Real photos go here.</p>
+    <div class="gallery" id="gallery"></div>
+  </div>
+</section>
+
+<section id="reviews" style="background:color-mix(in srgb,var(--surface) 70%,var(--bg))">
+  <div class="wrap">
+    <h2>Reviews</h2>
+    <p class="sub ex">Sample wording for the demo. Not real reviews.</p>
+    <div class="grid3" id="reviewsGrid"></div>
+  </div>
+</section>
+
+<section id="faq" class="faq">
+  <div class="wrap">
+    <h2>FAQ</h2>
+    <p class="sub">Short answers</p>
+    <div id="faqList"></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap" style="display:grid;grid-template-columns:1.1fr .9fr;gap:24px">
+    <div>
+      <h2>Request a quote</h2>
+      <p class="sub">Demo form only. No data is sent anywhere.</p>
+      <form id="leadForm" class="card">
+        <div><label for="name">Name</label><input id="name" name="name" required placeholder="Your name"></div>
+        <div><label for="phone">Phone</label><input id="phone" name="phone" required placeholder="+1 ..."></div>
+        <div><label for="msg">Message</label><textarea id="msg" name="msg" rows="3" placeholder="What you need and when"></textarea></div>
+        <button class="btn" type="submit">Send request</button>
+        <div class="okmsg" id="okmsg">Request sent (demo)</div>
+        <p class="note">By sending, you agree to be contacted back.</p>
+      </form>
+    </div>
+    <div class="card">
+      <h3 id="contactTitle">Contacts</h3>
+      <p id="contactText" style="color:var(--muted)"></p>
+      <p style="margin-top:16px"><strong id="contactPhone"></strong></p>
+      <p class="note" id="contactCity"></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" id="footerText"></div>
+</footer>
+
+<a class="btn sticky-call" id="stickyCall" href="tel:">Call</a>
+
+<script>
+/* EN build */
+const CONFIG = {
+  businessName: "-",
+  niche: "-",
+  city: "-",
+  phone: "+7 (900) 000-00-00",
+  phoneHref: "tel:+79000000000",
+  badge: "-",
+  headline: "-",
+  lead: "-",
+  ctaPrimary: "Request a quote",
+  heroPoints: [
+    "-",
+    "-",
+    "-"
+  ],
+  servicesSub: "-",
+  services: [
+    {title: "-", text: "-"},
+    {title: "-", text: "-"},
+    {title: "-", text: "-"}
+  ],
+  packages: [
+    {title: "-", price: "-", text: "-"},
+    {title: "-", price: "-", text: "-"},
+    {title: "-", price: "-", text: "-"}
+  ],
+  gallery: [
+    {cls:"a", label:"-"},
+    {cls:"b", label:"-"},
+    {cls:"c", label:"-"},
+    {cls:"d", label:"-"}
+  ],
+  reviews: [
+    {name:"-", text:"-"},
+    {name:"-", text:"-"},
+    {name:"-", text:"-"}
+  ],
+  faq: [
+    {q:"-", a:"-"},
+    {q:"-", a:"-"},
+    {q:"-", a:"-"}
+  ],
+  contactTitle: "-",
+  contactText: "-",
+  footer: "-"
+};
+/* ========== /CONFIG ========== */
+Object.assign(CONFIG, {"businessName": "Bright Smile Dental", "niche": "Dental clinic", "city": "Your city", "phone": "+1 (555) 000-0000", "phoneHref": "tel:+15550000000", "badge": "Local clinic · sample", "headline": "Book a dental check-up in two minutes", "lead": "Services, prices and a booking form on one screen. Visitors on a phone understand what you do and send a request.", "ctaPrimary": "Request a quote", "heroPoints": ["Clear offer above the fold", "Services and prices without noise", "Request in one minute"], "servicesSub": "Main services", "services": [{"title": "Check-up and cleaning", "text": "What is included and what problem it solves."}, {"title": "Whitening", "text": "What is included and what problem it solves."}, {"title": "Implants consultation", "text": "What is included and what problem it solves."}], "packages": [{"title": "Basic", "price": "from $… (sample)", "text": "Starter set for the task."}, {"title": "Standard", "price": "from $… (sample)", "text": "The usual choice for most clients."}, {"title": "Full care", "price": "from $… (sample)", "text": "Everything in one visit plan."}], "gallery": [{"cls": "a", "label": "Sample 1"}, {"cls": "b", "label": "Sample 2"}, {"cls": "c", "label": "Sample 3"}, {"cls": "d", "label": "Sample 4"}], "reviews": [{"name": "Sample review", "text": "Sample wording for the demo. Your real reviews go here."}, {"name": "Sample review", "text": "Sample wording for the demo. Your real reviews go here."}, {"name": "Sample review", "text": "Sample wording for the demo. Your real reviews go here."}], "faq": [{"q": "How long does it take?", "a": "We agree the timeline after a short brief."}, {"q": "How does payment work?", "a": "Through the platform's protected payment, in agreed milestones."}, {"q": "Can I request changes?", "a": "Yes, two rounds of revisions are included."}], "contactTitle": "Get in touch", "contactText": "Leave a request or call. We reply during business hours.", "footer": "© Demo template prepared for your request. Reviews and numbers are samples."});
+
+function $(id){return document.getElementById(id)}
+function fill(){
+  document.title = CONFIG.businessName + " · demo";
+  $("logo").textContent = CONFIG.businessName;
+  $("badge").textContent = CONFIG.badge;
+  $("headline").textContent = CONFIG.headline;
+  $("lead").textContent = CONFIG.lead;
+  $("ctaPrimary").textContent = CONFIG.ctaPrimary;
+  $("ctaPhone").textContent = CONFIG.phone;
+  $("ctaPhone").href = CONFIG.phoneHref;
+  $("stickyCall").href = CONFIG.phoneHref;
+  $("stickyCall").textContent = "Call";
+  $("heroPoints").innerHTML = CONFIG.heroPoints.map(x=>"<li>"+x+"</li>").join("");
+  $("servicesSub").textContent = CONFIG.servicesSub;
+  $("servicesGrid").innerHTML = CONFIG.services.map(s=>`<article class="card"><h3>${s.title}</h3><p>${s.text}</p></article>`).join("");
+  $("pricesGrid").innerHTML = CONFIG.packages.map(p=>`<article class="card"><h3>${p.title}</h3><div class="price">${p.price}</div><p>${p.text}</p></article>`).join("");
+  $("gallery").innerHTML = CONFIG.gallery.map(g=>`<div class="shot ${g.cls}"><span>${g.label}</span></div>`).join("");
+  $("reviewsGrid").innerHTML = CONFIG.reviews.map(r=>`<article class="card"><h3>${r.name}</h3><p>${r.text}</p><p class="ex">Sample for demo</p></article>`).join("");
+  $("faqList").innerHTML = CONFIG.faq.map(f=>`<details><summary>${f.q}</summary><p>${f.a}</p></details>`).join("");
+  $("contactTitle").textContent = CONFIG.contactTitle;
+  $("contactText").textContent = CONFIG.contactText;
+  $("contactPhone").textContent = CONFIG.phone;
+  $("contactCity").textContent = CONFIG.city + " · " + CONFIG.niche;
+  $("footerText").textContent = CONFIG.footer;
+}
+fill();
+document.querySelectorAll("[data-theme-btn]").forEach(btn=>{
+  btn.addEventListener("click",()=>document.body.setAttribute("data-theme", btn.getAttribute("data-theme-btn")));
+});
+$("leadForm").addEventListener("submit", e=>{
+  e.preventDefault();
+  $("okmsg").style.display="block";
+  e.target.reset();
+});
+</script>
+</body>
+</html>

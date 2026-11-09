@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Сметные шаблоны</title>
+<style>
+:root{
+  --bg:#f4f6fa; --surface:#fff; --text:#1c2430; --muted:#5b6573;
+  --accent:#1e4f9a; --accent2:#163a73; --line:#d9e0ea; --hero:#e7eef8;
+  --ok:#1a7f4b; --shadow:0 10px 28px rgba(28,36,48,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;overflow-x:hidden}
+body{font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{width:min(1080px,92%);margin:0 auto}
+.top{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;flex-wrap:wrap}
+.logo{font-weight:700}
+.nav-links{display:flex;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:.95rem}
+@media(max-width:720px){.nav-links{display:none}}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border-radius:12px;border:0;background:var(--accent);color:#fff;font-weight:600;cursor:pointer;font:inherit}
+.btn:hover{background:var(--accent2)}
+.btn.ghost{background:#fff;color:var(--text);border:1px solid var(--line)}
+.hero{padding:56px 0 40px;background:linear-gradient(180deg,var(--hero),var(--bg))}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center}
+@media(max-width:800px){.hero-grid{grid-template-columns:1fr}}
+.badge{display:inline-block;padding:6px 10px;border-radius:999px;background:#d9e6f8;color:var(--accent);font-size:.85rem;font-weight:600;margin-bottom:12px}
+h1{font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.15;margin:0 0 12px}
+.lead{color:var(--muted);margin:0 0 20px;max-width:44ch}
+.hero-card,.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow)}
+.hero-card ul{margin:0;padding-left:18px;color:var(--muted)}
+section{padding:48px 0}
+h2{font-size:1.55rem;margin:0 0 8px}
+.sub{color:var(--muted);margin:0 0 24px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:800px){.grid3,.grid2{grid-template-columns:1fr}}
+.price{font-size:1.35rem;font-weight:700;color:var(--accent);margin:10px 0}
+.calc-out{font-size:1.15rem;font-weight:700;margin-top:14px}
+input,textarea,select{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--text);font:inherit;max-width:100%}
+form{display:grid;gap:12px}
+label{font-size:.9rem;color:var(--muted)}
+.okmsg{display:none;padding:12px 14px;border-radius:12px;background:#e5f6ec;color:var(--ok);font-weight:600}
+.note{font-size:.85rem;color:var(--muted)}
+footer{padding:24px 0 80px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+.overlay{display:none;position:fixed;inset:0;background:rgba(16,22,34,.55);z-index:80;padding:24px 12px;overflow:auto}
+.overlay.open{display:block}
+.modal{width:min(520px,100%);margin:8vh auto;background:#fff;border-radius:18px;padding:22px;box-shadow:var(--shadow)}
+.steps{display:flex;gap:8px;margin:0 0 16px}
+.steps span{flex:1;height:6px;border-radius:99px;background:#e2e8f0}
+.steps span.on{background:var(--accent)}
+.choices{display:grid;gap:10px}
+.preview{position:relative;background:#eef3f9;border:1px dashed var(--line);border-radius:14px;padding:18px;min-height:180px;overflow:auto}
+ table{width:100%;max-width:100%;table-layout:fixed;word-break:break-word}
+.wm{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:800;color:rgba(30,79,154,.18);transform:rotate(-18deg);pointer-events:none}
+.wheel{width:min(220px,70vw);height:min(220px,70vw);margin:10px auto;border-radius:50%;background:conic-gradient(#1e4f9a 0 25%,#8aa8d4 0 50%,#1e4f9a 0 75%,#c5d4ea 0 100%);border:10px solid #163a73;position:relative}
+.wheel:after{content:"";position:absolute;left:50%;top:-12px;transform:translateX(-50%);border:10px solid transparent;border-top:0;border-bottom-color:#c45c26}
+.promo{display:none;margin-top:12px;padding:12px;border-radius:12px;background:#e5f6ec;color:var(--ok);font-weight:700;text-align:center}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap nav">
+    <div class="logo">Сметные шаблоны</div>
+    <nav class="nav-links">
+      <a href="#products">Шаблоны</a>
+      <a href="#calc">Выгода</a>
+      <a href="#how">Как это работает</a>
+      <a href="#contact">Заявка</a>
+    </nav>
+    <button class="btn" type="button" data-open="quiz">Получить шаблон</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="badge">Для прорабов и сметчиков</div>
+      <h1>Готовые шаблоны для строителей и прорабов. Скачай и работай.</h1>
+      <p class="lead">Забудь про часы на составление смет. Вставь цифры — программа всё посчитает сама.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn" type="button" data-open="quiz">Пройти квиз</button>
+        <button class="btn ghost" type="button" data-open="wheel">Получить промокод</button>
+      </div>
+    </div>
+    <div class="hero-card">
+      <p style="margin:0 0 10px;font-weight:600">Что получите</p>
+      <ul>
+        <li>Смета, акты КС-2 и КС-3, калькулятор и отчёт прораба</li>
+        <li>Формулы считают итоги сами</li>
+        <li>После оплаты файл на экране и дубль в Telegram</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="calc">
+  <div class="wrap">
+    <h2>Калькулятор выгоды</h2>
+    <p class="sub">Подвиньте ползунок: сколько часов в месяц уходит на сметы.</p>
+    <div class="card">
+      <label for="hours">Часов на сметы в месяц: <strong id="hoursVal">20</strong></label>
+      <input id="hours" type="range" min="4" max="80" value="20">
+      <p class="calc-out" id="calcOut"></p>
+      <p class="note">Считаем от 800 ₽ за час вашей работы. Это ориентир для макета, не финансовая гарантия.</p>
+    </div>
+  </div>
+</section>
+
+<section id="products">
+  <div class="wrap">
+    <h2>Пять готовых файлов</h2>
+    <p class="sub">Каждый шаблон — 490 ₽. Полный набор из пяти файлов — 1 490 ₽.</p>
+    <div class="grid3" id="productGrid"></div>
+  </div>
+</section>
+
+<section id="how" style="background:#eef3f9">
+  <div class="wrap">
+    <h2>Как это работает</h2>
+    <div class="grid3">
+      <article class="card"><h3>1. Квиз из трёх шагов</h3><p class="note">Кто вы, что ищете и куда прислать файл. Вместо обычной формы заявки.</p></article>
+      <article class="card"><h3>2. Промокод на скидку 10%</h3><p class="note">Колесо можно открыть сразу или оно появится через 15 секунд.</p></article>
+      <article class="card"><h3>3. Оплата и выдача</h3><p class="note">На рабочем сайте оплата через ЮKassa, файл — на экран и в Telegram-бот.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap grid2">
+    <div>
+      <h2>Оставить заявку</h2>
+      <p class="sub">Если удобнее написать напрямую, без квиза.</p>
+      <form id="leadForm" class="card">
+        <div><label for="name">Имя</label><input id="name" name="name" required></div>
+        <div><label for="phone">Телефон или Telegram</label><input id="phone" name="phone" required></div>
+        <div><label for="msg">Какой шаблон нужен</label><textarea id="msg" name="msg" rows="3"></textarea></div>
+        <button class="btn" type="submit">Отправить заявку</button>
+        <div class="okmsg" id="okmsg">Заявка принята. В рабочей версии она уйдёт в Telegram.</div>
+      </form>
+    </div>
+    <div class="card">
+      <h3>Для кого</h3>
+      <p class="note">Прорабы, сметчики и владельцы подрядных бригад, которым нужны готовые бланки: смета на ремонт квартиры, акт КС-2, справка КС-3, калькулятор расхода материалов и ежедневный отчёт прораба.</p>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">© Сметные шаблоны. Макет витрины первого этапа: сайт с квизом, промокодом и карточками файлов.</div></footer>
+
+<div class="overlay" id="quiz" data-modal>
+  <div class="modal" role="dialog">
+    <div class="steps"><span id="s1" class="on"></span><span id="s2"></span><span id="s3"></span></div>
+    <h3 id="quizTitle">Кто вы?</h3>
+    <div class="choices" id="quizChoices"></div>
+    <p class="okmsg" id="quizOk">Спасибо. В рабочей версии ответ придёт в Telegram или по телефону.</p>
+    <p style="margin-top:14px"><button class="btn ghost" type="button" data-close>Закрыть</button></p>
+  </div>
+</div>
+
+<div class="overlay" id="wheel" data-modal>
+  <div class="modal" role="dialog">
+    <h3>Колесо скидки</h3>
+    <p class="note">Крутится и выдаёт промокод на 10%.</p>
+    <div class="wheel" id="wheelDisk"></div>
+    <p style="text-align:center"><button class="btn" type="button" id="spinBtn">Крутить</button></p>
+    <div class="promo" id="promo">Ваш промокод: SMETA10 — скидка 10%</div>
+    <p style="margin-top:14px"><button class="btn ghost" type="button" data-close>Закрыть</button></p>
+  </div>
+</div>
+
+<div class="overlay" id="preview" data-modal>
+  <div class="modal" role="dialog">
+    <h3 id="prevTitle">Просмотр файла</h3>
+    <div class="preview">
+      <div class="wm">ПРОСМОТР</div>
+      <table style="width:100%;border-collapse:collapse;font-size:.9rem">
+        <thead><tr><th align="left">Наименование</th><th>Кол-во</th><th>Цена</th><th>Сумма</th></tr></thead>
+        <tbody>
+          <tr><td>Работа по смете</td><td>10</td><td>800</td><td>8 000</td></tr>
+          <tr><td>Материалы</td><td>1</td><td>12 000</td><td>12 000</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note" style="margin-top:10px">На рабочем сайте здесь скриншот файла с защитной меткой. После оплаты — оригинал без метки.</p>
+    <p style="margin-top:14px"><button class="btn ghost" type="button" data-close>Закрыть</button></p>
+  </div>
+</div>
+
+<script>
+const PRODUCTS = [
+  {title:"Смета на ремонт квартиры (Excel)", price:"490 ₽", text:"Таблица: наименование, единица, количество, цена. Внизу автоматический итог."},
+  {title:"Акт КС-2 (Excel)", price:"490 ₽", text:"Официальная форма акта, итоги считаются сами."},
+  {title:"Справка КС-3 (Excel)", price:"490 ₽", text:"Официальная форма справки."},
+  {title:"Калькулятор расхода материалов (Excel)", price:"490 ₽", text:"Вводите площадь и расход — получаете объём закупки."},
+  {title:"Ежедневный отчёт прораба (Word)", price:"490 ₽", text:"Дата, объект, выполненные работы, проблемы и план на завтра."}
+];
+const STEPS = [
+  {q:"Кто вы?", opts:["Прораб","Сметчик","Владелец"]},
+  {q:"Что ищете?", opts:["Смету","Акт","Калькулятор"]},
+  {q:"Куда прислать?", opts:["Telegram","Телефон"]}
+];
+let step = 0;
+const grid = document.getElementById("productGrid");
+grid.innerHTML = PRODUCTS.map((p,i)=>`<article class="card"><h3>${p.title}</h3><div class="price">${p.price}</div><p class="note">${p.text}</p><button class="btn ghost" type="button" data-preview="${i}">Посмотреть пример</button></article>`).join("");
+
+function openModal(id){ document.getElementById(id).classList.add("open"); }
+function closeModals(){ document.querySelectorAll("[data-modal]").forEach(el=>el.classList.remove("open")); }
+
+document.querySelectorAll("[data-open]").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    if(btn.getAttribute("data-open")==="quiz") renderQuiz();
+    openModal(btn.getAttribute("data-open"));
+  });
+});
+document.querySelectorAll("[data-close]").forEach(btn=>btn.addEventListener("click", closeModals));
+document.querySelectorAll("[data-modal]").forEach(el=>el.addEventListener("click", e=>{ if(e.target===el) closeModals(); }));
+
+function renderQuiz(){
+  step = 0;
+  document.getElementById("quizOk").style.display = "none";
+  showStep();
+}
+function showStep(){
+  document.getElementById("s1").classList.toggle("on", step>=0);
+  document.getElementById("s2").classList.toggle("on", step>=1);
+  document.getElementById("s3").classList.toggle("on", step>=2);
+  if(step>=STEPS.length){
+    document.getElementById("quizTitle").textContent = "Готово";
+    document.getElementById("quizChoices").innerHTML = "";
+    document.getElementById("quizOk").style.display = "block";
+    return;
+  }
+  const s = STEPS[step];
+  document.getElementById("quizTitle").textContent = s.q;
+  document.getElementById("quizChoices").innerHTML = s.opts.map(o=>`<button class="btn ghost" type="button">${o}</button>`).join("");
+  document.querySelectorAll("#quizChoices button").forEach(b=>b.addEventListener("click", ()=>{ step += 1; showStep(); }));
+}
+
+document.getElementById("productGrid").addEventListener("click", e=>{
+  const btn = e.target.closest("[data-preview]");
+  if(!btn) return;
+  const p = PRODUCTS[Number(btn.getAttribute("data-preview"))];
+  document.getElementById("prevTitle").textContent = p.title;
+  openModal("preview");
+});
+
+document.getElementById("spinBtn").addEventListener("click", ()=>{
+  document.getElementById("wheelDisk").style.transform = "rotate(720deg)";
+  document.getElementById("wheelDisk").style.transition = "transform 1s ease";
+  document.getElementById("promo").style.display = "block";
+});
+
+function updCalc(){
+  const h = Number(document.getElementById("hours").value);
+  document.getElementById("hoursVal").textContent = h;
+  const lost = h * 800;
+  document.getElementById("calcOut").textContent = "Вы теряете " + lost.toLocaleString("ru-RU") + " ₽ в месяц. Наши шаблоны сэкономят вам это время.";
+}
+document.getElementById("hours").addEventListener("input", updCalc);
+updCalc();
+
+document.getElementById("leadForm").addEventListener("submit", e=>{
+  e.preventDefault();
+  document.getElementById("okmsg").style.display = "block";
+  e.target.reset();
+});
+
+let interacted = false;
+document.addEventListener("click", ()=>{ interacted = true; }, true);
+setTimeout(()=>{
+  if(!interacted && !document.querySelector("[data-modal].open")) openModal("wheel");
+}, 15000);
+</script>
+</body>
+</html>

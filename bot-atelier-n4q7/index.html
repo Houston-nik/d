@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Демо бота ателье Лекало: меню услуг и цен, каталог работ, ответы на вопросы и перевод диалога консультанту.">
+<title>Лекало — демо бота ателье</title>
+<style>
+:root{
+  --linen:#f3ebdd;
+  --paper:#f7f1e7;
+  --ink:#2c1828;
+  --text:#3d2a36;
+  --muted:#6e5a66;
+  --plum:#5a2a52;
+  --plum2:#3d1c38;
+  --accent:#7a3b68;
+  --accent2:#622e54;
+  --line:#e4d5c6;
+  --card:#fffdf8;
+  --ok:#1a7a4c;
+  --shadow:0 16px 40px rgba(44,24,40,.08);
+  --wrap:1160px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;padding:0;overflow-x:hidden;max-width:100%}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--text);background:var(--linen);line-height:1.55}
+a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit}
+.wrap{width:min(var(--wrap),calc(100% - 32px));margin:0 auto}
+.top{position:sticky;top:0;z-index:50;background:rgba(243,235,221,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:14px;padding:12px 0;min-height:64px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:750;letter-spacing:.06em;color:var(--plum);flex:0 0 auto}
+.logo-mark{width:36px;height:36px;border-radius:11px;background:var(--plum);color:#f3ebdd;display:flex;align-items:center;justify-content:center}
+.logo-mark svg{width:20px;height:20px}
+.nav-actions{display:flex;align-items:center;gap:10px;margin-left:auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:14px;border:2px solid var(--accent);background:var(--accent);color:#fff;font-weight:650;font-size:16px;cursor:pointer}
+.btn:hover{background:var(--accent2);border-color:var(--accent2)}
+.btn.sm{padding:10px 14px;font-size:15px}
+.btn .short{display:none}
+.menu-btn{display:none;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;font-weight:650;color:var(--plum)}
+.drawer{display:none;position:absolute;right:16px;top:64px;width:min(280px,calc(100vw - 32px));background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:10px}
+.drawer.open{display:block}
+.drawer a{display:block;padding:12px 14px;border-radius:10px}
+.hero{padding:48px 0 24px}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.eyebrow{margin:0 0 12px;color:var(--accent);font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:.84rem}
+h1{font-size:clamp(1.8rem,3.6vw,2.7rem);line-height:1.12;letter-spacing:-.03em;margin:0 0 14px;color:var(--ink)}
+.lead{margin:0 0 24px;color:var(--muted);font-size:1.08rem;max-width:42ch}
+.feats{display:grid;gap:12px;margin:0 0 26px}
+.feat{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px}
+.feat .ico{width:40px;height:40px;border-radius:12px;background:#f0e1ea;color:var(--accent);display:flex;align-items:center;justify-content:center;flex:0 0 40px}
+.feat .ico svg{width:22px;height:22px}
+.feat b{display:block;color:var(--ink)}
+.feat p{margin:2px 0 0;color:var(--muted);font-size:.94rem}
+.phone{background:#2c1828;border-radius:28px;padding:10px;box-shadow:var(--shadow);min-width:0;display:flex;flex-direction:column;min-height:640px}
+.phone-in{background:var(--paper);border-radius:20px;display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}
+.phone-head{display:flex;gap:12px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line);background:#fffdf8}
+.ava{width:40px;height:40px;border-radius:14px;background:linear-gradient(145deg,#7a3b68,#c4a38a);color:#fff;display:flex;align-items:center;justify-content:center;flex:0 0 40px}
+.ava svg{width:22px;height:22px}
+.phone-head b{display:block;color:var(--ink)}
+.phone-head span{display:block;color:var(--muted);font-size:.78rem}
+.chat{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:10px;background:
+  linear-gradient(180deg,rgba(122,59,104,.04),transparent 40%),
+  #efe6d6;min-height:320px}
+.bubble{max-width:88%;padding:10px 12px;border-radius:16px;white-space:pre-wrap;line-height:1.42;font-size:.95rem}
+.bubble.bot{align-self:flex-start;background:#fffdf8;border:1px solid var(--line);color:var(--text)}
+.bubble.user{align-self:flex-end;background:var(--plum);color:#f7f1e7}
+.bubble .who{display:block;font-size:.75rem;font-weight:700;margin-bottom:4px;color:var(--accent)}
+.bubble.user .who{color:#f0d5e4}
+.sys{align-self:center;font-size:.8rem;color:var(--muted)}
+.works{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.work{background:#f3ebdd;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.work-ph{height:88px;position:relative}
+.work-ph.d1{background:linear-gradient(160deg,#5a2a52,#c4a38a 70%,#f3ebdd)}
+.work-ph.d2{background:linear-gradient(160deg,#3d1c38,#7a3b68 55%,#d8c3b0)}
+.work-ph.d3{background:linear-gradient(200deg,#2c1828,#6e5a66 60%,#e4d5c6)}
+.work-ph.d4{background:linear-gradient(145deg,#7a3b68,#2c1828 70%,#c4a38a)}
+.sil{position:absolute;inset:14px 28px 10px;background:rgba(247,241,231,.22);border-radius:40% 40% 18% 18% / 18% 18% 42% 42%}
+.d2 .sil{border-radius:18px 18px 10px 10px;inset:18px 22px 12px}
+.d3 .sil{width:28px;left:50%;margin-left:-14px;inset:16px auto 10px;border-radius:8px 8px 4px 4px;right:auto}
+.d4 .sil{border-radius:46% 46% 12% 12% / 20% 20% 50% 50%;inset:12px 24px 8px}
+.work h4{margin:8px 10px 2px;font-size:.88rem;color:var(--ink)}
+.work p{margin:0 10px 10px;font-size:.78rem;color:var(--muted)}
+.kb{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px;background:#fffdf8;border-top:1px solid var(--line)}
+.kb button{border:1px solid var(--line);background:#fff;border-radius:12px;padding:11px 8px;cursor:pointer;color:var(--plum);font-weight:650;font-size:.9rem;line-height:1.25;white-space:normal}
+.kb button:hover{border-color:var(--accent);background:#f0e1ea}
+section{padding:56px 0}
+h2{font-size:clamp(1.45rem,2.8vw,2rem);margin:0 0 10px;color:var(--ink);letter-spacing:-.03em}
+.sub{margin:0 0 28px;color:var(--muted);max-width:560px}
+.ig-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:var(--shadow);min-width:0}
+.post-ph{height:150px;border-radius:16px;background:
+  radial-gradient(circle at 30% 40%, rgba(196,163,138,.7), transparent 42%),
+  linear-gradient(135deg,#5a2a52,#c4a38a 58%,#f3ebdd);margin-bottom:12px}
+.cap{margin:0 0 14px;color:var(--text)}
+.cmt{padding:10px 0;border-top:1px solid var(--line)}
+.cmt b{display:block;color:var(--ink);margin-bottom:4px}
+.cmt p{margin:0;color:var(--muted)}
+.mini{display:flex;flex-direction:column;gap:8px}
+footer{padding:28px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+.note{font-size:.82rem}
+.modal{display:none;position:fixed;inset:0;z-index:80;background:rgba(44,24,40,.5);padding:24px 12px;overflow:auto}
+.modal.open{display:block}
+.modal-card{width:min(520px,100%);margin:40px auto;background:#fff;border-radius:22px}
+.modal-card .pad{padding:22px}
+.modal-card h3{margin:0 28px 8px 0;color:var(--ink)}
+.close{float:right;border:0;background:transparent;font-size:28px;cursor:pointer;color:var(--muted)}
+.form{display:grid;gap:12px}
+label{display:block;font-size:.86rem;color:var(--muted);margin-bottom:6px}
+input,textarea{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px}
+textarea{min-height:90px;resize:vertical}
+.hint{margin:0;color:var(--muted);font-size:.86rem}
+.okmsg{display:none;padding:12px;border-radius:12px;background:#e7f6ee;color:var(--ok);font-weight:650}
+.okmsg.show{display:block}
+.hidden{display:none}
+@media(max-width:960px){
+  .hero-grid,.ig-grid{grid-template-columns:1fr}
+  .phone{min-height:560px}
+  .menu-btn{display:inline-flex}
+}
+@media(max-width:640px){
+  .nav-actions .btn .full{display:none}
+  .nav-actions .btn .short{display:inline}
+  .works{grid-template-columns:1fr}
+  .kb button{font-size:.84rem}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap nav">
+    <a class="logo" href="#top"><span class="logo-mark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" width="22" height="22"><path d="M40.2,95.8a28,28,0,1,1,39.6,0A28,28,0,0,1,40.2,95.8Zm0,64.4a28,28,0,1,0,39.6,0A28,28,0,0,0,40.2,160.2Z" opacity="0.2"/><path d="M157.73,113.13A8,8,0,0,1,159.82,102L227.48,55.7a8,8,0,0,1,9,13.21l-67.67,46.3a7.92,7.92,0,0,1-4.51,1.4A8,8,0,0,1,157.73,113.13Zm80.87,85.09a8,8,0,0,1-11.12,2.08L136,137.7,93.49,166.78a36,36,0,1,1-9-13.19L121.83,128,84.44,102.41a35.86,35.86,0,1,1,9-13.19l143,97.87A8,8,0,0,1,238.6,198.22ZM80,180a20,20,0,1,0-5.86,14.14A19.85,19.85,0,0,0,80,180ZM74.14,90.13a20,20,0,1,0-28.28,0A19.85,19.85,0,0,0,74.14,90.13Z"/></svg></span>ЛЕКАЛО</a>
+    <div class="nav-actions">
+      <button class="btn sm" type="button" data-open-modal><span class="full">Обсудить бота</span><span class="short">Заявка</span></button>
+      <button class="menu-btn" type="button" id="menuBtn" aria-expanded="false">Меню</button>
+    </div>
+  </div>
+  <nav class="drawer" id="drawer" hidden>
+    <a href="#demo">Демо чата</a>
+    <a href="#comments">Ответ на комментарий</a>
+    <a href="#contacts">Заявка</a>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap hero-grid" id="demo">
+    <div class="phone" aria-label="Симулятор переписки с ботом">
+      <div class="phone-in">
+        <div class="phone-head">
+          <div class="ava"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" width="22" height="22"><path d="M40.2,95.8a28,28,0,1,1,39.6,0A28,28,0,0,1,40.2,95.8Zm0,64.4a28,28,0,1,0,39.6,0A28,28,0,0,0,40.2,160.2Z" opacity="0.2"/><path d="M157.73,113.13A8,8,0,0,1,159.82,102L227.48,55.7a8,8,0,0,1,9,13.21l-67.67,46.3a7.92,7.92,0,0,1-4.51,1.4A8,8,0,0,1,157.73,113.13Zm80.87,85.09a8,8,0,0,1-11.12,2.08L136,137.7,93.49,166.78a36,36,0,1,1-9-13.19L121.83,128,84.44,102.41a35.86,35.86,0,1,1,9-13.19l143,97.87A8,8,0,0,1,238.6,198.22ZM80,180a20,20,0,1,0-5.86,14.14A19.85,19.85,0,0,0,80,180ZM74.14,90.13a20,20,0,1,0-28.28,0A19.85,19.85,0,0,0,74.14,90.13Z"/></svg></div>
+          <div>
+            <b>Лекало</b>
+            <span>сообщения сообщества ВКонтакте</span>
+          </div>
+        </div>
+        <div class="chat" id="chat"></div>
+        <div class="kb" id="kb"></div>
+      </div>
+    </div>
+    <div>
+      <p class="eyebrow">Бот для ателье</p>
+      <h1>Клиент узнаёт сроки, цены и может позвать мастера, не дожидаясь рабочего утра</h1>
+      <p class="lead">Интерактивное демо бота сообщества для ателье Лекало. Нажимайте кнопки клавиатуры в окне слева: сценарий такой же, как в переписке.</p>
+      <div class="feats">
+        <div class="feat"><div class="ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" width="28" height="28"><path d="M40.2,95.8a28,28,0,1,1,39.6,0A28,28,0,0,1,40.2,95.8Zm0,64.4a28,28,0,1,0,39.6,0A28,28,0,0,0,40.2,160.2Z" opacity="0.2"/><path d="M157.73,113.13A8,8,0,0,1,159.82,102L227.48,55.7a8,8,0,0,1,9,13.21l-67.67,46.3a7.92,7.92,0,0,1-4.51,1.4A8,8,0,0,1,157.73,113.13Zm80.87,85.09a8,8,0,0,1-11.12,2.08L136,137.7,93.49,166.78a36,36,0,1,1-9-13.19L121.83,128,84.44,102.41a35.86,35.86,0,1,1,9-13.19l143,97.87A8,8,0,0,1,238.6,198.22ZM80,180a20,20,0,1,0-5.86,14.14A19.85,19.85,0,0,0,80,180ZM74.14,90.13a20,20,0,1,0-28.28,0A19.85,19.85,0,0,0,74.14,90.13Z"/></svg></div><div><b>Услуги и цены</b><p>Подгонка, ремонт и пошив с понятными ориентирами по стоимости.</p></div></div>
+        <div class="feat"><div class="ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" width="28" height="28"><path d="M200,224H56a8,8,0,0,1-7.35-11.15L96,112,73.14,76.12a8,8,0,0,1,0-8.24L96,35.23,103,44a32,32,0,0,0,50,0l7-8.76,22.86,32.65a8,8,0,0,1,0,8.24L160,112l47.34,100.85A8,8,0,0,1,200,224Z" opacity="0.2"/><path d="M214.7,209.7a1.89,1.89,0,0,0-.11-.25l-45.48-96.86,20.5-32.18.11-.18a16,16,0,0,0,0-16.46c-.09-.16-.2-.32-.3-.47L168,32.7V8a8,8,0,0,0-16,0V32.42L146.74,39a24,24,0,0,1-37.48,0L104,32.42V8A8,8,0,0,0,88,8V32.7L66.58,63.3c-.1.15-.21.31-.3.47a16,16,0,0,0,0,16.46l.11.18,20.5,32.18L41.41,209.45a1.89,1.89,0,0,0-.11.25A16,16,0,0,0,56,232H200a16,16,0,0,0,14.71-22.3ZM80,72,96.43,48.57l.33.42a40,40,0,0,0,62.48,0l.33-.42L176,72l-20.38,32H100.39ZM56,216l45.07-96h53.84L200,216Z"/></svg></div><div><b>Каталог работ</b><p>Карточки недавних изделий: платье, жакет, брюки и пальто.</p></div></div>
+        <div class="feat"><div class="ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" width="28" height="28"><path d="M224,128a96,96,0,1,1-96-96A96,96,0,0,1,224,128Z" opacity="0.2"/><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm64-88a8,8,0,0,1-8,8H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48A8,8,0,0,1,192,128Z"/></svg></div><div><b>Частые вопросы</b><p>Сроки, примерка, адрес и часы работы без ожидания ответа человека.</p></div></div>
+        <div class="feat"><div class="ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" width="28" height="28"><path d="M224,128a95.76,95.76,0,0,1-31.8,71.37A72,72,0,0,0,128,160a40,40,0,1,0-40-40,40,40,0,0,0,40,40,72,72,0,0,0-64.2,39.37h0A96,96,0,1,1,224,128Z" opacity="0.2"/><path d="M253.66,133.66l-24,24a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L216,132.69V128A88,88,0,0,0,56.49,76.67a8,8,0,0,1-13-9.34A104,104,0,0,1,232,128v4.69l10.34-10.35a8,8,0,0,1,11.32,11.32Zm-41.18,55A104,104,0,0,1,24,128v-4.69L13.66,133.66A8,8,0,0,1,2.34,122.34l24-24a8,8,0,0,1,11.32,0l24,24a8,8,0,0,1-11.32,11.32L40,123.31V128a87.62,87.62,0,0,0,22.24,58.41A79.66,79.66,0,0,1,98.3,157.66a48,48,0,1,1,59.4,0,79.59,79.59,0,0,1,36.08,28.78,89.68,89.68,0,0,0,5.71-7.11,8,8,0,0,1,13,9.34ZM128,152a32,32,0,1,0-32-32A32,32,0,0,0,128,152Zm0,64a88.2,88.2,0,0,0,53.92-18.49,64,64,0,0,0-107.84,0A87.57,87.57,0,0,0,128,216Z"/></svg></div><div><b>Перевод консультанту</b><p>Бот передаёт диалог мастеру, и человек отвечает в той же переписке.</p></div></div>
+        <div class="feat"><div class="ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" width="28" height="28"><path d="M232,152v64a8,8,0,0,1-8,8H160a72,72,0,0,1-67.9-48H96a72,72,0,0,0,72-72h0a71.83,71.83,0,0,0-4.07-23.88h0A72,72,0,0,1,232,152Z" opacity="0.2"/><path d="M169.57,72.59A80,80,0,0,0,16,104v64a16,16,0,0,0,16,16H86.67A80.15,80.15,0,0,0,160,232h64a16,16,0,0,0,16-16V152A80,80,0,0,0,169.57,72.59ZM32,104a64,64,0,1,1,64,64H32ZM224,216H160a64.14,64.14,0,0,1-55.68-32.43A79.93,79.93,0,0,0,174.7,89.71,64,64,0,0,1,224,152Z"/></svg></div><div><b>Ответ на комментарий</b><p>На вопрос о цене бот отвечает под публикацией и зовёт в личные сообщения.</p></div></div>
+      </div>
+      <button class="btn" type="button" data-open-modal id="contacts">Обсудить бота</button>
+    </div>
+  </div>
+</section>
+
+<section id="comments">
+  <div class="wrap">
+    <h2>Автоответ на комментарий в Instagram</h2>
+    <p class="sub">Макет без фирменного оформления сети: публикация ателье, комментарий гостя и ответ бота плюс то же приглашение в личных сообщениях.</p>
+    <div class="ig-grid">
+      <article class="card">
+        <div class="post-ph" aria-hidden="true"></div>
+        <p class="cap">Посадка жакета по фигуре. Сдано 15.09.2026. Пишите, если нужно подогнать своё изделие.</p>
+        <div class="cmt"><b>гость</b><p>сколько стоит?</p></div>
+        <div class="cmt"><b>Лекало</b><p>Здравствуйте! Ориентир по подгонке жакета — от 2 400 ₽, точную сумму скажем после осмотра. Напишите нам в личные сообщения — пришлём свободные окна на эту неделю.</p></div>
+      </article>
+      <article class="card">
+        <h3 style="margin:0 0 12px;color:var(--ink)">Пример личного сообщения после комментария</h3>
+        <div class="mini">
+          <div class="bubble bot" style="max-width:100%"><span class="who">Лекало</span>Здравствуйте! Вы спрашивали о стоимости в комментарии к публикации от 15.09.2026. Подгонка жакета обычно от 2 400 ₽. Приходите на осмотр: ближайшее окно 18.11.2026, ателье на Покровке, 14, с 11:00 до 20:00.</div>
+          <div class="bubble user" style="max-width:100%;align-self:flex-end">Хорошо, запишите меня на 18.11.2026 после 15:00</div>
+          <div class="bubble bot" style="max-width:100%"><span class="who">Лекало</span>Окно на 18.11.2026, 15:30, зарезервировано. Если нужно перенести, напишите в этой переписке.</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><b style="color:var(--ink)">Ателье Лекало</b><br>Подгонка, ремонт и пошив одежды</div>
+    <div class="note">Демо-версия. Цифры, цены и отзывы даны для примера</div>
+  </div>
+</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-card">
+    <div class="pad">
+      <button class="close" type="button" data-close aria-label="Закрыть">&times;</button>
+      <div id="modalFormView">
+        <h3 id="modalTitle">Обсудить бота для ателье</h3>
+        <p class="hint">Оставьте контакты и коротко опишите, какой сценарий нужен ателье.</p>
+        <form id="modalForm" class="form">
+          <div><label for="mn">Имя</label><input id="mn" name="name" required autocomplete="name"></div>
+          <div><label for="mp">Телефон</label><input id="mp" name="phone" required class="phone-mask" inputmode="tel" autocomplete="tel"></div>
+          <div><label for="mc">Комментарий</label><textarea id="mc" name="comment"></textarea></div>
+          <button class="btn" type="submit">Отправить заявку</button>
+        </form>
+      </div>
+      <div id="modalOkView" class="hidden">
+        <h3>Заявка принята</h3>
+        <div class="okmsg show">Спасибо, менеджер свяжется с вами</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const menuBtn = document.getElementById('menuBtn');
+  const drawer = document.getElementById('drawer');
+  menuBtn.addEventListener('click', () => {
+    const open = drawer.classList.toggle('open');
+    drawer.hidden = !open;
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  drawer.addEventListener('click', e => {
+    if (e.target.tagName === 'A') {
+      drawer.classList.remove('open');
+      drawer.hidden = true;
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  const modal = document.getElementById('modal');
+  const formView = document.getElementById('modalFormView');
+  const okView = document.getElementById('modalOkView');
+  function openModal(){
+    formView.classList.remove('hidden');
+    okView.classList.add('hidden');
+    modal.classList.add('open');
+  }
+  function closeModal(){ modal.classList.remove('open'); }
+  document.querySelectorAll('[data-open-modal]').forEach(b => b.addEventListener('click', openModal));
+  document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', closeModal));
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  document.querySelectorAll('.phone-mask').forEach(input => {
+    input.addEventListener('input', () => {
+      let d = input.value.replace(/\D/g,'').replace(/^8/,'7');
+      if (!d.startsWith('7')) d = '7' + d;
+      d = d.slice(0,11);
+      let r = '+7';
+      if (d.length > 1) r += ' (' + d.slice(1,4);
+      if (d.length >= 4) r += ') ' + d.slice(4,7);
+      if (d.length >= 7) r += '-' + d.slice(7,9);
+      if (d.length >= 9) r += '-' + d.slice(9,11);
+      input.value = r;
+    });
+  });
+  document.getElementById('modalForm').addEventListener('submit', e => {
+    e.preventDefault();
+    formView.classList.add('hidden');
+    okView.classList.remove('hidden');
+  });
+
+  const chat = document.getElementById('chat');
+  const kb = document.getElementById('kb');
+
+  function add(text, who, extras){
+    const el = document.createElement('div');
+    el.className = 'bubble ' + who;
+    if (who === 'bot') {
+      const w = document.createElement('span');
+      w.className = 'who';
+      w.textContent = extras && extras.who ? extras.who : 'Лекало';
+      el.appendChild(w);
+    }
+    const t = document.createElement('div');
+    t.textContent = text;
+    el.appendChild(t);
+    if (extras && extras.node) el.appendChild(extras.node);
+    chat.appendChild(el);
+    chat.scrollTop = chat.scrollHeight;
+    return el;
+  }
+  function addUser(text){ add(text, 'user'); }
+  function addSys(text){
+    const el = document.createElement('div');
+    el.className = 'sys';
+    el.textContent = text;
+    chat.appendChild(el);
+    chat.scrollTop = chat.scrollHeight;
+    return el;
+  }
+
+  function catalogNode(){
+    const box = document.createElement('div');
+    box.className = 'works';
+    const items = [
+      ['d1','Вечернее платье','Пошив по меркам, сдано 02.10.2026'],
+      ['d2','Мужской жакет','Посадка плеч и рукава, 15.09.2026'],
+      ['d3','Брюки со стрелками','Укоротить и заузить, 28.08.2026'],
+      ['d4','Пальто на подкладке','Ремонт швов и подклада, 11.07.2026']
+    ];
+    items.forEach(([cls, title, text]) => {
+      const a = document.createElement('article');
+      a.className = 'work';
+      a.innerHTML = '<div class="work-ph '+cls+'"><span class="sil"></span></div><h4></h4><p></p>';
+      a.querySelector('h4').textContent = title;
+      a.querySelector('p').textContent = text;
+      box.appendChild(a);
+    });
+    return box;
+  }
+
+  const replies = {
+    services: 'Ориентиры по работам ателье Лекало.\n\nПодгонка\nукоротить брюки или юбку — от 1 200 ₽\nушить изделие по бокам — от 1 800 ₽\nукоротить рукав — от 900 ₽\nподгонка жакета — от 2 400 ₽\n\nРемонт\nзамена молнии — от 1 400 ₽\nпоставить подкладку или шлицы — от 2 200 ₽\nремонт швов пальто — от 1 600 ₽\n\nПошив\nплатье по меркам — от 18 000 ₽\nжакет — от 24 000 ₽\n\nТочную сумму назовём после осмотра ткани и изделия. Ближайшая примерка — 18.11.2026.',
+    faq: 'Сроки\nПростая подгонка — 3–5 дней, пошив изделия — от 14 дней после утверждения лекал.\n\nПримерка\nНазначаем после осмотра. Ближайшее окно: 18.11.2026, с 12:00 до 19:00.\n\nАдрес и часы\nМосква, ул. Покровка, 14. Понедельник–суббота, 11:00–20:00. Воскресенье — по записи.'
+  };
+
+  function onServices(){
+    addUser('Услуги и цены');
+    add(replies.services, 'bot');
+  }
+  function onCatalog(){
+    addUser('Каталог');
+    add('Несколько недавних работ. Карточки собраны без фотосъёмки, чтобы страница оставалась лёгкой.', 'bot', {node: catalogNode()});
+  }
+  function onFaq(){
+    addUser('Частые вопросы');
+    add(replies.faq, 'bot');
+  }
+  function onHuman(){
+    addUser('Позвать консультанта');
+    add('Передаю диалог консультанту ателье. Сообщения остаются в этой переписке, человек увидит, что вы уже смотрели.', 'bot');
+    const wait = addSys('Консультант подключается');
+    setTimeout(() => {
+      if (wait.parentNode) wait.remove();
+      add('Здравствуйте, это Марина, консультант ателье Лекало. Напишите, что нужно подогнать, отремонтировать или пошить, и удобный день для визита. Ближайшее окно примерки — 18.11.2026.', 'bot', {who: 'Марина, консультант'});
+    }, 850);
+  }
+
+  [
+    ['Услуги и цены', onServices],
+    ['Каталог', onCatalog],
+    ['Частые вопросы', onFaq],
+    ['Позвать консультанта', onHuman]
+  ].forEach(([title, fn]) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = title;
+    b.addEventListener('click', fn);
+    kb.appendChild(b);
+  });
+
+  add('Здравствуйте! Это бот ателье Лекало. Могу показать услуги и цены, каталог работ, ответить на частые вопросы или позвать консультанта. Выберите пункт на клавиатуре ниже.', 'bot');
+})();
+</script>
+</body>
+</html>

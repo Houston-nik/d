@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ордината — операционное сопровождение бизнеса</title>
+<style>
+:root{
+  --ink:#132033;
+  --text:#243044;
+  --muted:#5c6778;
+  --paper:#f4f1ea;
+  --card:#ffffff;
+  --line:#e2ddd3;
+  --accent:#c05621;
+  --accent2:#9a4016;
+  --navy:#0f2744;
+  --navy2:#18385c;
+  --ok:#1a7a4c;
+  --shadow:0 12px 32px rgba(19,32,51,.08);
+  --r:16px;
+  --wrap:1140px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;padding:0;overflow-x:hidden;max-width:100%}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--text);background:var(--paper);line-height:1.55}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+button,input,textarea,select{font:inherit}
+.wrap{width:min(var(--wrap),calc(100% - 32px));margin:0 auto}
+.top{position:sticky;top:0;z-index:50;background:rgba(244,241,234,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:16px;padding:12px 0;min-height:64px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:750;letter-spacing:.04em;font-size:1.05rem;color:var(--navy);flex:0 0 auto}
+.logo-mark{width:34px;height:34px;border-radius:9px;background:var(--navy);position:relative;flex:0 0 34px}
+.logo-mark::before,.logo-mark::after{content:"";position:absolute;background:var(--accent)}
+.logo-mark::before{left:8px;top:8px;width:6px;height:18px;border-radius:2px}
+.logo-mark::after{left:16px;top:14px;width:10px;height:6px;border-radius:2px}
+.desk{display:flex;align-items:center;gap:4px;margin-left:auto}
+.desk a{padding:8px 12px;border-radius:10px;color:var(--text);font-weight:560;font-size:.95rem;white-space:nowrap}
+.desk a:hover{background:#ece7dc}
+.nav-actions{display:flex;align-items:center;gap:10px;margin-left:8px;flex:0 0 auto}
+.phone{font-weight:650;color:var(--navy);white-space:nowrap;font-size:.95rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:12px;border:2px solid var(--accent);background:var(--accent);color:#fff;font-weight:650;font-size:16px;cursor:pointer;transition:.2s}
+.btn:hover{background:var(--accent2);border-color:var(--accent2)}
+.btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.55)}
+.btn.ghost:hover{background:#fff;color:var(--navy);border-color:#fff}
+.btn.sm{padding:10px 14px;font-size:15px}
+.btn .short{display:none}
+.menu-btn{display:none;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;font-weight:650;color:var(--navy)}
+.drawer{display:none;position:absolute;right:16px;top:64px;width:min(300px,calc(100vw - 32px));background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:10px}
+.drawer.open{display:block}
+.drawer a{display:block;padding:12px 14px;border-radius:10px}
+.drawer a:hover{background:var(--paper)}
+.hero{position:relative;color:#fff;background:
+  radial-gradient(1200px 480px at 90% -10%, rgba(192,86,33,.28), transparent 50%),
+  linear-gradient(160deg, var(--navy) 0%, var(--navy2) 48%, #0c1d33 100%);
+  overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:
+  linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px) 0 0/48px 48px,
+  linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px) 0 0/48px 48px;
+  mask-image:linear-gradient(90deg, transparent, #000 30%, #000 80%, transparent);
+  pointer-events:none}
+.hero .wrap{position:relative;z-index:1;padding:76px 0 68px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);font-size:.84rem;letter-spacing:.02em;margin:0 0 18px}
+.hero h1{font-size:clamp(1.75rem,4.2vw,3rem);line-height:1.14;letter-spacing:-.03em;margin:0 0 16px;max-width:18ch}
+.hero .lead{font-size:1.12rem;max-width:42ch;margin:0 0 28px;color:rgba(255,255,255,.86)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+section{padding:72px 0}
+h2{font-size:clamp(1.5rem,3vw,2.1rem);letter-spacing:-.03em;margin:0 0 10px;color:var(--navy)}
+.sub{color:var(--muted);margin:0 0 32px;max-width:580px}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow)}
+.card h3{margin:0 0 8px;font-size:1.08rem;color:var(--navy)}
+.card p{margin:0;color:var(--muted)}
+.ico{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:#f7ece4;color:var(--accent);margin-bottom:14px}
+.ico svg{width:28px;height:28px;display:block}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 20px}
+.stat b{display:block;font-size:2.35rem;line-height:1;letter-spacing:-.04em;color:var(--accent);margin-bottom:8px}
+.stat span{color:var(--muted);font-size:.95rem}
+.stat .mini{display:flex;align-items:center;gap:8px;color:var(--navy);font-weight:650;margin-bottom:10px}
+.stat .mini svg{width:22px;height:22px;color:var(--accent)}
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.case .meta{font-size:.82rem;color:var(--accent);font-weight:700;margin:0 0 8px}
+.case h3{margin:0 0 10px}
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rev .who{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.ava{width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex:0 0 44px}
+.rev b{display:block;color:var(--navy)}
+.rev small{color:var(--muted)}
+.lead-sec{background:var(--navy);color:#fff}
+.lead-sec h2{color:#fff}
+.lead-box{display:grid;grid-template-columns:1fr .95fr;gap:28px;align-items:start}
+.form{background:#fff;color:var(--text);border-radius:20px;padding:22px;display:grid;gap:12px}
+label{display:block;font-size:.86rem;color:var(--muted);margin-bottom:6px}
+input,textarea{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--text)}
+textarea{min-height:96px;resize:vertical}
+.hint{margin:0;color:var(--muted);font-size:.86rem}
+.okmsg{display:none;padding:12px;border-radius:12px;background:#e7f6ee;color:var(--ok);font-weight:650}
+.okmsg.show{display:block}
+.form-note{margin:0;color:rgba(255,255,255,.78)}
+footer{padding:28px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem;background:#efebe3}
+.ft{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:20px}
+.ft b{display:block;color:var(--navy);margin-bottom:6px}
+.note{margin-top:18px;font-size:.82rem}
+.modal{display:none;position:fixed;inset:0;z-index:80;background:rgba(15,39,68,.58);padding:24px 12px;overflow:auto}
+.modal.open{display:block}
+.modal-card{width:min(520px,100%);margin:40px auto;background:#fff;border-radius:22px;overflow:hidden}
+.modal-card .pad{padding:22px}
+.modal-card h3{margin:0 20px 8px 0;color:var(--navy)}
+.close{float:right;border:0;background:transparent;font-size:28px;cursor:pointer;line-height:1;color:var(--muted);padding:0 4px}
+.tg{border:1px solid #d7e3ef;border-radius:16px;overflow:hidden;margin:14px 0;background:#eef4fa}
+.tg-top{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#229ED9;color:#fff}
+.tg-top svg{flex:0 0 22px}
+.tg-top b{display:block;font-size:.95rem}
+.tg-top span{display:block;font-size:.75rem;opacity:.9}
+.tg-body{padding:14px}
+.tg-chat{font-size:.8rem;color:#4a6280;margin-bottom:8px}
+.tg-bubble{background:#fff;border-radius:14px 14px 14px 4px;padding:12px 14px;box-shadow:0 4px 12px rgba(15,39,68,.06);white-space:pre-line;color:var(--text);font-size:.95rem}
+.hidden{display:none}
+@media(max-width:960px){
+  .svc-grid,.cases,.revs,.lead-box,.ft{grid-template-columns:1fr 1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  section{padding:52px 0}
+  .desk{display:none}
+  .menu-btn{display:inline-flex}
+  .nav-actions{margin-left:auto}
+  .phone{display:none}
+}
+@media(max-width:640px){
+  .svc-grid,.cases,.revs,.lead-box,.ft,.stats{grid-template-columns:1fr}
+  .hero .wrap{padding:52px 0 48px}
+  .card,.stat{min-width:0}
+  .logo{font-size:.92rem;letter-spacing:.03em}
+  .nav-actions .btn .full{display:none}
+  .nav-actions .btn .short{display:inline}
+  .nav-actions .btn.sm{padding:10px 12px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap nav">
+    <a class="logo" href="#top"><span class="logo-mark" aria-hidden="true"></span>ОРДИНАТА</a>
+    <nav class="desk" aria-label="Основное меню">
+      <a href="#about">О компании</a>
+      <a href="#services">Услуги</a>
+      <a href="#cases">Кейсы</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="phone" href="tel:+74951204080">+7 (495) 120-40-80</a>
+      <button class="btn sm" type="button" data-open-modal><span class="full">Оставить заявку</span><span class="short">Заявка</span></button>
+      <button class="menu-btn" type="button" id="menuBtn" aria-expanded="false">Меню</button>
+    </div>
+  </div>
+  <nav class="drawer" id="drawer" hidden>
+    <a href="#about">О компании</a>
+    <a href="#services">Услуги</a>
+    <a href="#cases">Кейсы</a>
+    <a href="#contacts">Контакты</a>
+    <a href="tel:+74951204080">+7 (495) 120-40-80</a>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <p class="eyebrow">Сопровождение среднего бизнеса</p>
+    <h1>Порядок в процессах, который держится без ежедневного контроля собственника</h1>
+    <p class="lead">Ордината выстраивает контуры компании: регламенты, документы, кадры и управленческую отчётность. Вы видите ход дел, команда знает, кто за что отвечает.</p>
+    <div class="hero-cta">
+      <button class="btn" type="button" data-open-modal><span class="full">Оставить заявку</span><span class="short">Заявка</span></button>
+      <a class="btn ghost" href="#services">Смотреть услуги</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <h2>О компании</h2>
+    <p class="sub">Работаем с производством, дистрибуцией, услугами и сетями. Не продаём абстрактную стратегию: собираем рабочий контур и остаёмся на сопровождении.</p>
+    <div class="stats">
+      <div class="stat">
+        <div class="mini"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" width="28" height="28"><path d="M216,136a88,88,0,1,1-88-88A88,88,0,0,1,216,136Z" opacity="0.2"/><path d="M128,40a96,96,0,1,0,96,96A96.11,96.11,0,0,0,128,40Zm0,176a80,80,0,1,1,80-80A80.09,80.09,0,0,1,128,216ZM173.66,90.34a8,8,0,0,1,0,11.32l-40,40a8,8,0,0,1-11.32-11.32l40-40A8,8,0,0,1,173.66,90.34ZM96,16a8,8,0,0,1,8-8h48a8,8,0,0,1,0,16H104A8,8,0,0,1,96,16Z"/></svg><span>На рынке</span></div>
+        <b data-count="12">12</b>
+        <span>лет настраиваем операционку компаний, а не разовые презентации</span>
+      </div>
+      <div class="stat">
+        <div class="mini"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" width="28" height="28"><path d="M136,32V216H40V85.35a8,8,0,0,1,3.56-6.66l80-53.33A8,8,0,0,1,136,32Z" opacity="0.2"/><path d="M240,208H224V96a16,16,0,0,0-16-16H144V32a16,16,0,0,0-24.88-13.32L39.12,72A16,16,0,0,0,32,85.34V208H16a8,8,0,0,0,0,16H240a8,8,0,0,0,0-16ZM208,96V208H144V96ZM48,85.34,128,32V208H48ZM112,112v16a8,8,0,0,1-16,0V112a8,8,0,1,1,16,0Zm-32,0v16a8,8,0,0,1-16,0V112a8,8,0,1,1,16,0Zm0,56v16a8,8,0,0,1-16,0V168a8,8,0,0,1,16,0Zm32,0v16a8,8,0,0,1-16,0V168a8,8,0,0,1,16,0Z"/></svg><span>Сопровождение</span></div>
+        <b data-count="80">80</b>
+        <span>компаний сейчас на регулярном контуре Ординаты</span>
+      </div>
+      <div class="stat">
+        <div class="mini"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" width="28" height="28"><path d="M216,128a88,88,0,1,1-88-88A88,88,0,0,1,216,128Z" opacity="0.2"/><path d="M224,48V96a8,8,0,0,1-8,8H168a8,8,0,0,1,0-16h28.69L182.06,73.37a79.56,79.56,0,0,0-56.13-23.43h-.45A79.52,79.52,0,0,0,69.59,72.71,8,8,0,0,1,58.41,61.27a96,96,0,0,1,135,.79L208,76.69V48a8,8,0,0,1,16,0ZM186.41,183.29a80,80,0,0,1-112.47-.66L59.31,168H88a8,8,0,0,0,0-16H40a8,8,0,0,0-8,8v48a8,8,0,0,0,16,0V179.31l14.63,14.63A95.43,95.43,0,0,0,130,222.06h.53a95.36,95.36,0,0,0,67.07-27.33,8,8,0,0,0-11.18-11.44Z"/></svg><span>Срок запуска</span></div>
+        <b data-count="37">37</b>
+        <span>дней в среднем занимает постановка базового контура</span>
+      </div>
+      <div class="stat">
+        <div class="mini"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" width="28" height="28"><path d="M232,128c0,12.51-17.82,21.95-22.68,33.69-4.68,11.32,1.42,30.65-7.78,39.85s-28.53,3.1-39.85,7.78C150,214.18,140.5,232,128,232s-22-17.82-33.69-22.68c-11.32-4.68-30.65,1.42-39.85-7.78s-3.1-28.53-7.78-39.85C41.82,150,24,140.5,24,128s17.82-22,22.68-33.69C51.36,83,45.26,63.66,54.46,54.46S83,51.36,94.31,46.68C106.05,41.82,115.5,24,128,24S150,41.82,161.69,46.68c11.32,4.68,30.65-1.42,39.85,7.78s3.1,28.53,7.78,39.85C214.18,106.05,232,115.5,232,128Z" opacity="0.2"/><path d="M225.86,102.82c-3.77-3.94-7.67-8-9.14-11.57-1.36-3.27-1.44-8.69-1.52-13.94-.15-9.76-.31-20.82-8-28.51s-18.75-7.85-28.51-8c-5.25-.08-10.67-.16-13.94-1.52-3.56-1.47-7.63-5.37-11.57-9.14C146.28,23.51,138.44,16,128,16s-18.27,7.51-25.18,14.14c-3.94,3.77-8,7.67-11.57,9.14C88,40.64,82.56,40.72,77.31,40.8c-9.76.15-20.82.31-28.51,8S41,67.55,40.8,77.31c-.08,5.25-.16,10.67-1.52,13.94-1.47,3.56-5.37,7.63-9.14,11.57C23.51,109.72,16,117.56,16,128s7.51,18.27,14.14,25.18c3.77,3.94,7.67,8,9.14,11.57,1.36,3.27,1.44,8.69,1.52,13.94.15,9.76.31,20.82,8,28.51s18.75,7.85,28.51,8c5.25.08,10.67.16,13.94,1.52,3.56,1.47,7.63,5.37,11.57,9.14C109.72,232.49,117.56,240,128,240s18.27-7.51,25.18-14.14c3.94-3.77,8-7.67,11.57-9.14,3.27-1.36,8.69-1.44,13.94-1.52,9.76-.15,20.82-.31,28.51-8s7.85-18.75,8-28.51c.08-5.25.16-10.67,1.52-13.94,1.47-3.56,5.37-7.63,9.14-11.57C232.49,146.28,240,138.44,240,128S232.49,109.73,225.86,102.82Zm-11.55,39.29c-4.79,5-9.75,10.17-12.38,16.52-2.52,6.1-2.63,13.07-2.73,19.82-.1,7-.21,14.33-3.32,17.43s-10.39,3.22-17.43,3.32c-6.75.1-13.72.21-19.82,2.73-6.35,2.63-11.52,7.59-16.52,12.38S132,224,128,224s-9.15-4.92-14.11-9.69-10.17-9.75-16.52-12.38c-6.1-2.52-13.07-2.63-19.82-2.73-7-.1-14.33-.21-17.43-3.32s-3.22-10.39-3.32-17.43c-.1-6.75-.21-13.72-2.73-19.82-2.63-6.35-7.59-11.52-12.38-16.52S32,132,32,128s4.92-9.15,9.69-14.11,9.75-10.17,12.38-16.52c2.52-6.1,2.63-13.07,2.73-19.82.1-7,.21-14.33,3.32-17.43S70.51,56.9,77.55,56.8c6.75-.1,13.72-.21,19.82-2.73,6.35-2.63,11.52-7.59,16.52-12.38S124,32,128,32s9.15,4.92,14.11,9.69,10.17,9.75,16.52,12.38c6.1,2.52,13.07,2.63,19.82,2.73,7,.1,14.33.21,17.43,3.32s3.22,10.39,3.32,17.43c.1,6.75.21,13.72,2.73,19.82,2.63,6.35,7.59,11.52,12.38,16.52S224,124,224,128,219.08,137.15,214.31,142.11ZM173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34Z"/></svg><span>Продление</span></div>
+        <b data-count="94">94</b>
+        <span>процентов клиентов продлевают договор на следующий год</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <h2>Услуги</h2>
+    <p class="sub">Шесть рабочих контуров. Можно взять один блок или собрать полный операционный контур компании.</p>
+    <div class="svc-grid">
+      <article class="card">
+        <div class="ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" width="28" height="28"><path d="M64,112v32a8,8,0,0,1-8,8H24a8,8,0,0,1-8-8V112a8,8,0,0,1,8-8H56A8,8,0,0,1,64,112ZM208,40H160a8,8,0,0,0-8,8V96a8,8,0,0,0,8,8h48a8,8,0,0,0,8-8V48A8,8,0,0,0,208,40Zm0,112H160a8,8,0,0,0-8,8v48a8,8,0,0,0,8,8h48a8,8,0,0,0,8-8V160A8,8,0,0,0,208,152Z" opacity="0.2"/><path d="M160,112h48a16,16,0,0,0,16-16V48a16,16,0,0,0-16-16H160a16,16,0,0,0-16,16V64H128a24,24,0,0,0-24,24v32H72v-8A16,16,0,0,0,56,96H24A16,16,0,0,0,8,112v32a16,16,0,0,0,16,16H56a16,16,0,0,0,16-16v-8h32v32a24,24,0,0,0,24,24h16v16a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V160a16,16,0,0,0-16-16H160a16,16,0,0,0-16,16v16H128a8,8,0,0,1-8-8V88a8,8,0,0,1,8-8h16V96A16,16,0,0,0,160,112ZM56,144H24V112H56v32Zm104,16h48v48H160Zm0-112h48V96H160Z"/></svg></div>
+        <h3>Постановка процессов</h3>
+        <p>Описываем, как реально идёт работа: согласования, роли, точки контроля. Убираем петли, где решение зависает на одном человеке.</p>
+      </article>
+      <article class="card">
+        <div class="ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" width="28" height="28"><path d="M208,48V216a8,8,0,0,1-8,8H56a8,8,0,0,1-8-8V48a8,8,0,0,1,8-8H96a39.83,39.83,0,0,0-8,24v8h80V64a39.83,39.83,0,0,0-8-24h40A8,8,0,0,1,208,48Z" opacity="0.2"/><path d="M168,152a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,152Zm-8-40H96a8,8,0,0,0,0,16h64a8,8,0,0,0,0-16Zm56-64V216a16,16,0,0,1-16,16H56a16,16,0,0,1-16-16V48A16,16,0,0,1,56,32H92.26a47.92,47.92,0,0,1,71.48,0H200A16,16,0,0,1,216,48ZM96,64h64a32,32,0,0,0-64,0ZM200,48H173.25A47.93,47.93,0,0,1,176,64v8a8,8,0,0,1-8,8H88a8,8,0,0,1-8-8V64a47.93,47.93,0,0,1,2.75-16H56V216H200Z"/></svg></div>
+        <h3>Документооборот и регламенты</h3>
+        <p>Шаблон пакета документов, маршруты согласования, сроки и ответственность. Регламент становится инструкцией, а не файлом в архиве.</p>
+      </article>
+      <article class="card">
+        <div class="ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" width="28" height="28"><path d="M216,48H40a8,8,0,0,0-8,8V200a8,8,0,0,0,8,8H216a8,8,0,0,0,8-8V56A8,8,0,0,0,216,48ZM96,144a24,24,0,1,1,24-24A24,24,0,0,1,96,144Z" opacity="0.2"/><path d="M200,112a8,8,0,0,1-8,8H152a8,8,0,0,1,0-16h40A8,8,0,0,1,200,112Zm-8,24H152a8,8,0,0,0,0,16h40a8,8,0,0,0,0-16Zm40-80V200a16,16,0,0,1-16,16H40a16,16,0,0,1-16-16V56A16,16,0,0,1,40,40H216A16,16,0,0,1,232,56ZM216,200V56H40V200H216Zm-80.26-34a8,8,0,1,1-15.5,4c-2.63-10.26-13.06-18-24.25-18s-21.61,7.74-24.25,18a8,8,0,1,1-15.5-4,39.84,39.84,0,0,1,17.19-23.34,32,32,0,1,1,45.12,0A39.76,39.76,0,0,1,135.75,166ZM96,136a16,16,0,1,0-16-16A16,16,0,0,0,96,136Z"/></svg></div>
+        <h3>Кадровый контур</h3>
+        <p>Приём, перемещения, отпуска, учёт штата и кадровые цепочки. Руководитель видит состав команды без ручных таблиц.</p>
+      </article>
+      <article class="card">
+        <div class="ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" width="28" height="28"><path d="M224,64V208H32V48H208A16,16,0,0,1,224,64Z" opacity="0.2"/><path d="M232,208a8,8,0,0,1-8,8H32a8,8,0,0,1-8-8V48a8,8,0,0,1,16,0V156.69l50.34-50.35a8,8,0,0,1,11.32,0L128,132.69,180.69,80H160a8,8,0,0,1,0-16h40a8,8,0,0,1,8,8v40a8,8,0,0,1-16,0V91.31l-58.34,58.35a8,8,0,0,1-11.32,0L96,123.31l-56,56V200H224A8,8,0,0,1,232,208Z"/></svg></div>
+        <h3>Управленческая отчётность</h3>
+        <p>Еженедельный и месячный контур цифр: выручка, маржа, дебиторка, загрузка. Отчёт к согласованной дате, без ночных сборок в Excel.</p>
+      </article>
+      <article class="card">
+        <div class="ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" width="28" height="28"><path d="M200,152l-40,40L96,176,40,136,72.68,70.63,128,56l55.32,14.63L183.6,72H144L98.34,116.29a8,8,0,0,0,1.38,12.42C117.23,139.9,141,139.13,160,120Z" opacity="0.2"/><path d="M254.3,107.91,228.78,56.85a16,16,0,0,0-21.47-7.15L182.44,62.13,130.05,48.27a8.14,8.14,0,0,0-4.1,0L73.56,62.13,48.69,49.7a16,16,0,0,0-21.47,7.15L1.7,107.9a16,16,0,0,0,7.15,21.47l27,13.51,55.49,39.63a8.06,8.06,0,0,0,2.71,1.25l64,16a8,8,0,0,0,7.6-2.1l55.07-55.08,26.42-13.21a16,16,0,0,0,7.15-21.46Zm-54.89,33.37L165,113.72a8,8,0,0,0-10.68.61C136.51,132.27,116.66,130,104,122L147.24,80h31.81l27.21,54.41ZM41.53,64,62,74.22,36.43,125.27,16,115.06Zm116,119.13L99.42,168.61l-49.2-35.14,28-56L128,64.28l9.8,2.59-45,43.68-.08.09a16,16,0,0,0,2.72,24.81c20.56,13.13,45.37,11,64.91-5L188,152.66Zm62-57.87-25.52-51L214.47,64,240,115.06Zm-87.75,92.67a8,8,0,0,1-7.75,6.06,8.13,8.13,0,0,1-1.95-.24L80.41,213.33a7.89,7.89,0,0,1-2.71-1.25L51.35,193.26a8,8,0,0,1,9.3-13l25.11,17.94L126,208.24A8,8,0,0,1,131.82,217.94Z"/></svg></div>
+        <h3>Договорная работа</h3>
+        <p>Каркас договоров, чек-листы рисков и маршрут согласования юридической и финансовой служб. Сделка не теряется между отделами.</p>
+      </article>
+      <article class="card">
+        <div class="ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" width="28" height="28"><path d="M216,128a88,88,0,1,1-88-88A88,88,0,0,1,216,128Z" opacity="0.2"/><path d="M224,48V96a8,8,0,0,1-8,8H168a8,8,0,0,1,0-16h28.69L182.06,73.37a79.56,79.56,0,0,0-56.13-23.43h-.45A79.52,79.52,0,0,0,69.59,72.71,8,8,0,0,1,58.41,61.27a96,96,0,0,1,135,.79L208,76.69V48a8,8,0,0,1,16,0ZM186.41,183.29a80,80,0,0,1-112.47-.66L59.31,168H88a8,8,0,0,0,0-16H40a8,8,0,0,0-8,8v48a8,8,0,0,0,16,0V179.31l14.63,14.63A95.43,95.43,0,0,0,130,222.06h.53a95.36,95.36,0,0,0,67.07-27.33,8,8,0,0,0-11.18-11.44Z"/></svg></div>
+        <h3>Сопровождение изменений</h3>
+        <p>Внедряем контур вместе с командой, обучаем ответственных и остаёмся на линии, пока новые правила не станут привычкой.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="cases" style="background:#ece8df">
+  <div class="wrap">
+    <h2>Кейсы</h2>
+    <p class="sub">Три недавних проекта. Цифры согласованы с заказчиками для публикации в обобщённом виде.</p>
+    <div class="cases">
+      <article class="card case">
+        <div class="ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" width="28" height="28"><path d="M216,136v80H40V88l64,48V88l64,48Z" opacity="0.2"/><path d="M116,176a8,8,0,0,1-8,8H80a8,8,0,0,1,0-16h28A8,8,0,0,1,116,176Zm60-8H148a8,8,0,0,0,0,16h28a8,8,0,0,0,0-16Zm64,48a8,8,0,0,1-8,8H24a8,8,0,0,1,0-16h8V88a8,8,0,0,1,12.8-6.4L96,120V88a8,8,0,0,1,12.8-6.4l38.74,29.05L159.1,29.74A16.08,16.08,0,0,1,174.94,16h18.12A16.08,16.08,0,0,1,208.9,29.74l15,105.13s.08.78.08,1.13v72h8A8,8,0,0,1,240,216Zm-77.86-94.4,8.53,6.4h36.11L193.06,32H174.94ZM48,208H208V144H168a8,8,0,0,1-4.8-1.6l-14.4-10.8,0,0L112,104v32a8,8,0,0,1-12.8,6.4L48,104Z"/></svg></div>
+        <p class="meta">14.01.2025 — 22.06.2025</p>
+        <h3>Производство комплектующих</h3>
+        <p>Согласование договоров шло 14 дней и часто останавливалось в переписке. Собрали маршрут, роли и лимиты. Срок согласования сократился до 3 рабочих дней.</p>
+      </article>
+      <article class="card case">
+        <div class="ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" width="28" height="28"><path d="M216,48H40a8,8,0,0,0-8,8V200a8,8,0,0,0,8,8H216a8,8,0,0,0,8-8V56A8,8,0,0,0,216,48ZM96,144a24,24,0,1,1,24-24A24,24,0,0,1,96,144Z" opacity="0.2"/><path d="M200,112a8,8,0,0,1-8,8H152a8,8,0,0,1,0-16h40A8,8,0,0,1,200,112Zm-8,24H152a8,8,0,0,0,0,16h40a8,8,0,0,0,0-16Zm40-80V200a16,16,0,0,1-16,16H40a16,16,0,0,1-16-16V56A16,16,0,0,1,40,40H216A16,16,0,0,1,232,56ZM216,200V56H40V200H216Zm-80.26-34a8,8,0,1,1-15.5,4c-2.63-10.26-13.06-18-24.25-18s-21.61,7.74-24.25,18a8,8,0,1,1-15.5-4,39.84,39.84,0,0,1,17.19-23.34,32,32,0,1,1,45.12,0A39.76,39.76,0,0,1,135.75,166ZM96,136a16,16,0,1,0-16-16A16,16,0,0,0,96,136Z"/></svg></div>
+        <p class="meta">Старт 03.03.2025</p>
+        <h3>Сеть частных клиник</h3>
+        <p>Собрали кадровый контур на 420 сотрудников: приём, отпуска, замены смен. Руководители филиалов перестали вести отдельные таблицы.</p>
+      </article>
+      <article class="card case">
+        <div class="ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" width="28" height="28"><path d="M224,64V208H32V48H208A16,16,0,0,1,224,64Z" opacity="0.2"/><path d="M232,208a8,8,0,0,1-8,8H32a8,8,0,0,1-8-8V48a8,8,0,0,1,16,0V156.69l50.34-50.35a8,8,0,0,1,11.32,0L128,132.69,180.69,80H160a8,8,0,0,1,0-16h40a8,8,0,0,1,8,8v40a8,8,0,0,1-16,0V91.31l-58.34,58.35a8,8,0,0,1-11.32,0L96,123.31l-56,56V200H224A8,8,0,0,1,232,208Z"/></svg></div>
+        <p class="meta">Завершён 18.09.2025</p>
+        <h3>Дистрибьютор оборудования</h3>
+        <p>Настроили управленческую отчётность: выручка, склад и дебиторка приходят к 5 числу каждого месяца. Совет директоров больше не ждёт ручной сборки.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="wrap">
+    <h2>Отзывы</h2>
+    <p class="sub">Что говорят руководители после первого года сопровождения.</p>
+    <div class="revs">
+      <article class="card rev">
+        <div class="who"><div class="ava">АК</div><div><b>Андрей К.</b><small>Учредитель производственной компании</small></div></div>
+        <p>Раньше я сам гонял каждый договор. После запуска контура вижу только отклонения. Команда знает маршрут, я не сижу в мессенджере по ночам.</p>
+      </article>
+      <article class="card rev">
+        <div class="who"><div class="ava">МО</div><div><b>Марина О.</b><small>Исполнительный директор сети клиник</small></div></div>
+        <p>Кадровый контур собрали без театральной диагностики. Через шесть недель филиалы работали по одним правилам, а не по привычкам заведующих.</p>
+      </article>
+      <article class="card rev">
+        <div class="who"><div class="ava">ДВ</div><div><b>Денис В.</b><small>Финансовый директор дистрибьютора</small></div></div>
+        <p>Отчёт к пятому числу приходит сам, цифры сходятся с учётом. Перестали собирать пятничные выгрузки из пяти систем вручную.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="lead-sec" id="contacts">
+  <div class="wrap lead-box">
+    <div>
+      <h2>Оставить заявку на разбор контура</h2>
+      <p class="form-note">Опишите, что сейчас тормозит работу. Заявка приходит в админку и в Telegram, менеджер отвечает в рабочий день.</p>
+      <p class="form-note">ООО «Ордината»<br>+7 (495) 120-40-80<br>hello@ordinata.ru<br>г. Москва, Пресненская наб., 10<br>Пн–Пт, 10:00–19:00</p>
+    </div>
+    <form class="form" id="leadForm">
+      <div><label for="fn">Имя</label><input id="fn" name="name" required autocomplete="name"></div>
+      <div><label for="fp">Телефон</label><input id="fp" name="phone" required class="phone-mask" inputmode="tel" autocomplete="tel"></div>
+      <div><label for="fc">Комментарий</label><textarea id="fc" name="comment" placeholder="Какой контур хотите разобрать"></textarea></div>
+      <p class="hint">Заявка приходит в админку и в Telegram</p>
+      <button class="btn" type="submit">Отправить заявку</button>
+      <div class="okmsg" id="leadOk">Спасибо, менеджер свяжется с вами</div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="ft">
+      <div>
+        <b>ООО «Ордината»</b>
+        Операционное сопровождение среднего бизнеса
+      </div>
+      <div>
+        <b>Контакты</b>
+        +7 (495) 120-40-80<br>
+        hello@ordinata.ru<br>
+        г. Москва, Пресненская наб., 10
+      </div>
+      <div>
+        <b>Реквизиты</b>
+        ИНН 7700123456<br>
+        КПП 770001001<br>
+        ОГРН 1234567890123
+      </div>
+    </div>
+    <div class="note">Демо-версия. Цифры, цены и отзывы даны для примера</div>
+  </div>
+</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-card">
+    <div class="pad">
+      <button class="close" type="button" data-close aria-label="Закрыть">&times;</button>
+      <div id="modalFormView">
+        <h3 id="modalTitle">Оставить заявку</h3>
+        <p class="hint">Напишите, с какого контура хотите начать. Заявка приходит в админку и в Telegram.</p>
+        <form id="modalForm" class="form" style="padding:0;box-shadow:none">
+          <div><label for="mn">Имя</label><input id="mn" name="name" required autocomplete="name"></div>
+          <div><label for="mp">Телефон</label><input id="mp" name="phone" required class="phone-mask" inputmode="tel" autocomplete="tel"></div>
+          <div><label for="mc">Комментарий</label><textarea id="mc" name="comment"></textarea></div>
+          <button class="btn" type="submit">Отправить заявку</button>
+        </form>
+      </div>
+      <div id="modalOkView" class="hidden">
+        <h3>Заявка отправлена, менеджер уже видит её в Telegram</h3>
+        <div class="tg" aria-label="Макет уведомления в Telegram">
+          <div class="tg-top">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" width="22" height="22"><path d="M223.41,32.09,80,134.87,21,123.3A6.23,6.23,0,0,1,20,111.38L222.63,32.07A1,1,0,0,1,223.41,32.09ZM80,200a8,8,0,0,0,13.76,5.56l30.61-31.76L80,134.87Z" opacity="0.2"/><path d="M228.88,26.19a9,9,0,0,0-9.16-1.57L17.06,103.93a14.22,14.22,0,0,0,2.43,27.21L72,141.45V200a15.92,15.92,0,0,0,10,14.83,15.91,15.91,0,0,0,17.51-3.73l25.32-26.26L165,220a15.88,15.88,0,0,0,10.51,4,16.3,16.3,0,0,0,5-.79,15.85,15.85,0,0,0,10.67-11.63L231.77,35A9,9,0,0,0,228.88,26.19ZM78.15,126.35l-49.61-9.73,139.2-54.48ZM88,200V152.52l24.79,21.74Zm87.53,8L92.85,135.5l119-85.29Z"/></svg>
+            <div><b>Telegram</b><span>канал заявок · сейчас</span></div>
+          </div>
+          <div class="tg-body">
+            <div class="tg-chat">Ордината · заявки</div>
+            <div class="tg-bubble" id="tgText">Новая заявка с сайта</div>
+          </div>
+        </div>
+        <div class="okmsg show">Спасибо, менеджер свяжется с вами</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const menuBtn = document.getElementById('menuBtn');
+  const drawer = document.getElementById('drawer');
+  menuBtn.addEventListener('click', () => {
+    const open = drawer.classList.toggle('open');
+    drawer.hidden = !open;
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  drawer.addEventListener('click', e => {
+    if (e.target.tagName === 'A') {
+      drawer.classList.remove('open');
+      drawer.hidden = true;
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  const mask = input => {
+    input.addEventListener('input', () => {
+      let d = input.value.replace(/\D/g,'').replace(/^8/,'7');
+      if (!d.startsWith('7')) d = '7' + d;
+      d = d.slice(0,11);
+      let r = '+7';
+      if (d.length > 1) r += ' (' + d.slice(1,4);
+      if (d.length >= 4) r += ') ' + d.slice(4,7);
+      if (d.length >= 7) r += '-' + d.slice(7,9);
+      if (d.length >= 9) r += '-' + d.slice(9,11);
+      input.value = r;
+    });
+  };
+  document.querySelectorAll('.phone-mask').forEach(mask);
+
+  const modal = document.getElementById('modal');
+  const formView = document.getElementById('modalFormView');
+  const okView = document.getElementById('modalOkView');
+  function openModal(){
+    formView.classList.remove('hidden');
+    okView.classList.add('hidden');
+    modal.classList.add('open');
+  }
+  function closeModal(){
+    modal.classList.remove('open');
+  }
+  document.querySelectorAll('[data-open-modal]').forEach(b => b.addEventListener('click', openModal));
+  document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', closeModal));
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  function fillTg(name, phone, comment){
+    const lines = [
+      'Новая заявка с сайта',
+      'Имя: ' + (name || 'не указано'),
+      'Телефон: ' + (phone || 'не указан')
+    ];
+    if (comment) lines.push('Комментарий: ' + comment);
+    document.getElementById('tgText').textContent = lines.join('\n');
+  }
+  function showTg(){
+    formView.classList.add('hidden');
+    okView.classList.remove('hidden');
+    modal.classList.add('open');
+  }
+
+  document.getElementById('modalForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    fillTg(fd.get('name'), fd.get('phone'), fd.get('comment'));
+    showTg();
+  });
+  document.getElementById('leadForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    fillTg(fd.get('name'), fd.get('phone'), fd.get('comment'));
+    document.getElementById('leadOk').classList.add('show');
+    showTg();
+  });
+
+  const nums = document.querySelectorAll('[data-count]');
+  nums.forEach(el => { el.textContent = el.dataset.count; });
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      const el = en.target; const end = +el.dataset.count; let n = 0;
+      el.textContent = '0';
+      const step = Math.max(1, Math.round(end/40));
+      const t = setInterval(() => {
+        n = Math.min(end, n + step);
+        el.textContent = n;
+        if (n >= end) { el.textContent = end; clearInterval(t); }
+      }, 20);
+      io.unobserve(el);
+    });
+  }, {threshold:.35});
+  nums.forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>

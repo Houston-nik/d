@@ -133,6 +133,8 @@ h2{font-size:clamp(28px,3.6vw,44px);letter-spacing:-.03em;margin:8px 0 0;line-he
  .sec{padding:44px 0}
  .viewer-box{height:54vh;min-height:340px;max-height:480px;border-radius:22px}
  .v-hint{left:12px;right:auto;bottom:12px;font-size:12px}
+ .hs-go{width:40px;height:40px}
+ .hs-go .tip{bottom:48px;font-size:12px;padding:6px 9px;max-width:120px;white-space:normal;text-align:center;line-height:1.2;width:max-content}
  .v-badge{left:12px;top:12px}
  .deps{grid-template-columns:1fr 1fr;gap:12px}.dep{min-height:210px}.deps .dep:nth-child(n+4){min-height:210px}.dep b{font-size:16px}
  .deps .dep:last-child{grid-column:1/-1}
@@ -257,34 +259,37 @@ const SCENES = [
 ];
 // куда ведут стрелки внутри панорам
 const LINKS = {
- reception:[['uzi',-30,-10],['dental',28,-10],['proc',75,-8]],
- uzi:[['reception',-32,-12],['surgery',30,-12]],
- surgery:[['uzi',-30,-12],['proc',30,-12]],
- dental:[['reception',-30,-12],['proc',30,-12]],
- proc:[['surgery',-30,-12],['reception',30,-12]]
+ reception:[['uzi',-24,-12],['dental',24,-12],['proc',0,-22]],
+ uzi:[['reception',-24,-14],['surgery',24,-14]],
+ surgery:[['uzi',-24,-14],['proc',24,-14]],
+ dental:[['reception',-24,-14],['proc',24,-14]],
+ proc:[['surgery',-24,-14],['reception',24,-14]]
 };
 const byId = Object.fromEntries(SCENES.map(s=>[s.id,s]));
 const tip = (div, args) => { div.classList.add('hs-go'); const t=document.createElement('span'); t.className='tip'; t.textContent=args; div.appendChild(t); };
+// на узком экране стрелки ближе к центру, чтобы подписи не обрезались
+const YK = Math.min(1, fitHfov()/80);
 const scenesCfg = {};
 SCENES.forEach(s=>{
  scenesCfg[s.id] = {
   title: s.title, type:'equirectangular', panorama:'img/pano-'+s.id+'.jpg',
-  haov:200, vaov:94, vOffset:0, yaw:s.yaw, pitch:0, hfov:88, minHfov:45, maxHfov:100,
+  haov:120, vaov:67.5, vOffset:0, yaw:s.yaw, pitch:0, hfov:84, minHfov:68, maxHfov:84,
   avoidShowingBackground:true,
-  hotSpots: LINKS[s.id].map(([to,yaw,pitch])=>({type:'scene', sceneId:to, yaw, pitch, cssClass:'hs-anchor', createTooltipFunc:tip, createTooltipArgs:byId[to].title}))
+  hotSpots: LINKS[s.id].map(([to,yaw,pitch])=>({type:'scene', sceneId:to, yaw: yaw*YK, pitch, cssClass:'hs-anchor', createTooltipFunc:tip, createTooltipArgs:byId[to].title}))
  };
 });
 
 const fromHash = () => { const m = location.hash.match(/^#sec-([a-z]+)$/); return m && byId[m[1]] ? m[1] : null; };
 const first = fromHash() || 'reception';
-// подбираем угол обзора под пропорции окна, чтобы на телефоне не было чёрных полей
+// панорамы 16:9 (120°×67.5°): угол обзора под пропорции окна, без чёрных полей и без «мыла»
 function fitHfov(){
  const el=document.getElementById('pano'); const a=el.clientWidth/Math.max(1,el.clientHeight);
- const v=86*Math.PI/180; const h=2*Math.atan(Math.tan(v/2)*a)*180/Math.PI;
- return Math.max(40,Math.min(96,h));
+ const v=64*Math.PI/180; const h=2*Math.atan(Math.tan(v/2)*a)*180/Math.PI;
+ return Math.max(40,Math.min(116,h));
 }
+const lim = h => ({hfov:h, maxHfov:h, minHfov:Math.max(36,h*0.8)});
 const HF = fitHfov();
-Object.values(scenesCfg).forEach(c=>{c.hfov=HF; c.maxHfov=Math.min(100,HF+4); c.minHfov=Math.min(40,HF-10);});
+Object.values(scenesCfg).forEach(c=>Object.assign(c,lim(HF)));
 const viewer = pannellum.viewer('pano', {
  default:{firstScene:first, sceneFadeDuration:900, autoLoad:true, showControls:true, compass:false, mouseZoom:'fullscreenonly', hfov:HF},
  scenes: scenesCfg
@@ -339,7 +344,7 @@ document.querySelectorAll('#nav a').forEach(a=>a.addEventListener('click',()=>do
 // подсветка пункта меню
 const io = new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting){ document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('on', a.getAttribute('href')==='#'+en.target.id)); } }),{rootMargin:'-45% 0px -50% 0px'});
 ['tour','departments','about','contacts'].forEach(id=>io.observe(document.getElementById(id)));
-let rz; window.addEventListener('resize',()=>{clearTimeout(rz); rz=setTimeout(()=>{const h=fitHfov(); Object.values(scenesCfg).forEach(c=>{c.hfov=h;c.maxHfov=Math.min(100,h+4);}); viewer.setHfov(h,false);},200);});
+let rz; window.addEventListener('resize',()=>{clearTimeout(rz); rz=setTimeout(()=>{const h=fitHfov(); Object.values(scenesCfg).forEach(c=>Object.assign(c,lim(h))); const L=lim(h); viewer.setHfovBounds&&viewer.setHfovBounds([L.minHfov,L.maxHfov]); viewer.setHfov(h,false);},200);});
 window.addEventListener('popstate', () => { const id = fromHash(); if (id) go(id, true); });
 </script>
 </body>

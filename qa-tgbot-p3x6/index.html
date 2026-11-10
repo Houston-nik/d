@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Демо-отчёт тестирования вымышленного Telegram-бота объявлений «Доска»: дефекты, код-ревью, платежи, нагрузка API.">
+<title>Тестирование бота «Доска» — демо-отчёт</title>
+<style>
+:root{
+  --bg:#12151c;--card:#1a1e27;--ink:#eef1f6;--text:#d5d9e2;--muted:#8b91a0;
+  --line:#2a3040;--accent:#22c3b5;--accent2:#1aa89c;--soft:rgba(34,195,181,.12);
+  --crit:#e24b4b;--critbg:rgba(226,75,75,.14);
+  --maj:#e0a01a;--majbg:rgba(224,160,26,.14);
+  --min:#7b8ba3;--minbg:rgba(123,139,163,.16);
+  --ok:#22c3b5;--wrap:1100px;--shadow:0 16px 40px rgba(0,0,0,.28);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;padding:0;overflow-x:hidden;max-width:100%}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--text);background:var(--bg);line-height:1.55}
+img,svg{max-width:100%;display:block}
+a{color:var(--accent)}
+button{font:inherit}
+.wrap{width:min(var(--wrap),calc(100% - 32px));margin:0 auto}
+.top{position:sticky;top:0;z-index:40;background:rgba(18,21,28,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:14px;padding:12px 0;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;color:var(--ink);font-weight:750;letter-spacing:-.02em;text-decoration:none}
+.logo svg{width:28px;height:28px;color:var(--accent);flex:0 0 28px}
+.desk{display:flex;flex-wrap:wrap;gap:6px 14px;margin-left:auto;font-size:.92rem}
+.desk a{color:var(--text);text-decoration:none;padding:6px 0}
+.desk a:hover{color:var(--accent)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:10px;border:2px solid var(--accent);background:var(--accent);color:#062422;font-weight:700;font-size:16px;cursor:pointer;text-decoration:none}
+.btn:hover{background:var(--accent2);border-color:var(--accent2);color:#062422}
+.btn.ghost{background:transparent;color:var(--ink);border-color:#3a4152}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
+.hero{padding:48px 0 20px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;margin:0 0 14px;padding:6px 10px;border-radius:999px;background:var(--soft);color:var(--accent);font-size:.82rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.eyebrow svg{width:16px;height:16px}
+.hero h1{margin:0 0 14px;font-size:clamp(1.65rem,4vw,2.6rem);line-height:1.12;letter-spacing:-.03em;color:var(--ink);font-weight:750;max-width:20ch}
+.lead{margin:0 0 22px;font-size:1.05rem;color:var(--muted);max-width:58ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px}
+.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:28px 0 8px}
+.sc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.sc b{display:block;font-size:1.7rem;letter-spacing:-.03em;color:var(--ink);line-height:1.1}
+.sc span{color:var(--muted);font-size:.88rem}
+.sc.crit b{color:var(--crit)}
+.sc.maj b{color:var(--maj)}
+.sc.min b{color:var(--min)}
+.note{margin:16px 0 0;color:var(--muted);font-size:.88rem;max-width:70ch}
+h2{margin:0 0 8px;font-size:clamp(1.3rem,2.4vw,1.65rem);color:var(--ink);letter-spacing:-.02em}
+.sub{margin:0 0 20px;color:var(--muted)}
+section{padding:32px 0}
+.badge{display:inline-flex;align-items:center;padding:3px 9px;border-radius:999px;font-size:.75rem;font-weight:750;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap}
+.badge.crit{background:var(--critbg);color:var(--crit)}
+.badge.maj{background:var(--majbg);color:var(--maj)}
+.badge.min{background:var(--minbg);color:var(--min)}
+.bugs{display:none}
+.cards{display:grid;gap:10px}
+.bug{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.bug-top{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-bottom:8px}
+.bug-id{font-weight:750;color:var(--ink);letter-spacing:.02em}
+.bug h3{margin:0 0 8px;font-size:1rem;color:var(--ink);font-weight:700}
+.bug p{margin:0 0 6px;font-size:.93rem}
+.bug p:last-child{margin:0}
+.bug b{color:var(--ink)}
+.tbl-wrap{display:none}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;font-size:.9rem}
+th,td{text-align:left;vertical-align:top;padding:12px 12px;border-bottom:1px solid var(--line);word-break:break-word}
+th{color:var(--muted);font-weight:650;background:#161a22;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em}
+tr:last-child td{border-bottom:0}
+.reviews{display:grid;gap:10px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.item summary{list-style:none;cursor:pointer;display:flex;align-items:flex-start;gap:12px;padding:16px 18px;font-weight:650;color:var(--ink)}
+.item summary::-webkit-details-marker{display:none}
+.ico{width:36px;height:36px;border-radius:10px;background:var(--soft);color:var(--accent);display:flex;align-items:center;justify-content:center;flex:0 0 36px}
+.ico svg{width:22px;height:22px}
+.item .body{padding:0 18px 18px 66px}
+.item .body p{margin:0;font-size:.95rem}
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pay .item .body{padding-left:18px}
+.chart-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:0 0 12px;font-size:.88rem;color:var(--muted)}
+.legend i{display:inline-block;width:18px;height:3px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.chart{width:100%;height:auto}
+.recs{display:grid;gap:10px}
+.rec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start}
+.rec p{margin:4px 0 0;font-size:.95rem;color:var(--muted)}
+.rec h3{margin:0;font-size:1rem;color:var(--ink)}
+footer{padding:28px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+@media (min-width:861px){
+  .cards{display:none}
+  .tbl-wrap{display:block;overflow-x:auto}
+}
+@media (max-width:860px){
+  .summary,.pay{grid-template-columns:1fr 1fr}
+  .item .body{padding-left:18px}
+  .hero{padding-top:32px}
+}
+@media (max-width:560px){
+  .summary,.pay,.rec{grid-template-columns:1fr}
+  .desk{width:100%;margin-left:0}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap nav">
+    <a class="logo" href="#top">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" width="28" height="28"><path d="M224,128a96,96,0,1,1-96-96A96,96,0,0,1,224,128Z" opacity="0.2"/><path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"/></svg>
+      QA бота «Доска»
+    </a>
+    <nav class="desk" aria-label="Разделы">
+      <a href="#bugs">Дефекты</a>
+      <a href="#review">Код-ревью</a>
+      <a href="#pay">Платежи</a>
+      <a href="#load">Нагрузка</a>
+      <a href="#recs">Рекомендации</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <p class="eyebrow">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" width="16" height="16"><path d="M216,56V200a16,16,0,0,1-16,16H56A16,16,0,0,1,40,200V56Z" opacity="0.2"/><path d="M80,64a8,8,0,0,1,8-8h80a8,8,0,0,1,0,16H88A8,8,0,0,1,80,64Zm8,40h80a8,8,0,0,0,0-16H88a8,8,0,0,0,0,16Zm32,72H88a8,8,0,0,0,0,16h32a8,8,0,0,0,0-16Zm104-128H32A16,16,0,0,0,16,64V200a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V48A16,16,0,0,0,224,32Zm0,168H32V64H224V200Z"/></svg>
+        Пример отчёта
+      </p>
+      <h1>Тестирование Telegram-бота «Доска»</h1>
+      <p class="lead">Вымышленный бот объявлений: поиск, карточки, платные подписки. Стек: Python, aiogram, FastAPI, PostgreSQL, SQLAlchemy, Redis, Docker. Отчёт показывает формат поставки, без привязки к реальному проекту.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#bugs">Смотреть дефекты</a>
+        <a class="btn ghost" href="#recs">Рекомендации</a>
+      </div>
+      <div class="summary" aria-label="Сводка">
+        <div class="sc"><b>12</b><span>дефектов найдено</span></div>
+        <div class="sc crit"><b>3</b><span>Critical</span></div>
+        <div class="sc maj"><b>5</b><span>Major</span></div>
+        <div class="sc min"><b>4</b><span>Minor</span></div>
+      </div>
+      <p class="note">Покрытие: 18 пользовательских сценариев, 16 пройдены полностью, 2 не автоматизированы (экспорт и жалоба). Ниже — 8 ключевых дефектов. Данные стенда демо-стенда, не боевые.</p>
+    </div>
+  </div>
+
+  <section id="bugs">
+    <div class="wrap">
+      <h2>Журнал дефектов</h2>
+      <p class="sub">Шаги, ожидаемый и фактический результат, приоритет. На узком экране — карточки.</p>
+
+      <div class="cards">
+        <article class="bug">
+          <div class="bug-top"><span class="bug-id">D-01</span><span class="badge crit">Critical</span></div>
+          <h3>Вебхук оплаты без проверки подписи</h3>
+          <p><b>Сценарий.</b> Оплата подписки «Премиум».</p>
+          <p><b>Шаги.</b> Отправить на /webhooks/pay тело успешного платежа без валидной подписи.</p>
+          <p><b>Ожидалось.</b> 401/403, подписка не меняется. <b>Получено.</b> 200, статус Premium, повтор того же события выдаёт вторую запись.</p>
+        </article>
+        <article class="bug">
+          <div class="bug-top"><span class="bug-id">D-02</span><span class="badge crit">Critical</span></div>
+          <h3>Поиск блокирует цикл aiogram</h3>
+          <p><b>Сценарий.</b> Поиск объявлений по запросу.</p>
+          <p><b>Шаги.</b> 20 одновременных запросов «квартира, центр».</p>
+          <p><b>Ожидалось.</b> Ответы без паузы бота. <b>Получено.</b> Хендлер вызывает синхронный Session.execute, остальные апдейты ждут 2–4 с.</p>
+        </article>
+        <article class="bug">
+          <div class="bug-top"><span class="bug-id">D-03</span><span class="badge crit">Critical</span></div>
+          <h3>Платное объявление видно до подтверждения оплаты</h3>
+          <p><b>Сценарий.</b> Публикация объявления в топе.</p>
+          <p><b>Шаги.</b> Создать объявление, открыть поиск, не завершая оплату.</p>
+          <p><b>Ожидалось.</b> Черновик скрыт до успешного платежа. <b>Получено.</b> Карточка сразу в выдаче с меткой «Топ».</p>
+        </article>
+        <article class="bug">
+          <div class="bug-top"><span class="bug-id">D-04</span><span class="badge maj">Major</span></div>
+          <h3>Ключи FSM в Redis без TTL</h3>
+          <p><b>Сценарий.</b> Мастер подачи объявления, пользователь уходит на шаге 3.</p>
+          <p><b>Шаги.</b> Начать сценарий, оборвать чат, проверить ключи fsm:* через сутки.</p>
+          <p><b>Ожидалось.</b> Истечение сессии. <b>Получено.</b> Ключи копятся без срока жизни.</p>
+        </article>
+        <article class="bug">
+          <div class="bug-top"><span class="bug-id">D-05</span><span class="badge maj">Major</span></div>
+          <h3>Сессия SQLAlchemy не закрывается при ошибке</h3>
+          <p><b>Сценарий.</b> Редактирование объявления с невалидным фото.</p>
+          <p><b>Шаги.</b> Отправить повреждённый файл, повторить 50 раз, смотреть пул соединений.</p>
+          <p><b>Ожидалось.</b> rollback и закрытие сессии. <b>Получено.</b> Исключение до commit, сессия остаётся открытой, пул исчерпывается.</p>
+        </article>
+        <article class="bug">
+          <div class="bug-top"><span class="bug-id">D-06</span><span class="badge maj">Major</span></div>
+          <h3>Отмена подписки не останавливает продление</h3>
+          <p><b>Сценарий.</b> Отмена автопродления.</p>
+          <p><b>Шаги.</b> /premium_cancel, дождаться даты продления на стенде.</p>
+          <p><b>Ожидалось.</b> Списание не уходит. <b>Получено.</b> Статус «отменена», вебхук renewal всё равно активирует период.</p>
+        </article>
+        <article class="bug">
+          <div class="bug-top"><span class="bug-id">D-07</span><span class="badge maj">Major</span></div>
+          <h3>Повторный платёж создаёт вторую подписку</h3>
+          <p><b>Сценарий.</b> Пользователь дважды подтверждает одну оплату.</p>
+          <p><b>Шаги.</b> Два одинаковых event_id на вебхук и повторный клик «Оплатить».</p>
+          <p><b>Ожидалось.</b> Идемпотентность, один период. <b>Получено.</b> Две активные подписки, двойной доступ.</p>
+        </article>
+        <article class="bug">
+          <div class="bug-top"><span class="bug-id">D-08</span><span class="badge min">Minor</span></div>
+          <h3>Ошибка API без корреляции</h3>
+          <p><b>Сценарий.</b> Сбой поиска при недоступной БД.</p>
+          <p><b>Шаги.</b> Остановить PostgreSQL, отправить /search.</p>
+          <p><b>Ожидалось.</b> Понятное сообщение и идентификатор запроса в логе. <b>Получено.</b> «Произошла ошибка», в логе traceback без id пользователя и апдейта.</p>
+        </article>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th>ID</th><th>Сценарий</th><th>Шаги</th><th>Ожидалось / получено</th><th>Приоритет</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>D-01</td>
+              <td>Оплата подписки «Премиум»</td>
+              <td>Вебхук успешной оплаты без валидной подписи</td>
+              <td>Отклонить запрос. Факт: 200, статус Premium, повтор события создаёт вторую запись</td>
+              <td><span class="badge crit">Critical</span></td>
+            </tr>
+            <tr>
+              <td>D-02</td>
+              <td>Поиск объявлений</td>
+              <td>20 одновременных запросов «квартира, центр»</td>
+              <td>Бот отвечает без паузы. Факт: синхронный Session.execute в хендлере, апдейты ждут 2–4 с</td>
+              <td><span class="badge crit">Critical</span></td>
+            </tr>
+            <tr>
+              <td>D-03</td>
+              <td>Публикация в топе</td>
+              <td>Создать объявление и открыть поиск до оплаты</td>
+              <td>Черновик скрыт. Факт: карточка сразу в выдаче с меткой «Топ»</td>
+              <td><span class="badge crit">Critical</span></td>
+            </tr>
+            <tr>
+              <td>D-04</td>
+              <td>Мастер подачи объявления</td>
+              <td>Оборвать сценарий на шаге 3, проверить ключи fsm:* через сутки</td>
+              <td>Сессия истекает. Факт: ключи Redis без TTL копятся</td>
+              <td><span class="badge maj">Major</span></td>
+            </tr>
+            <tr>
+              <td>D-05</td>
+              <td>Редактирование с невалидным фото</td>
+              <td>50 ошибочных загрузок, контроль пула соединений</td>
+              <td>rollback и закрытие сессии. Факт: сессия остаётся открытой</td>
+              <td><span class="badge maj">Major</span></td>
+            </tr>
+            <tr>
+              <td>D-06</td>
+              <td>Отмена автопродления</td>
+              <td>/premium_cancel, дождаться даты продления на стенде</td>
+              <td>Списание не уходит. Факт: статус «отменена», renewal снова включает период</td>
+              <td><span class="badge maj">Major</span></td>
+            </tr>
+            <tr>
+              <td>D-07</td>
+              <td>Повторный платёж</td>
+              <td>Два одинаковых event_id и повторный клик «Оплатить»</td>
+              <td>Один период. Факт: две активные подписки</td>
+              <td><span class="badge maj">Major</span></td>
+            </tr>
+            <tr>
+              <td>D-08</td>
+              <td>Сбой поиска при недоступной БД</td>
+              <td>Остановить PostgreSQL, отправить /search</td>
+              <td>Сообщение и id запроса в логе. Факт: «Произошла ошибка», traceback без корреляции</td>
+              <td><span class="badge min">Minor</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="review">
+    <div class="wrap">
+      <h2>Код-ревью бэкенда</h2>
+      <p class="sub">Выборочный разбор репозитория демо-стенда. Не полный аудит безопасности.</p>
+      <div class="reviews">
+        <details class="item" open>
+          <summary>
+            <span class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" width="22" height="22"><path d="M216,56V200a16,16,0,0,1-16,16H56A16,16,0,0,1,40,200V56Z" opacity="0.2"/><path d="M69.66,146.34a8,8,0,0,1,11.32-11.32L96,150.06l45.66-45.66a8,8,0,0,1,11.32,11.32l-51.32,51.32a8,8,0,0,1-11.32,0ZM216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,160H40V56H216V200Z"/></svg></span>
+            Async: блокирующие вызовы в хендлерах
+          </summary>
+          <div class="body"><p>В search и publish используются синхронные вызовы SQLAlchemy и requests внутри async-хендлеров aiogram и FastAPI. Под нагрузкой это останавливает цикл событий. Нужны async-сессии (или to_thread как временная мера) и отказ от блокирующего HTTP в обработчиках.</p></div>
+        </details>
+        <details class="item">
+          <summary>
+            <span class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" width="22" height="22"><path d="M80,80V208H40V80Z" opacity="0.2"/><path d="M80,40V208a8,8,0,0,1-8,8H32a8,8,0,0,1-8-8V40A16,16,0,0,1,40,24H64A16,16,0,0,1,80,40ZM40,40V200H64V40ZM224,88V208a8,8,0,0,1-8,8H168a8,8,0,0,1-8-8V88a16,16,0,0,1,16-16h32A16,16,0,0,1,224,88Zm-48,0V200h32V88ZM152,48V208a8,8,0,0,1-8,8H104a8,8,0,0,1-8-8V48a16,16,0,0,1,16-16h24A16,16,0,0,1,152,48ZM112,48V200h24V48Z"/></svg></span>
+            Сессии БД: утечки, commit и rollback
+          </summary>
+          <div class="body"><p>Зависимость get_session в FastAPI не закрывает сессию в finally. В хендлерах aiogram сессия создаётся вручную и при исключении не делается rollback. Это совпадает с D-05 и рискует исчерпать пул PostgreSQL.</p></div>
+        </details>
+        <details class="item">
+          <summary>
+            <span class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" width="22" height="22"><path d="M224,80H32V200a8,8,0,0,0,8,8H216a8,8,0,0,0,8-8Z" opacity="0.2"/><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,16V72H40V56ZM40,200V88H216V200Z"/></svg></span>
+            Redis: TTL и ключи FSM
+          </summary>
+          <div class="body"><p>Хранилище состояний пишет ключи fsm:{user}:{chat} без expire. Кэш выдачи поиска тоже без TTL. Нужно задать срок жизни сценария (например 24 часа), префикс по окружению и политику вытеснения для кэша.</p></div>
+        </details>
+        <details class="item">
+          <summary>
+            <span class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" width="22" height="22"><path d="M208,80v96a8,8,0,0,1-8,8H56a8,8,0,0,1-8-8V80Z" opacity="0.2"/><path d="M198.24,62.63l-36.8-13.12a16.06,16.06,0,0,0-21.27,9.5L128,96.23,99.83,58.13a16,16,0,0,0-21.18-9.29l-40,14.31A16.07,16.07,0,0,0,28,78.31V192a16,16,0,0,0,16,16H212a16,16,0,0,0,16-16V86.69A16.09,16.09,0,0,0,198.24,62.63ZM100,56.54,128,95.4,156,56.54,188.8,68.21,128,116.54,67.2,68.21ZM212,192H44V78.31l32.09-11.49L112.58,120A8,8,0,0,0,128,128a8,8,0,0,0,6.31-2.91L211.91,67,212,86.69V192Z"/></svg></span>
+            Обработка ошибок
+          </summary>
+          <div class="body"><p>Глобальный error handler глотает исключения и отвечает одной фразой. Нет идентификатора запроса, нет различия между ошибкой пользователя и сбоем инфраструктуры. Для FastAPI стоит отдать стандартизованный JSON с кодом, для бота — короткое сообщение и запись в лог с корреляцией.</p></div>
+        </details>
+        <details class="item">
+          <summary>
+            <span class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" width="22" height="22"><path d="M208,80v72a8,8,0,0,1-8,8H56a8,8,0,0,1-8-8V80Z" opacity="0.2"/><path d="M208,80H176V56a48,48,0,0,0-96,0V80H48A16,16,0,0,0,32,96V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V96A16,16,0,0,0,208,80ZM96,56a32,32,0,0,1,64,0V80H96ZM208,208H48V96H208V208Z"/></svg></span>
+            Учётные данные в коде и в конфиге окружения
+          </summary>
+          <div class="body"><p>В репозитории найдены зашитые токены платёжного шлюза и строка подключения к БД в исходниках. Файл переменных окружения попадает в образ Docker. Нужно вынести значения в секреты оркестратора, добавить проверку в CI, ротировать уже засвеченные ключи.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="pay">
+    <div class="wrap">
+      <h2>Платежи и подписки</h2>
+      <p class="sub">Проверка вебхуков, повторной оплаты, отмены и продления на демо-стенде.</p>
+      <div class="pay">
+        <article class="item" style="padding:16px 18px">
+          <h3 style="margin:0 0 8px;color:var(--ink);font-size:1rem">Вебхуки</h3>
+          <p style="margin:0;font-size:.95rem">Подпись не проверяется (D-01). Нет журнала обработанных event_id, повтор того же события применяется снова. Нужна проверка подписи, идемпотентный ключ и ответ 2xx только после устойчивой записи.</p>
+        </article>
+        <article class="item" style="padding:16px 18px">
+          <h3 style="margin:0 0 8px;color:var(--ink);font-size:1rem">Повторный платёж</h3>
+          <p style="margin:0;font-size:.95rem">Второй клик «Оплатить» и повтор вебхука создают вторую подписку (D-07). Нужна уникальность платежа и защита кнопки до завершения первого запроса.</p>
+        </article>
+        <article class="item" style="padding:16px 18px">
+          <h3 style="margin:0 0 8px;color:var(--ink);font-size:1rem">Отмена</h3>
+          <p style="margin:0;font-size:.95rem">/premium_cancel меняет статус в БД, но флаг автопродления у провайдера не снимается (D-06). Отмена должна быть транзакцией: провайдер, затем локальный статус, с повтором при сбое.</p>
+        </article>
+        <article class="item" style="padding:16px 18px">
+          <h3 style="margin:0 0 8px;color:var(--ink);font-size:1rem">Продление</h3>
+          <p style="margin:0;font-size:.95rem">Событие renewal не сверяется с флагом отмены и не привязано к текущему периоду. Возможны двойное продление и доступ после отказа от подписки.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="load">
+    <div class="wrap">
+      <h2>Нагрузка API</h2>
+      <p class="sub">Короткий прогон поиска и публикации на демо-стенде. График схематичный, цифры вымышленные, это пример оформления.</p>
+      <div class="chart-card">
+        <div class="legend">
+          <span><i style="background:#22c3b5"></i>RPS, запросы/с</span>
+          <span><i style="background:#e0a01a"></i>Латентность p95, мс (шкала справа)</span>
+        </div>
+        <svg class="chart" viewBox="0 0 640 260" role="img" aria-label="Пример графика RPS и p95, вымышленные данные">
+          <title>Пример: RPS и p95 на демо-стенде</title>
+          <rect x="0" y="0" width="640" height="260" fill="#161a22" rx="8"/>
+          <g stroke="#2a3040" stroke-width="1">
+            <line x1="48" y1="30" x2="48" y2="200"/>
+            <line x1="48" y1="200" x2="600" y2="200"/>
+            <line x1="48" y1="158" x2="600" y2="158"/>
+            <line x1="48" y1="116" x2="600" y2="116"/>
+            <line x1="48" y1="74" x2="600" y2="74"/>
+            <line x1="48" y1="32" x2="600" y2="32"/>
+          </g>
+          <text x="8" y="204" fill="#8b91a0" font-size="11">0</text>
+          <text x="8" y="162" fill="#8b91a0" font-size="11">100</text>
+          <text x="8" y="120" fill="#8b91a0" font-size="11">200</text>
+          <text x="8" y="78" fill="#8b91a0" font-size="11">300</text>
+          <text x="8" y="36" fill="#8b91a0" font-size="11">400</text>
+          <text x="608" y="204" fill="#8b91a0" font-size="11">0</text>
+          <text x="600" y="162" fill="#8b91a0" font-size="11">50</text>
+          <text x="594" y="120" fill="#8b91a0" font-size="11">100</text>
+          <text x="594" y="78" fill="#8b91a0" font-size="11">150</text>
+          <text x="594" y="36" fill="#8b91a0" font-size="11">200</text>
+          <polyline fill="none" stroke="#22c3b5" stroke-width="3" points="48,179 140,162 232,137 324,95 416,53 508,74 600,116"/>
+          <polyline fill="none" stroke="#e0a01a" stroke-width="3" points="48,166 140,162 232,156 324,132 416,47 508,98 600,149"/>
+          <text x="48" y="224" fill="#8b91a0" font-size="11">10:00</text>
+          <text x="210" y="224" fill="#8b91a0" font-size="11">10:05</text>
+          <text x="380" y="224" fill="#8b91a0" font-size="11">10:10</text>
+          <text x="548" y="224" fill="#8b91a0" font-size="11">10:15</text>
+          <text x="48" y="248" fill="#8b91a0" font-size="12">Пик ~350 RPS, p95 до ~180 мс. Пример, не замер боевого контура.</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section id="recs">
+    <div class="wrap">
+      <h2>Рекомендации по приоритету</h2>
+      <p class="sub">Сначала закрыть то, что ломает оплату и отзывчивость бота.</p>
+      <div class="recs">
+        <article class="rec">
+          <span class="badge crit">P0</span>
+          <div>
+            <h3>Платежный контур</h3>
+            <p>Проверка подписи вебхука, идемпотентность по event_id, не публиковать платные объявления до успешной оплаты, синхронизировать отмену и renewal с провайдером.</p>
+          </div>
+        </article>
+        <article class="rec">
+          <span class="badge maj">P1</span>
+          <div>
+            <h3>Устойчивость бэкенда</h3>
+            <p>Убрать блокирующие вызовы из хендлеров, закрывать сессии БД в finally с rollback, проставить TTL для FSM и кэша, вынести учётные данные из репозитория и образа.</p>
+          </div>
+        </article>
+        <article class="rec">
+          <span class="badge min">P2</span>
+          <div>
+            <h3>Наблюдаемость и регресс</h3>
+            <p>Корреляция ошибок, понятные ответы пользователю, нагрузочный сценарий поиска и оплаты в CI, добить 2 неавтоматизированных сценария.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Демо-версия. Отчёт, дефекты и графики даны для примера и не относятся к реальному боту или заказчику.</div>
+  </div>
+</footer>
+</body>
+</html>

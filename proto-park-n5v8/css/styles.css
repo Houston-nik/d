@@ -204,7 +204,7 @@ html[data-concept="b"] .card{border:0;box-shadow:var(--shadow)}
 .attr-card .body{padding:18px 18px 20px}
 html[data-concept="b"] .attr-card{border:0;box-shadow:var(--shadow)}
 
-@media (max-width:1100px){
+@media (max-width:1260px){
   .nav-links{display:none}
   .menu-btn{display:inline-flex}
   .price-row{grid-template-columns:1fr 1fr;gap:8px}

@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<div class="proto-note">Демо-прототип двух концепций (A — воздух и редакционный ритм, B — динамичная сетка). <span data-concept-live>Сейчас концепция A</span>.</div>
+<div class="proto-note">Демо-прототип двух концепций (A — воздух и крупный кадр, B — полный экран и динамичная сетка). <span data-concept-live>Сейчас концепция A</span>.</div>
 <header class="top">
   <div class="wrap nav">
     <a class="logo" href="index.html"><img src="img/logo.svg" alt="Комета, парк игровых реальностей"></a>
@@ -31,7 +31,7 @@
   <div class="sec-head">
     <p class="eyebrow">Запись</p>
     <h2>Забронировать визит</h2>
-    <p class="sub">Выберите развлечение, дату, время, число участников и длительность. Справа собирается сводка.</p>
+    <p class="muted">Выберите мир, дату, время, число гостей и длительность.</p>
   </div>
   <div class="steps" aria-label="Шаги записи">
     <span data-step-label>1. Развлечение</span>
@@ -43,19 +43,19 @@
   </div>
   <div class="success">
     <h3>Бронь принята</h3>
-    <p>Мы зафиксировали заявку на <span data-sum="attr"></span>, <span data-sum="date"></span> в <span data-sum="time"></span>. На боевом сайте её увидит администратор парка.</p>
+    <p>Заявка на <span data-sum="attr"></span>, <span data-sum="date"></span> в <span data-sum="time"></span>. На боевом сайте её увидит администратор парка.</p>
     <p><a class="btn" href="index.html">На главную</a></p>
   </div>
   <div class="book book-main">
     <div>
       <h3>Развлечение</h3>
       <div class="choice-grid" style="margin:12px 0 24px">
-        <button class="choice" type="button" data-attr="karting">Голографический картинг<small>от 1 800 ₽</small></button>
-        <button class="choice" type="button" data-attr="mrcs">MRCS-арена<small>от 4 000 ₽</small></button>
-        <button class="choice" type="button" data-attr="vr">VR-аттракционы<small>от 900 ₽</small></button>
-        <button class="choice" type="button" data-attr="ps5">PlayStation 5<small>от 600 ₽</small></button>
-        <button class="choice" type="button" data-attr="birthday">День рождения<small>от 18 000 ₽</small></button>
-        <button class="choice" type="button" data-attr="events">Групповое мероприятие<small>от 25 000 ₽</small></button>
+        <button class="choice" type="button" data-attr="karting"><div class="ph" style="background-image:url('img/attr-karting.webp')"></div><div class="txt">Голографический картинг<small>от 1 800 ₽</small></div></button>
+        <button class="choice" type="button" data-attr="mrcs"><div class="ph" style="background-image:url('img/attr-mrcs.webp')"></div><div class="txt">MRCS-арена<small>от 4 000 ₽</small></div></button>
+        <button class="choice" type="button" data-attr="vr"><div class="ph" style="background-image:url('img/attr-vr.webp')"></div><div class="txt">VR-аттракционы<small>от 900 ₽</small></div></button>
+        <button class="choice" type="button" data-attr="ps5"><div class="ph" style="background-image:url('img/attr-ps5.webp')"></div><div class="txt">PlayStation 5<small>от 600 ₽</small></div></button>
+        <button class="choice" type="button" data-attr="birthday"><div class="ph" style="background-image:url('img/scene-birthday.webp')"></div><div class="txt">День рождения<small>от 18 000 ₽</small></div></button>
+        <button class="choice" type="button" data-attr="events"><div class="ph" style="background-image:url('img/scene-corporate.webp')"></div><div class="txt">Групповое мероприятие<small>от 25 000 ₽</small></div></button>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
         <div><label for="date">Дата</label><input id="date" name="date" type="date" required></div>
@@ -72,15 +72,7 @@
       <h3>Время</h3>
       <p class="note">Серым отмечены занятые слоты.</p>
       <div class="slots" style="margin:10px 0 24px">
-        <button class="slot" type="button" data-slot="11:00">11:00</button>
-        <button class="slot" type="button" data-slot="12:00">12:00</button>
-        <button class="slot" type="button" data-slot="13:00">13:00</button>
-        <button class="slot" type="button" data-slot="14:00">14:00</button>
-        <button class="slot" type="button" data-slot="15:00">15:00</button>
-        <button class="slot" type="button" data-slot="16:00">16:00</button>
-        <button class="slot" type="button" data-slot="17:00">17:00</button>
-        <button class="slot" type="button" data-slot="18:00">18:00</button>
-        <button class="slot" type="button" data-slot="19:00">19:00</button>
+        <button class="slot" type="button" data-slot="11:00">11:00</button> <button class="slot" type="button" data-slot="12:00">12:00</button> <button class="slot" type="button" data-slot="13:00">13:00</button> <button class="slot" type="button" data-slot="14:00">14:00</button> <button class="slot" type="button" data-slot="15:00">15:00</button> <button class="slot" type="button" data-slot="16:00">16:00</button> <button class="slot" type="button" data-slot="17:00">17:00</button> <button class="slot" type="button" data-slot="18:00">18:00</button> <button class="slot" type="button" data-slot="19:00">19:00</button>
       </div>
       <h3>Участники</h3>
       <div class="counter" style="margin:12px 0 24px">
@@ -110,6 +102,7 @@
 </section>
 
 </main>
+<div class="sticky-cta"><a class="btn" href="booking.html">Забронировать визит</a></div>
 <footer>
   <div class="wrap ft">
     <div>

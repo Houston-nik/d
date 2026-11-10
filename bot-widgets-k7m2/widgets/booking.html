@@ -1,0 +1,22 @@
+<!DOCTYPE html><html lang=ru><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Запись</title><style>*{box-sizing:border-box;margin:0}body{padding:10px 12px 24px;font-family:system-ui,sans-serif;color:var(--tg-theme-text-color,#1a1d24);background:var(--tg-theme-bg-color,transparent);font-size:var(--tg-text-font-size,15px);line-height:1.35}h3{font-size:1.06em;margin:0 0 8px}.h{font-size:.78em;color:var(--tg-theme-hint-color,#6b7280);font-weight:600;margin:8px 0 4px}.r{display:flex;flex-wrap:wrap;gap:6px}button{border:1px solid var(--tg-theme-section-separator-color,#d8dee8);background:var(--tg-theme-secondary-bg-color,#f3f5f8);color:inherit;border-radius:10px;padding:8px 10px;font:inherit;cursor:pointer}button.on{background:var(--tg-theme-button-color,#2aabee);color:var(--tg-theme-button-text-color,#fff);border-color:transparent}.go{width:100%;margin-top:10px;background:var(--tg-theme-button-color,#2aabee);color:var(--tg-theme-button-text-color,#fff);border:0;font-weight:600;padding:10px}.go:disabled{opacity:.4}.m{margin-top:8px;color:var(--tg-theme-accent-text-color,#1a7f4b);font-size:.92em}.st{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:6px 0;padding:8px 10px;border:1px solid var(--tg-theme-section-separator-color,#d8dee8);border-radius:12px}.st b{font-weight:600}.st .v{min-width:4.5em;text-align:center;font-variant-numeric:tabular-nums}.pm{display:flex;gap:6px}.pm button{width:36px;padding:6px 0;font-weight:700}.tot{margin-top:10px;padding:10px;border-radius:12px;background:var(--tg-theme-secondary-bg-color,#f3f5f8)}.tot strong{display:block;font-size:1.25em}q-n,p.q{margin:0 0 8px}</style>
+<h3>Запись в салон</h3>
+<div class=h>Услуга</div><div class=r id=s></div>
+<div class=h>День</div><div class=r id=d></div>
+<div class=h>Время</div><div class=r id=t></div>
+<button class=go id=g disabled>Записать</button>
+<p class=m id=m hidden></p>
+<script>
+function tw(){var T=window.TelegramWidget;if(T)return T;return window.TelegramWidget={chatData:null,publicData:null,request:function(d){return Promise.resolve({result:"ok"})},onEvent:function(){},ready:function(){},HapticFeedback:{selectionChanged:function(){},notificationOccurred:function(){},impactOccurred:function(){}}}}
+(function(){
+var W=tw(),S=["Стрижка","Окрашивание","Маникюр"],T=["10:00","12:00","14:00","16:00","18:00"],st={s:-1,d:-1,t:-1};
+try{if(W.chatData)Object.assign(st,JSON.parse(W.chatData))}catch(e){}
+function days(){var a=[],n=new Date(),i,x;for(i=0;i<5;i++){x=new Date(n);x.setDate(n.getDate()+i);a.push(("0"+x.getDate()).slice(-2)+"."+("0"+(x.getMonth()+1)).slice(-2))}return a}
+var D=days();
+function row(id,items,key){var el=document.getElementById(id);el.textContent="";items.forEach(function(x,i){var b=document.createElement("button");b.type="button";b.textContent=x;if(st[key]===i)b.className="on";b.onclick=function(){st[key]=i;if(W.HapticFeedback&&W.HapticFeedback.selectionChanged)W.HapticFeedback.selectionChanged();draw()};el.appendChild(b)})}
+function draw(){row("s",S,"s");row("d",D,"d");row("t",T,"t");document.getElementById("g").disabled=!(st.s>=0&&st.d>=0&&st.t>=0)}
+function done(){var m=document.getElementById("m");m.hidden=false;m.textContent="Запись: "+S[st.s]+", "+D[st.d]+", "+T[st.t]+". Телефон отправите кнопкой в чате.";document.getElementById("g").disabled=true}
+document.getElementById("g").onclick=function(){var data="b:"+st.s+","+st.d+","+st.t+","+D[st.d];if(W.request){W.request(data).then(done,function(){var m=document.getElementById("m");m.hidden=false;m.textContent="Не отправилось, нажмите ещё раз."})}else done()};
+if(W.onEvent)W.onEvent("chatDataChanged",function(){try{Object.assign(st,JSON.parse(W.chatData))}catch(e){}draw()});
+draw();if(W.ready)W.ready();
+})();
+</script>

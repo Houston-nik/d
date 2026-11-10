@@ -1,0 +1,27 @@
+<!DOCTYPE html><html lang=ru><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Калькулятор</title><style>*{box-sizing:border-box;margin:0}body{padding:10px 12px 24px;font-family:system-ui,sans-serif;color:var(--tg-theme-text-color,#1a1d24);background:var(--tg-theme-bg-color,transparent);font-size:var(--tg-text-font-size,15px);line-height:1.35}h3{font-size:1.06em;margin:0 0 8px}.h{font-size:.78em;color:var(--tg-theme-hint-color,#6b7280);font-weight:600;margin:8px 0 4px}.r{display:flex;flex-wrap:wrap;gap:6px}button{border:1px solid var(--tg-theme-section-separator-color,#d8dee8);background:var(--tg-theme-secondary-bg-color,#f3f5f8);color:inherit;border-radius:10px;padding:8px 10px;font:inherit;cursor:pointer}button.on{background:var(--tg-theme-button-color,#2aabee);color:var(--tg-theme-button-text-color,#fff);border-color:transparent}.go{width:100%;margin-top:10px;background:var(--tg-theme-button-color,#2aabee);color:var(--tg-theme-button-text-color,#fff);border:0;font-weight:600;padding:10px}.go:disabled{opacity:.4}.m{margin-top:8px;color:var(--tg-theme-accent-text-color,#1a7f4b);font-size:.92em}.st{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:6px 0;padding:8px 10px;border:1px solid var(--tg-theme-section-separator-color,#d8dee8);border-radius:12px}.st b{font-weight:600}.st .v{min-width:4.5em;text-align:center;font-variant-numeric:tabular-nums}.pm{display:flex;gap:6px}.pm button{width:36px;padding:6px 0;font-weight:700}.tot{margin-top:10px;padding:10px;border-radius:12px;background:var(--tg-theme-secondary-bg-color,#f3f5f8)}.tot strong{display:block;font-size:1.25em}q-n,p.q{margin:0 0 8px}</style>
+<h3>Натяжной потолок</h3>
+<p class=h>Цифры для примера, матовое полотно</p>
+<div id=rows></div>
+<div class=tot><span class=h>Итого</span><strong id=sum></strong><span class=h id=br></span></div>
+<button class=go id=g>Отправить расчёт</button>
+<p class=m id=m hidden></p>
+<script>
+function tw(){var T=window.TelegramWidget;if(T)return T;return window.TelegramWidget={chatData:null,publicData:null,request:function(d){return Promise.resolve({result:"ok"})},onEvent:function(){},ready:function(){},HapticFeedback:{selectionChanged:function(){},notificationOccurred:function(){},impactOccurred:function(){}}}}
+(function(){
+var W=tw(),st={a:18,c:4,l:2},R=990,C=250,L=450;
+try{if(W.chatData)Object.assign(st,JSON.parse(W.chatData))}catch(e){}
+function money(n){return (""+n).replace(/\B(?=(\d{3})+(?!\d))/g," ")+" ₽"}
+function tot(){return st.a*R+Math.max(0,st.c-4)*C+st.l*L}
+function step(key,min,max,delta){st[key]=Math.min(max,Math.max(min,st[key]+delta));if(W.HapticFeedback&&W.HapticFeedback.selectionChanged)W.HapticFeedback.selectionChanged();draw()}
+function row(label,key,unit,min,max){var d=document.createElement("div");d.className="st";d.innerHTML="<b>"+label+"</b><div class=pm><button type=button class=mns>-</button><span class=v></span><button type=button class=pls>+</button></div>";d.querySelector(".mns").onclick=function(){step(key,min,max,-1)};d.querySelector(".pls").onclick=function(){step(key,min,max,1)};d.querySelector(".v").id="v"+key;return d}
+var box=document.getElementById("rows");
+box.appendChild(row("Площадь","a","м²",8,80));
+box.appendChild(row("Углы","c","",4,16));
+box.appendChild(row("Светильники","l","",0,20));
+function draw(){document.getElementById("va").textContent=st.a+" м²";document.getElementById("vc").textContent=""+st.c;document.getElementById("vl").textContent=""+st.l;document.getElementById("sum").textContent=money(tot());document.getElementById("br").textContent=st.a+" м² × "+money(R)+" + углы свыше 4 × "+money(C)+" + свет × "+money(L)}
+function done(){var m=document.getElementById("m");m.hidden=false;m.textContent="Расчёт "+money(tot())+" отправлен."}
+document.getElementById("g").onclick=function(){var data="c:"+st.a+","+st.c+","+st.l;if(W.request){W.request(data).then(done,function(){var m=document.getElementById("m");m.hidden=false;m.textContent="Не отправилось, нажмите ещё раз."})}else done()};
+if(W.onEvent)W.onEvent("chatDataChanged",function(){try{Object.assign(st,JSON.parse(W.chatData))}catch(e){}draw()});
+draw();if(W.ready)W.ready();
+})();
+</script>

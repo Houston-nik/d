@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<div class="proto-note">Демо-прототип двух концепций (A — воздух и крупный кадр, B — полный экран и динамичная сетка). <span data-concept-live>Сейчас концепция A</span>.</div>
+<div class="proto-note">Демо-прототип двух концепций (A — воздух и крупный кадр, B — яркий плакат и динамика). <span data-concept-live>Сейчас концепция A</span>.</div>
 <header class="top">
   <div class="wrap nav">
     <a class="logo" href="index.html"><img src="img/logo.svg" alt="Комета, парк игровых реальностей"></a>
@@ -29,9 +29,14 @@
 
 <section class="wrap hero">
   <div class="hero-copy">
-    <p class="eyebrow">Парк игровых реальностей</p>
-    <h1>Четыре мира. Одна Комета.</h1>
-    <p class="lead">Светлый парк для семей, компаний друзей и взрослых: голографический картинг, командная арена, VR и зона PlayStation 5.</p>
+    <p class="eyebrow" data-only="a">Парк игровых реальностей</p>
+    <p class="eyebrow" data-only="b">Четыре мира · одна смена</p>
+    <h1>
+      <span data-only="a">Четыре мира. Одна Комета.</span>
+      <span class="headline-b" data-only="b"><span class="fill">Играй</span> <span class="outline">по‑настоящему</span></span>
+    </h1>
+    <p class="lead" data-only="a">Светлый парк для семей, компаний друзей и взрослых: голографический картинг, командная арена, VR и зона PlayStation 5.</p>
+    <p class="lead" data-only="b">Голографический картинг, командная арена, VR и PlayStation 5. Яркий парк, где компания не сидит по углам.</p>
     <div class="hero-actions">
       <a class="btn" href="booking.html">Забронировать визит</a>
       <a class="btn ghost" href="attractions.html">Смотреть аттракционы</a>
@@ -43,8 +48,11 @@
     </ul>
   </div>
   <figure class="hero-visual">
-    <img src="img/hero-park.webp" alt="Семья в светлом зале парка рядом с голографическим картингом и VR">
-    <figcaption>Семьи и друзья в зале парка</figcaption>
+    <img data-only="a" src="img/hero-park.webp" alt="Семья в светлом зале парка рядом с голографическим картингом и VR">
+    <img data-only="b" src="img/hero-b-karts.webp" alt="Подростки на голографическом картинге, съёмка с низкого ракурса в движении">
+    <figcaption data-only="a">Семьи и друзья в зале парка</figcaption>
+    <figcaption data-only="b">Голографический картинг</figcaption>
+    <img class="hero-stamp" data-only="b" src="img/hero-b-arena.webp" alt="Команда на арене смешанной реальности">
   </figure>
 </section>
 <div class="marquee" aria-hidden="true"><div class="marquee-track"><span>Голографический картинг<i>/</i></span><span>MRCS-арена<i>/</i></span><span>VR-аттракционы<i>/</i></span><span>PlayStation 5<i>/</i></span><span>Дни рождения<i>/</i></span><span>Корпоративы<i>/</i></span><span>Голографический картинг<i>/</i></span><span>MRCS-арена<i>/</i></span><span>VR-аттракционы<i>/</i></span><span>PlayStation 5<i>/</i></span><span>Дни рождения<i>/</i></span><span>Корпоративы<i>/</i></span><span>Голографический картинг<i>/</i></span><span>MRCS-арена<i>/</i></span><span>VR-аттракционы<i>/</i></span><span>PlayStation 5<i>/</i></span><span>Дни рождения<i>/</i></span><span>Корпоративы<i>/</i></span><span>Голографический картинг<i>/</i></span><span>MRCS-арена<i>/</i></span><span>VR-аттракционы<i>/</i></span><span>PlayStation 5<i>/</i></span><span>Дни рождения<i>/</i></span><span>Корпоративы<i>/</i></span></div></div>
@@ -57,18 +65,22 @@
   </div>
   <div class="bento">
     <a class="shot" href="attraction.html#karting">
+      <span class="shot-num" aria-hidden="true">01</span>
       <img src="img/attr-karting.webp" alt="Пилот у голографического карта на светлой трассе">
       <div class="cap"><h3>Голографический картинг</h3><p>Трасса со световыми проекциями. Короткий старт и адреналин без ночного клуба.</p><span class="price">от 1 800 ₽</span></div>
     </a>
     <a class="shot" href="attraction.html#mrcs">
+      <span class="shot-num" aria-hidden="true">02</span>
       <img src="img/attr-mrcs.webp" alt="Команда в смешанной реальности на круглой арене">
       <div class="cap"><h3>MRCS-арена</h3><p>Командная игра для друзей и отделов.</p><span class="price">от 4 000 ₽</span></div>
     </a>
     <a class="shot" href="attraction.html#vr">
+      <span class="shot-num" aria-hidden="true">03</span>
       <img src="img/attr-vr.webp" alt="Двое друзей в VR в светлом зале с окнами">
       <div class="cap"><h3>VR-аттракционы</h3><p>Сессии под возраст, в зале с дневным светом.</p><span class="price">от 900 ₽</span></div>
     </a>
     <a class="shot" href="attraction.html#ps5">
+      <span class="shot-num" aria-hidden="true">04</span>
       <img src="img/attr-ps5.webp" alt="Лаунж с экранами и удобными диванами">
       <div class="cap"><h3>PlayStation 5</h3><p>Своя зона, свои диваны, своя компания.</p><span class="price">от 600 ₽</span></div>
     </a>

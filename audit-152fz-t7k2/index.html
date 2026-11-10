@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Демо-отчёт аудита вымышленного сайта studio-primer.ru на соответствие 152-ФЗ: чек-лист, структура Политики и Согласия, рабочий cookie-баннер и форма.">
+<title>Аудит сайта по 152-ФЗ — studio-primer.ru (демо)</title>
+<style>
+:root{
+  --bg:#f3f4f8;--card:#fff;--ink:#1b1f2a;--text:#2c3140;--muted:#5c6474;
+  --line:#e1e4eb;--accent:#2f3e8c;--accent2:#243272;--soft:#e8eaf4;
+  --ok:#1a7a4c;--okbg:#e8f6ee;--bad:#c43535;--badbg:#fdecec;
+  --warn:#b07a12;--warnbg:#fdf3e0;--wrap:1080px;--shadow:0 14px 36px rgba(27,31,42,.07);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;padding:0;overflow-x:hidden;max-width:100%}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--text);background:var(--bg);line-height:1.55}
+img,svg{max-width:100%;display:block}
+a{color:var(--accent)}
+button,input,textarea{font:inherit}
+.wrap{width:min(var(--wrap),calc(100% - 32px));margin:0 auto}
+.top{position:sticky;top:0;z-index:40;background:rgba(243,244,248,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:14px;padding:12px 0;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;color:var(--ink);font-weight:750;letter-spacing:-.02em;text-decoration:none;flex:0 0 auto}
+.logo svg{width:28px;height:28px;color:var(--accent);flex:0 0 28px}
+.desk{display:flex;flex-wrap:wrap;gap:6px 14px;margin-left:auto;font-size:.92rem}
+.desk a{color:var(--text);text-decoration:none;padding:6px 0}
+.desk a:hover{color:var(--accent)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:10px;border:2px solid var(--accent);background:var(--accent);color:#fff;font-weight:650;font-size:16px;cursor:pointer;text-decoration:none;transition:.15s}
+.btn:hover{background:var(--accent2);border-color:var(--accent2);color:#fff}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.hero{padding:52px 0 28px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;margin:0 0 14px;padding:6px 10px;border-radius:999px;background:var(--soft);color:var(--accent);font-size:.82rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.eyebrow svg{width:16px;height:16px}
+.hero h1{margin:0 0 14px;font-size:clamp(1.7rem,4.2vw,2.7rem);line-height:1.12;letter-spacing:-.03em;color:var(--ink);font-weight:750;max-width:18ch}
+.lead{margin:0 0 22px;font-size:1.08rem;color:var(--muted);max-width:52ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px}
+.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:28px 0 8px}
+.sc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
+.sc b{display:block;font-size:1.7rem;letter-spacing:-.03em;color:var(--ink);line-height:1.1}
+.sc span{color:var(--muted);font-size:.88rem}
+.sc.bad b{color:var(--bad)}
+.sc.warn b{color:var(--warn)}
+.sc.ok b{color:var(--ok)}
+.note-legal{margin:16px 0 0;color:var(--muted);font-size:.88rem;max-width:70ch}
+h2{margin:0 0 8px;font-size:clamp(1.35rem,2.4vw,1.7rem);color:var(--ink);letter-spacing:-.02em}
+.sub{margin:0 0 20px;color:var(--muted)}
+section{padding:36px 0}
+.checks{display:grid;gap:10px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.item summary{list-style:none;cursor:pointer;display:flex;align-items:flex-start;gap:12px;padding:16px 18px;font-weight:650;color:var(--ink)}
+.item summary::-webkit-details-marker{display:none}
+.item .ico{width:36px;height:36px;border-radius:10px;background:var(--soft);color:var(--accent);display:flex;align-items:center;justify-content:center;flex:0 0 36px}
+.item .ico svg{width:22px;height:22px}
+.item .meta{flex:1;min-width:0}
+.item .meta small{display:block;font-weight:500;color:var(--muted);margin-top:2px}
+.badge{display:inline-flex;align-items:center;margin-left:auto;flex:0 0 auto;padding:4px 10px;border-radius:999px;font-size:.78rem;font-weight:750;letter-spacing:.02em;text-transform:uppercase;white-space:nowrap}
+.badge.ok{background:var(--okbg);color:var(--ok)}
+.badge.bad{background:var(--badbg);color:var(--bad)}
+.badge.warn{background:var(--warnbg);color:var(--warn)}
+.item .body{padding:0 18px 18px 66px;display:grid;gap:10px}
+.item .body p{margin:0;font-size:.95rem}
+.item .body b{color:var(--ink)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:8px 4px 8px}
+.card>h3{margin:12px 18px 8px;color:var(--ink);font-size:1.1rem}
+.card details{border-top:1px solid var(--line)}
+.card summary{list-style:none;cursor:pointer;padding:12px 18px;font-weight:650;color:var(--ink)}
+.card summary::-webkit-details-marker{display:none}
+.card details p{margin:0 18px 14px;color:var(--muted);font-size:.95rem}
+.form-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:start}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow)}
+.form label{display:block;font-weight:600;margin:0 0 6px;color:var(--ink)}
+.form input[type=text],.form input[type=email],.form textarea{width:100%;max-width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;margin:0 0 12px}
+.consent{display:flex;gap:10px;align-items:flex-start;margin:4px 0 16px;font-size:.92rem}
+.consent input{margin-top:4px;flex:0 0 auto}
+.okmsg{display:none;margin:12px 0 0;padding:12px 14px;border-radius:10px;background:var(--okbg);color:var(--ok);font-weight:650}
+.okmsg.show{display:block}
+footer{padding:28px 0 110px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+.ft{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;align-items:flex-start}
+.demo-note{margin-top:14px;color:var(--muted)}
+.cookie{position:fixed;left:0;right:0;bottom:0;z-index:60;background:#fff;border-top:1px solid var(--line);box-shadow:0 -10px 30px rgba(27,31,42,.08);padding:14px 0;max-width:100%}
+.cookie.hidden{display:none}
+.cookie .inner{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.cookie p{margin:0;flex:1;min-width:min(100%,260px);font-size:.92rem}
+.cookie .actions{display:flex;flex-wrap:wrap;gap:8px}
+.cookie .btn{padding:10px 14px;font-size:14px}
+.prefs{display:none;width:100%;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+.prefs.open{display:block}
+.prefs label{display:flex;gap:8px;align-items:center;margin:6px 0;font-size:.92rem}
+@media (max-width:860px){
+  .summary,.cols,.form-grid{grid-template-columns:1fr 1fr}
+  .form-grid{grid-template-columns:1fr}
+  .item .body{padding-left:18px}
+  .hero{padding-top:32px}
+}
+@media (max-width:560px){
+  .summary,.cols{grid-template-columns:1fr}
+  .desk{width:100%;margin-left:0}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap nav">
+    <a class="logo" href="#top">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" width="28" height="28"><path d="M208,40V120c0,70.68-51.86,111.54-76.53,124.16a16.19,16.19,0,0,1-14.94,0C91.86,231.54,40,190.68,40,120V40Z" opacity="0.2"/><path d="M208,32H48A16,16,0,0,0,32,48v72c0,87.65,75.68,116.56,90.51,121.38a15.68,15.68,0,0,0,10.98,0C148.32,236.56,224,207.65,224,120V48A16,16,0,0,0,208,32Zm0,88c0,74.67-64.15,99.72-80,104.88C112.15,219.72,48,194.67,48,120V48H208ZM82.34,141.66a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32l-56,56a8,8,0,0,1-11.32,0Z"/></svg>
+      Аудит 152-ФЗ
+    </a>
+    <nav class="desk" aria-label="Разделы">
+      <a href="#checklist">Чек-лист</a>
+      <a href="#docs">Политика и согласие</a>
+      <a href="#live">Форма и cookie</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <p class="eyebrow">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" width="16" height="16"><path d="M224,128a96,96,0,1,1-96-96A96,96,0,0,1,224,128Z" opacity="0.2"/><path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"/></svg>
+        Пример отчёта
+      </p>
+      <h1>Аудит сайта по 152-ФЗ</h1>
+      <p class="lead">Проверка вымышленного сайта studio-primer.ru: чек-лист со статусами, черновик Политики и отдельного Согласия, рабочие примеры cookie-баннера и формы. Это демонстрация формата отчёта, не юридическое заключение.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#checklist">Смотреть чек-лист</a>
+        <a class="btn ghost" href="#live">Форма и баннер</a>
+      </div>
+      <div class="summary" aria-label="Сводка аудита">
+        <div class="sc"><b>6</b><span>пунктов чек-листа</span></div>
+        <div class="sc bad"><b>4</b><span>нарушения</span></div>
+        <div class="sc warn"><b>2</b><span>рекомендации</span></div>
+        <div class="sc ok"><b>2 / 6</b><span>условная оценка</span></div>
+      </div>
+      <p class="note-legal">Объект проверки задан для демо. Реальных персональных данных и брендов заказчика на странице нет. Размеры возможных санкций намеренно не указываем: их оценивают по конкретной ситуации.</p>
+    </div>
+  </div>
+
+  <section id="checklist">
+    <div class="wrap">
+      <h2>Чек-лист</h2>
+      <p class="sub">Для каждого пункта: что нашли, какой риск и что исправить. Статусы: нарушение, рекомендация, ок.</p>
+      <div class="checks">
+
+        <details class="item" open>
+          <summary>
+            <span class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" width="22" height="22"><path d="M224,128a96,96,0,1,1-96-96A96,96,0,0,1,224,128Z" opacity="0.2"/><path d="M164.47,163.51a12,12,0,1,1-17,0A12,12,0,0,1,164.47,163.51ZM140,76a12,12,0,1,0,12,12A12,12,0,0,0,140,76ZM76,140a12,12,0,1,0,12,12A12,12,0,0,0,76,140ZM225.53,102.15a8,8,0,0,0-7.31-14.22A88.06,88.06,0,0,1,168,40.78a8,8,0,0,0-1.53-15.93,104.18,104.18,0,0,0-54.2,7.07,8,8,0,0,0,6.61,14.56A88,88,0,1,1,216,128a8,8,0,0,0,16,0A103.33,103.33,0,0,0,225.53,102.15ZM180,100a12,12,0,1,0-12-12A12,12,0,0,0,180,100Z"/></svg></span>
+            <span class="meta">Cookie-баннер<small>Согласие до установки необязательных cookie</small></span>
+            <span class="badge bad">Нарушение</span>
+          </summary>
+          <div class="body">
+            <p><b>Что нашли.</b> На главной и внутренних страницах сразу загружаются счётчики аналитики. Отдельного баннера с выбором «принять / только необходимые / настроить» нет, отказ не предусмотрен.</p>
+            <p><b>Риск.</b> Обработка и передача данных начинается до согласия. Сложно подтвердить законность необязательных cookie и метрик.</p>
+            <p><b>Как исправить.</b> Показать баннер до записи необязательных cookie, запомнить выбор, по умолчанию включать только технически необходимые, дать отказ и настройки. Пример такого баннера — внизу этой страницы.</p>
+          </div>
+        </details>
+
+        <details class="item">
+          <summary>
+            <span class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" width="22" height="22"><path d="M224,56V200a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V56Z" opacity="0.2"/><path d="M224,48H32A16,16,0,0,0,16,64V192a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V64A16,16,0,0,0,224,48Zm0,144H32V64H224V192ZM60,88a12,12,0,1,1,12,12A12,12,0,0,1,60,88Zm0,40a12,12,0,1,1,12,12A12,12,0,0,1,60,128Zm0,40a12,12,0,1,1,12,12A12,12,0,0,1,60,168Zm136-80H104a8,8,0,0,0,0,16h92a8,8,0,0,0,0-16Zm0,40H104a8,8,0,0,0,0,16h92a8,8,0,0,0,0-16Zm0,40H104a8,8,0,0,0,0,16h92a8,8,0,0,0,0-16Z"/></svg></span>
+            <span class="meta">Отдельная галочка согласия в формах<small>Не предзаполнена, отдельно от оферты</small></span>
+            <span class="badge bad">Нарушение</span>
+          </summary>
+          <div class="body">
+            <p><b>Что нашли.</b> Форма заявки отправляется без отдельного согласия на обработку ПДн. Нет ссылки на текст Согласия, галочка отсутствует (в похожих шаблонах её иногда ставят заранее отмеченной — это тоже недопустимо).</p>
+            <p><b>Риск.</b> Нет фиксации добровольного, конкретного и информированного согласия по ст. 9 152-ФЗ.</p>
+            <p><b>Как исправить.</b> Отдельная неотмеченная галочка, ссылка на текст Согласия, кнопка неактивна без отметки, хранить факт и дату согласия. Живой пример — в блоке «Форма и cookie».</p>
+          </div>
+        </details>
+
+        <details class="item">
+          <summary>
+            <span class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" width="22" height="22"><path d="M208,32V224H72a24,24,0,0,1-24-24V56A24,24,0,0,1,72,32Z" opacity="0.2"/><path d="M208,24H72A32,32,0,0,0,40,56V200a32,32,0,0,0,32,32H208a8,8,0,0,0,8-8V32A8,8,0,0,0,208,24ZM56,56A16,16,0,0,1,72,40H200V88H72A16,16,0,0,1,56,72Zm16,160a16,16,0,0,1,0-32H200v32ZM200,168H72a32.06,32.06,0,0,1-16-4.29V99.71A32.06,32.06,0,0,1,72,96H200Z"/></svg></span>
+            <span class="meta">Политика доступна с каждой страницы<small>Понятная ссылка в подвале и рядом с формами</small></span>
+            <span class="badge warn">Рекомендация</span>
+          </summary>
+          <div class="body">
+            <p><b>Что нашли.</b> Страница Политики есть, но ссылка стоит только в подвале главной. На странице блога и в форме заявки ссылки нет, с мобильного меню документ не открыть.</p>
+            <p><b>Риск.</b> Пользователь не всегда может ознакомиться с правилами обработки до отправки данных.</p>
+            <p><b>Как исправить.</b> Стабильная ссылка в подвале всех шаблонов, в формах и в cookie-баннере. Проверить посадочные и служебные страницы.</p>
+          </div>
+        </details>
+
+        <details class="item">
+          <summary>
+            <span class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" width="22" height="22"><path d="M224,80l-96,56L32,80l96-56Z" opacity="0.2"/><path d="M230.91,172a8,8,0,1,1-13.82,8A88.09,88.09,0,0,0,136,216.75V200a8,8,0,0,0-16,0v16.75A88.09,88.09,0,0,0,38.91,180a8,8,0,1,1-13.82-8A104.12,104.12,0,0,1,120,111.22V24a8,8,0,0,1,16,0v87.22A104.12,104.12,0,0,1,230.91,172ZM128,64.5,209.19,80,128,127.5,46.81,80ZM128,144c.67,0,1.33,0,2,0l79.82-46.54A87.87,87.87,0,0,1,216,168a8,8,0,0,0,16,0,103.9,103.9,0,0,0-7.35-38.29L136,176.75V200a8,8,0,0,1-16,0V176.75L31.35,129.71A103.9,103.9,0,0,0,24,168a8,8,0,0,0,16,0,87.87,87.87,0,0,1,6.19-70.5L126,144C126.67,144,127.33,144,128,144Z"/></svg></span>
+            <span class="meta">Уведомление Роскомнадзора<small>Об обработке персональных данных</small></span>
+            <span class="badge bad">Нарушение</span>
+          </summary>
+          <div class="body">
+            <p><b>Что нашли.</b> В открытых сведениях и в тексте Политики нет подтверждения, что оператор направил уведомление об обработке. По вымышленным реквизитам studio-primer.ru уведомление не прослеживается.</p>
+            <p><b>Риск.</b> Если исключение из обязанности уведомить не подтверждено, оператор работает без обязательной процедуры учёта.</p>
+            <p><b>Как исправить.</b> Проверить, есть ли основание не уведомлять. Если нет — подготовить и направить уведомление, отразить статус в документации. Факт уведомления не публикуют «для красоты», но в аудите его фиксируют.</p>
+          </div>
+        </details>
+
+        <details class="item">
+          <summary>
+            <span class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" width="22" height="22"><path d="M80,80V208H40V80Z" opacity="0.2"/><path d="M80,40V208a8,8,0,0,1-8,8H32a8,8,0,0,1-8-8V40A16,16,0,0,1,40,24H64A16,16,0,0,1,80,40ZM40,40V200H64V40ZM224,88V208a8,8,0,0,1-8,8H168a8,8,0,0,1-8-8V88a16,16,0,0,1,16-16h32A16,16,0,0,1,224,88Zm-48,0V200h32V88ZM152,48V208a8,8,0,0,1-8,8H104a8,8,0,0,1-8-8V48a16,16,0,0,1,16-16h24A16,16,0,0,1,152,48ZM112,48V200h24V48Z"/></svg></span>
+            <span class="meta">Локализация баз в РФ<small>Ч. 5 ст. 18 152-ФЗ, граждане России</small></span>
+            <span class="badge warn">Рекомендация</span>
+          </summary>
+          <div class="body">
+            <p><b>Что нашли.</b> Сайт отдаётся через зарубежную сеть доставки контента. В Политике не сказано, где хранится первичная база ПДн граждан РФ и как соблюдается требование о записи и хранении в России.</p>
+            <p><b>Риск.</b> Без понятной схемы размещения первичных баз сложно подтвердить соблюдение ч. 5 ст. 18.</p>
+            <p><b>Как исправить.</b> Зафиксировать место первичной базы на территории РФ, проверить формы, CRM и резервные копии, описать это в Политике без лишней технической детализации.</p>
+          </div>
+        </details>
+
+        <details class="item">
+          <summary>
+            <span class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" width="22" height="22"><path d="M128,32A96,96,0,1,0,224,128,96,96,0,0,0,128,32Z" opacity="0.2"/><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm88,104c0,2.22-.09,4.42-.26,6.6L187,113.83a24,24,0,0,0-21.54-5.07l-28.5,4.76L116.79,92.61a24,24,0,0,0-31.62-4.81l-8.2,5.46A88.09,88.09,0,0,1,216,128ZM40,128a87.44,87.44,0,0,1,10.54-41.64l8.2-5.46a8,8,0,0,1,10.54,1.6l20.17,26.35-3.26,22.74a8,8,0,0,0,6.35,8.91l38.16,6.37,14.13,18.83a8,8,0,0,0,8.59,3l21.47-5.37a8,8,0,0,1,7.93,2.15l19.81,20.77A87.93,87.93,0,0,1,40,128Z"/></svg></span>
+            <span class="meta">Сторонние сервисы и передача данных<small>Аналитика и трансграничная передача</small></span>
+            <span class="badge bad">Нарушение</span>
+          </summary>
+          <div class="body">
+            <p><b>Что нашли.</b> Подключены иностранные сервисы аналитики и рекламный пиксель. В Политике они не названы, условие и основание передачи не описаны, отдельного согласия на трансграничную передачу нет.</p>
+            <p><b>Риск.</b> Передача за рубеж и обработка подрядчиками без раскрытия и правового основания.</p>
+            <p><b>Как исправить.</b> Составить реестр сервисов, описать цели и географию, отключить загрузку до согласия, при необходимости оформить трансграничную передачу и поручение обработки.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="docs">
+    <div class="wrap">
+      <h2>Политика и отдельное Согласие</h2>
+      <p class="sub">Черновая структура документов для studio-primer.ru. Тексты короткие, для показа состава разделов, не для копирования «как есть».</p>
+      <div class="cols">
+        <div class="card">
+          <h3>Политика обработки ПДн</h3>
+          <details open>
+            <summary>1. Оператор</summary>
+            <p>ООО «Студия Праймер» (вымышленное лицо). Контакт для обращений по ПДн: privacy@studio-primer.ru. Адрес в демо не привязан к реальной организации.</p>
+          </details>
+          <details>
+            <summary>2. Цели обработки</summary>
+            <p>Ответ на заявку с сайта, ведение переписки, исполнение договора, учёт обращений, обеспечение работы сайта (необходимые cookie).</p>
+          </details>
+          <details>
+            <summary>3. Категории данных</summary>
+            <p>Имя, электронная почта, содержание сообщения, технические данные сессии и файлы cookie — в объёме, который человек сам направил или который нужен для работы сайта.</p>
+          </details>
+          <details>
+            <summary>4. Правовые основания</summary>
+            <p>Согласие субъекта, договор (если заключается), законные обязанности оператора. Основание указывают отдельно для каждой цели.</p>
+          </details>
+          <details>
+            <summary>5. Сроки хранения и отзыв</summary>
+            <p>Срок хранения заявки фиксируют конкретно (например, до года после закрытия обращения, если иное не требует закон). Согласие можно отозвать письмом на privacy@studio-primer.ru.</p>
+          </details>
+          <details>
+            <summary>6. Передача и локализация</summary>
+            <p>Перечень подрядчиков, факт трансграничной передачи (если есть), сведения о размещении первичной базы ПДн граждан РФ на территории России (ч. 5 ст. 18).</p>
+          </details>
+        </div>
+        <div class="card">
+          <h3>Отдельное Согласие (ст. 9)</h3>
+          <details open>
+            <summary>Кто оператор</summary>
+            <p>Я, субъект ПДн, даю согласие ООО «Студия Праймер» (вымышленный оператор сайта studio-primer.ru) на обработку моих персональных данных.</p>
+          </details>
+          <details>
+            <summary>Цели</summary>
+            <p>Связаться со мной по заявке, уточнить запрос и направить ответ.</p>
+          </details>
+          <details>
+            <summary>Перечень данных</summary>
+            <p>Имя, адрес электронной почты, текст сообщения.</p>
+          </details>
+          <details>
+            <summary>Действия с данными</summary>
+            <p>Сбор, запись, систематизация, хранение, уточнение, использование, удаление. Без передачи третьим лицам, кроме случаев, прямо указанных в Политике и законе.</p>
+          </details>
+          <details>
+            <summary>Срок согласия</summary>
+            <p>До достижения целей обработки либо до отзыва, но не дольше срока, который оператор укажет в итоговой редакции.</p>
+          </details>
+          <details>
+            <summary>Как отозвать</summary>
+            <p>Направить заявление на privacy@studio-primer.ru. После отзыва обработка прекращается, если иное не предусмотрено законом.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="live">
+    <div class="wrap">
+      <h2>Рабочие примеры на этой странице</h2>
+      <p class="sub">Баннер внизу экрана и форма с отдельной галочкой — так может выглядеть исправление двух нарушений из чек-листа.</p>
+      <div class="form-grid">
+        <form class="panel form" id="demo-form" action="#" method="post" novalidate>
+          <h3 style="margin:0 0 14px;color:var(--ink);font-size:1.15rem">Форма заявки</h3>
+          <label for="name">Имя</label>
+          <input id="name" name="name" type="text" autocomplete="name" required>
+          <label for="email">Электронная почта</label>
+          <input id="email" name="email" type="email" autocomplete="email" required>
+          <label for="msg">Сообщение</label>
+          <textarea id="msg" name="message" rows="3" required></textarea>
+          <label class="consent">
+            <input id="agree" name="agree" type="checkbox" required>
+            <span>Даю отдельное <a href="#docs">согласие</a> на обработку персональных данных. С <a href="#docs">Политикой</a> ознакомлен. Галочка не отмечена заранее.</span>
+          </label>
+          <button class="btn" id="send" type="submit" disabled>Отправить заявку</button>
+          <div class="okmsg" data-form-ok hidden>Это демо, данные не отправляются.</div>
+        </form>
+        <div class="panel">
+          <h3 style="margin:0 0 10px;color:var(--ink);font-size:1.15rem">Что проверить в демо</h3>
+          <p class="sub" style="margin-bottom:10px">Баннер запоминает выбор в localStorage, форма не уходит на сервер.</p>
+          <p style="margin:0 0 8px">Принять все / только необходимые / настроить категории.</p>
+          <p style="margin:0 0 8px">Кнопка заявки становится активной только после отдельной галочки.</p>
+          <p style="margin:0">После отправки появляется сообщение, что это демо и данные не отправляются.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="ft">
+      <div>Демо-отчёт для отклика. Объект проверки — вымышленный сайт studio-primer.ru, не связан с реальными организациями.</div>
+    </div>
+    <div class="demo-note">Демо-версия. Документы, статусы и формулировки даны для примера и не являются юридическим заключением.</div>
+  </div>
+</footer>
+
+<div class="cookie" id="cookie" role="region" aria-label="Настройки cookie">
+  <div class="wrap">
+    <div class="inner">
+      <p>Мы используем необходимые cookie для работы страницы и необязательные — для аналитики, только после вашего выбора. Подробнее в <a href="#docs">Политике</a>.</p>
+      <div class="actions">
+        <button class="btn" type="button" id="c-all">Принять</button>
+        <button class="btn ghost" type="button" id="c-need">Только необходимые</button>
+        <button class="btn ghost" type="button" id="c-set">Настроить</button>
+      </div>
+      <div class="prefs" id="prefs">
+        <label><input type="checkbox" checked disabled> Необходимые (всегда включены)</label>
+        <label><input type="checkbox" id="c-an"> Аналитика</label>
+        <button class="btn" type="button" id="c-save">Сохранить</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var KEY = "primerConsent152";
+  var bar = document.getElementById("cookie");
+  var prefs = document.getElementById("prefs");
+  var msg = bar.querySelector("p");
+  function hide(){ bar.classList.add("hidden"); }
+  function save(val){
+    try{ localStorage.setItem(KEY, JSON.stringify(val)); }catch(e){}
+    var mode = val.analytics ? "приняты все cookie" : "включены только необходимые cookie";
+    msg.textContent = "Выбор сохранён: " + mode + ". При новой загрузке страницы баннер не показывается.";
+    prefs.classList.remove("open");
+  }
+  try{
+    if(localStorage.getItem(KEY)) hide();
+  }catch(e){}
+  document.getElementById("c-all").addEventListener("click", function(){ save({all:true, necessary:true, analytics:true}); });
+  document.getElementById("c-need").addEventListener("click", function(){ save({all:false, necessary:true, analytics:false}); });
+  document.getElementById("c-set").addEventListener("click", function(){ prefs.classList.toggle("open"); });
+  document.getElementById("c-save").addEventListener("click", function(){
+    var an = document.getElementById("c-an").checked;
+    save({all:an, necessary:true, analytics:an});
+  });
+
+  var form = document.getElementById("demo-form");
+  var agree = document.getElementById("agree");
+  var send = document.getElementById("send");
+  var ok = form.querySelector(".okmsg");
+  function sync(){ send.disabled = !agree.checked; }
+  agree.addEventListener("change", sync);
+  sync();
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    if(!agree.checked){ sync(); return; }
+    ok.hidden = false;
+    ok.classList.add("show");
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru" data-concept="a">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Контакты — Комета</title>
+<link rel="icon" href="img/mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="proto-note">Демо-прототип двух концепций (A — воздух и редакционный ритм, B — динамичная сетка). <span data-concept-live>Сейчас концепция A</span>.</div>
+<header class="top">
+  <div class="wrap nav">
+    <a class="logo" href="index.html"><img src="img/logo.svg" alt="Комета, парк игровых реальностей"></a>
+    <nav class="nav-links"><a href="index.html">Главная</a><a href="attractions.html">Аттракционы</a><a href="prices.html">Цены</a><a href="birthdays.html">Дни рождения</a><a href="events.html">Мероприятия</a><a href="certificates.html">Сертификаты</a><a href="contacts.html" aria-current="page">Контакты</a></nav>
+    <div class="nav-actions">
+      <div class="concept-switch" role="group" aria-label="Концепции дизайна">
+        <button type="button" data-concept-btn="a" data-theme-btn="a" aria-pressed="true">A</button>
+        <button type="button" data-concept-btn="b" data-theme-btn="b" aria-pressed="false">B</button>
+      </div>
+      <a class="btn sm" href="booking.html">Забронировать</a>
+      <button class="menu-btn" type="button" aria-label="Меню" data-menu><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="drawer modal"><a href="index.html">Главная</a><a href="attractions.html">Аттракционы</a><a href="prices.html">Цены</a><a href="birthdays.html">Дни рождения</a><a href="events.html">Мероприятия</a><a href="certificates.html">Сертификаты</a><a href="contacts.html" aria-current="page">Контакты</a><a href="booking.html">Забронировать</a></nav>
+</header>
+<main>
+
+<section class="wrap" style="padding-top:48px">
+  <div class="contact-grid">
+    <div>
+      <p class="eyebrow">Контакты</p>
+      <h2>Как нас найти</h2>
+      <p>Адрес: вымышленный город, улица Садовая, 14.</p>
+      <p>Запись через форму на сайте. Отдельный телефон в демо не указываем.</p>
+      <p>Часы работы, ориентир: ежедневно 10:00–22:00.</p>
+      <div class="map" style="margin-top:20px" aria-label="Карта, вымышленный адрес для демо">
+        <div class="map-pin" aria-hidden="true"></div>
+        <div class="map-cap">Карта: вымышленный адрес для демо</div>
+      </div>
+    </div>
+    <div>
+      <h3>Написать парку</h3>
+      <form class="form" data-demo-form>
+  <div><label for="n4">Имя</label><input id="n4" name="name" required autocomplete="name"></div>
+  <div><label for="p4">Телефон</label><input id="p4" name="phone" type="tel" required autocomplete="tel"></div>
+  <div><label for="c4">Комментарий</label><textarea id="c4" name="comment"></textarea></div>
+  <button class="btn" type="submit">Отправить заявку</button>
+  <div class="okmsg">Заявка принята в прототипе. На боевом сайте она уйдёт администратору парка.</div>
+</form>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer>
+  <div class="wrap ft">
+    <div>
+      <img src="img/logo.svg" alt="" style="height:32px;margin-bottom:8px">
+      <div>Парк игровых реальностей. Демо-прототип многостраничного сайта.</div>
+    </div>
+    <div>Это демо для портфолио, не сайт действующего парка.</div>
+  </div>
+</footer>
+<script src="js/app.js"></script>
+</body>
+</html>

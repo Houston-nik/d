@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 56" fill="none">
+  <circle cx="22" cy="28" r="18" fill="#1B6CA8"/>
+  <path d="M8 36c10-3 16-12 18-24 7 12 18 18 30 20-14 2-24 9-30 18-2-6-10-12-18-14z" fill="#E85D04"/>
+  <circle cx="22" cy="28" r="5" fill="#F7F4EE"/>
+  <text x="52" y="30" fill="#1A2332" font-family="Montserrat, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="1">КОМЕТА</text>
+  <text x="52" y="46" fill="#5C6570" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="600" letter-spacing="1.6">ПАРК ИГРОВЫХ РЕАЛЬНОСТЕЙ</text>
+</svg>

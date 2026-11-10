@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Пример SEO-аудита интернет-магазина чехлов на мебель на WordPress. Данные демонстрационные.">
+<title>Пример SEO-аудита интернет-магазина чехлов на мебель (WordPress)</title>
+<style>
+:root{
+  --bg:#f6efe6;
+  --bg2:#efe4d4;
+  --card:#fffaf4;
+  --ink:#2a1c14;
+  --text:#3a2c24;
+  --muted:#6d5a4c;
+  --line:#e6d5c3;
+  --terracotta:#c45a2c;
+  --terra2:#9d3f1c;
+  --sand:#e8d3b8;
+  --walnut:#5c3a28;
+  --ok:#2a6b47;
+  --okbg:#e5f3ea;
+  --bad:#b13322;
+  --badbg:#fdecea;
+  --warn:#9a6a12;
+  --warnbg:#f8eed8;
+  --mid:#3d5e8a;
+  --midbg:#e7eef7;
+  --wrap:1120px;
+  --shadow:0 18px 40px rgba(42,28,20,.08);
+  --r:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;padding:0;overflow-x:hidden;max-width:100%}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--text);background:
+  radial-gradient(1200px 500px at 10% -10%,#f8e3c4 0%,transparent 55%),
+  radial-gradient(900px 400px at 110% 8%,#f0c9a8 0%,transparent 50%),
+  var(--bg);line-height:1.55}
+img,svg{max-width:100%;display:block}
+a{color:var(--terracotta)}
+.wrap{width:min(var(--wrap),calc(100% - 32px));margin:0 auto}
+.top{position:sticky;top:0;z-index:40;background:rgba(246,239,230,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:12px;padding:12px 0;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;color:var(--ink);font-weight:750;letter-spacing:-.02em;text-decoration:none}
+.logo-mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(145deg,var(--terracotta),#e08a4d);color:#fff;display:grid;place-items:center;flex:0 0 34px;box-shadow:0 6px 16px rgba(196,90,44,.35)}
+.logo-mark svg{width:18px;height:18px}
+.desk{display:flex;flex-wrap:wrap;gap:4px 14px;margin-left:auto;font-size:.9rem}
+.desk a{color:var(--text);text-decoration:none;padding:6px 0}
+.desk a:hover{color:var(--terracotta)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:12px;border:2px solid var(--terracotta);background:var(--terracotta);color:#fff;font-weight:700;font-size:16px;cursor:pointer;text-decoration:none;transition:.15s}
+.btn:hover{background:var(--terra2);border-color:var(--terra2);color:#fff}
+.btn.ghost{background:rgba(255,250,244,.86);color:var(--ink);border-color:rgba(42,28,20,.2)}
+.btn.ghost:hover{background:#fff;color:var(--ink)}
+.hero{position:relative;padding:0 0 8px;color:#fff}
+.hero-art{position:relative;min-height:min(72vh,640px);border-radius:0 0 36px 36px;overflow:hidden;background:#3a2a20}
+.hero-art img{width:100%;height:min(72vh,640px);object-fit:cover;object-position:center 62%;filter:saturate(1.05)}
+.hero-art::after{content:"";position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(28,16,10,.18) 0%,rgba(28,16,10,.25) 35%,rgba(22,12,8,.78) 100%),
+  linear-gradient(90deg,rgba(22,12,8,.55) 0%,rgba(22,12,8,.15) 55%,rgba(22,12,8,.25) 100%)}
+.hero-inner{position:absolute;left:0;right:0;bottom:0;padding:36px 0 40px;z-index:1}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;margin:0 0 14px;padding:6px 12px;border-radius:999px;background:rgba(255,250,244,.16);border:1px solid rgba(255,250,244,.35);color:#fff;font-size:.78rem;font-weight:750;letter-spacing:.06em;text-transform:uppercase}
+.hero h1{margin:0 0 12px;font-family:Georgia,"Iowan Old Style","Palatino Linotype",Palatino,serif;font-size:clamp(1.7rem,4.4vw,3rem);line-height:1.12;letter-spacing:-.03em;font-weight:700;max-width:18ch;text-shadow:0 8px 28px rgba(0,0,0,.35)}
+.lead{margin:0 0 20px;font-size:1.05rem;color:rgba(255,250,244,.9);max-width:54ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px}
+.demo-banner{margin:18px auto 0;width:min(var(--wrap),calc(100% - 32px));padding:12px 16px;border-radius:14px;background:#fff4d8;border:1px solid #efd9a0;color:#6a4d10;font-weight:650;font-size:.95rem}
+section{padding:44px 0}
+h2{margin:0 0 8px;font-family:Georgia,"Iowan Old Style",Palatino,serif;font-size:clamp(1.4rem,2.6vw,2rem);color:var(--ink);letter-spacing:-.02em}
+.sub{margin:0 0 22px;color:var(--muted);max-width:68ch}
+.summary-grid{display:grid;grid-template-columns:260px 1fr;gap:22px;align-items:stretch}
+.score-card{background:linear-gradient(180deg,#fffaf4,#f4e6d4);border:1px solid var(--line);border-radius:24px;padding:26px 20px 22px;box-shadow:var(--shadow);text-align:center}
+.gauge{--p:54;--c:var(--terracotta);width:168px;height:168px;margin:0 auto 12px;border-radius:50%;background:
+  conic-gradient(from 210deg,var(--c) 0 calc(var(--p) * 1% * 0.82), #ead8c4 0 82%, transparent 0);
+  display:grid;place-items:center;position:relative;filter:drop-shadow(0 8px 18px rgba(196,90,44,.2))}
+.gauge::before{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 210deg,transparent 82%,transparent 0)}
+.gauge-inner{width:128px;height:128px;border-radius:50%;background:var(--card);display:grid;place-items:center;position:relative;z-index:1;box-shadow:inset 0 0 0 1px var(--line)}
+.gauge-inner b{font-size:2.5rem;letter-spacing:-.04em;color:var(--ink);line-height:1}
+.gauge-inner span{display:block;color:var(--muted);font-size:.82rem;font-weight:650}
+.score-card p{margin:8px 0 0;color:var(--muted);font-size:.92rem}
+.problems{display:grid;gap:12px}
+.problem{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow)}
+.problem .num{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-weight:800;color:#fff;background:var(--terracotta);flex:0 0 42px}
+.problem.p2 .num{background:#c47a22}
+.problem.p3 .num{background:#3d5e8a}
+.problem h3{margin:0 0 4px;font-size:1.05rem;color:var(--ink)}
+.problem p{margin:0;color:var(--muted);font-size:.95rem}
+.tech{display:grid;gap:10px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 22px rgba(42,28,20,.04)}
+.item summary{list-style:none;cursor:pointer;display:flex;align-items:flex-start;gap:12px;padding:16px 18px;font-weight:700;color:var(--ink)}
+.item summary::-webkit-details-marker{display:none}
+.ico{width:40px;height:40px;border-radius:12px;background:#f3e4d2;color:var(--walnut);display:grid;place-items:center;flex:0 0 40px}
+.ico svg{width:22px;height:22px}
+.meta{flex:1;min-width:0}
+.meta small{display:block;font-weight:500;color:var(--muted);margin-top:2px}
+.badge{display:inline-flex;align-items:center;margin-left:auto;flex:0 0 auto;padding:4px 10px;border-radius:999px;font-size:.74rem;font-weight:800;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap}
+.badge.ok{background:var(--okbg);color:var(--ok)}
+.badge.bad{background:var(--badbg);color:var(--bad)}
+.badge.warn{background:var(--warnbg);color:var(--warn)}
+.item .body{padding:0 18px 18px 70px;display:grid;gap:8px}
+.item .body p{margin:0;font-size:.95rem}
+.item .body b{color:var(--ink)}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:4px}
+.metric{background:#f8f0e6;border-radius:12px;padding:10px 12px}
+.metric b{display:block;font-size:1.2rem;letter-spacing:-.03em}
+.metric span{font-size:.8rem;color:var(--muted)}
+.metric.bad b{color:var(--bad)}
+.metric.warn b{color:var(--warn)}
+.metric.ok b{color:var(--ok)}
+.cmp{display:grid;gap:12px}
+.cmp-row{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 8px 22px rgba(42,28,20,.04)}
+.cmp-label{font-weight:750;color:var(--ink);padding-top:2px}
+.cmp-box{border-radius:12px;padding:10px 12px;font-size:.92rem}
+.cmp-box small{display:block;font-weight:800;letter-spacing:.04em;text-transform:uppercase;font-size:.68rem;margin-bottom:4px}
+.before{background:var(--badbg);color:var(--text)}
+.before small{color:var(--bad)}
+.after{background:var(--okbg);color:var(--text)}
+.after small{color:var(--ok)}
+.clusters{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.cluster{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 8px 22px rgba(42,28,20,.04)}
+.cluster h3{margin:0 0 6px;font-size:1.08rem;color:var(--ink)}
+.freq{display:inline-block;margin:0 0 10px;padding:3px 8px;border-radius:999px;background:#f3e4d2;color:var(--walnut);font-size:.78rem;font-weight:700}
+.cluster ul{margin:0;padding:0 0 0 18px;color:var(--muted)}
+.cluster li{margin:0 0 4px}
+.note{margin:16px 0 0;padding:12px 14px;border-radius:12px;background:#fff4d8;border:1px solid #efd9a0;color:#6a4d10;font-size:.92rem}
+.rivals{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.rival{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+.rival h3{margin:0 0 8px;font-size:1.05rem;color:var(--ink)}
+.rival p{margin:0;color:var(--muted);font-size:.95rem}
+.plan-wrap{overflow-x:auto;max-width:100%;border-radius:16px;border:1px solid var(--line);background:var(--card);box-shadow:var(--shadow)}
+table.plan{width:100%;border-collapse:collapse;min-width:640px}
+.plan th,.plan td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:.95rem}
+.plan th{background:#f3e4d2;color:var(--ink);font-size:.78rem;letter-spacing:.04em;text-transform:uppercase}
+.plan tr:last-child td{border-bottom:0}
+.prio{display:inline-flex;padding:3px 8px;border-radius:999px;font-size:.75rem;font-weight:800;letter-spacing:.03em;text-transform:uppercase}
+.prio.hi{background:var(--badbg);color:var(--bad)}
+.prio.md{background:var(--warnbg);color:var(--warn)}
+.prio.lo{background:var(--okbg);color:var(--ok)}
+footer{padding:28px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:.92rem}
+.ft{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;align-items:flex-start}
+.sign{color:var(--ink);font-weight:750}
+@media (max-width:900px){
+  .summary-grid,.clusters,.rivals{grid-template-columns:1fr 1fr}
+  .summary-grid{grid-template-columns:1fr}
+  .cmp-row{grid-template-columns:1fr}
+  .item .body{padding-left:18px}
+  .metrics{grid-template-columns:1fr}
+  .hero-art,.hero-art img{height:min(78vh,560px);min-height:420px}
+}
+@media (max-width:640px){
+  .clusters,.rivals,.metrics{grid-template-columns:1fr}
+  .desk{width:100%;margin-left:0}
+  .hero-inner{padding:24px 0 28px}
+  .hero h1{max-width:none}
+  .score-card{padding:22px 16px}
+  .plan-wrap{border:0;background:transparent;box-shadow:none;overflow:visible}
+  table.plan{min-width:0;border:0}
+  .plan thead{display:none}
+  .plan tbody,.plan tr,.plan td{display:block;width:100%}
+  .plan tr{background:var(--card);border:1px solid var(--line);border-radius:16px;margin:0 0 10px;padding:12px 14px;box-shadow:0 8px 22px rgba(42,28,20,.04)}
+  .plan th,.plan td{border:0;padding:6px 0}
+  .plan td[data-label="Задача"]{font-weight:700;color:var(--ink);padding-top:0}
+  .plan td:not([data-label="Задача"]){display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:.92rem}
+  .plan td:not([data-label="Задача"])::before{content:attr(data-label);color:var(--muted);font-size:.75rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap nav">
+    <a class="logo" href="#top">
+      <span class="logo-mark" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" width="18" height="18"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm48-88a8,8,0,0,1-8,8H128a8,8,0,0,1-8-8V80a8,8,0,0,1,16,0v40h32A8,8,0,0,1,176,128Z"/></svg>
+      </span>
+      SEO-аудит магазина
+    </a>
+    <nav class="desk" aria-label="Разделы">
+      <a href="#summary">Сводка</a>
+      <a href="#tech">Техническое SEO</a>
+      <a href="#pages">Категории и карточки</a>
+      <a href="#semantics">Семантика</a>
+      <a href="#rivals">Конкуренты</a>
+      <a href="#plan">План правок</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="Обложка отчёта">
+    <div class="hero-art">
+      <img src="hero.jpg" alt="Диван и кресло в светлых тканевых чехлах в солнечной гостиной, демонстрационное фото для отчёта">
+      <div class="hero-inner">
+        <div class="wrap">
+          <p class="eyebrow">Пример отчёта, данные демонстрационные</p>
+          <h1>Пример SEO-аудита интернет-магазина чехлов на мебель (WordPress)</h1>
+          <p class="lead">Вымышленный магазин «Ателье Чехол» на WordPress и WooCommerce: пошив чехлов на диваны и кресла на заказ. Отчёт показывает формат работы, а не проверку реального сайта клиента.</p>
+          <div class="hero-cta">
+            <a class="btn" href="#summary">Смотреть сводку</a>
+            <a class="btn ghost" href="#plan">План правок</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <p class="demo-banner">Это пример отчёта. Оценки, замеры, адреса страниц и частотности запросов демонстрационные, их нельзя считать данными Вордстата или аудитом живого сайта.</p>
+
+  <section id="summary">
+    <div class="wrap">
+      <h2>Сводка</h2>
+      <p class="sub">Сайт индексируется, сертификат установлен, каталог собран. Запас роста большой: шаблонные метатеги, тяжёлые фото и дубли фильтров мешают страницам чехлов выходить в топ по целевым запросам.</p>
+      <div class="summary-grid">
+        <div class="score-card">
+          <div class="gauge" style="--p:54;--c:#c45a2c" aria-label="Оценка 54 из 100">
+            <div class="gauge-inner"><div><b>54</b><span>из 100</span></div></div>
+          </div>
+          <p>Общая оценка демо-сайта. Техника 48, контент 51, семантика 62.</p>
+        </div>
+        <div class="problems">
+          <article class="problem">
+            <div class="num">1</div>
+            <div>
+              <h3>Одинаковые title и пустые description</h3>
+              <p>Категории и карточки часто идут с заголовком «Чехлы на мебель — купить». Поисковику трудно понять, где чехол на угловой диван, а где на кресло.</p>
+            </div>
+          </article>
+          <article class="problem p2">
+            <div class="num">2</div>
+            <div>
+              <h3>Медленная мобильная страница</h3>
+              <p>Крупные фото товаров без сжатия и отложенной загрузки. В демо-замере LCP около 4,8 с, есть сдвиг вёрстки при подгрузке галереи.</p>
+            </div>
+          </article>
+          <article class="problem p3">
+            <div class="num">3</div>
+            <div>
+              <h3>Дубли фильтров и слабая разметка товара</h3>
+              <p>Цвет, ткань и размер открываются отдельными URL и попадают в индекс. Разметка Product и Offer не заполнена, сниппеты беднее, чем у конкурентов из топа.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tech">
+    <div class="wrap">
+      <h2>Техническое SEO</h2>
+      <p class="sub">Проверка на демонстрационном сайте atelier-chehol-demo.ru. Цифры скорости и счётчики страниц приведены как образец формата отчёта.</p>
+      <div class="tech">
+
+        <details class="item" open>
+          <summary>
+            <span class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" width="22" height="22"><path d="M208,40V216H48V40Z" opacity="0.2"/><path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32Zm0,176H48V48H208V208ZM96,168a8,8,0,0,1-8,8H72a8,8,0,0,1,0-16H88A8,8,0,0,1,96,168Zm0-40a8,8,0,0,1-8,8H72a8,8,0,0,1,0-16H88A8,8,0,0,1,96,128Zm0-40a8,8,0,0,1-8,8H72a8,8,0,0,1,0-16H88A8,8,0,0,1,96,88Zm96,80a8,8,0,0,1-8,8H120a8,8,0,0,1,0-16h64A8,8,0,0,1,192,168Zm0-40a8,8,0,0,1-8,8H120a8,8,0,0,1,0-16h64A8,8,0,0,1,192,128Zm0-40a8,8,0,0,1-8,8H120a8,8,0,0,1,0-16h64A8,8,0,0,1,192,88Z"/></svg></span>
+            <span class="meta">Скорость и Core Web Vitals<small>Мобильный профиль, демонстрационный замер</small></span>
+            <span class="badge bad">Критично</span>
+          </summary>
+          <div class="body">
+            <p><b>Что нашли.</b> Главная и карточка товара отдают галерею из исходников по 2–4 МБ, без srcset и ленивой загрузки ниже первого экрана. Шрифты темы подключаются с задержкой, поверх видео-заставки в шапке.</p>
+            <div class="metrics">
+              <div class="metric bad"><b>4,8 с</b><span>LCP, пример замера</span></div>
+              <div class="metric warn"><b>280 мс</b><span>INP, пример замера</span></div>
+              <div class="metric bad"><b>0,18</b><span>CLS, пример замера</span></div>
+            </div>
+            <p><b>Как исправить.</b> Сжать и перевести фото в WebP, задать размеры, отложить загрузку ниже экрана, убрать тяжёлую заставку, предварительно загрузить шрифт заголовков и главное фото чехла.</p>
+          </div>
+        </details>
+
+        <details class="item">
+          <summary>
+            <span class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" width="22" height="22"><path d="M224,128a96,96,0,1,1-96-96A96,96,0,0,1,224,128Z" opacity="0.2"/><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216ZM173.66,90.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,140.69l50.34-50.35A8,8,0,0,1,173.66,90.34Z"/></svg></span>
+            <span class="meta">Индексация<small>Карта сайта и страницы в индексе</small></span>
+            <span class="badge warn">Внимание</span>
+          </summary>
+          <div class="body">
+            <p><b>Что нашли.</b> В sitemap около 190 адресов, в индексе заметно больше: туда попали фильтры цвета и ткани, служебные страницы пагинации и корзина в параметрах. Часть новых категорий чехлов на угловые диваны в карту ещё не добавлена.</p>
+            <p><b>Как исправить.</b> Оставить в индексе только посадочные категории и карточки. Фильтры закрыть в robots.txt и каноникалом. Обновлять sitemap после публикации товаров.</p>
+          </div>
+        </details>
+
+        <details class="item">
+          <summary>
+            <span class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" width="22" height="22"><path d="M224,56V200H32V56Z" opacity="0.2"/><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,160H40V56H216V200ZM184,96a8,8,0,0,1-8,8H80a8,8,0,0,1,0-16h96A8,8,0,0,1,184,96Zm0,32a8,8,0,0,1-8,8H80a8,8,0,0,1,0-16h96A8,8,0,0,1,184,128Zm0,32a8,8,0,0,1-8,8H80a8,8,0,0,1,0-16h96A8,8,0,0,1,184,160Z"/></svg></span>
+            <span class="meta">robots.txt и sitemap.xml<small>Правила обхода WordPress / WooCommerce</small></span>
+            <span class="badge warn">Внимание</span>
+          </summary>
+          <div class="body">
+            <p><b>Что нашли.</b> В robots.txt закрыты /wp-admin и служебные ленты, но открыты ?filter_color=, ?orderby= и поиск. sitemap.xml отдаёт плагин по умолчанию: в нём есть снятые с публикации товары и два адреса 404, нет страницы «чехол на заказ по размерам».</p>
+            <p><b>Как исправить.</b> Дописать Disallow для фильтров, сортировок и внутреннего поиска. Почистить карту, включить только канонические URL, настроить автосбор новых категорий.</p>
+          </div>
+        </details>
+
+        <details class="item">
+          <summary>
+            <span class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" width="22" height="22"><path d="M216,40V216H40V40Z" opacity="0.2"/><path d="M216,32H40A8,8,0,0,0,32,40V216a8,8,0,0,0,8,8H216a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32Zm-8,176H48V48H208ZM96,120H72a8,8,0,0,0,0,16H96v24a8,8,0,0,0,16,0V136h24a8,8,0,0,0,0-16H112V96a8,8,0,0,0-16,0Zm80,40H160a8,8,0,0,0,0,16h16a8,8,0,0,0,0-16Zm0-48H144a8,8,0,0,0,0,16h32a8,8,0,0,0,0-16Zm0-32H144a8,8,0,0,0,0,16h32a8,8,0,0,0,0-16Z"/></svg></span>
+            <span class="meta">Дубли страниц<small>www, параметры, пагинация</small></span>
+            <span class="badge bad">Критично</span>
+          </summary>
+          <div class="body">
+            <p><b>Что нашли.</b> Открываются и www, и без www, оба с 200. Категория «Еврочехлы» доступна как /evrochehly/ и /product-category/evrochehly/. Пагинация без rel=prev/next и без каноникала на первую страницу.</p>
+            <p><b>Как исправить.</b> Оставить одну зеркальную зону с 301, единый ЧПУ категорий WooCommerce, каноникал на основной список, закрыть технические дубли.</p>
+          </div>
+        </details>
+
+        <details class="item">
+          <summary>
+            <span class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" width="22" height="22"><path d="M240,88v80H16V88Z" opacity="0.2"/><path d="M221.66,90.34,192,60.68,165.66,87A8,8,0,0,1,154.34,75.31L180.69,49,151,19.31A8,8,0,0,1,162.34,8l37.32,37.29h0L229.66,75.31a8,8,0,0,1-11.32,11.32ZM16,80a8,8,0,0,0,0,16H40v64H16a8,8,0,0,0,0,16H240a8,8,0,0,0,0-16H216V96h24a8,8,0,0,0,0-16Zm160,16v64H80V96Z"/></svg></span>
+            <span class="meta">404 и редиректы<small>Старые карточки и снятые модели</small></span>
+            <span class="badge warn">Внимание</span>
+          </summary>
+          <div class="body">
+            <p><b>Что нашли.</b> При снятии чехла с продажи карточка отдаёт 404. Внешние ссылки и старые кампании ведут в тупик. Цепочка редиректов с http на www, затем на без www, занимает два шага.</p>
+            <p><b>Как исправить.</b> Со снятых моделей ставить 301 на близкую категорию или аналог. Сократить редирект до одного шага.</p>
+          </div>
+        </details>
+
+        <details class="item">
+          <summary>
+            <span class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" width="22" height="22"><path d="M224,72V200H32V72Z" opacity="0.2"/><path d="M192,24H64A16,16,0,0,0,48,40V216a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V40A16,16,0,0,0,192,24Zm0,192H64V40H192V216ZM80,56a8,8,0,0,1,8-8h80a8,8,0,0,1,0,16H88A8,8,0,0,1,80,56Zm0,144a8,8,0,0,1,8-8h32a8,8,0,0,1,0,16H88A8,8,0,0,1,80,200Z"/></svg></span>
+            <span class="meta">Мобильная версия<small>Тема WordPress, адаптив каталога</small></span>
+            <span class="badge warn">Внимание</span>
+          </summary>
+          <div class="body">
+            <p><b>Что нашли.</b> Каталог открывается на телефоне, но кнопки «в корзину» и фильтры мелкие, меню перекрывает первый экран, таблица размеров на карточке уезжает за край. Это бьёт и по удобству, и по INP.</p>
+            <p><b>Как исправить.</b> Увеличить зоны нажатия, пересобрать фильтры в выезжающую панель, таблицу размеров свернуть в карточки на узком экране.</p>
+          </div>
+        </details>
+
+        <details class="item">
+          <summary>
+            <span class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" width="22" height="22"><path d="M208,80v96H48V80Z" opacity="0.2"/><path d="M208,40H48A16,16,0,0,0,32,56v64a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V56A16,16,0,0,0,208,40Zm0,80H48V56H208ZM48,160a8,8,0,0,0,0,16H208a8,8,0,0,0,0-16Zm0,32a8,8,0,0,0,0,16H208a8,8,0,0,0,0-16Z"/></svg></span>
+            <span class="meta">HTTPS<small>Сертификат и смешанный контент</small></span>
+            <span class="badge ok">В порядке</span>
+          </summary>
+          <div class="body">
+            <p><b>Что нашли.</b> Сертификат валидный, основная выдача идёт по HTTPS. На трёх старых карточках галерея всё ещё тянет фото по http: браузер блокирует их как смешанный контент.</p>
+            <p><b>Как исправить.</b> Заменить адреса вложений на https и пройтись поиском по контенту медиатеки WordPress. Это точечная правка, оценка раздела в целом положительная.</p>
+          </div>
+        </details>
+
+        <details class="item">
+          <summary>
+            <span class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" width="22" height="22"><path d="M224,80v96H32V80Z" opacity="0.2"/><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,160H40V56H216V200ZM80,88a8,8,0,0,1,8-8h80a8,8,0,0,1,0,16H88A8,8,0,0,1,80,88Zm0,40a8,8,0,0,1,8-8h80a8,8,0,0,1,0,16H88A8,8,0,0,1,80,128Zm0,40a8,8,0,0,1,8-8h48a8,8,0,0,1,0,16H88A8,8,0,0,1,80,168Z"/></svg></span>
+            <span class="meta">schema.org Product и Offer<small>Микроразметка карточек WooCommerce</small></span>
+            <span class="badge bad">Критично</span>
+          </summary>
+          <div class="body">
+            <p><b>Что нашли.</b> Тема выводит разметку Product почти пустой: нет цены, наличия, валюты, состояния товара и ссылки на оффер. На категориях разметки нет совсем. В поиске магазин проигрывает сниппетам с ценой.</p>
+            <p><b>Как исправить.</b> Заполнить Product и Offer: название, изображение, цену, валюту, наличие, бренд ателье и SKU. Проверить валидатором после выкладки.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="pages">
+    <div class="wrap">
+      <h2>Категории и карточки</h2>
+      <p class="sub">Сравнение текущего шаблона и рекомендованной редакции. Формулировки ниже собраны для демо-магазина, их нужно переписать под ассортимент клиента.</p>
+      <div class="cmp">
+        <div class="cmp-row">
+          <div class="cmp-label">Title категории «Чехлы на диван»</div>
+          <div class="cmp-box before"><small>Сейчас</small>Чехлы на мебель — купить</div>
+          <div class="cmp-box after"><small>Предлагаем</small>Чехлы на диван на заказ, размеры и ткани | Ателье Чехол</div>
+        </div>
+        <div class="cmp-row">
+          <div class="cmp-label">Description той же категории</div>
+          <div class="cmp-box before"><small>Сейчас</small>Поле пустое, поисковик берёт случайный абзац из подвала.</div>
+          <div class="cmp-box after"><small>Предлагаем</small>Съёмные чехлы на прямые и угловые диваны: плотные ткани, посадка по размерам, доставка по России. Срок пошива 7–10 дней.</div>
+        </div>
+        <div class="cmp-row">
+          <div class="cmp-label">H1 карточки еврочехла</div>
+          <div class="cmp-box before"><small>Сейчас</small>Товар</div>
+          <div class="cmp-box after"><small>Предлагаем</small>Еврочехол на диван 3-местный, жаккард, цвет песочный</div>
+        </div>
+        <div class="cmp-row">
+          <div class="cmp-label">Текст категории</div>
+          <div class="cmp-box before"><small>Сейчас</small>Два предложения из шаблона темы, без размеров, тканей и отличий от готовых чехлов.</div>
+          <div class="cmp-box after"><small>Предлагаем</small>Короткий полезный текст: какие диваны закрываем, как снять мерки, какие ткани держат форму, когда выбирать еврочехол, а когда пошив по размерам.</div>
+        </div>
+        <div class="cmp-row">
+          <div class="cmp-label">Alt фото на карточке</div>
+          <div class="cmp-box before"><small>Сейчас</small>IMG_2048, DSC_11, «изображение» без описания.</div>
+          <div class="cmp-box after"><small>Предлагаем</small>Песочный еврочехол на угловом диване в гостиной, вид спереди / крупный план ткани.</div>
+        </div>
+        <div class="cmp-row">
+          <div class="cmp-label">ЧПУ</div>
+          <div class="cmp-box before"><small>Сейчас</small>/product/p-18422/?attribute_color=bege</div>
+          <div class="cmp-box after"><small>Предлагаем</small>/chehly-na-divan/evrochehol-uglovoy-pesok/</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="semantics">
+    <div class="wrap">
+      <h2>Семантика ниши</h2>
+      <p class="sub">Кластеры, вокруг которых стоит собирать посадочные. Частотности ниже помечены как пример: это не выгрузка Вордстата и не оценка реального спроса.</p>
+      <div class="clusters">
+        <article class="cluster">
+          <h3>Чехлы на диван</h3>
+          <div class="freq">пример спроса: 8 400 в месяц</div>
+          <ul>
+            <li>чехол на диван 3-местный</li>
+            <li>съёмный чехол на диван</li>
+            <li>чехол на диван с подлокотниками</li>
+            <li>купить чехол на прямой диван</li>
+          </ul>
+        </article>
+        <article class="cluster">
+          <h3>Еврочехлы</h3>
+          <div class="freq">пример спроса: 4 100 в месяц</div>
+          <ul>
+            <li>еврочехол на диван</li>
+            <li>универсальный еврочехол</li>
+            <li>еврочехол жаккард</li>
+            <li>еврочехол на кресло</li>
+          </ul>
+        </article>
+        <article class="cluster">
+          <h3>Чехол на угловой диван</h3>
+          <div class="freq">пример спроса: 3 600 в месяц</div>
+          <ul>
+            <li>чехол на угловой диван универсальный</li>
+            <li>чехол на диван с выступом слева / справа</li>
+            <li>еврочехол на угловой</li>
+            <li>чехол на модульный диван</li>
+          </ul>
+        </article>
+        <article class="cluster">
+          <h3>Чехол на кресло</h3>
+          <div class="freq">пример спроса: 2 200 в месяц</div>
+          <ul>
+            <li>чехол на кресло с подлокотниками</li>
+            <li>чехол на кресло-реклайнер</li>
+            <li>накидка на кресло плотная</li>
+            <li>комплект на диван и два кресла</li>
+          </ul>
+        </article>
+        <article class="cluster">
+          <h3>На заказ по размерам</h3>
+          <div class="freq">пример спроса: 1 700 в месяц</div>
+          <ul>
+            <li>чехол на диван на заказ</li>
+            <li>пошив чехла по меркам</li>
+            <li>чехол на нестандартный диван</li>
+            <li>индивидуальный чехол на мебель</li>
+          </ul>
+        </article>
+        <article class="cluster">
+          <h3>Сопутствующие посадки</h3>
+          <div class="freq">пример спроса: 1 100 в месяц</div>
+          <ul>
+            <li>чехол на пуф и банкетку</li>
+            <li>водоотталкивающий чехол на диван</li>
+            <li>чехол на диван с любимым животным</li>
+            <li>замена обивки или чехол: что выбрать</li>
+          </ul>
+        </article>
+      </div>
+      <p class="note">Частотности в этом блоке иллюстративные. В рабочем аудите они снимаются по Вордстату на дату проверки и сверяются с выдачей, без подстановки вымышленных чисел как факта.</p>
+    </div>
+  </section>
+
+  <section id="rivals">
+    <div class="wrap">
+      <h2>Конкуренты из топа</h2>
+      <p class="sub">Сравнение с типичными игроками выдачи по запросам ниши. Названия компаний не приводим: это обобщённый портрет, а не разбор конкретных магазинов.</p>
+      <div class="rivals">
+        <article class="rival">
+          <h3>Крупный каталог готовых чехлов</h3>
+          <p>Широкая сетка фильтров, аккуратные title и сниппеты с ценой. Слабое место: мало текста про посадку на нестандартные диваны, упор на готовый размерный ряд.</p>
+        </article>
+        <article class="rival">
+          <h3>Федеральный магазин еврочехлов</h3>
+          <p>Сильные посадочные под «еврочехол» и быстрые страницы. Мало страниц про пошив по меркам, фото однотипные, без интерьеров.</p>
+        </article>
+        <article class="rival">
+          <h3>Региональное ателье на заказ</h3>
+          <p>Живые кейсы «до и после», понятный сценарий замеров. Техника слабее: нет разметки товара, медленная тема, категории свалены в один список.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="plan">
+    <div class="wrap">
+      <h2>План правок по приоритету</h2>
+      <p class="sub">Порядок работ для демонстрационного магазина. Сроки считаются от передачи доступов к WordPress и исходникам фото.</p>
+      <div class="plan-wrap">
+        <table class="plan">
+          <thead>
+            <tr>
+              <th>Задача</th>
+              <th>Влияние</th>
+              <th>Сложность</th>
+              <th>Срок</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Задача">Сжать фото, WebP, ленивая загрузка, убрать тяжёлую заставку, поднять LCP</td>
+              <td data-label="Влияние"><span class="prio hi">Высокое</span></td>
+              <td data-label="Сложность">Средняя</td>
+              <td data-label="Срок">2–3 дня</td>
+            </tr>
+            <tr>
+              <td data-label="Задача">Закрыть индексирование фильтров, починить зеркала, sitemap и 301 со старых карточек</td>
+              <td data-label="Влияние"><span class="prio hi">Высокое</span></td>
+              <td data-label="Сложность">Средняя</td>
+              <td data-label="Срок">2 дня</td>
+            </tr>
+            <tr>
+              <td data-label="Задача">Уникальные title, description и H1 по кластерам категорий и ключевых карточек</td>
+              <td data-label="Влияние"><span class="prio hi">Высокое</span></td>
+              <td data-label="Сложность">Средняя</td>
+              <td data-label="Срок">3–4 дня</td>
+            </tr>
+            <tr>
+              <td data-label="Задача">Разметка Product и Offer на карточках, проверка сниппета</td>
+              <td data-label="Влияние"><span class="prio md">Среднее</span></td>
+              <td data-label="Сложность">Низкая</td>
+              <td data-label="Срок">1 день</td>
+            </tr>
+            <tr>
+              <td data-label="Задача">Тексты категорий и полезные блоки на карточках: ткани, мерки, уход</td>
+              <td data-label="Влияние"><span class="prio hi">Высокое</span></td>
+              <td data-label="Сложность">Средняя</td>
+              <td data-label="Срок">5–7 дней</td>
+            </tr>
+            <tr>
+              <td data-label="Задача">ЧПУ, перелинковка кластеров и блок «с этим чехлом берут»</td>
+              <td data-label="Влияние"><span class="prio md">Среднее</span></td>
+              <td data-label="Сложность">Низкая</td>
+              <td data-label="Срок">2 дня</td>
+            </tr>
+            <tr>
+              <td data-label="Задача">Доработка мобильных фильтров, таблицы размеров и зон нажатия</td>
+              <td data-label="Влияние"><span class="prio md">Среднее</span></td>
+              <td data-label="Сложность">Средняя</td>
+              <td data-label="Срок">2 дня</td>
+            </tr>
+            <tr>
+              <td data-label="Задача">Alt у фото каталога и замена http-вложений</td>
+              <td data-label="Влияние"><span class="prio lo">Точечное</span></td>
+              <td data-label="Сложность">Низкая</td>
+              <td data-label="Срок">1 день</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="ft">
+      <div>
+        <div class="sign">Николай</div>
+        <div>Пример SEO-аудита для отклика. Объект проверки вымышленный, к реальному магазину клиента не привязан.</div>
+      </div>
+      <div>Данные демонстрационные. Оценки, частотности и замеры скорости даны как образец формата отчёта.</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

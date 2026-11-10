@@ -56,11 +56,11 @@ p{margin:0 0 1em}
 .proto-note b{font-weight:600}
 
 .top{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.nav{display:flex;align-items:center;gap:16px;padding:12px 0;min-height:72px}
+.nav{display:flex;align-items:center;gap:12px;padding:12px 0;min-height:72px}
 .logo{display:flex;align-items:center;flex:0 0 auto}
-.logo img{height:42px;width:auto}
+.logo img{height:38px;width:auto}
 .nav-links{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-left:8px}
-.nav-links a{padding:8px 10px;border-radius:999px;font-size:13px;font-weight:500;color:var(--ink)}
+.nav-links{flex-wrap:nowrap}.nav-links a{padding:8px 8px;border-radius:999px;font-size:12.5px;font-weight:500;color:var(--ink);white-space:nowrap}
 .nav-links a:hover,.nav-links a[aria-current="page"]{background:#F3EBE3;color:var(--violet)}
 .nav-actions{margin-left:auto;display:flex;align-items:center;gap:8px}
 .concept-switch{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:#fff}

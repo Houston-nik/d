@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>СтальЦех — металлоизделия на заказ: лофт-мебель, навесы, хозблоки</title>
+<meta name="description" content="Демолендинг сварочного цеха: лофт-столы и кровати, навесы из поликарбоната, хозблоки и урны на заказ. Замер, изготовление и установка. Цены в калькуляторе даны для примера.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23111418'/%3E%3Cpath d='M8 22 L16 8 L24 22' fill='none' stroke='%23FF6A1A' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --ink:#121417;
+  --steel:#14181E;
+  --steel-2:#1C222B;
+  --deep:#0B0D10;
+  --ember:#FF6A1A;
+  --ember-d:#E0560F;
+  --ember-s:#FFB07A;
+  --paper:#F3F1EC;
+  --cream:#FAF8F4;
+  --muted:#5C626A;
+  --line:#D6D2C9;
+  --card:#fff;
+  --r:22px;
+  --sh:0 22px 50px -28px rgba(11,13,16,.5);
+  --font:"Manrope",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+.btn,section{scroll-margin-top:88px}
+body{margin:0;font-family:var(--font);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;line-height:1.55}
+img{max-width:100%;display:block;height:auto}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{width:min(1180px,calc(100% - 40px));margin-inline:auto}
+.skip{position:absolute;left:-999px;top:8px;background:#000;color:#fff;padding:8px 12px;z-index:200}
+.skip:focus{left:8px}
+
+.hdr{position:sticky;top:0;z-index:80;background:rgba(11,13,16,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,106,26,.18)}
+.hdr .wrap{display:flex;align-items:center;justify-content:space-between;height:74px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;color:#fff;min-width:0}
+.logo-mark{width:38px;height:38px;border-radius:10px;background:var(--ember);color:#1A0C00;display:grid;place-items:center;flex:none}
+.logo-mark i{font-size:22px}
+.logo-name{font-weight:800;font-size:22px;letter-spacing:.02em;line-height:1.15}
+.logo-name span{display:block;font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--ember-s);margin-top:2px;text-transform:uppercase}
+
+.nav{display:flex;align-items:center;gap:2px}
+.nav a{padding:10px 12px;border-radius:999px;font-weight:600;font-size:14.5px;color:#ececec}
+.nav a:hover,.nav a:focus-visible{background:rgba(255,255,255,.1);color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;min-height:44px;border-radius:999px;border:0;font-weight:800;font-size:15px;cursor:pointer;transition:transform .2s,background .2s,box-shadow .2s,color .2s;white-space:nowrap}
+.btn:focus-visible{outline:3px solid var(--ember);outline-offset:3px}
+.btn:hover{transform:translateY(-1px)}
+.btn i{font-size:18px}
+.btn-ember{background:var(--ember);color:#1A0C00;box-shadow:0 12px 24px -12px rgba(255,106,26,.9)}
+.btn-ember:hover{background:#ff8a3d}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.55)}
+.btn-ghost:hover{background:rgba(255,255,255,.1)}
+.btn-dark{background:var(--steel);color:#fff}
+.btn-dark:hover{background:var(--steel-2)}
+.hdr-cta{padding:11px 18px;font-size:14px;min-height:44px}
+.burger{display:none;width:44px;height:44px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);align-items:center;justify-content:center;flex-direction:column;gap:5px;cursor:pointer}
+.burger span{display:block;width:18px;height:2px;background:#fff;border-radius:2px}
+
+.hero{position:relative;min-height:min(92vh,860px);display:flex;align-items:flex-end;color:#fff;isolation:isolate;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:-2}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.hero-shade{position:absolute;inset:0;z-index:-1;background:
+  linear-gradient(90deg,rgba(8,10,12,.88) 0%,rgba(8,10,12,.62) 42%,rgba(8,10,12,.22) 100%),
+  linear-gradient(180deg,rgba(8,10,12,.28) 0%,rgba(8,10,12,.2) 40%,rgba(8,10,12,.72) 100%)}
+.hero .wrap{padding:120px 0 56px;width:min(1180px,calc(100% - 40px))}
+.kicker{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--ember);margin:0 0 16px;background:rgba(8,10,12,.55);padding:8px 14px;border-radius:999px;border:1px solid rgba(255,106,26,.35)}
+.kicker i{font-size:16px}
+.hero h1{font-weight:800;font-size:clamp(32px,5.2vw,62px);line-height:1.08;letter-spacing:.01em;margin:0 0 22px;max-width:16ch;text-wrap:balance;text-shadow:0 2px 18px rgba(0,0,0,.55)}
+.hero p.lead{font-size:18px;line-height:1.5;max-width:560px;margin:0 0 28px;color:#f0f0f0;font-weight:500;text-shadow:0 1px 10px rgba(0,0,0,.55)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:36px}
+.hero-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:760px}
+.hero-stats div{background:rgba(11,13,16,.55);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:14px 16px;backdrop-filter:blur(8px);min-width:0}
+.hero-stats b{display:block;font-size:20px;font-weight:800;line-height:1.2;letter-spacing:.01em;color:#fff}
+.hero-stats span{display:block;margin-top:4px;font-size:12px;font-weight:600;color:#d5d5d5;letter-spacing:.02em}
+
+.section{padding:88px 0}
+.section.alt{background:#fff}
+.section.dark{background:var(--steel);color:#fff}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:36px;flex-wrap:wrap}
+.eyebrow{margin:0 0 8px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--ember-d)}
+.section.dark .eyebrow{color:var(--ember)}
+h2{font-weight:800;font-size:clamp(28px,4vw,44px);line-height:1.15;letter-spacing:.01em;margin:0;max-width:18ch}
+.section-head p{max-width:440px;margin:0;color:var(--muted);font-weight:500}
+.section.dark .section-head p{color:#c8cdd3}
+
+.cat-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:18px}
+.cat{grid-column:span 2;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 30px -24px rgba(11,13,16,.5);min-width:0}
+.cat:nth-child(4),.cat:nth-child(5){grid-column:span 3}
+.cat-pic{aspect-ratio:4/3;overflow:hidden;background:#e8e4d8}
+.cat-pic img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.cat:hover .cat-pic img{transform:scale(1.05)}
+.cat-body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.cat h3{margin:0;font-size:20px;line-height:1.25;font-weight:800;letter-spacing:.01em}
+.cat .tag{display:inline-flex;align-self:flex-start;padding:4px 10px;border-radius:999px;background:rgba(255,106,26,.12);color:#9a3a0a;font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.cat p{margin:0;color:var(--muted);font-size:14.5px;font-weight:500}
+.cat .btn{margin-top:auto;width:100%}
+
+.calc-box{display:grid;grid-template-columns:1.05fr 1fr;border-radius:28px;overflow:hidden;background:var(--deep);color:#fff;box-shadow:var(--sh)}
+.calc-pic{position:relative;min-height:460px}
+.calc-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.calc-pic .shade{position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.82) 0%, rgba(0,0,0,.4) 45%, transparent 75%)}
+.calc-copy{position:absolute;left:24px;right:24px;bottom:24px}
+.calc-copy h3{margin:0 0 8px;font-size:clamp(24px,3vw,32px);line-height:1.2;font-weight:800;letter-spacing:.01em;text-shadow:0 1px 2px rgba(0,0,0,.9),0 2px 12px rgba(0,0,0,.5)}
+.calc-copy p{margin:0;text-shadow:0 1px 4px rgba(0,0,0,.75);color:#f2f2f2;font-weight:500}
+.calc-form{padding:36px 36px 40px}
+.calc-form h2{color:#fff;max-width:none}
+.calc-form > p.intro{color:#c8cdd3;margin:8px 0 22px;max-width:46ch}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{display:grid;gap:6px}
+.field span{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ember-s)}
+.field input,.field select,.field textarea{width:100%;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);color:#fff;border-radius:14px;padding:12px 14px;min-height:48px;font-size:16px}
+.field textarea{min-height:96px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--ember);outline-offset:1px}
+.field select option{color:var(--ink)}
+.check{display:flex;align-items:flex-start;gap:10px;font-size:14px;font-weight:500;color:#d7dbe0;line-height:1.4;cursor:pointer}
+.check input{width:20px;height:20px;margin-top:2px;flex:none;accent-color:var(--ember)}
+.calc-result{display:none;background:rgba(255,106,26,.14);border:1px solid rgba(255,106,26,.4);border-radius:16px;padding:16px 18px;margin-top:4px}
+.calc-result.show{display:block}
+.calc-result b{display:block;font-size:32px;font-weight:800;color:#fff;letter-spacing:.01em}
+.calc-result em{display:block;margin-top:4px;font-style:normal;font-size:13px;color:var(--ember-s);font-weight:700}
+.calc-result p{margin:8px 0 0;color:#d7dbe0;font-size:14px;font-weight:500}
+.calc-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.calc-err{display:none;color:#ffd0c4;font-size:14px;font-weight:700}
+.calc-err.show{display:block}
+
+.sketch-box{display:grid;grid-template-columns:.95fr 1.05fr;gap:28px;align-items:stretch}
+.sketch-photo{border-radius:var(--r);overflow:hidden;min-height:100%;position:relative}
+.sketch-photo img{width:100%;height:100%;object-fit:cover;object-position:center 20%;min-height:420px}
+.sketch-caption{position:absolute;left:16px;right:16px;bottom:16px;background:rgba(11,13,16,.82);color:#fff;border-radius:14px;padding:12px 14px;font-size:14px;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,.5)}
+.sketch-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px 26px;display:flex;flex-direction:column;min-width:0;box-shadow:0 10px 30px -24px rgba(11,13,16,.5)}
+.sketch-card h2{max-width:14ch}
+.sketch-card > p{color:var(--muted);font-weight:500;margin:10px 0 20px}
+.upload{border:1.5px dashed #b9b4aa;border-radius:18px;padding:22px 18px;text-align:center;background:#faf8f4;cursor:pointer;transition:border-color .2s,background .2s}
+.upload:hover,.upload:focus-within{border-color:var(--ember);background:#fff6f0}
+.upload i{font-size:32px;color:var(--ember-d)}
+.upload b{display:block;margin:8px 0 4px;font-size:16px}
+.upload p{margin:0;color:var(--muted);font-size:13.5px;font-weight:500}
+.upload input{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.upload-preview{display:none;margin-top:14px;text-align:left}
+.upload-preview.show{display:block}
+.upload-preview img{width:100%;max-height:200px;object-fit:cover;border-radius:14px;margin-bottom:8px}
+.upload-preview span{font-size:13px;font-weight:700;color:var(--ink)}
+
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+.step{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px 18px 20px;min-width:0;box-shadow:0 10px 30px -24px rgba(11,13,16,.5)}
+.step-num{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:44px;padding:0 12px;border-radius:14px;background:var(--steel);color:var(--ember);font-weight:800;font-size:18px;letter-spacing:.02em;margin-bottom:14px}
+.step h3{margin:0 0 8px;font-size:18px;font-weight:800;line-height:1.25;letter-spacing:.01em}
+.step p{margin:0;color:var(--muted);font-size:14.5px;font-weight:500}
+
+.faq{display:grid;gap:10px}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:18px;padding:4px 4px;min-width:0}
+.faq summary{list-style:none;cursor:pointer;font-weight:800;font-size:17px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary i{color:var(--ember-d);font-size:20px;flex:none;transition:transform .2s}
+.faq details[open] summary i{transform:rotate(45deg)}
+.faq details p{margin:0;padding:0 18px 16px;color:var(--muted);font-weight:500;max-width:70ch}
+
+.lead-box{display:grid;grid-template-columns:1fr 1.05fr;border-radius:28px;overflow:hidden;background:var(--steel);color:#fff;box-shadow:var(--sh)}
+.lead-pic{position:relative;min-height:420px}
+.lead-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%}
+.lead-pic .shade{position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.78) 0%, rgba(0,0,0,.4) 45%, transparent 75%)}
+.lead-copy{position:absolute;left:24px;right:24px;bottom:24px}
+.lead-copy h3{margin:0 0 8px;font-size:clamp(24px,3vw,32px);line-height:1.2;font-weight:800;letter-spacing:.01em;text-shadow:0 1px 2px rgba(0,0,0,.9),0 2px 12px rgba(0,0,0,.5)}
+.lead-copy p{margin:0;text-shadow:0 1px 4px rgba(0,0,0,.75)}
+.lead-form{padding:36px 36px 40px}
+.lead-form h2{color:#fff;max-width:none}
+.lead-form .eyebrow{color:var(--ember)}
+.lead-form > p{color:#d0d4d8;margin:8px 0 22px;max-width:46ch}
+form{display:grid;gap:14px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-ok{display:none;background:rgba(255,106,26,.18);border:1px solid rgba(255,106,26,.4);border-radius:16px;padding:14px 16px;color:#fff;font-weight:700}
+.form-ok.show{display:block}
+.form-err{display:none;color:#ffd0c4;font-size:14px;font-weight:700}
+.form-err.show{display:block}
+.consent{display:flex;align-items:flex-start;gap:10px;font-size:13px;font-weight:500;color:#c8cdd3;line-height:1.45;cursor:pointer}
+.consent input{width:20px;height:20px;margin-top:1px;flex:none;accent-color:var(--ember)}
+.consent a{color:#fff;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+
+.foot{background:var(--deep);color:#c4c8ce;padding:36px 0 40px}
+.foot .wrap{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:28px;align-items:start}
+.foot .legal{display:block}
+.foot a:hover{color:#fff}
+.foot .logo-name{color:#fff}
+.foot p{margin:10px 0 0;font-size:14px;max-width:36ch}
+.foot .privacy p,.foot .fine{max-width:none}
+.foot h4{margin:0 0 10px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ember);font-weight:800}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.foot .fine{margin-top:28px;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);font-size:13px;color:#8a9098;max-width:none}
+.privacy{margin-top:16px;color:#8a9098;font-size:13px;line-height:1.55;max-width:80ch}
+.privacy h3{margin:0 0 8px;color:#fff;font-size:16px}
+
+@media (max-width: 1080px){
+  .cat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cat,.cat:nth-child(4),.cat:nth-child(5){grid-column:auto}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .step:last-child{grid-column:1 / -1}
+  .sketch-box,.calc-box,.lead-box,.foot .wrap{grid-template-columns:1fr}
+  .sketch-photo img{min-height:320px}
+  .calc-pic,.lead-pic{min-height:280px}
+}
+@media (max-width: 860px){
+  .nav{display:none;position:absolute;left:0;right:0;top:74px;background:var(--deep);flex-direction:column;padding:12px 20px 20px;gap:4px;border-bottom:1px solid rgba(255,106,26,.18);z-index:90}
+  .nav a{padding:12px 14px;min-height:44px;display:flex;align-items:center}
+  .nav.open{display:flex}
+  .burger{display:flex}
+  .hdr-cta{display:none}
+  .hero h1{font-size:clamp(30px,8vw,46px)}
+  .kicker{letter-spacing:.1em}
+  .lead-form .btn,.calc-actions .btn{width:100%}
+}
+@media (max-width: 700px){
+  .wrap,.hero .wrap{width:min(1180px,calc(100% - 32px))}
+  .section{padding:64px 0}
+  .cat-grid,.steps,.form-row,.hero-stats,.calc-grid{grid-template-columns:1fr}
+  .cat,.cat:nth-child(4),.cat:nth-child(5),.step:last-child{grid-column:auto}
+  .hero{min-height:auto}
+  .hero .wrap{padding:88px 0 36px}
+  .lead-form,.calc-form{padding:24px 20px 28px}
+  .hero-actions .btn,.cat .btn,.calc-actions .btn{width:100%;white-space:normal;text-align:center}
+  .logo-name{font-size:20px}
+  .lead-copy h3,.calc-copy h3{font-size:26px}
+  .sketch-card{padding:22px 18px}
+  .kicker{max-width:100%;white-space:normal;text-align:center;line-height:1.35}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .btn:hover,.cat-pic img{transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#catalog">К содержанию</a>
+<header class="hdr">
+  <div class="wrap">
+    <a class="logo" href="#top">
+      <span class="logo-mark" aria-hidden="true"><i class="ph-bold ph-lightning"></i></span>
+      <span class="logo-name">СтальЦех<span>Металл на заказ</span></span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#catalog">Изделия</a>
+      <a href="#calc">Расчёт навеса</a>
+      <a href="#sketch">По эскизу</a>
+      <a href="#process">Этапы</a>
+      <a href="#faq">Вопросы</a>
+      <a href="#request">Звонок</a>
+    </nav>
+    <a class="btn btn-ember hdr-cta" href="#request">Заказать звонок</a>
+    <button class="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="nav" id="burger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-bg"><img src="img/hero-workshop.jpg" alt="Сварщик в цеху собирает каркас лофт-мебели" width="1280" height="720"></div>
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="kicker"><i class="ph-bold ph-wrench"></i> Сварочный цех · Работаем по эскизу</p>
+    <h1>Металл на заказ: лофт-мебель, навесы и хозблоки</h1>
+    <p class="lead">Делаем лофт-столы и кровати, навесы из поликарбоната, хозблоки и урны. Приезжаем на замер, считаем стоимость и устанавливаем изделие под ключ.</p>
+    <div class="hero-actions">
+      <a class="btn btn-ember" href="#calc">Рассчитать навес <i class="ph-bold ph-arrow-right"></i></a>
+      <a class="btn btn-ghost" href="#request">Заказать звонок</a>
+    </div>
+    <div class="hero-stats">
+      <div><b>Замер на объекте</b><span>Выезжаем, снимаем размеры и фото</span></div>
+      <div><b>По вашему эскизу</b><span>Пришлите чертёж или фото места</span></div>
+      <div><b>Установка под ключ</b><span>Доставляем и ставим на месте</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="catalog">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Каталог</p>
+        <h2>Что делаем в цеху</h2>
+      </div>
+      <p>Изделия под задачу: для дома, двора, кафе или городской среды. Фото работ в демо даны для примера.</p>
+    </div>
+    <div class="cat-grid">
+      <article class="cat">
+        <div class="cat-pic"><img src="img/loft-table.jpg" alt="Лофт-стол с дубовой столешницей на стальном каркасе" width="1152" height="864"></div>
+        <div class="cat-body">
+          <span class="tag">Мебель</span>
+          <h3>Лофт-столы</h3>
+          <p>Обеденные и рабочие столы на сварном каркасе, столешница из дерева, металла или камня по вашему выбору.</p>
+          <a class="btn btn-dark" href="#request" data-topic="Лофт-стол">Заказать стол</a>
+        </div>
+      </article>
+      <article class="cat">
+        <div class="cat-pic"><img src="img/loft-bed.jpg" alt="Кровать из матового чёрного металла в стиле лофт" width="1152" height="864"></div>
+        <div class="cat-body">
+          <span class="tag">Мебель</span>
+          <h3>Кровати из металла</h3>
+          <p>Каркасы и изголовья под матрас нужного размера. Порошковая окраска, устойчивая геометрия, без лишнего декора.</p>
+          <a class="btn btn-dark" href="#request" data-topic="Кровать из металла">Заказать кровать</a>
+        </div>
+      </article>
+      <article class="cat">
+        <div class="cat-pic"><img src="img/canopy.jpg" alt="Навес из поликарбоната на стальном каркасе у частного дома" width="1152" height="864"></div>
+        <div class="cat-body">
+          <span class="tag">Двор</span>
+          <h3>Навесы из поликарбоната</h3>
+          <p>Для авто, крыльца и зоны отдыха. Считаем каркас и покрытие под ваши размеры, ставим на участке.</p>
+          <a class="btn btn-dark" href="#calc" data-topic="Навес из поликарбоната">Рассчитать навес</a>
+        </div>
+      </article>
+      <article class="cat">
+        <div class="cat-pic"><img src="img/shed.jpg" alt="Металлический хозблок с двускатной крышей во дворе" width="1152" height="864"></div>
+        <div class="cat-body">
+          <span class="tag">Двор</span>
+          <h3>Хозблоки</h3>
+          <p>Сараи и бытовки из профнастила и сварного каркаса: под инструменты, инвентарь или мастерскую на участке.</p>
+          <a class="btn btn-dark" href="#request" data-topic="Хозблок">Заказать хозблок</a>
+        </div>
+      </article>
+      <article class="cat">
+        <div class="cat-pic"><img src="img/urn.jpg" alt="Дизайнерская металлическая урна на городской улице" width="1152" height="864"></div>
+        <div class="cat-body">
+          <span class="tag">Город</span>
+          <h3>Урны</h3>
+          <p>Уличные урны из стали для дворов, парков и входных групп. Партии под объект и покраска в нужный цвет.</p>
+          <a class="btn btn-dark" href="#request" data-topic="Урна">Заказать урны</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="calc">
+  <div class="wrap">
+    <div class="calc-box">
+      <div class="calc-pic">
+        <img src="img/canopy.jpg" alt="Готовый навес из поликарбоната на две машины" width="1152" height="864">
+        <div class="shade"></div>
+        <div class="calc-copy">
+          <h3>Примерный расчёт навеса</h3>
+          <p>Укажите длину и ширину, мы покажем ориентир по стоимости. Точную сумму скажем после замера.</p>
+        </div>
+      </div>
+      <div class="calc-form">
+        <p class="eyebrow">Калькулятор</p>
+        <h2>Примерная стоимость навеса</h2>
+        <p class="intro">Цены в калькуляторе примерные, для понимания порядка суммы. На итоговую стоимость влияют грунт, высота, фермы и толщина поликарбоната.</p>
+        <div class="calc-grid">
+          <label class="field"><span>Длина, м</span><input id="calc-len" type="number" inputmode="decimal" min="1" max="30" step="0.1" value="6"></label>
+          <label class="field"><span>Ширина, м</span><input id="calc-wid" type="number" inputmode="decimal" min="1" max="12" step="0.1" value="3.5"></label>
+        </div>
+        <label class="field"><span>Поликарбонат</span>
+          <select id="calc-sheet">
+            <option value="6">Сотовый 6 мм, 4 900 ₽/м² (пример)</option>
+            <option value="8" selected>Сотовый 8 мм, 5 700 ₽/м² (пример)</option>
+            <option value="10">Сотовый 10 мм, 6 500 ₽/м² (пример)</option>
+          </select>
+        </label>
+        <label class="check"><input id="calc-install" type="checkbox" checked> Добавить установку, 1 200 ₽/м² (примерная ставка)</label>
+        <p class="calc-err" id="calc-err" role="alert">Укажите длину и ширину больше нуля.</p>
+        <div class="calc-result" id="calc-result">
+          <b id="calc-sum"></b>
+          <em>Примерная стоимость, не оферта</em>
+          <p id="calc-note"></p>
+        </div>
+        <div class="calc-actions">
+          <button class="btn btn-ember" type="button" id="calc-btn">Рассчитать</button>
+          <a class="btn btn-ghost" href="#request" data-topic="Навес из поликарбоната" id="calc-lead">Заказать звонок</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sketch">
+  <div class="wrap">
+    <div class="sketch-box">
+      <div class="sketch-photo">
+        <img src="img/welder.jpg" alt="Сварщик в маске работает с металлом в цеху" width="1152" height="864">
+        <p class="sketch-caption">Собираем каркас по вашему эскизу или по фото места установки.</p>
+      </div>
+      <div class="sketch-card">
+        <p class="eyebrow">Индивидуально</p>
+        <h2>Сделаем по вашему эскизу</h2>
+        <p>Пришлите чертёж, набросок от руки или фото участка. Подскажем, как лучше собрать каркас, посчитаем материал и согласуем вид до запуска в работу.</p>
+        <label class="upload" id="upload-box">
+          <input type="file" id="sketch-file" accept="image/*">
+          <i class="ph-bold ph-upload-simple" aria-hidden="true"></i>
+          <b>Загрузить фото или эскиз</b>
+          <p>JPG, PNG или снимок с телефона. В этой демо-версии файл никуда не отправляется, на готовом сайте уйдёт вместе с заявкой.</p>
+        </label>
+        <div class="upload-preview" id="upload-preview">
+          <img id="upload-img" alt="Выбранный эскиз">
+          <span id="upload-name"></span>
+        </div>
+        <a class="btn btn-dark" href="#request" data-topic="Изделие по эскизу" style="margin-top:18px;width:100%">Оставить заявку с эскизом</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="process">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Как работаем</p>
+        <h2>От замера до установки</h2>
+      </div>
+      <p>Понятный путь без сюрпризов: сначала размеры и эскиз, затем изготовление в цеху и монтаж на месте.</p>
+    </div>
+    <div class="steps">
+      <article class="step">
+        <span class="step-num">01</span>
+        <h3>Замер</h3>
+        <p>Выезжаем на объект, снимаем размеры, фото и особенности площадки или помещения.</p>
+      </article>
+      <article class="step">
+        <span class="step-num">02</span>
+        <h3>Эскиз и расчёт</h3>
+        <p>Готовим схему изделия и примерную смету. Если есть ваш чертёж, считаем по нему.</p>
+      </article>
+      <article class="step">
+        <span class="step-num">03</span>
+        <h3>Согласование</h3>
+        <p>Утверждаем размеры, материал, цвет покрытия и срок. После этого запускаем работу в цеху.</p>
+      </article>
+      <article class="step">
+        <span class="step-num">04</span>
+        <h3>Изготовление</h3>
+        <p>Режем, свариваем и красим каркас. Поликарбонат, дерево или обшивку ставим уже на готовый металл.</p>
+      </article>
+      <article class="step">
+        <span class="step-num">05</span>
+        <h3>Установка</h3>
+        <p>Доставляем изделие, монтируем на месте, проверяем геометрию и сдаём работу.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Ответы</p>
+        <h2>Частые вопросы</h2>
+      </div>
+      <p>Коротко о сроках, ценах и том, как передать эскиз. Условия в демо даны для примера.</p>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>Сколько занимает работа?<i class="ph-bold ph-plus" aria-hidden="true"></i></summary>
+        <p>Мебель обычно 7–14 дней, навес или хозблок 10–21 день после согласования эскиза. Срок зависит от загрузки цеха и сложности каркаса. Цифры в демо примерные.</p>
+      </details>
+      <details>
+        <summary>Можно ли прислать свой эскиз?<i class="ph-bold ph-plus" aria-hidden="true"></i></summary>
+        <p>Да. Подойдёт чертёж, набросок от руки или фото места, куда изделие встанет. Мы проверим несущую схему, подскажем по материалу и посчитаем стоимость.</p>
+      </details>
+      <details>
+        <summary>Цены в калькуляторе окончательные?<i class="ph-bold ph-plus" aria-hidden="true"></i></summary>
+        <p>Нет, это ориентир. Ставки в калькуляторе примерные. На сумму влияют грунт, высота, шаг ферм, толщина поликарбоната и доставка. Точную стоимость называем после замера.</p>
+      </details>
+      <details>
+        <summary>Что входит в замер?<i class="ph-bold ph-plus" aria-hidden="true"></i></summary>
+        <p>Выезд, снятие размеров, фото объекта и короткая консультация по конструкции. Если объект далеко, сначала считаем по вашим размерам, затем уточняем на месте.</p>
+      </details>
+      <details>
+        <summary>Вы ставите изделия сами?<i class="ph-bold ph-plus" aria-hidden="true"></i></summary>
+        <p>Да, доставляем и монтируем. Можно заказать только изготовление, если установку берёте на себя. Географию выезда уточним по заявке.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="request">
+  <div class="wrap">
+    <div class="lead-box">
+      <div class="lead-pic">
+        <img src="img/hero-workshop.jpg" alt="Работа сварочного цеха: сборка металлического каркаса" width="1280" height="720">
+        <div class="shade"></div>
+        <div class="lead-copy">
+          <h3>Перезвоним и уточним задачу</h3>
+          <p>Назовите изделие и размеры, если они уже есть. Дальше согласуем замер или расчёт по эскизу.</p>
+        </div>
+      </div>
+      <div class="lead-form">
+        <p class="eyebrow">Обратный звонок</p>
+        <h2>Оставьте имя и телефон</h2>
+        <p>В демо заявка никуда не уходит. На готовом сайте она придёт в почту или мессенджер цеха.</p>
+        <form id="lead-form" novalidate>
+          <div class="form-row">
+            <label class="field"><span>Имя</span><input name="name" type="text" autocomplete="name" required></label>
+            <label class="field"><span>Телефон</span><input name="phone" type="tel" autocomplete="tel" required></label>
+          </div>
+          <label class="field"><span>Что нужно</span>
+            <select name="topic" id="topic">
+              <option value="">Выберите изделие</option>
+              <option>Лофт-стол</option>
+              <option>Кровать из металла</option>
+              <option>Навес из поликарбоната</option>
+              <option>Хозблок</option>
+              <option>Урна</option>
+              <option>Изделие по эскизу</option>
+            </select>
+          </label>
+          <label class="field"><span>Комментарий</span><textarea name="comment" rows="3"></textarea></label>
+          <label class="consent"><input type="checkbox" name="agree" required> <span>Соглашаюсь на обработку персональных данных. <a href="#privacy">Политика обработки данных</a></span></label>
+          <p class="form-err" id="form-err" role="alert">Заполните имя, телефон и подтвердите согласие.</p>
+          <p class="form-ok form-success" id="form-ok" data-form-ok tabindex="-1">Спасибо, мы свяжемся с вами.</p>
+          <button class="btn btn-ember" type="submit">Заказать звонок <i class="ph-bold ph-phone"></i></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div>
+      <a class="logo" href="#top">
+        <span class="logo-mark" aria-hidden="true"><i class="ph-bold ph-lightning"></i></span>
+        <span class="logo-name">СтальЦех<span>Металл на заказ</span></span>
+      </a>
+      <p>Сварочный цех: лофт-мебель, навесы из поликарбоната, хозблоки и урны на заказ. Замер, изготовление и установка.</p>
+    </div>
+    <div>
+      <h4>Разделы</h4>
+      <ul>
+        <li><a href="#catalog">Изделия</a></li>
+        <li><a href="#calc">Расчёт навеса</a></li>
+        <li><a href="#sketch">По эскизу</a></li>
+        <li><a href="#process">Этапы</a></li>
+        <li><a href="#request">Звонок</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Контакты</h4>
+      <ul>
+        <li>+7 (000) 000-00-00</li>
+        <li>info@stalceh.example</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap legal">
+    <p class="fine">Демо-версия. Цены, сроки и фото изделий даны для примера.</p>
+    <div class="privacy" id="privacy">
+      <h3>Политика обработки персональных данных</h3>
+      <p>В этой демо-версии форма ничего не отправляет и не сохраняет. На готовом сайте имя и телефон используются только чтобы перезвонить по заявке, в соответствии с 152-ФЗ. Данные не передаются третьим лицам, кроме сервисов, нужных для доставки заявки. Чтобы уточнить или удалить данные, напишите на контакт, указанный в этом блоке.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var burger = document.getElementById('burger');
+  var nav = document.getElementById('nav');
+  function setNav(open){
+    nav.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  burger.addEventListener('click', function(){
+    setNav(!nav.classList.contains('open'));
+  });
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ setNav(false); });
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') setNav(false);
+  });
+  window.addEventListener('resize', function(){
+    if (window.innerWidth > 860) setNav(false);
+  });
+
+  var topic = document.getElementById('topic');
+  function pick(val){
+    if (!topic || !val) return;
+    for (var i=0;i<topic.options.length;i++){
+      if (topic.options[i].text === val){ topic.selectedIndex = i; break; }
+    }
+  }
+  document.querySelectorAll('[data-topic]').forEach(function(el){
+    el.addEventListener('click', function(){ pick(el.getAttribute('data-topic')); });
+  });
+
+  var rates = {6: 4900, 8: 5700, 10: 6500};
+  var installRate = 1200;
+  var minSum = 18000;
+  var len = document.getElementById('calc-len');
+  var wid = document.getElementById('calc-wid');
+  var sheet = document.getElementById('calc-sheet');
+  var inst = document.getElementById('calc-install');
+  var result = document.getElementById('calc-result');
+  var sumEl = document.getElementById('calc-sum');
+  var note = document.getElementById('calc-note');
+  var err = document.getElementById('calc-err');
+
+  function format(n){
+    return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' ₽';
+  }
+  function calc(){
+    var l = parseFloat(String(len.value).replace(',', '.'));
+    var w = parseFloat(String(wid.value).replace(',', '.'));
+    err.classList.remove('show');
+    result.classList.remove('show');
+    if (!(l > 0) || !(w > 0)){
+      err.classList.add('show');
+      return;
+    }
+    var area = Math.round(l * w * 10) / 10;
+    var thick = sheet.value;
+    var rate = rates[thick] || rates[8];
+    var total = area * rate;
+    if (inst.checked) total += area * installRate;
+    if (total < minSum) total = minSum;
+    sumEl.textContent = 'от ' + format(total);
+    note.textContent = 'Площадь ' + area + ' м², поликарбонат ' + thick + ' мм' + (inst.checked ? ', с установкой' : ', без установки') + '. Минимум в этом расчёте 18 000 ₽.';
+    result.classList.add('show');
+  }
+  document.getElementById('calc-btn').addEventListener('click', calc);
+  calc();
+
+  var file = document.getElementById('sketch-file');
+  var preview = document.getElementById('upload-preview');
+  var previewImg = document.getElementById('upload-img');
+  var previewName = document.getElementById('upload-name');
+  var lastUrl = null;
+  file.addEventListener('change', function(){
+    var f = file.files && file.files[0];
+    if (!f){
+      preview.classList.remove('show');
+      previewImg.removeAttribute('src');
+      return;
+    }
+    if (lastUrl) URL.revokeObjectURL(lastUrl);
+    lastUrl = URL.createObjectURL(f);
+    previewImg.src = lastUrl;
+    previewName.textContent = f.name;
+    preview.classList.add('show');
+  });
+
+  var form = document.getElementById('lead-form');
+  var ok = document.getElementById('form-ok');
+  var formErr = document.getElementById('form-err');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    ok.classList.remove('show');
+    formErr.classList.remove('show');
+    if (!form.reportValidity()){
+      formErr.classList.add('show');
+      return;
+    }
+    form.reset();
+    ok.classList.add('show');
+    ok.focus();
+  });
+})();
+</script>
+</body>
+</html>

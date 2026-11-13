@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Italcampo — агротехника из Италии</title>
+<meta name="description" content="Демолендинг поставщика итальянской агротехники: уборка ореха, обработка почвы, полив, хранение и фасовка, саженцы. Цифры и отзывы в демо даны для примера.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23123C2B'/%3E%3Cpath d='M8 22l8-14 8 14' fill='none' stroke='%23E8B423' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --green:#123C2B; --green-mid:#1A5A3D; --green-deep:#0A2419;
+  --leaf:#247A4C; --gold:#E8B423; --gold-d:#C49212; --gold-s:#F6D36A;
+  --cream:#F3EFE4; --paper:#FAF8F3; --ink:#101610; --muted:#5A635C;
+  --line:#D8D3C6; --card:#fff; --terra:#C45C26;
+  --r:22px; --sh:0 22px 50px -28px rgba(10,36,25,.45);
+  --font:"Manrope",system-ui,sans-serif; --display:"Barlow Condensed",Impact,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--font);color:var(--ink);background:var(--cream);-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.55}
+img{max-width:100%;display:block;height:auto}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{width:min(1180px,calc(100% - 40px));margin-inline:auto}
+.skip{position:absolute;left:-999px;top:8px;background:#000;color:#fff;padding:8px 12px;z-index:200}
+.skip:focus{left:8px}
+
+.hdr{position:sticky;top:0;z-index:80;background:rgba(10,36,25,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(232,180,35,.18)}
+.hdr .wrap{display:flex;align-items:center;justify-content:space-between;height:74px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;color:#fff;min-width:0}
+.logo-mark{width:38px;height:38px;border-radius:10px;background:var(--gold);color:var(--green-deep);display:grid;place-items:center;flex:none}
+.logo-mark i{font-size:22px}
+.logo-name{font-family:var(--display);font-weight:800;font-size:26px;letter-spacing:.04em;line-height:1;text-transform:uppercase}
+.logo-name span{display:block;font-family:var(--font);font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--gold-s);margin-top:3px;text-transform:uppercase}
+
+.nav{display:flex;align-items:center;gap:2px}
+.nav a{padding:10px 12px;border-radius:999px;font-weight:600;font-size:14.5px;color:#e8efe8}
+.nav a:hover,.nav a:focus-visible{background:rgba(255,255,255,.1);color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:999px;border:0;font-weight:800;font-size:15px;cursor:pointer;transition:transform .2s,background .2s,box-shadow .2s,color .2s;white-space:nowrap}
+.btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.btn:hover{transform:translateY(-1px)}
+.btn i{font-size:18px}
+.btn-gold{background:var(--gold);color:var(--green-deep);box-shadow:0 12px 24px -12px rgba(232,180,35,.9)}
+.btn-gold:hover{background:var(--gold-s)}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.55)}
+.btn-ghost:hover{background:rgba(255,255,255,.1)}
+.btn-dark{background:var(--green);color:#fff}
+.btn-dark:hover{background:var(--green-mid)}
+.hdr-cta{padding:11px 18px;font-size:14px}
+.burger{display:none;width:44px;height:44px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);align-items:center;justify-content:center;flex-direction:column;gap:5px;cursor:pointer}
+.burger span{display:block;width:18px;height:2px;background:#fff;border-radius:2px}
+
+.hero{position:relative;min-height:min(92vh,860px);display:flex;align-items:flex-end;color:#fff;isolation:isolate;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:-2}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.hero-shade{position:absolute;inset:0;z-index:-1;background:
+  linear-gradient(90deg,rgba(8,22,16,.82) 0%,rgba(8,22,16,.55) 42%,rgba(8,22,16,.18) 100%),
+  linear-gradient(180deg,rgba(8,22,16,.15) 0%,rgba(8,22,16,.55) 100%)}
+.hero .wrap{padding:120px 0 56px;width:min(1180px,calc(100% - 40px))}
+.kicker{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:0 0 16px}
+.kicker i{font-size:16px}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(48px,8vw,96px);line-height:.88;letter-spacing:.01em;text-transform:uppercase;margin:0 0 22px;max-width:14ch;text-wrap:balance}
+.hero p.lead{font-size:18px;line-height:1.5;max-width:540px;margin:0 0 28px;color:#e8efe8;font-weight:500}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:36px}
+.hero-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:640px}
+.hero-stats div{background:rgba(10,36,25,.45);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:14px 16px;backdrop-filter:blur(8px)}
+.hero-stats b{display:block;font-family:var(--display);font-size:32px;font-weight:800;line-height:1;color:var(--gold)}
+.hero-stats span{display:block;margin-top:4px;font-size:12px;font-weight:600;color:#d7ddd7;letter-spacing:.02em}
+
+.section{padding:88px 0}
+.section.alt{background:#fff}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:36px;flex-wrap:wrap}
+.eyebrow{margin:0 0 8px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--leaf)}
+h2{font-family:var(--display);font-weight:800;font-size:clamp(34px,5vw,56px);line-height:.95;letter-spacing:.01em;text-transform:uppercase;margin:0;max-width:16ch}
+.section-head p{max-width:420px;margin:0;color:var(--muted);font-weight:500}
+
+.cat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.cat{position:relative;display:block;min-height:280px;border-radius:var(--r);overflow:hidden;color:#fff;box-shadow:var(--sh);isolation:isolate}
+.cat img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.cat:hover img{transform:scale(1.06)}
+.cat-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,22,16,.05) 20%,rgba(8,22,16,.82) 100%)}
+.cat-body{position:relative;z-index:1;height:100%;min-height:280px;display:flex;flex-direction:column;justify-content:flex-end;padding:22px 22px 20px}
+.cat h3{margin:0 0 6px;font-family:var(--display);font-size:28px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;line-height:1}
+.cat p{margin:0;font-size:14px;color:#e4ebe4;font-weight:500}
+.cat i{margin-top:10px;font-size:20px;color:var(--gold)}
+
+.prod-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.prod{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 30px -24px rgba(10,36,25,.5);min-width:0}
+.prod-pic{aspect-ratio:4/3;overflow:hidden;background:#e8e4d8}
+.prod-pic img{width:100%;height:100%;object-fit:cover}
+.prod-body{padding:20px 20px 22px;display:flex;flex-direction:column;gap:12px;flex:1}
+.prod h3{margin:0;font-family:var(--display);font-size:26px;line-height:1.05;text-transform:uppercase;letter-spacing:.02em}
+.specs{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.specs li{display:flex;align-items:flex-start;gap:8px;font-size:14px;color:#2c352f;font-weight:500}
+.specs i{color:var(--leaf);margin-top:1px;flex:none}
+.prod-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:6px}
+.price{font-weight:800;font-size:14px;color:var(--green);letter-spacing:.02em}
+.prod .btn{padding:11px 16px;font-size:14px}
+
+.svc-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:stretch}
+.svc-list{display:grid;gap:12px}
+.svc{display:grid;grid-template-columns:52px 1fr;gap:14px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 18px}
+.svc-ico{width:52px;height:52px;border-radius:14px;background:var(--green);color:var(--gold);display:grid;place-items:center;font-size:24px}
+.svc h3{margin:0 0 4px;font-size:17px;font-weight:800}
+.svc p{margin:0;color:var(--muted);font-size:14.5px;font-weight:500}
+.svc-photo{border-radius:var(--r);overflow:hidden;min-height:100%;position:relative}
+.svc-photo img{width:100%;height:100%;object-fit:cover}
+.svc-caption{position:absolute;left:16px;right:16px;bottom:16px;background:rgba(10,36,25,.82);color:#fff;border-radius:14px;padding:12px 14px;font-size:14px;font-weight:600}
+
+.adv{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.adv article{background:var(--green);color:#fff;border-radius:var(--r);padding:26px 22px;min-width:0}
+.adv b{display:block;font-family:var(--display);font-size:clamp(40px,5vw,58px);line-height:1;color:var(--gold);font-weight:800}
+.adv span{display:block;margin-top:8px;font-size:15px;font-weight:600;color:#dce6de}
+.adv-note{margin:14px 0 0;font-size:13px;color:var(--muted);font-weight:600}
+
+.partners{display:flex;flex-wrap:wrap;gap:10px}
+.partners span{display:inline-flex;align-items:center;padding:12px 18px;border-radius:999px;border:1.5px solid var(--line);background:#fff;font-weight:800;font-size:15px;letter-spacing:.02em;color:var(--green)}
+
+.lead-box{display:grid;grid-template-columns:1fr 1.05fr;border-radius:28px;overflow:hidden;background:var(--green);color:#fff;box-shadow:var(--sh)}
+.lead-pic{position:relative;min-height:420px}
+.lead-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.lead-pic .shade{position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(8,22,16,.55))}
+.lead-copy{position:absolute;left:24px;right:24px;bottom:24px}
+.lead-copy h3{margin:0 0 6px;font-family:var(--display);font-size:36px;line-height:1;text-transform:uppercase}
+.lead-form{padding:36px 36px 40px}
+.lead-form h2{color:#fff;max-width:none}
+.lead-form .eyebrow{color:var(--gold)}
+.lead-form > p{color:#d7e0d7;margin:8px 0 22px;max-width:46ch}
+form{display:grid;gap:14px}
+.field{display:grid;gap:6px}
+.field span{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-s)}
+.field input,.field select,.field textarea{width:100%;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);color:#fff;border-radius:14px;padding:12px 14px;min-height:48px}
+.field textarea{min-height:96px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--gold);outline-offset:1px}
+.field select option{color:var(--ink)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-ok{display:none;background:rgba(232,180,35,.18);border:1px solid rgba(232,180,35,.4);border-radius:16px;padding:14px 16px;color:#fff;font-weight:700}
+.form-ok.show{display:block}
+.form-err{display:none;color:#ffd0c4;font-size:14px;font-weight:700}
+.form-err.show{display:block}
+
+.foot{background:var(--green-deep);color:#c9d4cc;padding:36px 0 40px}
+.foot .wrap{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:28px;align-items:start}
+.foot .legal{display:block}
+.foot a:hover{color:#fff}
+.foot .logo-name{color:#fff}
+.foot p{margin:10px 0 0;font-size:14px;max-width:36ch}
+.foot h4{margin:0 0 10px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:800}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.foot .fine{margin-top:28px;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);font-size:13px;color:#8b968e;max-width:none}
+
+@media (max-width: 1080px){
+  .cat-grid,.prod-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .adv{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .svc-grid,.lead-box,.foot .wrap{grid-template-columns:1fr}
+  .svc-photo{min-height:280px}
+  .lead-pic{min-height:280px}
+}
+@media (max-width: 860px){
+  .nav{display:none;position:absolute;left:0;right:0;top:74px;background:var(--green-deep);flex-direction:column;padding:12px 20px 20px;gap:4px;border-bottom:1px solid rgba(232,180,35,.18)}
+  .nav a{padding:12px 14px}
+  .nav.open{display:flex}
+  .burger{display:flex}
+  .hdr-cta{display:none}
+  .hero h1{font-size:clamp(40px,11.2vw,72px)}
+  .kicker{letter-spacing:.1em}
+  .hero-stats{grid-template-columns:1fr 1fr 1fr}
+}
+@media (max-width: 620px){
+  .wrap,.hero .wrap{width:min(1180px,calc(100% - 32px))}
+  .section{padding:64px 0}
+  .cat-grid,.prod-grid,.form-row,.hero-stats{grid-template-columns:1fr}
+  .hero{min-height:auto}
+  .hero .wrap{padding:96px 0 40px}
+  .hero-stats div:last-child{grid-column:1}
+  .lead-form{padding:24px 20px 28px}
+  .hero-actions .btn{width:100%}
+  .prod-foot{flex-direction:column;align-items:stretch}
+  .prod-foot .btn{width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .btn:hover,.cat img{transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#catalog">К содержанию</a>
+<header class="hdr">
+  <div class="wrap">
+    <a class="logo" href="#top">
+      <span class="logo-mark" aria-hidden="true"><i class="ph-bold ph-leaf"></i></span>
+      <span class="logo-name">Italcampo<span>Агротехника из Италии</span></span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#catalog">Каталог</a>
+      <a href="#machines">Техника</a>
+      <a href="#services">Услуги</a>
+      <a href="#partners">Партнёры</a>
+      <a href="#request">Заявка</a>
+    </nav>
+    <a class="btn btn-gold hdr-cta" href="#request">Запросить цену</a>
+    <button class="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="nav" id="burger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-bg"><img src="img/hero-orchard.jpg" alt="Самоходный комбайн в ореховом саду на рассвете" width="1280" height="720"></div>
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="kicker"><i class="ph-bold ph-map-pin"></i> Поставки из Италии · Сопровождение</p>
+    <h1>Агротехника из Италии</h1>
+    <p class="lead">Уборочные машины для ореха и фундука, обработка почвы, системы полива, линии очистки и фасовки, саженцы. Проект сада и консультации итальянских агрономов — в одном контуре с поставкой техники.</p>
+    <div class="hero-actions">
+      <a class="btn btn-gold" href="#catalog">Смотреть каталог <i class="ph-bold ph-arrow-right"></i></a>
+      <a class="btn btn-ghost" href="#request">Запросить цену</a>
+    </div>
+    <div class="hero-stats">
+      <div><b>15</b><span>лет с заводами Италии</span></div>
+      <div><b>40+</b><span>хозяйств в России и СНГ</span></div>
+      <div><b>5</b><span>направления техники</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="catalog">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Разделы</p>
+        <h2>Каталог под ваш сад</h2>
+      </div>
+      <p>От закладки сада до сбора, сушки и упаковки урожая. Подберём линейку под площадь и культуру.</p>
+    </div>
+    <div class="cat-grid">
+      <a class="cat" href="#machines" data-topic="Уборка ореха">
+        <img src="img/machine-harvester.jpg" alt="Самоходный комбайн собирает орех в саду" width="1152" height="864">
+        <span class="cat-shade"></span>
+        <span class="cat-body">
+          <h3>Уборка ореха</h3>
+          <p>Самоходные комбайны и прицепные сборщики для фундука, грецкого ореха, миндаля и каштана.</p>
+          <i class="ph-bold ph-arrow-right"></i>
+        </span>
+      </a>
+      <a class="cat" href="#machines" data-topic="Обработка почвы">
+        <img src="img/machine-soil.jpg" alt="Трактор с культиватором в междурядье сада" width="1152" height="864">
+        <span class="cat-shade"></span>
+        <span class="cat-body">
+          <h3>Обработка почвы</h3>
+          <p>Междурядные культиваторы и машины для подготовки почвы под сад.</p>
+          <i class="ph-bold ph-arrow-right"></i>
+        </span>
+      </a>
+      <a class="cat" href="#machines" data-topic="Системы полива">
+        <img src="img/machine-irrigation.jpg" alt="Капельный полив в молодом саду на закате" width="1152" height="864">
+        <span class="cat-shade"></span>
+        <span class="cat-body">
+          <h3>Полив</h3>
+          <p>Проект, поставка и запуск капельного полива и фертигации.</p>
+          <i class="ph-bold ph-arrow-right"></i>
+        </span>
+      </a>
+      <a class="cat" href="#machines" data-topic="Хранение и переработка">
+        <img src="img/machine-storage.jpg" alt="Линия очистки и сушки ореха на складе" width="1152" height="864">
+        <span class="cat-shade"></span>
+        <span class="cat-body">
+          <h3>Хранение и переработка</h3>
+          <p>Очистка, калибровка, сушка, обжарка и хранение ореха.</p>
+          <i class="ph-bold ph-arrow-right"></i>
+        </span>
+      </a>
+      <a class="cat" href="#machines" data-topic="Фасовка">
+        <img src="img/machine-packing.jpg" alt="Фасовочная линия с весовым дозатором" width="1152" height="864">
+        <span class="cat-shade"></span>
+        <span class="cat-body">
+          <h3>Фасовка</h3>
+          <p>Упаковочные линии и весовые дозаторы для ореха и сухофруктов.</p>
+          <i class="ph-bold ph-arrow-right"></i>
+        </span>
+      </a>
+      <a class="cat" href="#machines" data-topic="Саженцы">
+        <img src="img/seedlings.jpg" alt="Саженцы фундука в питомнике" width="1152" height="864">
+        <span class="cat-shade"></span>
+        <span class="cat-body">
+          <h3>Саженцы</h3>
+          <p>Сорта фундука и плодовых культур из итальянских питомников.</p>
+          <i class="ph-bold ph-arrow-right"></i>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="machines">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Техника</p>
+        <h2>Шесть позиций для старта</h2>
+      </div>
+      <p>Характеристики и комплектации уточняем под хозяйство. Цена — по запросу после состава заказа.</p>
+    </div>
+    <div class="prod-grid">
+      <article class="prod">
+        <div class="prod-pic"><img src="img/machine-harvester.jpg" alt="Самоходный комбайн IC-4200 в ореховом саду" width="1152" height="864"></div>
+        <div class="prod-body">
+          <h3>Комбайн IC-4200</h3>
+          <ul class="specs">
+            <li><i class="ph-bold ph-check-circle"></i> Сбор с земли: фундук, грецкий орех, миндаль, каштан</li>
+            <li><i class="ph-bold ph-check-circle"></i> Производительность до 1,2 га/ч</li>
+            <li><i class="ph-bold ph-check-circle"></i> Двигатель 75 л.с., полный привод</li>
+          </ul>
+          <div class="prod-foot">
+            <span class="price">Цена по запросу</span>
+            <a class="btn btn-dark" href="#request" data-machine="Комбайн IC-4200">Запросить цену</a>
+          </div>
+        </div>
+      </article>
+      <article class="prod">
+        <div class="prod-pic"><img src="img/machine-collector.jpg" alt="Прицепной сборщик ореха IC-1800 за трактором" width="1152" height="864"></div>
+        <div class="prod-body">
+          <h3>Сборщик IC-1800</h3>
+          <ul class="specs">
+            <li><i class="ph-bold ph-check-circle"></i> Для хозяйств от 5 гектаров</li>
+            <li><i class="ph-bold ph-check-circle"></i> Регулируемая высота забора</li>
+            <li><i class="ph-bold ph-check-circle"></i> Бункер 1 800 литров</li>
+          </ul>
+          <div class="prod-foot">
+            <span class="price">Цена по запросу</span>
+            <a class="btn btn-dark" href="#request" data-machine="Сборщик IC-1800">Запросить цену</a>
+          </div>
+        </div>
+      </article>
+      <article class="prod">
+        <div class="prod-pic"><img src="img/machine-soil.jpg" alt="Междурядный культиватор IC-Soil 7" width="1152" height="864"></div>
+        <div class="prod-body">
+          <h3>Культиватор IC-Soil 7</h3>
+          <ul class="specs">
+            <li><i class="ph-bold ph-check-circle"></i> Семь рабочих органов</li>
+            <li><i class="ph-bold ph-check-circle"></i> Междурядье 3–6 метров</li>
+            <li><i class="ph-bold ph-check-circle"></i> Гидравлическая регулировка</li>
+          </ul>
+          <div class="prod-foot">
+            <span class="price">Цена по запросу</span>
+            <a class="btn btn-dark" href="#request" data-machine="Культиватор IC-Soil 7">Запросить цену</a>
+          </div>
+        </div>
+      </article>
+      <article class="prod">
+        <div class="prod-pic"><img src="img/machine-irrigation.jpg" alt="Система капельного полива в молодом саду" width="1152" height="864"></div>
+        <div class="prod-body">
+          <h3>Капельный полив под ключ</h3>
+          <ul class="specs">
+            <li><i class="ph-bold ph-check-circle"></i> Проект, поставка и пуск</li>
+            <li><i class="ph-bold ph-check-circle"></i> Фильтрация и фертигация</li>
+            <li><i class="ph-bold ph-check-circle"></i> Для садов ореха и фруктов</li>
+          </ul>
+          <div class="prod-foot">
+            <span class="price">Цена по запросу</span>
+            <a class="btn btn-dark" href="#request" data-machine="Капельный полив под ключ">Запросить цену</a>
+          </div>
+        </div>
+      </article>
+      <article class="prod">
+        <div class="prod-pic"><img src="img/machine-storage.jpg" alt="Линия очистки и сушки ореха" width="1152" height="864"></div>
+        <div class="prod-body">
+          <h3>Линия очистки и сушки</h3>
+          <ul class="specs">
+            <li><i class="ph-bold ph-check-circle"></i> Калибровка, сушка, хранение</li>
+            <li><i class="ph-bold ph-check-circle"></i> Производительность 800 кг/ч</li>
+            <li><i class="ph-bold ph-check-circle"></i> Пищевая нержавеющая сталь</li>
+          </ul>
+          <div class="prod-foot">
+            <span class="price">Цена по запросу</span>
+            <a class="btn btn-dark" href="#request" data-machine="Линия очистки и сушки">Запросить цену</a>
+          </div>
+        </div>
+      </article>
+      <article class="prod">
+        <div class="prod-pic"><img src="img/machine-packing.jpg" alt="Фасовочная линия для ореха" width="1152" height="864"></div>
+        <div class="prod-body">
+          <h3>Фасовочная линия 0,2–5 кг</h3>
+          <ul class="specs">
+            <li><i class="ph-bold ph-check-circle"></i> Взвешивание и упаковка</li>
+            <li><i class="ph-bold ph-check-circle"></i> Для ореха и сухофруктов</li>
+            <li><i class="ph-bold ph-check-circle"></i> Сенсорная панель управления</li>
+          </ul>
+          <div class="prod-foot">
+            <span class="price">Цена по запросу</span>
+            <a class="btn btn-dark" href="#request" data-machine="Фасовочная линия 0,2–5 кг">Запросить цену</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Сопровождение</p>
+        <h2>Не только техника</h2>
+      </div>
+      <p>Помогаем заложить сад, выбрать сорт и договориться с заводами. Едем на выставки и на поля вместе с вами.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-list">
+        <article class="svc">
+          <div class="svc-ico" aria-hidden="true"><i class="ph-bold ph-user-focus"></i></div>
+          <div>
+            <h3>Консультации итальянских агрономов</h3>
+            <p>Анализ почвы и климата, подбор сорта, защита и питание, рекомендации по сбору.</p>
+          </div>
+        </article>
+        <article class="svc">
+          <div class="svc-ico" aria-hidden="true"><i class="ph-bold ph-tree"></i></div>
+          <div>
+            <h3>Проекты закладки садов</h3>
+            <p>Схема посадки, подготовка почвы, полив и подбор техники под площадь хозяйства.</p>
+          </div>
+        </article>
+        <article class="svc">
+          <div class="svc-ico" aria-hidden="true"><i class="ph-bold ph-translate"></i></div>
+          <div>
+            <h3>Переводчик на переговорах</h3>
+            <p>Сопровождение сделок с итальянскими заводами и питомниками, без потери деталей.</p>
+          </div>
+        </article>
+        <article class="svc">
+          <div class="svc-ico" aria-hidden="true"><i class="ph-bold ph-chalkboard-teacher"></i></div>
+          <div>
+            <h3>Семинары</h3>
+            <p>Тематические встречи по агротехнике ореха, поливу и послеуборочной обработке.</p>
+          </div>
+        </article>
+        <article class="svc">
+          <div class="svc-ico" aria-hidden="true"><i class="ph-bold ph-airplane-tilt"></i></div>
+          <div>
+            <h3>Выезды и выставки в Европе</h3>
+            <p>Организуем поездки специалистов, визиты на производства и стенды выставок.</p>
+          </div>
+        </article>
+      </div>
+      <div class="svc-photo">
+        <img src="img/seedlings.jpg" alt="Ряды саженцев фундука у теплицы питомника" width="1152" height="864">
+        <p class="svc-caption">Саженцы из итальянских питомников — под ваш климат и задачу сада.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="advantages">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Почему мы</p>
+        <h2>Коротко о подходе</h2>
+      </div>
+      <p>Работаем как поставщик и как сопровождение проекта: от сорта и полива до комбайна и линии очистки.</p>
+    </div>
+    <div class="adv">
+      <article><b>15</b><span>лет прямых поставок с итальянских заводов</span></article>
+      <article><b>40+</b><span>хозяйств, которым подобрали технику и сорта</span></article>
+      <article><b>120+</b><span>единиц техники, поставленных в поля</span></article>
+      <article><b>1</b><span>контур: сад, полив, уборка и переработка</span></article>
+    </div>
+    <p class="adv-note">Цифры на этой странице даны для примера.</p>
+  </div>
+</section>
+
+<section class="section" id="partners">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Заводы и питомники</p>
+        <h2>Партнёры в Италии</h2>
+      </div>
+      <p>Работаем с производителями уборочной техники, питомниками и агроконсультантами.</p>
+    </div>
+    <div class="partners">
+      <span>FACMA</span>
+      <span>CIMINA</span>
+      <span>Vivai Nicola</span>
+      <span>AgroTeamConsulting</span>
+      <span>Nocciolare</span>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="request">
+  <div class="wrap">
+    <div class="lead-box">
+      <div class="lead-pic">
+        <img src="img/hero-orchard.jpg" alt="Ряды орехового сада и уборочная машина" width="1280" height="720">
+        <div class="shade"></div>
+        <div class="lead-copy">
+          <h3>Подберём технику под ваш сад</h3>
+          <p>Напишите площадь, культуру и что нужно в первую очередь — комбайн, полив или линия.</p>
+        </div>
+      </div>
+      <div class="lead-form">
+        <p class="eyebrow">Заявка</p>
+        <h2>Запросить цену</h2>
+        <p>Оставьте имя и телефон. Менеджер уточнит комплект и пришлёт предложение.</p>
+        <form id="lead-form" novalidate>
+          <label class="field"><span>Имя</span><input name="name" type="text" autocomplete="name" required></label>
+          <div class="form-row">
+            <label class="field"><span>Телефон</span><input name="phone" type="tel" autocomplete="tel" required></label>
+            <label class="field"><span>Интересует</span>
+              <select name="topic" id="topic">
+                <option value="">Выберите раздел</option>
+                <option>Комбайн IC-4200</option>
+                <option>Сборщик IC-1800</option>
+                <option>Культиватор IC-Soil 7</option>
+                <option>Капельный полив под ключ</option>
+                <option>Линия очистки и сушки</option>
+                <option>Фасовочная линия 0,2–5 кг</option>
+                <option>Уборка ореха</option>
+                <option>Обработка почвы</option>
+                <option>Системы полива</option>
+                <option>Хранение и переработка</option>
+                <option>Фасовка</option>
+                <option>Саженцы</option>
+                <option>Консультация агронома</option>
+              </select>
+            </label>
+          </div>
+          <label class="field"><span>Комментарий</span><textarea name="comment" rows="3"></textarea></label>
+          <p class="form-err" id="form-err" role="alert">Заполните имя и телефон.</p>
+          <p class="form-ok form-success" id="form-ok" data-form-ok tabindex="-1">Спасибо, менеджер свяжется с вами.</p>
+          <button class="btn btn-gold" type="submit">Отправить заявку <i class="ph-bold ph-paper-plane-tilt"></i></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div>
+      <a class="logo" href="#top">
+        <span class="logo-mark" aria-hidden="true"><i class="ph-bold ph-leaf"></i></span>
+        <span class="logo-name">Italcampo<span>Агротехника из Италии</span></span>
+      </a>
+      <p>Поставка итальянской агротехники, саженцев и сопровождение хозяйств.</p>
+    </div>
+    <div>
+      <h4>Разделы</h4>
+      <ul>
+        <li><a href="#catalog">Каталог</a></li>
+        <li><a href="#machines">Техника</a></li>
+        <li><a href="#services">Услуги</a></li>
+        <li><a href="#request">Заявка</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Контакты</h4>
+      <ul>
+        <li>+7 (000) 000-00-00</li>
+        <li>info@italcampo.example</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap legal">
+    <p class="fine">Демо-версия. Цифры, цены и отзывы даны для примера.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var burger = document.getElementById('burger');
+  var nav = document.getElementById('nav');
+  burger.addEventListener('click', function(){
+    var open = nav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      nav.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  var topic = document.getElementById('topic');
+  function pick(val){
+    if (!topic || !val) return;
+    for (var i=0;i<topic.options.length;i++){
+      if (topic.options[i].text === val){ topic.selectedIndex = i; break; }
+    }
+  }
+  document.querySelectorAll('[data-machine]').forEach(function(el){
+    el.addEventListener('click', function(){ pick(el.getAttribute('data-machine')); });
+  });
+  document.querySelectorAll('[data-topic]').forEach(function(el){
+    el.addEventListener('click', function(){ pick(el.getAttribute('data-topic')); });
+  });
+
+  var form = document.getElementById('lead-form');
+  var ok = document.getElementById('form-ok');
+  var err = document.getElementById('form-err');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    ok.classList.remove('show');
+    err.classList.remove('show');
+    if (!form.reportValidity()){
+      err.classList.add('show');
+      return;
+    }
+    form.reset();
+    ok.classList.add('show');
+    ok.focus();
+  });
+})();
+</script>
+</body>
+</html>

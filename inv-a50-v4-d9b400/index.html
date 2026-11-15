@@ -13,24 +13,48 @@
 @font-face{font-family:"Cormorant SC";font-weight:500;src:url(fonts/sc500.woff2) format("woff2");font-display:swap}
 @font-face{font-family:"Cormorant SC";font-weight:600;src:url(fonts/sc600.woff2) format("woff2");font-display:swap}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;height:100%;background:#120a06;color:#f6e6c8;font-family:"Cormorant Garamond",Georgia,serif;font-weight:500}
-.screen{display:none;position:relative;width:100%;height:100vh;height:100svh;overflow:hidden;background:#120a06;align-items:center;justify-content:center}
+html,body{margin:0;height:100%;background:#1b0f09;color:#f6e6c8;font-family:"Cormorant Garamond",Georgia,serif;font-weight:500}
+:root{--pt:calc(env(safe-area-inset-top,0px) + 60px)}
+.screen{display:none;position:relative;width:100%;height:100vh;height:100svh;overflow:hidden;background:#1b0f09;align-items:flex-start;justify-content:center;padding-top:var(--pt)}
+.screen::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 85% 70% at 50% 42%,rgba(27,15,9,0) 30%,rgba(27,15,9,.78) 100%)}
 .screen.active{display:flex}
-.bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(18px) brightness(.8) saturate(1.15)}
-.bg.deep{background-size:auto 190%;background-position:50% 100%;filter:blur(5px) brightness(.62) saturate(1.2)}
-.frame{position:relative;flex:none;width:min(100vw,calc(100vh*2/3));width:min(100vw,calc(100svh*2/3));aspect-ratio:2/3;box-shadow:0 0 40px #000a}
+.bg{position:absolute;inset:-60px;background-color:#1b0f09;background-size:cover;background-position:center;filter:blur(32px) brightness(.4) saturate(1.1)}
+/* фон без текста для экранов с карточкой: низ img05 (свечи и стол) + затемнение */
+.bg.tf{inset:-40px;background-image:linear-gradient(rgba(27,15,9,.65),rgba(27,15,9,.65)),url(img/bg-tf.webp);background-size:100% 100%;background-position:center;filter:blur(24px)}
+.frame{position:relative;z-index:2;flex:none;width:min(100vw,calc((100vh - var(--pt))*2/3));width:min(100vw,calc((100svh - var(--pt))*2/3));aspect-ratio:2/3;box-shadow:0 0 40px #000a}
+@media(min-width:700px){.screen{align-items:center;padding-bottom:var(--pt)}}
+#p7,#p9{align-items:center;padding-bottom:16px}
+#p7 .card,#p9 .card{max-height:calc(100vh - var(--pt) - 16px);max-height:calc(100svh - var(--pt) - 16px)}
 .frame img{display:block;width:100%;height:100%;user-select:none;-webkit-user-drag:none}
 .tap{position:absolute;border:0;padding:0;background:transparent;cursor:pointer;touch-action:manipulation;border-radius:14px}
 .tap:focus-visible{outline:3px solid #fff}
 .tap:active{background:rgba(0,0,0,.2);transform:scale(.985)}
 .debug .tap{outline:2px solid #0f0;background:rgba(0,255,0,.12)}
 .check{position:absolute;pointer-events:none;border:2px solid #ffd887;border-radius:12px;box-shadow:0 0 14px #e9a74a,inset 0 0 10px rgba(255,216,135,.25)}
-.scroll{overflow:auto;-webkit-overflow-scrolling:touch;display:none;height:100vh;height:100svh;background:#120a06;width:100%}
-.scroll.active{display:flex}
-.scroll .frame{margin:auto;aspect-ratio:1312/1199;width:min(1312px,max(100vw,820px));box-shadow:none}
-.back-nav{position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px);left:10px;z-index:50;border:1px solid rgba(230,190,115,.7);background:rgba(18,10,6,.72);backdrop-filter:blur(6px);color:#f1d9a6;border-radius:20px;padding:7px 14px 6px;font:600 13px "Cormorant SC",serif;letter-spacing:.14em;cursor:pointer;touch-action:manipulation}
+.route{display:none;position:relative;height:100vh;height:100svh;overflow:auto;-webkit-overflow-scrolling:touch;background:#fdf6ec;color:#30241a;padding-top:calc(56px + env(safe-area-inset-top,0px))}
+.route.active{display:block}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:40;height:calc(56px + env(safe-area-inset-top,0px));background:#1b0f09;border-bottom:1px solid rgba(217,178,111,.35)}
+.route-in{max-width:900px;margin:0 auto}
+.mapbox{position:relative}
+.mapbox img{display:block;width:100%;height:auto}
+.zoom-btn{display:block;width:calc(100% - 32px);margin:12px 16px 0;font:600 16px "Cormorant SC",serif;letter-spacing:.14em;color:#f1d9a6;background:#1b0f09;border:1px solid rgba(230,190,115,.8);border-radius:40px;padding:12px 16px 11px;cursor:pointer;touch-action:manipulation}
+.info{display:grid;grid-template-columns:1fr;gap:6px;padding:12px 16px 28px}
+.blk{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid rgba(120,80,40,.22)}
+.blk:last-child{border:0}
+.blk img{flex:none;width:58px;height:58px;object-fit:contain}
+.blk h3{margin:2px 0 4px;font:600 26px/1.1 "Cormorant SC",serif;letter-spacing:.06em;color:#34240f}
+.blk p{margin:0;font:600 18px/1.3 "Cormorant Garamond",serif;color:#30241a}
+.blk .note{margin-top:10px;padding:9px 12px;border-radius:12px;background:#fce8b9}
+@media(min-width:760px){.info{grid-template-columns:repeat(3,1fr);gap:24px}.blk{border:0;flex-direction:column}}
+#zoom{position:fixed;inset:0;z-index:100;display:none;overflow:auto;background:#fdf6ec;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y pinch-zoom}
+#zoom.open{display:block}
+#zoom img{display:block;width:1312px;max-width:none;height:auto;margin-top:calc(56px + env(safe-area-inset-top,0px))}
+#zoomBar{position:fixed;top:0;left:0;right:0;z-index:101;height:calc(56px + env(safe-area-inset-top,0px));background:#1b0f09;display:none}
+#zoomBar.open{display:block}
+#zoomBar button{position:absolute;top:calc(env(safe-area-inset-top,0px) + 12px);left:10px}
+.back-nav{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:10px;z-index:50;border:1px solid rgba(230,190,115,.7);background:rgba(18,10,6,.72);backdrop-filter:blur(6px);color:#f1d9a6;border-radius:20px;padding:7px 14px 6px;font:600 13px "Cormorant SC",serif;letter-spacing:.14em;cursor:pointer;touch-action:manipulation}
 .back-nav[hidden]{display:none}
-.card{position:relative;width:min(92vw,520px);max-height:94vh;max-height:94svh;overflow:auto;padding:30px 24px 26px;border-radius:20px;background:linear-gradient(160deg,rgba(44,26,15,.8),rgba(14,8,5,.86));-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid #d9b26f;box-shadow:0 0 0 5px rgba(18,10,6,.55),0 0 0 6px rgba(217,178,111,.4),0 24px 70px #000b;text-align:center}
+.card{position:relative;z-index:2;margin-top:0;width:min(92vw,520px);max-height:94vh;max-height:94svh;overflow:auto;padding:30px 24px 26px;border-radius:20px;background:linear-gradient(160deg,rgba(44,26,15,.8),rgba(14,8,5,.86));-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid #d9b26f;box-shadow:0 0 0 5px rgba(18,10,6,.55),0 0 0 6px rgba(217,178,111,.4),0 24px 70px #000b;text-align:center}
 .eyebrow{font:600 14px "Cormorant SC",serif;letter-spacing:.34em;color:#e7c98e;margin:0 0 6px}
 .card h1,.card h2{margin:6px 0 10px;font-weight:600;font-size:clamp(40px,11vw,54px);line-height:1.08;background:linear-gradient(180deg,#fdeabc 0%,#e8bf6d 52%,#b98530 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 .rule{height:1px;margin:10px auto 16px;width:70%;background:linear-gradient(90deg,transparent,#d9b26f,transparent)}
@@ -63,14 +87,23 @@ html,body{margin:0;height:100%;background:#120a06;color:#f6e6c8;font-family:"Cor
 <section class="screen" id="p4"><div class="bg" style="background-image:url(img/img05.webp)"></div><div class="frame"><img src="img/img05.webp" loading="lazy" decoding="async" alt="Присутствие"></div></section>
 <section class="screen" id="p5"><div class="bg" style="background-image:url(img/img06.webp)"></div><div class="frame"><img src="img/img06.webp" loading="lazy" decoding="async" alt="Количество гостей"></div></section>
 <section class="screen" id="p6"><div class="bg" style="background-image:url(img/img07.webp)"></div><div class="frame"><img src="img/img07.webp" loading="lazy" decoding="async" alt="Напитки"></div></section>
-<section class="screen" id="p7"><div class="bg deep" style="background-image:url(img/img06.webp)"></div>
+<section class="screen" id="p7"><div class="bg tf"></div>
  <div class="card"><div class="eyebrow">ЮБИЛЕЙ 50 ЛЕТ</div><h2>Почти готово!</h2><div class="rule"></div><p>Укажите имя и фамилию<br>и проверьте ответы.</p>
  <div class="name-fields"><input id="first" placeholder="Имя" autocomplete="given-name" aria-label="Имя"><input id="last" placeholder="Фамилия" autocomplete="family-name" aria-label="Фамилия"></div>
  <div class="answer-card"><div class="answer-row"><span>Присутствие</span><strong id="a"></strong></div><div class="answer-row"><span>Гостей (включая вас)</span><strong id="c"></strong></div><div class="answer-row"><span>Напитки</span><strong id="d"></strong></div></div>
  <div class="actions"><button class="btn" id="confirmBtn" onclick="confirmAnswer()">Подтвердить</button><button class="btn ghost" onclick="show(4)">Изменить ответы</button></div></div></section>
-<section class="scroll" id="p8"><div class="frame"><img src="img/img01.webp" loading="lazy" decoding="async" alt="Схема проезда, парковки и входа №10"></div></section>
-<section class="screen" id="p9" aria-live="polite"><div class="bg deep" style="background-image:url(img/img06.webp)"></div>
- <div class="card"><span class="demo" id="demoTag" hidden>демо</span><div class="eyebrow">ЮБИЛЕЙ 50 ЛЕТ</div><h1 id="thH"></h1><div class="rule"></div><p id="thP"></p>
+<section class="route" id="p8"><div class="topbar"></div><div class="route-in">
+ <div class="mapbox"><img src="img/map.webp" alt="Схема проезда к ЦМТ: въезд с Краснопресненской набережной, подъезд № 10" onclick="openZoom()"></div>
+ <button type="button" class="zoom-btn" onclick="openZoom()">ОТКРЫТЬ КРУПНО</button>
+ <div class="info">
+  <div class="blk"><img src="img/ic-car.png" alt=""><div><h3>ВЪЕЗД</h3><p>С Краснопресненской набережной, через ближайший к Москва-Сити въезд (если ехать из центра, он последний).</p></div></div>
+  <div class="blk"><img src="img/ic-park.png" alt=""><div><h3>ПАРКОВКА</h3><p>На территории ЦМТ.</p><p class="note">Для гостей бесплатна: на вечере вам выдадут карту для выезда.</p></div></div>
+  <div class="blk"><img src="img/ic-door.png" alt=""><div><h3>ВХОД</h3><p>Подъезд № 10, клубный корпус Plaza Garden, зал «Дорчестер».</p></div></div>
+ </div></div></section>
+<div id="zoomBar"><button type="button" class="back-nav" onclick="closeZoom()">✕ ЗАКРЫТЬ</button></div>
+<div id="zoom"><img src="img/map.webp" alt="Схема проезда, крупно"></div>
+<section class="screen" id="p9" aria-live="polite"><div class="bg tf"></div>
+ <div class="card"><span class="demo" id="demoTag" hidden>демо</span><div class="eyebrow">ЮБИЛЕЙ 50 ЛЕТ</div><h1 id="thH"></h1><div class="rule"></div><p id="thP"></p><p class="notice" id="thNote" hidden></p>
  <div class="actions"><button class="btn" id="thRetry" onclick="retrySend()" hidden>Отправить ответ</button><button class="btn ghost" id="thCopy" onclick="shareAnswer()" hidden>Скопировать ответ</button><button class="btn ghost" id="thCal" onclick="calendar()">Добавить в календарь</button><button class="btn ghost" onclick="show(7)">Изменить ответы</button></div>
  <button class="linkbtn" onclick="show(8)">Схема проезда и парковки</button></div></section>
 </main><script>
@@ -79,8 +112,8 @@ const S=n=>document.getElementById('p'+n);
 function zone(n,x,y,w,h,fn,label){const f=S(n).querySelector('.frame'),b=document.createElement('button');b.className='tap';b.style.cssText=`left:${x}%;top:${y}%;width:${w}%;height:${h}%`;b.setAttribute('aria-label',label);b.onclick=fn;f.append(b);return b}
 zone(1,19.73,90.76,60.45,4.82,()=>show(2),'Открыть приглашение');
 zone(1,66.5,79.8,30,9.8,()=>show(8,1),'Схема проезда: ЦМТ, подъезд № 10');
-zone(2,29.7,84.4,40.6,4.36,()=>show(3),'Продолжить');
-zone(3,29.7,92.97,40.6,4.36,()=>show(4),'Продолжить');
+zone(2,19.73,90.10,60.45,4.82,()=>show(3),'Продолжить');
+zone(3,19.73,90.10,60.45,4.82,()=>show(4),'Продолжить');
 zone(4,19.73,39.84,60.45,9.83,()=>attendance('Да, приду'),'Да, приду');zone(4,19.73,51.17,60.45,9.96,()=>attendance('Пока не знаю'),'Пока не знаю');zone(4,19.73,62.70,60.45,9.90,()=>attendance('К сожалению, не смогу'),'Не смогу');
 function attendance(v){state.attend=v;show(v==='К сожалению, не смогу'?7:5)}
 zone(5,17.68,47.53,64.94,10.48,()=>{state.count=1;show(6)},'Приду один');zone(5,17.68,59.51,64.94,10.61,()=>{state.count=2;show(6)},'Придём вдвоём');
@@ -89,7 +122,10 @@ positions.forEach(([x,y,h],i)=>zone(6,x,y,37.01,h,()=>{const label=labels[i];if(
 zone(6,26.66,82.88,47.46,5.21,()=>show(7),'Продолжить');
 function drawChecks(){const f=S(6).querySelector('.frame');f.querySelectorAll('.check').forEach(n=>n.remove());state.drinks.forEach(v=>{const i=labels.indexOf(v),[x,y,h]=positions[i],c=document.createElement('div');c.className='check';c.style.cssText=`left:${x}%;top:${y}%;width:37.01%;height:${h}%`;f.append(c)})}
 let currentPage=1,prevPage=1;
-function goBack(){if(currentPage===8)show(prevPage);else if(currentPage===9)show(7);else if(currentPage>1)show(currentPage-1)}
+function openZoom(){document.getElementById('zoom').classList.add('open');document.getElementById('zoomBar').classList.add('open');document.getElementById('zoom').scrollTo(0,0)}
+function closeZoom(){document.getElementById('zoom').classList.remove('open');document.getElementById('zoomBar').classList.remove('open')}
+addEventListener('keydown',e=>{if(e.key==='Escape')closeZoom()});
+function goBack(){if(document.getElementById('zoom').classList.contains('open')){closeZoom();return}if(currentPage===8)show(prevPage);else if(currentPage===9)show(7);else if(currentPage>1)show(currentPage-1)}
 function show(n,from){if(n===8)prevPage=from||currentPage;currentPage=n;document.querySelectorAll('main > section').forEach(x=>x.classList.remove('active'));S(n).classList.add('active');document.getElementById('backNav').hidden=(n===1);
  if(n===7){document.getElementById('a').textContent=state.attend||'Не выбрано';document.getElementById('c').textContent=state.attend==='К сожалению, не смогу'?'—':state.count;document.getElementById('d').textContent=state.drinks.join(', ')||'—'}
  window.scrollTo(0,0);const sc=S(n);if(sc.scrollTo)sc.scrollTo(0,0)}
@@ -115,7 +151,7 @@ function confirmAnswer(){if(!first.value.trim()||!last.value.trim()){alert('По
 async function shareAnswer(){const t=message();if(navigator.share){try{await navigator.share({title:'Ответ на приглашение',text:t});return}catch(e){}}try{await navigator.clipboard.writeText(t);alert('Ответ скопирован. Вставьте его в сообщение Андрею и отправьте.')}catch(e){prompt('Скопируйте ответ:',t)}}
 function calendar(){const content=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Birthday Invite//RU','BEGIN:VEVENT','UID:andrey50-20261221@invitation','DTSTAMP:20261029T090000Z','DTSTART:20261221T143000Z','DTEND:20261221T200000Z','SUMMARY:Юбилей Андрея Белинского — 50 лет','LOCATION:ЦМТ, Краснопресненская наб. 12, зал Дорчестер, подъезд 10','DESCRIPTION:Сбор гостей 17:30, банкет 18:00','END:VEVENT','END:VCALENDAR'].join('\r\n')+'\r\n';const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type:'text/calendar;charset=utf-8'}));a.download='yubiley-andreya-21-dekabrya.ics';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),2000)}
 show(1);
-function showThanks(ok,demo){const t=S(9);thH.textContent=ok?TX.okTitle:TX.errTitle;thP.textContent=ok?TX.okText:TX.errText;document.getElementById('demoTag').hidden=!(ok&&demo);
+function showThanks(ok,demo){const t=S(9);thH.textContent=ok?TX.okTitle:TX.errTitle;thP.textContent=ok?(demo?(TX.demoText||'Ваш ответ сохранён. До встречи 21 декабря!'):TX.okText):TX.errText;document.getElementById('demoTag').hidden=!(ok&&demo);const nt=document.getElementById('thNote');nt.hidden=!(ok&&demo);nt.textContent=TX.demoNote||'';
  thRetry.hidden=ok;thCopy.hidden=ok;thCal.hidden=!ok;show(9)}
 show(1);
 </script></body></html>

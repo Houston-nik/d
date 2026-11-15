@@ -369,7 +369,7 @@ function paint(){[].forEach.call($('drinks').children,function(b,i){var on=state
 function fj(url,opts,ms){var c=new AbortController(),t=setTimeout(function(){c.abort()},ms||8000);var o=opts||{};o.signal=c.signal;return fetch(url,o).then(function(r){clearTimeout(t);return r.json().catch(function(){return{}}).then(function(j){return{ok:r.ok,status:r.status,json:j}})},function(e){clearTimeout(t);throw e})}
 function setGuest(g){guest=g;if(g&&g.name){var f=$('forLine');f.textContent='Для: '+g.name;f.hidden=false}
  if(g&&g.first&&!$('first').value)$('first').value=g.first;if(g&&g.last&&!$('last').value)$('last').value=g.last}
-function loadGuest(){if(!guestId)return;
+function loadGuest(){return;
  if(base()){fj(base()+'/guest?g='+encodeURIComponent(guestId),{},6000).then(function(r){setGuest(r.ok&&r.json&&r.json.guest||null)},function(){});
   fj(base()+'/rsvp?g='+encodeURIComponent(guestId),{},6000).then(function(r){var a=r.ok&&r.json&&r.json.answer;if(a&&ATT_LABEL[a.attend]){state.attend=a.attend;state.count=a.count||1;state.drinks=(a.drinks||[]).slice();if(a.first)$('first').value=a.first;if(a.last)$('last').value=a.last;paint()}},function(){})}
  else fj(CFG.GUESTS_URL||'guests.json',{cache:'no-cache'},6000).then(function(r){var l=Array.isArray(r.json)?r.json:(r.json&&r.json.guests)||[];setGuest(l.filter(function(x){return x.id===guestId})[0]||null)},function(){})}

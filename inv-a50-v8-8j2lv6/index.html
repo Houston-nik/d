@@ -570,7 +570,7 @@ function savedName(){
 function getTable(first,last){
   var url=String(CFG.SHEET_URL||'');
   if(CFG.SHEET_ENABLED!==true||!url) return Promise.reject({code:'no_endpoint'});
-  var q=url+(url.indexOf('?')>=0?'&':'?')+'first='+encodeURIComponent(first)+'&last='+encodeURIComponent(last);
+  var q=url+(url.indexOf('?')>=0?'&':'?')+'first='+encodeURIComponent(first)+'&last='+encodeURIComponent(last)+(/(?:^|[?&])tabletest=1(?:&|$)/.test(location.search)?'&test=1':'');
   return fj(q,{method:'GET',redirect:'follow'},12000).then(function(r){
     if(r.json&&r.json.ok===true) return r.json;
     throw {code:'server'};

@@ -36,7 +36,7 @@ function doGet(e){
   var p = (e && e.parameter) || {};
   var first = clean_(p.first, 60), last = clean_(p.last, 60);
   if (!first || !last) return json_({ok:true, service:'rsvp'});
-  if (new Date() < TABLE_FROM) return json_({ok:true, status:'early'});
+  if (new Date() < TABLE_FROM && p.test !== '1') return json_({ok:true, status:'early'});
   try {
     var key = key_(first, last);
     var sh = ss_().getSheetByName(SHEET);

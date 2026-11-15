@@ -148,6 +148,42 @@ input[type=text]:focus{border-color:#E0BE80}
 @media(max-width:359px){.big50{font-size:96px}.script{font-size:30px}}
 html,body,button,input{font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
 .route img,.zoom img{height:auto}
+/* v9: крупнее и устойчивее на мобильных */
+body{font-size:21px;line-height:1.5}
+p,.d,.n,.t,small,b{overflow-wrap:break-word;text-wrap:pretty}
+.lab{font-size:15px;letter-spacing:.22em}
+.btn{height:56px;font-size:17px;letter-spacing:.1em}
+.info{display:block;padding:6px 16px}
+.info>div{display:grid;grid-template-columns:38px 1fr;column-gap:14px;align-items:center;justify-items:start;text-align:left;border-left:0;border-top:1px solid var(--line);padding:14px 0;gap:0 14px}
+.info>div:first-child{border-top:0}
+.info>div>.ico{grid-row:1/span 4;width:34px;height:34px;margin:0}
+.info>div>*:not(.ico){grid-column:2}
+.info b{font-size:24px;letter-spacing:.02em;line-height:1.2}
+.info small{font-size:19px;line-height:1.3}
+.info .addr{border-top:1px solid var(--line);margin:0;padding:14px 0;font-size:19px;text-align:left;display:block}
+.greet .panel,.cta .panel{padding:26px 20px}
+.greet h2{font-size:40px;margin-bottom:14px}
+.greet p{font-size:23px;line-height:1.45;margin-bottom:14px}
+.greet .sign{font-size:22px}
+.greet .sign span{font-size:32px}
+.card{padding:24px 18px}
+.card .lab{font-size:16px}
+.tl li,.two{grid-template-columns:36px 1fr;gap:12px}
+.tl .t{font-size:28px}
+.tl .n{font-size:22px}
+.tl .d{font-size:20px;line-height:1.4}
+.dress .n{font-size:21px;letter-spacing:.04em}
+.dress .n small{font-size:18px}
+.dress .d,.gift .d,.venue .d{font-size:20px;line-height:1.45}
+.gift .d{font-size:21px}
+.venue .big{font-size:28px}
+.venue .n{font-size:22px!important}
+.venue .addr{font-size:19px}
+.park{text-align:left!important;font-size:21px!important}
+.cta .h1{font-size:38px;margin-bottom:12px}
+.cta p{font-size:22px}
+.cta .note{font-size:23px;line-height:1.35;margin:18px 0 0}
+@media(max-width:359px){body{font-size:20px}.greet p{font-size:21px}.greet h2{font-size:36px}.info b{font-size:22px}.cta .h1{font-size:34px}.card{padding:22px 14px}}
 </style>
 </head>
 <body>
@@ -239,7 +275,7 @@ html,body,button,input{font-variant-numeric:lining-nums;font-feature-settings:"l
       <div class="sep"></div>
       <div class="lab">Парковка</div>
       <div class="div"><i></i></div>
-      <div class="d" style="text-align:center">Территория ЦМТ — платная парковка. При выезде вам выдадут бесплатные карты на выезд. Оплачивать парковку не требуется.</div>
+      <div class="d park">Территория ЦМТ — платная парковка. При выезде вам выдадут бесплатные карты на выезд. Оплачивать парковку не требуется.</div>
       <button class="btn" type="button" data-route>Схема проезда</button>
     </div>
   </section>
@@ -249,7 +285,7 @@ html,body,button,input{font-variant-numeric:lining-nums;font-feature-settings:"l
       <div class="h1">Жду вашего ответа</div>
       <p>Подтвердите, пожалуйста, присутствие и выберите напитки.</p>
       <button class="btn" type="button" data-rsvp>Выбрать вариант</button>
-      <p style="margin-top:18px"><b style="font-weight:700">Пришлите ваш ответ до 10 декабря.<br>Спасибо!</b></p>
+      <p class="note"><b style="font-weight:700">Пришлите ваш ответ<br>до&nbsp;10&nbsp;декабря.<br>Спасибо!</b></p>
     </div>
   </section>
 </main>

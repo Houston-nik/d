@@ -18,7 +18,7 @@
 <link rel="preload" href="fonts/cg-lat.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/marck-cyr.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="img/cover.webp" as="image">
-<script src="config.js?v=2"></script>
+<script src="config.js?v=3"></script>
 <style>
 @font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:300 700;font-display:block;src:url(fonts/cg-cyr.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
 @font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:300 700;font-display:block;src:url(fonts/cg-lat.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
@@ -235,6 +235,19 @@ p,.d,.n,.t,small,b{overflow-wrap:break-word;text-wrap:pretty}
 @media(max-width:359px){.info2 b{font-size:20px}.info2 small{font-size:16px}}
 /* v12 */.btn,.btn.ghost,.rs .btn{border-radius:999px}.opt2,.rs .opt2{border-radius:20px}.rs .dr{border-radius:16px}.info2 .ic,.info2 .place{border-radius:16px}.card{border-radius:18px}
 /* v11 rounded */.info2 .ic,.info2 .place{border-radius:12px}.card{border-radius:14px}.panel,.cta .panel{border-radius:16px}.btn{border-radius:12px}.sum,input[type=text]{border-radius:10px}.dr{border-radius:12px}.dr .bx{border-radius:5px}
+
+/* v13 table number */
+.sep1{padding-bottom:22px}
+.table-card{margin:0 0 16px;padding:22px 18px 20px;text-align:center;border:1px solid var(--line);background:rgba(18,12,8,.62);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-radius:18px}
+.table-card .tn{font-family:"Marck Script",cursive;font-weight:400;font-size:42px;line-height:1.2;margin:4px 0 0;background:linear-gradient(180deg,#F7DFA8,#D9A960 60%,#F2D196);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.table-ask{justify-self:center;width:max-content;height:auto;min-height:44px;margin:8px auto 0;padding:8px 24px;border-radius:999px;font-size:17px;letter-spacing:.04em;text-transform:none}
+#tableOv .rk{padding-left:0}
+.th-table{margin:16px auto 4px;padding:16px 16px 14px;max-width:340px;border:1px solid rgba(224,190,128,.85);background:rgba(16,10,5,.55);border-radius:18px;color:#F6EAD2}
+.th-table p{font-size:21px;line-height:1.35;margin:0}
+#tfRes{margin-top:16px;padding:16px 14px;border:1px solid rgba(224,190,128,.85);background:rgba(16,10,5,.55);border-radius:18px}
+#tfRes .tn{font-family:"Marck Script",cursive;font-weight:400;font-size:40px;line-height:1.15;background:linear-gradient(180deg,#F7DFA8,#D9A960 60%,#F2D196);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.btn,.btn.ghost,.rs .btn{border-radius:999px}
+@media(max-width:359px){.table-card .tn,#tfRes .tn{font-size:34px}.th-table p{font-size:20px}}
 </style>
 </head>
 <body>
@@ -246,6 +259,11 @@ p,.d,.n,.t,small,b{overflow-wrap:break-word;text-wrap:pretty}
 
   <!-- разделитель между экранами: дата, время, место -->
   <section class="sep1" id="sep1">
+    <div class="table-card" id="tableCard" hidden>
+      <div class="lab">Ваше место</div>
+      <div class="div"><i></i></div>
+      <div class="tn" id="tableNum"></div>
+    </div>
     <div class="info2">
       <div class="ic"><svg class="ico" viewBox="0 0 32 32"><rect x="5" y="7" width="22" height="20" rx="2"/><path d="M5 13h22M11 4v6M21 4v6"/><path d="M10 18h3M15 18h3M20 18h2M10 22h3M15 22h3"/></svg><b>21 декабря</b><b>2026 года</b><small>понедельник</small></div>
       <div class="ic"><svg class="ico" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12"/><path d="M16 9v7l5 3"/></svg><small>Сбор гостей</small><b>17:30</b><small>Начало банкета</small><b>18:00</b></div>
@@ -254,6 +272,7 @@ p,.d,.n,.t,small,b{overflow-wrap:break-word;text-wrap:pretty}
     <div class="btns">
       <button class="btn" type="button" id="openInv">Открыть приглашение</button>
       <button class="btn ghost" type="button" data-route>Схема проезда</button>
+      <button class="btn ghost table-ask" type="button" id="tableAsk" hidden>Узнать номер стола</button>
     </div>
   </section>
 
@@ -371,6 +390,9 @@ p,.d,.n,.t,small,b{overflow-wrap:break-word;text-wrap:pretty}
         <h3 class="rt" id="thH">Спасибо!</h3>
         <div class="tag" id="demoTag" hidden>демо</div>
         <p class="rsub" id="thP"></p>
+        <div class="th-table" id="thTable" hidden>
+          <p>Номер вашего стола появится здесь 15 декабря. Просто откройте это приглашение снова.</p>
+        </div>
         <div class="stack">
           <button class="btn" type="button" id="thRetry" hidden>Отправить ещё раз</button>
           <button class="btn" type="button" id="thCal">Добавить в календарь</button>
@@ -398,6 +420,25 @@ p,.d,.n,.t,small,b{overflow-wrap:break-word;text-wrap:pretty}
       </ul>
       <div class="lab" style="margin-bottom:6px">Адрес</div>
       <p style="font-size:16px">ЦМТ, Москва, Краснопресненская набережная, 12</p>
+    </div>
+  </div>
+</div>
+
+<!-- узнать номер стола -->
+<div class="ov rs" id="tableOv" hidden>
+  <div class="rsbg"></div>
+  <div class="ovcol">
+    <div class="ovtop"><button class="back" type="button" id="tableBack"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>Назад</button></div>
+    <div class="panel">
+      <div class="rk">Юбилей 50 лет</div><div class="rdiv"><i></i></div>
+      <h3 class="rt">Номер стола</h3>
+      <div class="rdiv"><i></i></div>
+      <p class="rsub">Укажите имя и фамилию,<br>как в вашем ответе.</p>
+      <label class="fld"><span class="lab">Имя</span><input type="text" id="tfFirst" autocomplete="given-name" maxlength="60" placeholder="Имя"></label>
+      <label class="fld"><span class="lab">Фамилия</span><input type="text" id="tfLast" autocomplete="family-name" maxlength="60" placeholder="Фамилия"></label>
+      <div class="err" id="tfErr" role="alert"></div>
+      <button class="btn" type="button" id="tfGo">Показать</button>
+      <div id="tfRes" hidden><div class="tn" id="tfNum"></div></div>
     </div>
   </div>
 </div>
@@ -432,11 +473,11 @@ function showStep(n){['att','count','drinks','form','thanks'].forEach(function(s
  [].forEach.call(document.querySelectorAll('#s-count .opt2'),function(b){b.classList.toggle('on',Number(b.dataset.count)===state.count)});
  [].forEach.call(document.querySelectorAll('#s-att .opt2'),function(b){b.classList.toggle('on',b.dataset.att===state.attend)})}
 function go(n){stack.push(n);showStep(n)}
-function openRsvp(){lockOn();$('route').hidden=true;$('rsvp').hidden=false;stack=[];go('att')}
-function closeOv(){$('rsvp').hidden=true;$('route').hidden=true;lockOff()}
+function openRsvp(){lockOn();$('route').hidden=true;if($('tableOv'))$('tableOv').hidden=true;$('rsvp').hidden=false;stack=[];go('att')}
+function closeOv(){$('rsvp').hidden=true;$('route').hidden=true;if($('tableOv'))$('tableOv').hidden=true;lockOff()}
 function back(){var cur=stack.pop();if(cur==='thanks'||!stack.length){closeOv();return}showStep(stack[stack.length-1])}
-function openRoute(){var fromRsvp=!$('rsvp').hidden;lockOn();$('rsvp').hidden=true;$('route').hidden=false;$('route').dataset.from=fromRsvp?'rsvp':'';$('route').scrollTop=0}
-function routeBack(){$('route').hidden=true;if($('route').dataset.from==='rsvp'){$('rsvp').hidden=false}else lockOff()}
+function openRoute(){var fromRsvp=!$('rsvp').hidden;var fromTable=$('tableOv')&&!$('tableOv').hidden;lockOn();$('rsvp').hidden=true;if($('tableOv'))$('tableOv').hidden=true;$('route').hidden=false;$('route').dataset.from=fromRsvp?'rsvp':(fromTable?'table':'');$('route').scrollTop=0}
+function routeBack(){$('route').hidden=true;if($('route').dataset.from==='rsvp'){$('rsvp').hidden=false}else if($('route').dataset.from==='table'&&$('tableOv')){$('tableOv').hidden=false}else lockOff()}
 document.querySelectorAll('[data-rsvp]').forEach(function(b){b.onclick=openRsvp});
 document.querySelectorAll('[data-route]').forEach(function(b){b.onclick=openRoute});
 $('backBtn').onclick=back;$('routeBack').onclick=routeBack;
@@ -463,12 +504,92 @@ $('send').onclick=function(){if(!$('first').value.trim()||!$('last').value.trim(
  if(!state.attend){stack=[];go('att');return}lastAnswer=buildAnswer();submit(lastAnswer,$('send'),'Отправить ответ')};
 $('thRetry').onclick=function(){if(lastAnswer)submit(lastAnswer,$('thRetry'),'Отправить ещё раз')};
 function thanks(ok,demo){$('thH').textContent=ok?TX.okTitle:TX.errTitle;
- $('thP').textContent=ok?(demo?(state.attend==='no'?TX.noText:TX.demoText):TX.okText):TX.errText;
+ $('thP').textContent=ok?(state.attend==='no'?TX.noText:(demo?TX.demoText:TX.okText)):TX.errText;
  $('demoTag').hidden=!(ok&&demo);$('thRetry').hidden=ok;$('thCal').hidden=!ok;$('thEdit').hidden=false;$('thLab').textContent=ok?(demo?'Ответ принят':'Ответ отправлен'):'Ответ не отправлен';
  if(ok&&state.attend==='no')$('thCal').hidden=true;
+ if($('thTable'))$('thTable').hidden=!(ok&&state.attend!=='no');
  go('thanks')}
 $('thCal').onclick=function(){var c=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Birthday Invite//RU','BEGIN:VEVENT','UID:andrey50-20261221@invitation','DTSTAMP:20261029T090000Z','DTSTART:20261221T143000Z','DTEND:20261221T200000Z','SUMMARY:Юбилей Андрея Белинского — 50 лет','LOCATION:ЦМТ\\, Краснопресненская наб. 12\\, зал Дорчестер\\, подъезд 10','DESCRIPTION:Сбор гостей 17:30\\, банкет 18:00','END:VEVENT','END:VCALENDAR'].join('\r\n')+'\r\n';
  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([c],{type:'text/calendar;charset=utf-8'}));a.download='yubiley-andreya-21-dekabrya.ics';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},2000)};
+
+/* --- номер стола --- */
+function tableOpen(){
+  try{ if(/(?:^|[?&])tabletest=1(?:&|$)/.test(location.search)) return true; }catch(e){}
+  var raw=CFG.TABLE_FROM||'2026-12-15T00:00:00+03:00';
+  var at=new Date(raw).getTime();
+  if(isNaN(at)) at=new Date('2026-12-15T00:00:00+03:00').getTime();
+  return Date.now()>=at;
+}
+function savedName(){
+  try{ var a=JSON.parse(localStorage.getItem('birthday_rsvp')||'');
+    if(a&&a.first&&a.last) return {first:String(a.first).trim(),last:String(a.last).trim()};
+  }catch(e){}
+  return null;
+}
+function getTable(first,last){
+  var url=String(CFG.SHEET_URL||'');
+  if(CFG.SHEET_ENABLED!==true||!url) return Promise.reject({code:'no_endpoint'});
+  var q=url+(url.indexOf('?')>=0?'&':'?')+'first='+encodeURIComponent(first)+'&last='+encodeURIComponent(last);
+  return fj(q,{method:'GET',redirect:'follow'},12000).then(function(r){
+    if(r.json&&r.json.ok===true) return r.json;
+    throw {code:'server'};
+  },function(){ throw {code:'network'}; });
+}
+function showTableCard(j){
+  var card=$('tableCard'), num=$('tableNum');
+  if(!card||!num) return;
+  if(j&&j.status==='found'&&String(j.table||'').trim()){
+    num.textContent='Ваш стол № '+String(j.table).trim();
+    card.hidden=false;
+  }else if(j&&j.status==='notset'){
+    num.textContent='Номер стола скоро появится';
+    card.hidden=false;
+  }else{
+    card.hidden=true;
+  }
+}
+function initTable(){
+  var ask=$('tableAsk');
+  if(tableOpen()){
+    if(ask) ask.hidden=false;
+    var n=savedName();
+    if(n) getTable(n.first,n.last).then(showTableCard,function(){});
+  }else{
+    if(ask) ask.hidden=true;
+    if($('tableCard')) $('tableCard').hidden=true;
+  }
+}
+function openTableOv(){
+  lockOn();$('rsvp').hidden=true;$('route').hidden=true;
+  var n=savedName();
+  if(n){$('tfFirst').value=n.first;$('tfLast').value=n.last;}
+  $('tfErr').textContent='';$('tfRes').hidden=true;$('tfNum').textContent='';
+  $('tableOv').hidden=false;$('tableOv').scrollTop=0;
+}
+function closeTableOv(){$('tableOv').hidden=true;lockOff()}
+if($('tableAsk')) $('tableAsk').onclick=openTableOv;
+if($('tableBack')) $('tableBack').onclick=closeTableOv;
+if($('tfGo')) $('tfGo').onclick=function(){
+  var first=$('tfFirst').value.trim(), last=$('tfLast').value.trim(), btn=$('tfGo');
+  $('tfErr').textContent='';$('tfRes').hidden=true;
+  if(!first||!last){$('tfErr').textContent='Пожалуйста, укажите имя и фамилию.';return}
+  btn.disabled=true;btn.textContent='Ищем…';
+  getTable(first,last).then(function(j){
+    btn.disabled=false;btn.textContent='Показать';
+    if(j&&j.status==='found'&&String(j.table||'').trim()){
+      $('tfNum').textContent='Ваш стол № '+String(j.table).trim();$('tfRes').hidden=false;
+    }else if(j&&j.status==='notset'){
+      $('tfNum').textContent='Номер стола скоро появится';$('tfRes').hidden=false;
+    }else if(j&&j.status==='early'){
+      $('tfNum').textContent='Номер стола появится 15 декабря';$('tfRes').hidden=false;
+    }else if(j&&j.status==='notfound'){
+      $('tfErr').textContent='Не нашли ваш ответ. Проверьте имя и фамилию.';
+    }else{
+      $('tfErr').textContent='Не удалось узнать номер. Попробуйте ещё раз.';
+    }
+  },function(){btn.disabled=false;btn.textContent='Показать';$('tfErr').textContent='Не удалось узнать номер. Попробуйте ещё раз.';});
+};
+initTable();
 })();
 </script>
 </body>

@@ -51,7 +51,7 @@ body.lock #site{visibility:hidden}
 .div::after{transform:scaleX(-1)}
 .div i{width:5px;height:5px;transform:rotate(45deg);background:currentColor}
 .ico{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
-.coverimg{display:block;width:100%;height:auto;aspect-ratio:2/3;background:#2a2036}
+.coverimg{display:block;width:100%;height:auto;aspect-ratio:853/1004;background:#2a2036}
 .sep1{padding:18px 16px 8px}
 .sep1 .btns{display:grid;gap:12px}
 .info{display:grid;grid-template-columns:1fr 1fr 1.15fr;border:1px solid var(--line);background:rgba(18,12,8,.58);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);padding:14px 4px;margin-bottom:16px}
@@ -184,6 +184,43 @@ p,.d,.n,.t,small,b{overflow-wrap:break-word;text-wrap:pretty}
 .cta p{font-size:22px}
 .cta .note{font-size:23px;line-height:1.35;margin:18px 0 0}
 @media(max-width:359px){body{font-size:20px}.greet p{font-size:21px}.greet h2{font-size:36px}.info b{font-size:22px}.cta .h1{font-size:34px}.card{padding:22px 14px}}
+/* v10: экраны ответа как в образце */
+.rs .rsbg{position:fixed;inset:0;background:linear-gradient(180deg,rgba(10,6,3,.82) 0%,rgba(10,6,3,.6) 45%,rgba(10,6,3,.15) 75%,rgba(10,6,3,.35) 100%),url(img/rsvp-bg.webp) center bottom/cover no-repeat;z-index:0}
+.rs .ovcol{position:relative;z-index:1}
+.rs .ovtop{height:auto;padding:14px 0 0;position:relative;margin-bottom:-28px;z-index:3}
+.rs .back{border-radius:30px;height:48px;padding:0 18px 0 12px;font-weight:600;font-size:19px;letter-spacing:.02em;text-transform:none;border-color:#C9A46A;background:rgba(18,12,8,.55)}
+.rs .panel{background:transparent;border:1px solid rgba(224,190,128,.75);box-shadow:inset 0 0 0 4px rgba(224,190,128,.08);-webkit-backdrop-filter:none;backdrop-filter:none;padding:22px 14px 26px;text-align:center;margin-top:0}
+.rk{font-weight:600;font-size:13px;letter-spacing:.32em;text-transform:uppercase;color:#E8D2A6;padding-left:84px;min-height:24px}
+.rdiv{display:flex;align-items:center;justify-content:center;gap:8px;color:#E0BE80;margin:8px auto}
+.rdiv::before,.rdiv::after{content:"";height:1px;width:90px;background:linear-gradient(90deg,transparent,currentColor)}
+.rdiv::after{transform:scaleX(-1)}.rdiv i{width:6px;height:6px;transform:rotate(45deg);background:currentColor}
+.rt{font-family:"Marck Script",cursive;font-weight:400;font-size:42px;line-height:1.12;margin:6px 0 4px;background:linear-gradient(180deg,#F7DFA8,#D9A960 60%,#F2D196);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.rsub{font-size:21px;line-height:1.35;color:#F6EAD2;margin:4px 0 14px}
+.rsm{font-size:17px;line-height:1.35;color:#E6D5B5;margin:-4px 0 14px}
+.rs .opts{gap:12px;max-width:340px;margin:0 auto}
+.opt2{display:grid;grid-template-columns:56px 1fr 22px;align-items:center;width:100%;min-height:72px;padding:8px 14px 8px 8px;border-radius:12px;border:1px solid rgba(224,190,128,.85);background:rgba(16,10,5,.62);color:#F6EAD2;text-align:left;cursor:pointer;-webkit-appearance:none;appearance:none}
+.opt2 .oi{display:flex;align-items:center;justify-content:center;height:46px;border-right:1px solid rgba(224,190,128,.5);margin-right:14px}
+.opt2 .oi svg{width:34px;height:34px;fill:none;stroke:#E0BE80;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.opt2 .ol{font-weight:600;font-size:18px;letter-spacing:.14em;text-transform:uppercase;line-height:1.3}
+.opt2 .chev{width:20px;height:20px;fill:none;stroke:#E0BE80;stroke-width:1.8}
+.opt2.gold{background:linear-gradient(180deg,#F1D396,#C99B55);color:#2a1b0c;border-color:#F3D9A2}
+.opt2.gold .oi svg,.opt2.gold .chev{stroke:#2a1b0c}.opt2.gold .oi{border-color:rgba(42,27,12,.35)}
+.opt2:active,.opt2.on{box-shadow:0 0 0 2px #F3D9A2}
+.rs .drinks{grid-template-columns:1fr 1fr;gap:8px;margin:0 0 16px}
+.rs .dr{display:grid;grid-template-columns:22px 40px 1fr;gap:6px;align-items:center;min-height:76px;padding:4px 8px;border-radius:12px;border:1px solid rgba(224,190,128,.8);background:rgba(16,10,5,.62);font-weight:600;font-size:14px;letter-spacing:.08em;text-transform:uppercase;line-height:1.25;color:#F6EAD2}
+.rs .dr img{width:40px;height:54px;object-fit:contain}
+.rs .dr .bx{width:22px;height:22px;border-radius:6px;border-color:#E0BE80}
+.rs .dr .dl{overflow-wrap:anywhere}
+.btn.pill{border-radius:30px;max-width:260px;margin:0 auto;height:54px}
+.routepill{display:block;margin:22px auto 4px;height:58px;padding:0 28px;border-radius:30px;border:1px solid #C9A46A;background:rgba(18,12,8,.6);color:#F1DDB0;font-weight:500;font-size:21px;cursor:pointer}
+.rs .fld span.lab{text-align:left}.rs .sum{text-align:left;background:rgba(16,10,5,.78);border-radius:10px;font-size:18px}.rs .stack{max-width:340px;margin:18px auto 0}
+.rs input[type=text]{border-radius:10px;font-size:19px}
+.rs .panel{padding:22px 10px 24px}
+.rs .dr{position:relative;grid-template-columns:34px 1fr;gap:8px;padding:6px 8px 6px 6px;font-size:17px;letter-spacing:0;text-transform:none;line-height:1.2}
+.rs .dr img{width:34px;height:50px}
+.rs .dr .bx{position:absolute;top:6px;right:6px;width:18px;height:18px;border-radius:5px}
+.rs .dr .dl{overflow-wrap:normal;word-break:normal;hyphens:none;padding-right:16px}
+@media(max-width:374px){.rt{font-size:36px}.rs .dr{font-size:16px}.opt2 .ol{font-size:16px;letter-spacing:.1em}.rk{padding-left:80px;font-size:12px;letter-spacing:.22em}}
 </style>
 </head>
 <body>
@@ -291,40 +328,33 @@ p,.d,.n,.t,small,b{overflow-wrap:break-word;text-wrap:pretty}
 </main>
 
 <!-- ответ на приглашение -->
-<div class="ov" id="rsvp" hidden>
+<div class="ov rs" id="rsvp" hidden>
+  <div class="rsbg"></div>
   <div class="ovcol">
     <div class="ovtop"><button class="back" type="button" id="backBtn"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>Назад</button></div>
     <div class="panel">
       <section class="step" id="s-att">
-        <div class="lab">Ваш ответ</div>
-        <div class="h1">Вы придёте?</div>
-        <p class="lead">Выберите подходящий вариант.</p>
+        <div class="rk">Юбилей 50 лет</div><div class="rdiv"><i></i></div><h3 class="rt">Ну что,<br>увидимся 21&nbsp;декабря?</h3><div class="rdiv"><i></i></div><p class="rsub">Буду очень рад видеть вас<br>на моём юбилее!</p>
         <div class="opts">
-          <button class="opt" type="button" data-att="yes">Да, приду</button>
-          <button class="opt" type="button" data-att="maybe">Пока не знаю</button>
-          <button class="opt" type="button" data-att="no">К сожалению, не смогу</button>
+          <button class="opt2 gold" type="button" data-att="yes"><span class="oi"><svg viewBox="0 0 32 32"><path d="M8 4h6l-.5 8a2.5 2.5 0 0 1-5 0zM18 4h6l-.5 8a2.5 2.5 0 0 1-5 0zM11 14.5V26M21 14.5V26M8 27h6M18 27h6"/></svg></span><span class="ol">Конечно,<br>буду!</span><svg class="chev" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+          <button class="opt2" type="button" data-att="maybe"><span class="oi"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="12"/><path d="M12.5 12.5a3.5 3.5 0 1 1 5 3.2c-1 .5-1.5 1.2-1.5 2.3v.5M16 22.5v.5"/></svg></span><span class="ol">Пока<br>под вопросом</span><svg class="chev" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+          <button class="opt2" type="button" data-att="no"><span class="oi"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="12"/><path d="M11.5 11.5l9 9M20.5 11.5l-9 9"/></svg></span><span class="ol">К сожалению,<br>не смогу</span><svg class="chev" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
         </div>
       </section>
       <section class="step" id="s-count">
-        <div class="lab">Гости</div>
-        <div class="h1">Сколько вас будет?</div>
-        <p class="lead">Выберите подходящий вариант.</p>
+        <div class="rk">Юбилей 50 лет</div><div class="rdiv"><i></i></div><h3 class="rt">Сколько<br>будет гостей?</h3><div class="rdiv"><i></i></div><p class="rsub">Пожалуйста, выберите,<br>сколько человек будет от вас.</p>
         <div class="opts">
-          <button class="opt" type="button" data-count="1">Один</button>
-          <button class="opt" type="button" data-count="2">Вдвоём</button>
+          <button class="opt2" type="button" data-count="1"><span class="oi"><svg viewBox="0 0 32 32"><circle cx="16" cy="11" r="5"/><path d="M6 27c0-5.5 4.5-9 10-9s10 3.5 10 9z"/></svg></span><span class="ol">Буду<br>один</span><svg class="chev" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+          <button class="opt2" type="button" data-count="2"><span class="oi"><svg viewBox="0 0 32 32"><circle cx="12" cy="11" r="4.5"/><path d="M3 27c0-5 4-8 9-8s9 3 9 8z"/><circle cx="22" cy="12" r="3.8"/><path d="M21 19.5c4.5-.3 8 2.300 8 7.500h-6"/></svg></span><span class="ol">Будем<br>вдвоём</span><svg class="chev" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
         </div>
       </section>
       <section class="step" id="s-drinks">
-        <div class="lab">Напитки</div>
-        <div class="h1">Что вы предпочитаете?</div>
-        <p class="lead">Можно выбрать несколько вариантов.</p>
+        <div class="rk">Юбилей 50 лет</div><div class="rdiv"><i></i></div><h3 class="rt">Какие напитки<br>предпочитаете?</h3><div class="rdiv"><i></i></div><p class="rsub">Помогите мне подготовиться<br>к нашему вечеру!</p><p class="rsm">Выберите любимые напитки — можно отметить несколько вариантов.</p>
         <div class="drinks" id="drinks"></div>
-        <button class="btn" type="button" id="drinksNext">Далее</button>
+        <button class="btn pill" type="button" id="drinksNext">Продолжить&nbsp;→</button>
       </section>
       <section class="step" id="s-form">
-        <div class="lab">Последний шаг</div>
-        <div class="h1">Почти готово!</div>
-        <p class="lead">Укажите, как вас зовут, и проверьте ответ.</p>
+        <div class="rk">Юбилей 50 лет</div><div class="rdiv"><i></i></div><h3 class="rt">Почти готово!</h3><div class="rdiv"><i></i></div><p class="rsub">Укажите, как вас зовут,<br>и проверьте ответ.</p>
         <label class="fld"><span class="lab">Имя</span><input type="text" id="first" autocomplete="given-name" maxlength="60" placeholder="Имя"></label>
         <label class="fld"><span class="lab">Фамилия</span><input type="text" id="last" autocomplete="family-name" maxlength="60" placeholder="Фамилия"></label>
         <input class="hp" type="text" id="website" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -333,10 +363,10 @@ p,.d,.n,.t,small,b{overflow-wrap:break-word;text-wrap:pretty}
         <button class="btn" type="button" id="send">Отправить ответ</button>
       </section>
       <section class="step" id="s-thanks">
-        <div class="lab" id="thLab">Ответ</div>
-        <div class="h1" id="thH">Спасибо!</div>
+        <div class="rk" id="thLab">Ответ</div><div class="rdiv"><i></i></div>
+        <h3 class="rt" id="thH">Спасибо!</h3>
         <div class="tag" id="demoTag" hidden>демо</div>
-        <p class="lead" id="thP"></p>
+        <p class="rsub" id="thP"></p>
         <div class="stack">
           <button class="btn" type="button" id="thRetry" hidden>Отправить ещё раз</button>
           <button class="btn" type="button" id="thCal">Добавить в календарь</button>
@@ -373,15 +403,16 @@ p,.d,.n,.t,small,b{overflow-wrap:break-word;text-wrap:pretty}
 (function(){
 var CFG=window.INVITE_CONFIG||{},TX=CFG.TEXT||{};
 var $=function(id){return document.getElementById(id)};
+var DIMG=['champ','white','red','whisky','cognac','gin','vodka','none'];
 var DRINKS=['Шампанское / игристое','Белое вино','Красное вино','Виски','Коньяк','Джин','Водка','Алкоголь не пью'];
 var NONE='Алкоголь не пью';
-var ATT_LABEL={yes:'Да, приду',maybe:'Пока не знаю',no:'К сожалению, не смогу'};
+var ATT_LABEL={yes:'Конечно, буду!',maybe:'Пока под вопросом',no:'К сожалению, не смогу'};
 var state={attend:'',count:1,drinks:[]};
 var lastAnswer=null,stack=[],scrollY0=0;
 
 /* --- напитки --- */
-(function(){var g=$('drinks');DRINKS.forEach(function(l,i){var b=document.createElement('button');b.type='button';b.className='dr'+(i===DRINKS.length-1?' wide':'');b.setAttribute('aria-pressed','false');
- b.innerHTML='<span class="bx"><svg viewBox="0 0 16 16"><path d="M3 8.500l3.200 3.200L13 4.500"/></svg></span><span></span>';b.lastChild.textContent=l;b.onclick=function(){toggle(l)};g.appendChild(b)})})();
+(function(){var g=$('drinks');DRINKS.forEach(function(l,i){var b=document.createElement('button');b.type='button';b.className='dr';b.setAttribute('aria-pressed','false');
+ b.innerHTML='<span class="bx"><svg viewBox="0 0 16 16"><path d="M3 8.500l3.200 3.200L13 4.500"/></svg></span><img alt="" width="105" height="140" src="img/d-'+DIMG[i]+'.webp"><span class="dl"></span>';b.lastChild.textContent=l;b.onclick=function(){toggle(l)};g.appendChild(b)})})();
 function toggle(l){var d=state.drinks;if(l===NONE){state.drinks=d.indexOf(NONE)>=0?[]:[NONE]}else{d=d.filter(function(x){return x!==NONE});state.drinks=d.indexOf(l)>=0?d.filter(function(x){return x!==l}):d.concat(l)}paint()}
 function paint(){[].forEach.call($('drinks').children,function(b,i){var on=state.drinks.indexOf(DRINKS[i])>=0;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on)})}
 
@@ -394,8 +425,8 @@ function lockOn(){if(!document.body.classList.contains('lock')){scrollY0=window.
 function lockOff(){document.body.classList.remove('lock');window.scrollTo(0,scrollY0)}
 function showStep(n){['att','count','drinks','form','thanks'].forEach(function(s){$('s-'+s).classList.toggle('on',s===n)});$('rsvp').scrollTop=0;
  if(n==='form')fillForm();
- [].forEach.call(document.querySelectorAll('#s-count .opt'),function(b){b.classList.toggle('on',Number(b.dataset.count)===state.count)});
- [].forEach.call(document.querySelectorAll('#s-att .opt'),function(b){b.classList.toggle('on',b.dataset.att===state.attend)})}
+ [].forEach.call(document.querySelectorAll('#s-count .opt2'),function(b){b.classList.toggle('on',Number(b.dataset.count)===state.count)});
+ [].forEach.call(document.querySelectorAll('#s-att .opt2'),function(b){b.classList.toggle('on',b.dataset.att===state.attend)})}
 function go(n){stack.push(n);showStep(n)}
 function openRsvp(){lockOn();$('route').hidden=true;$('rsvp').hidden=false;stack=[];go('att')}
 function closeOv(){$('rsvp').hidden=true;$('route').hidden=true;lockOff()}

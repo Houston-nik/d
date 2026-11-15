@@ -3,7 +3,7 @@ window.INVITE_CONFIG = {
   // Отправка ответов в Google Таблицу через Apps Script (веб-приложение).
   // ВКЛЮЧЕНО: ответы уходят в Google Таблицу.
   SHEET_ENABLED: true,
-  SHEET_URL: "https://script.google.com/macros/s/AKfycbwawIMHG2BcshzheYwnZxS9qiDXld94yirzCl_mLNUhnRF0Si0UG7tktEz-NwUmo7CL/exec",
+  SHEET_URL: "https://script.google.com/macros/s/AKfycbxaFb_2jtSqoN0Sh1Zp6wmBEIaDcCOOP_YFAVzsJIr0ivt_HaUg6e1tc7op-7VMJR1xYw/exec",
   // true: пока отправка выключена, показывать успех (демо, ответ никуда не уходит).
   // false: при выключенной отправке показывается честная ошибка. Для боевой версии false.
   DEMO: false,

@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Юбилей Андрея Белинского, 21 декабря 2026</title>
+<meta name="description" content="Приглашение на юбилей: 21 декабря 2026, ЦМТ, зал «Дорчестер», подъезд № 10.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1a100b">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Конверт -->
+<div class="intro" id="intro" role="dialog" aria-modal="true" aria-labelledby="introTitle">
+  <div class="bokeh" data-bokeh="intro" aria-hidden="true"></div>
+  <img class="fir-img fir-img--intro-a" src="img/fir.webp" alt="" aria-hidden="true" width="900" height="674">
+  <img class="fir-img fir-img--intro-b" src="img/fir.webp" alt="" aria-hidden="true" width="900" height="674">
+  <div class="intro__inner">
+    <p class="intro__kicker" id="introTitle">Вам пришло<br><em>приглашение</em></p>
+    <div class="envelope" id="envelope">
+      <div class="envelope__letter" aria-hidden="true">
+        <span>50</span>
+      </div>
+      <div class="envelope__back"></div>
+      <div class="envelope__front"></div>
+      <div class="envelope__flap"></div>
+      <button class="seal" id="seal" type="button" aria-label="Открыть приглашение">
+        <span class="seal__ring"></span>
+        <span class="seal__text">нажмите<br>сюда</span>
+      </button>
+    </div>
+    <dl class="intro__to">
+      <div><dt>Для:</dt><dd id="introFor">дорогих гостей</dd></div>
+      <div><dt>От:</dt><dd>Андрея</dd></div>
+    </dl>
+  </div>
+</div>
+
+<main class="sheet" id="sheet">
+
+  <!-- 1. Обложка -->
+  <section class="cover" id="cover">
+    <div class="cover__bg" aria-hidden="true">
+      <div class="bokeh" data-bokeh="cover"></div>
+      <canvas class="snow" id="snow"></canvas>
+      <img class="fir-img fir-img--cover-a" src="img/fir.webp" alt="" width="900" height="674">
+      <img class="fir-img fir-img--cover-b" src="img/fir.webp" alt="" width="900" height="674" loading="lazy">
+    </div>
+    <div class="cover__body">
+    <p class="eyebrow">Приглашение</p>
+    <p class="cover__for" id="coverFor" hidden></p>
+    <h1 class="cover__fifty" aria-label="50 лет">50</h1>
+    <p class="cover__title">Первые 50 лет<br>были разминкой</p>
+    <p class="cover__sub">Продолжение следует…</p>
+    <hr class="rule">
+    <p class="cover__name">Андрей Белинский</p>
+
+    <dl class="facts">
+      <div class="facts__item">
+        <dt>Дата</dt>
+        <dd><strong>21 декабря<br>2026 года</strong><span>понедельник</span></dd>
+      </div>
+      <div class="facts__item">
+        <dt>Время</dt>
+        <dd><strong>17:30</strong><span>сбор гостей</span><strong class="facts__second">18:00</strong><span>начало банкета</span></dd>
+      </div>
+      <div class="facts__item">
+        <dt>Место</dt>
+        <dd><strong>ЦМТ</strong><span>зал «Дорчестер», подъезд № 10</span><span class="facts__addr">Москва, Краснопресненская набережная, 12</span></dd>
+      </div>
+    </dl>
+
+    <div class="countdown" id="countdown" aria-live="off">
+      <p class="countdown__label" id="countdownLabel">До встречи осталось</p>
+      <div class="countdown__row">
+        <div><b id="cdDays">–</b><span id="cdDaysL">дней</span></div>
+        <div><b id="cdHours">–</b><span id="cdHoursL">часов</span></div>
+        <div><b id="cdMins">–</b><span id="cdMinsL">минут</span></div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- 2. Приветствие -->
+  <section class="letter" id="letter">
+   <div class="letter__card">
+    <h2 class="script">Дорогие друзья!</h2>
+    <p>Буду рад разделить с вами особенный вечер, посвящённый моему 50-летию.</p>
+    <p>Это будет тёплая встреча в кругу близких друзей — с хорошей кухней, музыкой и приятной атмосферой.</p>
+    <p>Очень ценю, что вы рядом, и буду счастлив видеть вас на этом празднике!</p>
+    <hr class="rule rule--short">
+    <p class="signature">Андрей Белинский</p>
+   </div>
+  </section>
+
+  <!-- 3. Программа, дресс-код, подарки -->
+  <section class="program" id="program">
+    <div class="bokeh" data-bokeh="strip" aria-hidden="true"></div>
+    <img class="fir-img fir-img--program" src="img/fir.webp" alt="" aria-hidden="true" loading="lazy" width="900" height="674">
+    <h2 class="section-title">Программа вечера</h2>
+    <ol class="timeline">
+      <li><time>17:30</time><div><h3>Сбор гостей</h3><p>Welcome drink, лёгкие закуски</p></div></li>
+      <li><time>18:00</time><div><h3>Начало банкета</h3><p>Праздничный ужин и тёплые слова</p></div></li>
+      <li><time>19:30</time><div><h3>Музыкальная программа</h3><p>Живая музыка, DJ и танцы</p></div></li>
+      <li><time>21:00</time><div><h3>Торт</h3><p>Самый сладкий момент вечера</p></div></li>
+      <li><time>…</time><div><h3>Дальше…</h3><p>Общение, музыка и отличное настроение до позднего вечера</p></div></li>
+    </ol>
+
+    <div class="pair">
+      <div>
+        <h3 class="small-caps">Дресс-код</h3>
+        <p class="script script--sm">Cocktail / Festive Chic</p>
+        <p>Элегантные наряды в праздничном стиле. Будем рады, если вы поддержите атмосферу вечера своим образом!</p>
+      </div>
+      <div>
+        <h3 class="small-caps">Подарки</h3>
+        <p>Ваше присутствие — самый ценный подарок. Если вы захотите меня порадовать, буду благодарен за вклад в мои новые путешествия и проекты.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Место -->
+  <section class="venue" id="venue">
+    <div class="arch">
+      <img src="img/hall-1.jpg" alt="Банкетный зал «Дорчестер»: накрытые столы, синие стены" width="1200" height="800" loading="lazy">
+      <div class="arch__shade"></div>
+      <div class="arch__text">
+        <h2 class="section-title">Место встречи</h2>
+        <p class="venue__place">ЦМТ</p>
+        <p class="script script--lg">зал «Дорчестер»</p>
+        <p class="venue__entrance"><span>подъезд</span> № 10</p>
+      </div>
+    </div>
+    <p class="todo todo--note todo--photo">[уточнить] фото с сайта площадки, нужно согласие</p>
+    <div class="venue__info">
+      <p class="venue__addr">Москва, Краснопресненская набережная, 12</p>
+      <p class="venue__sub">Вход в клубный корпус Plaza Garden, первый этаж. Через реку — <span class="nw">Москва-Сити</span>.</p>
+    </div>
+
+    <div class="photos">
+      <figure class="photos__wide"><img src="img/hall-2.jpg" alt="Банкетный зал: столы, ёлка, сервировка" width="1200" height="1199" loading="lazy"><figcaption class="todo">[уточнить] фото площадки</figcaption></figure>
+      <figure class="photos__wide"><img src="img/hall-3.jpg" alt="Длинный стол у окон" width="1200" height="799" loading="lazy"><figcaption class="todo">[уточнить] тот ли это зал, фото площадки</figcaption></figure>
+      <figure class="ph" role="img" aria-label="Место под фото входа"><span>фото входа № 10</span></figure>
+      <figure class="ph" role="img" aria-label="Место под фото зала"><span>фото зала</span></figure>
+    </div>
+
+    <div class="mapbox">
+      <iframe id="mapFrame" title="Карта: ЦМТ, Краснопресненская набережная, 12" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <p class="mapbox__fallback">Карта загрузится, когда будет интернет.</p>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn--primary" id="mapOpen" href="#" target="_blank" rel="noopener">Открыть в Яндекс Картах</a>
+      <a class="btn btn--ghost" id="mapRoute" href="#" target="_blank" rel="noopener">Построить маршрут</a>
+    </div>
+    <p class="todo todo--note">[уточнить] Метка стоит на ЦМТ. Точку подъезда № 10 поставим после подтверждения.</p>
+
+    <h3 class="small-caps howto__title">Как добраться</h3>
+    <ul class="howto">
+      <li><b>На машине.</b> Заезжайте с Краснопресненской набережной через последний въезд, ближайший к <span class="nw">Москва-Сити</span>. Дальше к подъезду № 10: это вход в клубный корпус Plaza Garden, зал «Дорчестер».</li>
+      <li><b>Парковка.</b> Территория ЦМТ, парковка платная. При выезде вам выдадут бесплатные карты на выезд, оплачивать парковку не требуется. <span class="todo">[уточнить у площадки]</span></li>
+      <li><b>На метро.</b> <span class="todo">[уточнить] ближайшие станции «Деловой центр» и «Улица 1905 года», пешком около 12 минут (по данным сайта ЦМТ).</span></li>
+      <li><b>Вход.</b> Подъезд № 10, вход в клубный корпус. Дальше по указателям на зал «Дорчестер». <span class="todo">[уточнить] фото входа</span></li>
+    </ul>
+
+    <details class="scheme">
+      <summary>Схема проезда и парковки</summary>
+      <a href="img/route-scheme.jpg" target="_blank" rel="noopener"><img src="img/route-scheme.jpg" alt="Схема проезда к ЦМТ: последний въезд с Краснопресненской набережной, ближайший к Москва-Сити, подъезд № 10, парковка" loading="lazy" width="1312" height="1199"></a>
+      <p class="todo todo--note">[уточнить] Схему прислал Андрей. Нужен исходник или официальная схема площадки в хорошем качестве.</p>
+    </details>
+  </section>
+
+  <!-- 6. Ответ -->
+  <section class="rsvp" id="rsvp">
+    <div class="bokeh" data-bokeh="strip" aria-hidden="true"></div>
+    <img class="fir-img fir-img--rsvp" src="img/fir.webp" alt="" aria-hidden="true" loading="lazy" width="900" height="674">
+
+    <div id="rsvpForm">
+      <p class="eyebrow">Юбилей 50 лет</p>
+      <h2 class="script script--lg">Ну что, увидимся 21&nbsp;декабря?</h2>
+      <p class="lead">Буду очень рад видеть вас на моём юбилее!</p>
+
+      <form id="form" novalidate>
+        <fieldset class="choice" id="fsAttend">
+          <legend class="visually-hidden">Придёте ли вы</legend>
+          <label class="opt"><input type="radio" name="attend" value="yes"><span>Конечно, буду!</span></label>
+          <label class="opt"><input type="radio" name="attend" value="maybe"><span>Пока под вопросом</span></label>
+          <label class="opt"><input type="radio" name="attend" value="no"><span>К сожалению, не смогу</span></label>
+        </fieldset>
+
+        <div id="moreBlock" hidden>
+          <fieldset class="choice choice--row" id="fsCount">
+            <legend class="q">Сколько будет гостей?<small>Пожалуйста, выберите, сколько человек будет от вас.</small></legend>
+            <label class="opt opt--sm"><input type="radio" name="count" value="1"><span>Один</span></label>
+            <label class="opt opt--sm"><input type="radio" name="count" value="2"><span>Вдвоём</span></label>
+            <label class="opt opt--sm"><input type="radio" name="count" value="3"><span>Втроём</span></label>
+            <label class="opt opt--sm"><input type="radio" name="count" value="4"><span>Вчетвером</span></label>
+            <p class="hint" id="seatsHint" hidden></p>
+          </fieldset>
+
+          <fieldset class="choice choice--chips" id="fsDrinks">
+            <legend class="q">Какие напитки предпочитаете?<small>Помогите мне подготовиться к нашему вечеру! Можно отметить несколько вариантов. Необязательно.</small></legend>
+            <label class="chip"><input type="checkbox" name="drink" value="Шампанское / игристое"><span>Шампанское / игристое</span></label>
+            <label class="chip"><input type="checkbox" name="drink" value="Белое вино"><span>Белое вино</span></label>
+            <label class="chip"><input type="checkbox" name="drink" value="Красное вино"><span>Красное вино</span></label>
+            <label class="chip"><input type="checkbox" name="drink" value="Виски"><span>Виски</span></label>
+            <label class="chip"><input type="checkbox" name="drink" value="Коньяк"><span>Коньяк</span></label>
+            <label class="chip"><input type="checkbox" name="drink" value="Джин"><span>Джин</span></label>
+            <label class="chip"><input type="checkbox" name="drink" value="Водка"><span>Водка</span></label>
+            <label class="chip"><input type="checkbox" name="drink" value="Алкоголь не пью" data-exclusive><span>Алкоголь не пью</span></label>
+          </fieldset>
+        </div>
+
+        <div id="nameBlock" hidden>
+          <p class="q">Почти готово!<small>Пожалуйста, укажите ваше имя.</small></p>
+          <div class="names">
+            <label class="field"><span>Имя</span><input id="first" name="first" autocomplete="given-name" required></label>
+            <label class="field"><span>Фамилия</span><input id="last" name="last" autocomplete="family-name" required></label>
+          </div>
+          <label class="field"><span>Комментарий <i>(необязательно)</i></span><textarea id="comment" name="comment" rows="2" maxlength="300" placeholder="Например: аллергия на орехи"></textarea></label>
+          <p class="form-error" id="formError" role="alert" hidden></p>
+          <button class="btn btn--primary btn--block" type="submit" id="submitBtn">Подтвердить ответ&nbsp;→</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Спасибо -->
+    <div id="thanks" hidden>
+      <p class="eyebrow">Юбилей 50 лет</p>
+      <h2 class="script script--lg">Спасибо!</h2>
+      <p class="lead" id="thanksText">Ваш ответ получен. До встречи 21 декабря!</p>
+      <dl class="summary" id="summary"></dl>
+      <p class="notice" id="thanksNote" hidden></p>
+      <div class="btn-row">
+        <button class="btn btn--primary" type="button" id="calBtn">Добавить в календарь</button>
+        <button class="btn btn--ghost" type="button" id="editBtn">Изменить ответ</button>
+      </div>
+      <p class="small">Передумали или изменились планы? Откройте это приглашение по своей ссылке ещё раз и поправьте ответ.</p>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="bokeh" data-bokeh="foot" aria-hidden="true"></div>
+    <img class="fir-img fir-img--foot" src="img/fir.webp" alt="" aria-hidden="true" loading="lazy" width="900" height="674">
+    <p>21 декабря 2026 · ЦМТ, зал «Дорчестер», подъезд № 10</p>
+  </footer>
+</main>
+
+<a class="sticky-cta" id="stickyCta" href="#rsvp" hidden>Ответить на приглашение</a>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

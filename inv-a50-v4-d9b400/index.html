@@ -1,134 +1,254 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1,viewport-fit=cover"><title>Андрей Белинский — 50 лет</title>
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#0f0a06"><title>Андрей Белинский — 50 лет</title>
 <meta name="description" content="Приглашение на 50-летие Андрея Белинского: 21 декабря 2026, ЦМТ, зал «Дорчестер». Ответьте, пожалуйста, придёте ли вы.">
 <meta name="robots" content="noindex,nofollow">
 <meta property="og:type" content="website"><meta property="og:locale" content="ru_RU">
 <meta property="og:title" content="Андрей Белинский — 50 лет">
-<meta property="og:description" content="Приглашение на юбилей: 21 декабря 2026, ЦМТ, зал «Дорчестер». Откройте и ответьте, придёте ли вы.">
+<meta property="og:description" content="Приглашение на юбилей: 21 декабря 2026, ЦМТ, зал «Дорчестер». Откройте и ответьте, придёт ли вы.">
 <meta property="og:image" content="img/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Андрей Белинский — 50 лет"><meta name="twitter:image" content="img/og.jpg">
-<link rel="preload" as="image" href="img/img00.webp" type="image/webp" fetchpriority="high"><link rel="preload" as="font" type="font/woff2" href="fonts/cg500.woff2" crossorigin>
+<link rel="preload" as="image" href="img/bg-cover.webp" type="image/webp" fetchpriority="high">
+<link rel="preload" as="font" type="font/woff2" href="fonts/cg600.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/cg500.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/mont600.woff2" crossorigin>
 <script src="config.js"></script><style>
-@font-face{font-family:"Cormorant Garamond";font-weight:500;src:url(fonts/cg500.woff2) format("woff2");font-display:swap}
-@font-face{font-family:"Cormorant Garamond";font-weight:600;src:url(fonts/cg600.woff2) format("woff2");font-display:swap}
-@font-face{font-family:"Cormorant SC";font-weight:500;src:url(fonts/sc500.woff2) format("woff2");font-display:swap}
-@font-face{font-family:"Cormorant SC";font-weight:600;src:url(fonts/sc600.woff2) format("woff2");font-display:swap}
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:500;src:url(fonts/cg500.woff2) format("woff2");font-display:swap}
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:600;src:url(fonts/cg600.woff2) format("woff2");font-display:swap}
+@font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:500;src:url(fonts/cgi500.woff2) format("woff2");font-display:swap}
+@font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:600;src:url(fonts/cgi600.woff2) format("woff2");font-display:swap}
+@font-face{font-family:"Montserrat";font-style:normal;font-weight:500;src:url(fonts/mont500.woff2) format("woff2");font-display:swap}
+@font-face{font-family:"Montserrat";font-style:normal;font-weight:600;src:url(fonts/mont600.woff2) format("woff2");font-display:swap}
+:root{--gold:#D9B77A;--body:#F3E9D8;--muted:#CDBFA6;--line:rgba(217,183,122,.5);--panel:rgba(20,14,9,.62)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;height:100%;background:#1b0f09;color:#f6e6c8;font-family:"Cormorant Garamond",Georgia,serif;font-weight:500}
-:root{--pt:calc(env(safe-area-inset-top,0px) + 60px)}
-.screen{display:none;position:relative;width:100%;height:100vh;height:100svh;overflow:hidden;background:#1b0f09;align-items:flex-start;justify-content:center;padding-top:var(--pt)}
-.screen::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 85% 70% at 50% 42%,rgba(27,15,9,0) 30%,rgba(27,15,9,.78) 100%)}
-.screen.active{display:flex}
-.bg{position:absolute;inset:-60px;background-color:#1b0f09;background-size:cover;background-position:center;filter:blur(32px) brightness(.4) saturate(1.1)}
-/* фон без текста для экранов с карточкой: низ img05 (свечи и стол) + затемнение */
-.bg.tf{inset:-40px;background-image:linear-gradient(rgba(27,15,9,.65),rgba(27,15,9,.65)),url(img/bg-tf.webp);background-size:100% 100%;background-position:center;filter:blur(24px)}
-.frame{position:relative;z-index:2;flex:none;width:min(100vw,calc((100vh - var(--pt))*2/3));width:min(100vw,calc((100svh - var(--pt))*2/3));aspect-ratio:2/3;box-shadow:0 0 40px #000a}
-@media(min-width:700px){.screen{align-items:center;padding-bottom:var(--pt)}}
-#p7,#p9{align-items:center;padding-bottom:16px}
-#p7 .card,#p9 .card{max-height:calc(100vh - var(--pt) - 16px);max-height:calc(100svh - var(--pt) - 16px)}
-.frame img{display:block;width:100%;height:100%;user-select:none;-webkit-user-drag:none}
-.tap{position:absolute;border:0;padding:0;background:transparent;cursor:pointer;touch-action:manipulation;border-radius:14px}
-.tap:focus-visible{outline:3px solid #fff}
-.tap:active{background:rgba(0,0,0,.2);transform:scale(.985)}
-.debug .tap{outline:2px solid #0f0;background:rgba(0,255,0,.12)}
-.check{position:absolute;pointer-events:none;border:2px solid #ffd887;border-radius:12px;box-shadow:0 0 14px #e9a74a,inset 0 0 10px rgba(255,216,135,.25)}
-.route{display:none;position:relative;height:100vh;height:100svh;overflow:auto;-webkit-overflow-scrolling:touch;background:#fdf6ec;color:#30241a;padding-top:calc(56px + env(safe-area-inset-top,0px))}
-.route.active{display:block}
-.topbar{position:fixed;top:0;left:0;right:0;z-index:40;height:calc(56px + env(safe-area-inset-top,0px));background:#1b0f09;border-bottom:1px solid rgba(217,178,111,.35)}
-.route-in{max-width:900px;margin:0 auto}
-.mapbox{position:relative}
-.mapbox img{display:block;width:100%;height:auto}
-.zoom-btn{display:block;width:calc(100% - 32px);margin:12px 16px 0;font:600 16px "Cormorant SC",serif;letter-spacing:.14em;color:#f1d9a6;background:#1b0f09;border:1px solid rgba(230,190,115,.8);border-radius:40px;padding:12px 16px 11px;cursor:pointer;touch-action:manipulation}
-.info{display:grid;grid-template-columns:1fr;gap:6px;padding:12px 16px 28px}
-.blk{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid rgba(120,80,40,.22)}
-.blk:last-child{border:0}
-.blk img{flex:none;width:58px;height:58px;object-fit:contain}
-.blk h3{margin:2px 0 4px;font:600 26px/1.1 "Cormorant SC",serif;letter-spacing:.06em;color:#34240f}
-.blk p{margin:0;font:600 18px/1.3 "Cormorant Garamond",serif;color:#30241a}
-.blk .note{margin-top:10px;padding:9px 12px;border-radius:12px;background:#fce8b9}
-@media(min-width:760px){.info{grid-template-columns:repeat(3,1fr);gap:24px}.blk{border:0;flex-direction:column}}
-#zoom{position:fixed;inset:0;z-index:100;display:none;overflow:auto;background:#fdf6ec;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y pinch-zoom}
-#zoom.open{display:block}
-#zoom img{display:block;width:1312px;max-width:none;height:auto;margin-top:calc(56px + env(safe-area-inset-top,0px))}
-#zoomBar{position:fixed;top:0;left:0;right:0;z-index:101;height:calc(56px + env(safe-area-inset-top,0px));background:#1b0f09;display:none}
-#zoomBar.open{display:block}
-#zoomBar button{position:absolute;top:calc(env(safe-area-inset-top,0px) + 12px);left:10px}
-.back-nav{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:10px;z-index:50;border:1px solid rgba(230,190,115,.7);background:rgba(18,10,6,.72);backdrop-filter:blur(6px);color:#f1d9a6;border-radius:20px;padding:7px 14px 6px;font:600 13px "Cormorant SC",serif;letter-spacing:.14em;cursor:pointer;touch-action:manipulation}
-.back-nav[hidden]{display:none}
-.card{position:relative;z-index:2;margin-top:0;width:min(92vw,520px);max-height:94vh;max-height:94svh;overflow:auto;padding:30px 24px 26px;border-radius:20px;background:linear-gradient(160deg,rgba(44,26,15,.8),rgba(14,8,5,.86));-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid #d9b26f;box-shadow:0 0 0 5px rgba(18,10,6,.55),0 0 0 6px rgba(217,178,111,.4),0 24px 70px #000b;text-align:center}
-.eyebrow{font:600 14px "Cormorant SC",serif;letter-spacing:.34em;color:#e7c98e;margin:0 0 6px}
-.card h1,.card h2{margin:6px 0 10px;font-weight:600;font-size:clamp(40px,11vw,54px);line-height:1.08;background:linear-gradient(180deg,#fdeabc 0%,#e8bf6d 52%,#b98530 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
-.rule{height:1px;margin:10px auto 16px;width:70%;background:linear-gradient(90deg,transparent,#d9b26f,transparent)}
-.card p{margin:0 0 16px;font-size:21px;line-height:1.35;color:#f6e6c8}
-.name-fields{display:flex;gap:10px;margin:4px 0 18px}
-.name-fields input{min-width:0;width:50%;background:rgba(0,0,0,.38);color:#fbefd6;border:1px solid #c9a062;border-radius:12px;padding:13px 12px;font:600 21px "Cormorant Garamond",serif;outline:none}
-.name-fields input::placeholder{color:#bda47a;font-weight:500}
-.name-fields input:focus{border-color:#ffdd9a;box-shadow:0 0 0 2px rgba(255,221,154,.25)}
-.answer-card{border:1px solid rgba(217,178,111,.55);border-radius:14px;padding:6px 16px;text-align:left;background:rgba(0,0,0,.22)}
-.answer-row{display:flex;gap:12px;justify-content:space-between;align-items:baseline;padding:11px 0;border-bottom:1px solid rgba(217,178,111,.25);font-size:20px;line-height:1.25}
-.answer-row:last-child{border:0}
-.answer-row span{color:#dcc392}
-.answer-row strong{max-width:58%;text-align:right;font-weight:600;color:#fff4dc}
-.actions{margin-top:20px;display:flex;flex-direction:column;gap:10px}
-.btn{font:600 19px "Cormorant SC",serif;letter-spacing:.14em;background:linear-gradient(110deg,#c18a3c,#f6d595 45%,#b98330);border:1px solid #f0cd88;border-radius:40px;padding:15px 22px 14px;color:#2a1608;cursor:pointer;touch-action:manipulation;box-shadow:0 4px 14px #0008}
-.btn:active{filter:brightness(.85);transform:scale(.985)}
-.btn.ghost{background:transparent;color:#ecd29c;border:1px solid #c9a062;box-shadow:none}
+html,body{margin:0;height:100%;background:#0f0a06;color:var(--body);font-family:"Cormorant Garamond",serif;font-weight:500;font-size:17.5px;line-height:1.45;font-variant-numeric:lining-nums;font-feature-settings:'lnum' 1;-webkit-text-size-adjust:100%;overflow:hidden}
+button,input{font-family:inherit}
+.outer{position:fixed;inset:-30px;background:#0f0a06 url(img/bg-hall.webp) center/cover;filter:blur(24px) brightness(.55);display:none}
+@media(min-width:520px){.outer{display:block}}
+.app{position:relative;width:min(100%,430px);height:100vh;height:100svh;margin:0 auto;overflow:hidden;background:#0f0a06}
+@media(min-width:520px){.app{box-shadow:0 0 60px #000c}}
+.bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .5s ease}
+.bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,10,6,.45),rgba(15,10,6,.76))}
+#bgHall{background-image:url(img/bg-hall.webp)}
+#bgCover{background-image:url(img/bg-cover.webp)}
+#bgCover::after{background:linear-gradient(180deg,rgba(15,10,6,.7) 0%,rgba(15,10,6,.5) 34%,rgba(15,10,6,.3) 52%,rgba(15,10,6,.82) 82%,rgba(15,10,6,.9) 100%)}
+.app.cover #bgCover{opacity:1}.app:not(.cover) #bgHall{opacity:1}
+.screen{position:absolute;inset:0;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;padding:68px 24px calc(28px + env(safe-area-inset-bottom,0px));opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s linear .35s;text-align:center}
+.screen.active{opacity:1;visibility:visible;transition:opacity .35s ease}
+.inner{margin:auto 0;width:100%}
+#p1{padding-top:calc(24px + env(safe-area-inset-top,0px))}
+#p1 .inner{height:100%;margin:0;display:flex;flex-direction:column;justify-content:space-between}
+.label{font-family:"Montserrat",sans-serif;font-weight:600;font-size:12px;line-height:1.5;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0}
+.label.m{color:var(--muted);font-weight:500}
+h1,h2{margin:0;font-weight:600;color:var(--gold);font-size:32px;line-height:1.12}
+.big50{font-weight:600;font-size:120px;line-height:.92;margin:6px 0 4px;background:linear-gradient(180deg,#F1DDAE,#C9A15A);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+p{margin:0;font-size:18px;line-height:1.45;color:var(--body)}
+.it{font-style:italic}
+.rule{height:1px;background:var(--line);margin:16px 0;border:0}
+.card{background:var(--panel);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(217,183,122,.55);border-radius:16px;padding:22px 20px}
+.stack>*+*{margin-top:14px}
+.btn{display:block;width:100%;font-family:"Montserrat",sans-serif;font-weight:600;font-size:12px;letter-spacing:.18em;text-transform:uppercase;line-height:1.3;text-align:center;border-radius:999px;padding:17px 20px;cursor:pointer;touch-action:manipulation;border:1px solid transparent;text-decoration:none}
+.btn.pri{background:linear-gradient(110deg,#C9A15A,#F1DDAE 50%,#C9A15A);color:#1c120a;box-shadow:0 4px 14px rgba(0,0,0,.45)}
+.btn.sec{background:rgba(20,14,9,.35);color:var(--gold);border-color:var(--gold)}
+.btn:active{filter:brightness(.88);transform:scale(.985)}
 .btn[disabled]{opacity:.7}
-.linkbtn{background:none;border:0;color:#d8bb86;font:600 14px "Cormorant SC",serif;letter-spacing:.14em;text-decoration:underline;text-underline-offset:4px;cursor:pointer;margin-top:16px;padding:6px}
-.hidden{display:none!important}
-.demo{position:absolute;top:10px;right:14px;font:600 11px "Cormorant SC",serif;letter-spacing:.2em;color:#cdb078;opacity:.7}
-.notice{font-size:18px;color:#e4c7a1}
-@media(max-width:400px){.btn{font-size:17px;letter-spacing:.08em;padding:14px 14px 13px}.card{padding:26px 18px 22px}}
+.back{position:absolute;z-index:50;top:calc(14px + env(safe-area-inset-top,0px));left:24px;font-family:"Montserrat",sans-serif;font-weight:600;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);background:var(--panel);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid var(--gold);border-radius:999px;padding:9px 16px;cursor:pointer;touch-action:manipulation}
+.back[hidden]{display:none}
+.linkb{background:none;border:0;padding:10px;margin:0 auto;display:block;font-family:"Montserrat",sans-serif;font-weight:500;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-decoration:underline;text-underline-offset:5px;text-decoration-color:rgba(217,183,122,.5);cursor:pointer;touch-action:manipulation}
+.facts{display:grid;grid-template-columns:1fr 1fr 1fr;padding:16px 4px}
+.facts>div{padding:0 8px;border-left:1px solid var(--line);display:flex;flex-direction:column;gap:5px;align-items:center}.facts .label{min-height:36px;display:flex;align-items:flex-end;justify-content:center;text-align:center}
+.facts>div:first-child{border-left:0}
+.facts b{font-weight:600;font-size:19px;line-height:1.15;color:var(--body)}
+.facts span.s{font-size:15px;line-height:1.25;color:var(--muted)}
+.forline{font-size:22px;font-style:italic;color:var(--body);margin:0 0 14px;min-height:0}
+.forline:empty{display:none}
+.hello p+p{margin-top:12px}
+.tl{position:relative;margin:16px 0 0;padding:0;list-style:none;text-align:left}
+.tl::before{content:"";position:absolute;left:21px;top:30px;bottom:34px;width:1px;background:var(--line)}
+.tl li{position:relative;display:grid;grid-template-columns:44px 1fr;column-gap:14px;padding:9px 0}
+.tl .ic{width:44px;height:44px;border-radius:50%;background:#1b130c;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;position:relative}
+svg{display:block;fill:none;stroke:var(--gold);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.tl .t{font-weight:600;font-size:22px;line-height:1.1;color:var(--gold)}
+.tl .t small{font-family:"Montserrat",sans-serif;font-weight:600;font-size:11px;letter-spacing:.18em;color:var(--body);margin-left:10px;text-transform:uppercase;vertical-align:2px}
+.tl .d{font-size:17px;line-height:1.3;color:var(--muted);margin-top:3px}
+.dress h2{font-size:30px;font-style:italic;margin:10px 0 8px}
+.dress p{font-size:17px}
+.opts{display:flex;flex-direction:column;gap:12px;margin-top:22px}
+.opt{display:grid;grid-template-columns:30px 1fr 14px;column-gap:16px;align-items:center;text-align:left;width:100%;background:var(--panel);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid var(--gold);border-radius:16px;padding:18px 20px;color:var(--body);font-family:"Montserrat",sans-serif;font-weight:600;font-size:12px;letter-spacing:.18em;text-transform:uppercase;line-height:1.5;cursor:pointer;touch-action:manipulation}
+.opt:active{background:rgba(217,183,122,.18)}
+.drinks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0 20px}
+.dr{position:relative;text-align:left;min-height:68px;background:var(--panel);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(217,183,122,.4);border-radius:16px;padding:12px 40px 12px 14px;color:var(--body);font-weight:600;font-size:18px;line-height:1.15;cursor:pointer;touch-action:manipulation;display:flex;align-items:center}
+.dr::after{content:"";position:absolute;right:12px;top:50%;margin-top:-10px;width:20px;height:20px;border-radius:50%;border:1px solid var(--gold)}
+.dr svg{position:absolute;right:12px;top:50%;margin-top:-10px;width:20px;height:20px;stroke:#1c120a;stroke-width:2.2;opacity:0;z-index:1}
+.dr.on{border-color:var(--gold);background:rgba(217,183,122,.16);box-shadow:inset 0 0 0 1px var(--gold)}
+.dr.on::after{background:var(--gold)}
+.dr.on svg{opacity:1}
+.field{text-align:left;margin-top:14px}
+.field label{display:block;font-family:"Montserrat",sans-serif;font-weight:500;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.field input{width:100%;background:rgba(10,6,3,.45);color:var(--body);border:1px solid rgba(217,183,122,.6);border-radius:12px;padding:14px;font-family:"Montserrat",sans-serif;font-weight:500;font-size:16px;letter-spacing:.02em;outline:none}
+.field input:focus{border-color:#F1DDAE;box-shadow:0 0 0 2px rgba(217,183,122,.25)}
+.sum{margin-top:18px;border:1px solid var(--line);border-radius:12px;padding:4px 14px;text-align:left}
+.sum div{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:11px 0;border-bottom:1px solid rgba(217,183,122,.25)}
+.sum div:last-child{border:0}
+.sum span{font-family:"Montserrat",sans-serif;font-weight:500;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);flex:none}
+.sum strong{font-weight:600;font-size:18px;line-height:1.2;color:var(--body);text-align:right}
+.err{font-size:17px;color:#F1DDAE;margin-top:12px;min-height:0}
+.err:empty{display:none}
+.hidden,[hidden]{display:none!important}
+.demo{position:absolute;top:22px;right:24px;font-family:"Montserrat",sans-serif;font-weight:500;font-size:10px;letter-spacing:.18em;color:var(--muted);opacity:.8}
+.route-img{display:block;border-radius:12px;overflow:hidden;border:1px solid var(--line);margin-top:16px}
+.route-img img{display:block;width:100%;height:auto}
+.rl{text-align:left;margin-top:16px}
+.rl .label{margin-bottom:3px}.rl p{font-size:17px;line-height:1.35;color:var(--body)}.rl p.label{font-size:12px;color:var(--gold)}.rl>div+div{margin-top:14px}
+@media(max-width:380px){.big50{font-size:112px}.screen{padding-left:20px;padding-right:20px}.back{left:20px}.demo{right:20px}h1,h2{font-size:30px}.facts b{font-size:18px}.facts span.s{font-size:14px}.drinks{gap:8px}.dr{font-size:17px;padding-left:12px}}
+@media(prefers-reduced-motion:reduce){.screen,.bg{transition:none}}
 </style></head><body>
-<button type="button" class="back-nav" id="backNav" hidden onclick="goBack()">← НАЗАД</button>
+<div class="outer" aria-hidden="true"></div>
+<div class="app cover" id="app">
+<div class="bg" id="bgCover"></div><div class="bg" id="bgHall"></div>
+<button type="button" class="back" id="backNav" hidden onclick="goBack()">← Назад</button>
 <main>
-<section class="screen active" id="p1"><div class="bg" style="background-image:url(img/img00.webp)"></div><div class="frame"><img src="img/img00.webp" fetchpriority="high" decoding="async" alt="Приглашение на юбилей Андрея Белинского"></div></section>
-<section class="screen" id="p2"><div class="bg" style="background-image:url(img/img03.webp)"></div><div class="frame"><img src="img/img03.webp" loading="lazy" decoding="async" alt="Обращение"></div></section>
-<section class="screen" id="p3"><div class="bg" style="background-image:url(img/img04.webp)"></div><div class="frame"><img src="img/img04.webp" loading="lazy" decoding="async" alt="Программа вечера"></div></section>
-<section class="screen" id="p4"><div class="bg" style="background-image:url(img/img05.webp)"></div><div class="frame"><img src="img/img05.webp" loading="lazy" decoding="async" alt="Присутствие"></div></section>
-<section class="screen" id="p5"><div class="bg" style="background-image:url(img/img06.webp)"></div><div class="frame"><img src="img/img06.webp" loading="lazy" decoding="async" alt="Количество гостей"></div></section>
-<section class="screen" id="p6"><div class="bg" style="background-image:url(img/img07.webp)"></div><div class="frame"><img src="img/img07.webp" loading="lazy" decoding="async" alt="Напитки"></div></section>
-<section class="screen" id="p7"><div class="bg tf"></div>
- <div class="card"><div class="eyebrow">ЮБИЛЕЙ 50 ЛЕТ</div><h2>Почти готово!</h2><div class="rule"></div><p>Укажите имя и фамилию<br>и проверьте ответы.</p>
- <div class="name-fields"><input id="first" placeholder="Имя" autocomplete="given-name" aria-label="Имя"><input id="last" placeholder="Фамилия" autocomplete="family-name" aria-label="Фамилия"></div>
- <div class="answer-card"><div class="answer-row"><span>Присутствие</span><strong id="a"></strong></div><div class="answer-row"><span>Гостей (включая вас)</span><strong id="c"></strong></div><div class="answer-row"><span>Напитки</span><strong id="d"></strong></div></div>
- <div class="actions"><button class="btn" id="confirmBtn" onclick="confirmAnswer()">Подтвердить</button><button class="btn ghost" onclick="show(4)">Изменить ответы</button></div></div></section>
-<section class="route" id="p8"><div class="topbar"></div><div class="route-in">
- <div class="mapbox"><img src="img/map.webp" alt="Схема проезда к ЦМТ: въезд с Краснопресненской набережной, подъезд № 10" onclick="openZoom()"></div>
- <button type="button" class="zoom-btn" onclick="openZoom()">ОТКРЫТЬ КРУПНО</button>
- <div class="info">
-  <div class="blk"><img src="img/ic-car.png" alt=""><div><h3>ВЪЕЗД</h3><p>С Краснопресненской набережной, через ближайший к Москва-Сити въезд (если ехать из центра, он последний).</p></div></div>
-  <div class="blk"><img src="img/ic-park.png" alt=""><div><h3>ПАРКОВКА</h3><p>На территории ЦМТ.</p><p class="note">Для гостей бесплатна: на вечере вам выдадут карту для выезда.</p></div></div>
-  <div class="blk"><img src="img/ic-door.png" alt=""><div><h3>ВХОД</h3><p>Подъезд № 10, клубный корпус Plaza Garden, зал «Дорчестер».</p></div></div>
- </div></div></section>
-<div id="zoomBar"><button type="button" class="back-nav" onclick="closeZoom()">✕ ЗАКРЫТЬ</button></div>
-<div id="zoom"><img src="img/map.webp" alt="Схема проезда, крупно"></div>
-<section class="screen" id="p9" aria-live="polite"><div class="bg tf"></div>
- <div class="card"><span class="demo" id="demoTag" hidden>демо</span><div class="eyebrow">ЮБИЛЕЙ 50 ЛЕТ</div><h1 id="thH"></h1><div class="rule"></div><p id="thP"></p><p class="notice" id="thNote" hidden></p>
- <div class="actions"><button class="btn" id="thRetry" onclick="retrySend()" hidden>Отправить ответ</button><button class="btn ghost" id="thCopy" onclick="shareAnswer()" hidden>Скопировать ответ</button><button class="btn ghost" id="thCal" onclick="calendar()">Добавить в календарь</button><button class="btn ghost" onclick="show(7)">Изменить ответы</button></div>
- <button class="linkbtn" onclick="show(8)">Схема проезда и парковки</button></div></section>
-</main><script>
-let state={attend:'',count:1,drinks:[]};const labels=['Шампанское / игристое','Белое вино','Красное вино','Виски','Коньяк','Джин','Водка','Без алкоголя'];
+<section class="screen active" id="p1"><div class="inner">
+ <div>
+  <p class="label">Приглашение</p>
+  <div class="big50">50</div>
+  <h1>Юбилей 50 лет</h1>
+  <p class="it" style="font-size:22px;margin:8px 0 14px;color:var(--body)">Продолжение следует…</p>
+  <p class="label" style="color:var(--body)">Андрей Белинский</p>
+  <p class="forline" id="forLine" style="margin:14px 0 0"></p>
+ </div>
+ <div>
+  <div class="card facts">
+   <div><span class="label" style="font-size:11px">Дата</span><b>21 декабря</b><span class="s">2026, понедельник</span></div>
+   <div><span class="label" style="font-size:11px">Сбор гостей</span><b>17:30</b><span class="s">банкет в 18:00</span></div>
+   <div><span class="label" style="font-size:11px">Место</span><b>ЦМТ</b><span class="s">зал «Дорчестер», подъезд № 10</span></div>
+  </div>
+  <button class="btn pri" style="margin-top:16px" onclick="show(2)">Открыть приглашение</button>
+  <button class="linkb" style="margin-top:6px" onclick="show(8,1)">Схема проезда</button>
+ </div>
+</div></section>
+
+<section class="screen" id="p2"><div class="inner">
+ <div class="card hello" style="padding:28px 22px">
+  <p class="label">Приглашение</p>
+  <div class="big50" style="font-size:96px">50</div>
+  <h2 class="it" style="font-size:34px">Дорогие друзья!</h2>
+  <hr class="rule">
+  <p>21&nbsp;декабря мне исполняется 50, и я хочу отметить этот день с вами.</p>
+  <p>Нас ждёт тёплый вечер в кругу близких: хорошая кухня, живая музыка и танцы.</p>
+  <p>Спасибо, что вы рядом. Буду очень рад вас видеть!</p>
+  <hr class="rule">
+  <p class="label" style="color:var(--body)">Андрей Белинский</p>
+ </div>
+ <button class="btn pri" style="margin-top:18px" onclick="show(3)">Продолжить</button>
+</div></section>
+
+<section class="screen" id="p3"><div class="inner">
+ <div class="card">
+  <p class="label">Программа вечера</p>
+  <ul class="tl">
+   <li><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M5 4h14l-1.2 5.5a5.8 5.8 0 0 1-11.6 0z"/><path d="M12 15.2V20M8 20h8"/><path d="M10 7.5h.01M13.5 6.5h.01"/></svg></span><div><div class="t">17:30<small>Сбор гостей</small></div><div class="d">Аперитив и лёгкие закуски</div></div></li>
+   <li><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M4 16a8 8 0 0 1 16 0z"/><path d="M3 19.5h18M12 8V5.5M10.6 5.5h2.8"/></svg></span><div><div class="t">18:00<small>Банкет</small></div><div class="d">Праздничный ужин и тосты</div></div></li>
+   <li><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M9 17V6l10-2v11"/><circle cx="6.5" cy="17" r="2.5"/><circle cx="16.5" cy="15" r="2.5"/></svg></span><div><div class="t">19:30<small>Музыка</small></div><div class="d">Живое выступление, DJ и танцы</div></div></li>
+   <li><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M4 20h16M5 20v-6h14v6"/><path d="M5 17c2 1.5 3.5 1.5 4.5 0 1 1.5 3 1.5 4.5 0 1 1.5 3 1.5 5 0"/><path d="M12 14v-4M12 8.5c-.9-.8-.9-1.7 0-2.6.9.9.9 1.8 0 2.6z"/></svg></span><div><div class="t">21:00<small>Торт</small></div><div class="d">Самый сладкий момент вечера</div></div></li>
+   <li><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L12 16.9l-5.2 2.8 1-5.9L3.5 9.7l5.9-.8z"/></svg></span><div><div class="t">Дальше…</div><div class="d">Общение и танцы до позднего вечера</div></div></li>
+  </ul>
+ </div>
+ <div class="card dress" style="margin-top:14px">
+  <p class="label">Дресс-код</p>
+  <h2>Cocktail / Festive Chic</h2>
+  <p>Нарядно и празднично: коктейльное или вечернее платье, костюм.</p>
+  <hr class="rule">
+  <p class="label">Подарки</p>
+  <p style="margin-top:8px">Главный подарок для меня — ваше присутствие. Если всё же захотите что-то подарить, буду благодарен за вклад в мои будущие путешествия и проекты.</p>
+ </div>
+ <button class="btn pri" style="margin-top:18px" onclick="show(4)">Продолжить</button>
+</div></section>
+
+<section class="screen" id="p4"><div class="inner">
+ <p class="label">Юбилей 50 лет</p>
+ <h1 style="margin-top:12px">Увидимся 21 декабря?</h1>
+ <p style="margin-top:12px">Буду очень рад видеть вас на юбилее!</p>
+ <div class="opts">
+  <button class="opt" onclick="attendance('Да, приду')"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M5 4h14l-1.2 5.5a5.8 5.8 0 0 1-11.6 0z"/><path d="M12 15.2V20M8 20h8"/></svg><span>Да, приду</span><svg width="14" height="14" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+  <button class="opt" onclick="attendance('Пока не знаю')"><svg width="28" height="28" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.6 2.6 0 1 1 3.6 2.4c-.7.4-1.1.9-1.1 1.8M12 17h.01"/></svg><span>Пока не знаю</span><svg width="14" height="14" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+  <button class="opt" onclick="attendance('К сожалению, не смогу')"><svg width="28" height="28" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 8.5l7 7M15.5 8.5l-7 7"/></svg><span>К сожалению, не смогу</span><svg width="14" height="14" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+ </div>
+</div></section>
+
+<section class="screen" id="p5"><div class="inner">
+ <p class="label">Юбилей 50 лет</p>
+ <h1 style="margin-top:12px">Вы придёте один или с парой?</h1>
+ <p style="margin-top:12px">Это нужно, чтобы подготовить места за столом.</p>
+ <div class="opts">
+  <button class="opt" onclick="state.count=1;show(6)"><svg width="28" height="28" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-4 3-6.5 7-6.5s7 2.5 7 6.5z"/></svg><span>Приду один / одна</span><svg width="14" height="14" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+  <button class="opt" onclick="state.count=2;show(6)"><svg width="28" height="28" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.2"/><path d="M3 19.5c0-3.6 2.6-5.8 6-5.8s6 2.2 6 5.8z"/><circle cx="17" cy="9" r="2.6"/><path d="M16.5 14c3 0 5 1.8 5 5"/></svg><span>Придём вдвоём</span><svg width="14" height="14" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+ </div>
+</div></section>
+
+<section class="screen" id="p6"><div class="inner">
+ <p class="label">Юбилей 50 лет</p>
+ <h1 style="margin-top:12px">Что вы предпочитаете пить?</h1>
+ <p style="margin-top:12px">Так я буду знать, что заказать к столу. Можно выбрать несколько вариантов.</p>
+ <div class="drinks" id="drinks"></div>
+ <button class="btn pri" onclick="show(7)">Продолжить</button>
+</div></section>
+
+<section class="screen" id="p7"><div class="inner">
+ <div class="card" style="padding:26px 20px">
+  <p class="label">Юбилей 50 лет</p>
+  <h1 style="margin-top:10px">Почти готово!</h1>
+  <p style="margin-top:10px">Укажите имя и фамилию и проверьте ответы.</p>
+  <div class="field"><label for="first">Имя</label><input id="first" autocomplete="given-name"></div>
+  <div class="field"><label for="last">Фамилия</label><input id="last" autocomplete="family-name"></div>
+  <div class="sum"><div><span>Присутствие</span><strong id="a"></strong></div><div><span>Гостей</span><strong id="c"></strong></div><div><span>Напитки</span><strong id="d"></strong></div></div>
+  <p class="err" id="formErr" role="alert"></p>
+  <div class="stack" style="margin-top:20px"><button class="btn pri" id="confirmBtn" onclick="confirmAnswer()">Подтвердить</button><button class="btn sec" onclick="show(4)">Изменить ответы</button></div>
+ </div>
+</div></section>
+
+<section class="screen" id="p8"><div class="inner">
+ <div class="card">
+  <p class="label">Схема проезда</p>
+  <a class="route-img" href="img/img01.webp" target="_blank" rel="noopener" aria-label="Открыть схему проезда крупно"><img src="img/img01.webp" loading="lazy" decoding="async" width="1312" height="1199" alt="Схема проезда, парковки и входа № 10"></a>
+  <p class="label m" style="margin-top:10px;font-size:11px">Нажмите на схему, чтобы открыть крупно</p>
+  <div class="rl">
+   <div><p class="label">Въезд</p><p>Последний въезд с Краснопресненской набережной, ближайший к Москва-Сити.</p></div>
+   <div><p class="label">Парковка</p><p>Территория ЦМТ платная. При выезде вам выдадут бесплатные карты на выезд, оплачивать парковку не нужно.</p></div>
+   <div><p class="label">Подъезд № 10</p><p>Вход в клубный корпус Plaza Garden, зал «Дорчестер». Москва, Краснопресненская наб., 12.</p></div>
+  </div>
+ </div>
+</div></section>
+
+<section class="screen" id="p9" aria-live="polite"><span class="demo" id="demoTag" hidden>демо</span><div class="inner">
+ <div class="card" style="padding:28px 22px">
+  <p class="label">Юбилей 50 лет</p>
+  <h1 id="thH" style="margin-top:10px;font-size:40px"></h1>
+  <hr class="rule">
+  <p id="thP"></p>
+  <div class="stack" style="margin-top:22px">
+   <button class="btn pri" id="thRetry" onclick="retrySend()" hidden>Отправить ответ</button>
+   <button class="btn sec" id="thCopy" onclick="shareAnswer()" hidden>Скопировать ответ</button>
+   <button class="btn pri" id="thCal" onclick="calendar()">Добавить в календарь</button>
+   <button class="btn sec" onclick="show(7)">Изменить ответы</button>
+  </div>
+  <button class="linkb" style="margin-top:14px" onclick="show(8,9)">Схема проезда</button>
+ </div>
+</div></section>
+</main></div>
+<script>
+let state={attend:'',count:1,drinks:[]};
+const labels=['Шампанское / игристое','Белое вино','Красное вино','Виски','Коньяк','Джин','Водка','Алкоголь не пью'];
 const S=n=>document.getElementById('p'+n);
-function zone(n,x,y,w,h,fn,label){const f=S(n).querySelector('.frame'),b=document.createElement('button');b.className='tap';b.style.cssText=`left:${x}%;top:${y}%;width:${w}%;height:${h}%`;b.setAttribute('aria-label',label);b.onclick=fn;f.append(b);return b}
-zone(1,19.73,90.76,60.45,4.82,()=>show(2),'Открыть приглашение');
-zone(1,66.5,79.8,30,9.8,()=>show(8,1),'Схема проезда: ЦМТ, подъезд № 10');
-zone(2,19.73,90.10,60.45,4.82,()=>show(3),'Продолжить');
-zone(3,19.73,90.10,60.45,4.82,()=>show(4),'Продолжить');
-zone(4,19.73,39.84,60.45,9.83,()=>attendance('Да, приду'),'Да, приду');zone(4,19.73,51.17,60.45,9.96,()=>attendance('Пока не знаю'),'Пока не знаю');zone(4,19.73,62.70,60.45,9.90,()=>attendance('К сожалению, не смогу'),'Не смогу');
+const CHK='<svg viewBox="0 0 24 24"><path d="M5.5 12.5l4.2 4.2 8.8-9"/></svg>';
+(function(){const g=document.getElementById('drinks');labels.forEach((l,i)=>{const b=document.createElement('button');b.type='button';b.className='dr';b.setAttribute('aria-pressed','false');b.innerHTML='<span></span>'+CHK;b.firstChild.textContent=l;b.onclick=()=>toggleDrink(i);g.append(b)})})();
+function toggleDrink(i){const label=labels[i];if(i===7){state.drinks=state.drinks.includes(label)?[]:[label]}else{state.drinks=state.drinks.filter(v=>v!==labels[7]);state.drinks=state.drinks.includes(label)?state.drinks.filter(v=>v!==label):[...state.drinks,label]}drawChecks()}
+function drawChecks(){document.querySelectorAll('#drinks .dr').forEach((b,i)=>{const on=state.drinks.includes(labels[i]);b.classList.toggle('on',on);b.setAttribute('aria-pressed',on)})}
 function attendance(v){state.attend=v;show(v==='К сожалению, не смогу'?7:5)}
-zone(5,17.68,47.53,64.94,10.48,()=>{state.count=1;show(6)},'Приду один');zone(5,17.68,59.51,64.94,10.61,()=>{state.count=2;show(6)},'Придём вдвоём');
-const positions=[[12.30,39.71,9.38],[50.68,39.71,9.38],[12.30,50.13,9.44],[50.68,50.13,9.44],[12.30,60.55,9.11],[50.68,60.55,9.11],[12.30,70.51,9.05],[50.68,70.51,9.05]];
-positions.forEach(([x,y,h],i)=>zone(6,x,y,37.01,h,()=>{const label=labels[i];if(i===7){state.drinks=state.drinks.includes(label)?[]:[label]}else{state.drinks=state.drinks.filter(v=>v!==labels[7]);state.drinks=state.drinks.includes(label)?state.drinks.filter(v=>v!==label):[...state.drinks,label]}drawChecks()},labels[i]));
-zone(6,26.66,82.88,47.46,5.21,()=>show(7),'Продолжить');
-function drawChecks(){const f=S(6).querySelector('.frame');f.querySelectorAll('.check').forEach(n=>n.remove());state.drinks.forEach(v=>{const i=labels.indexOf(v),[x,y,h]=positions[i],c=document.createElement('div');c.className='check';c.style.cssText=`left:${x}%;top:${y}%;width:37.01%;height:${h}%`;f.append(c)})}
 let currentPage=1,prevPage=1;
-function openZoom(){document.getElementById('zoom').classList.add('open');document.getElementById('zoomBar').classList.add('open');document.getElementById('zoom').scrollTo(0,0)}
-function closeZoom(){document.getElementById('zoom').classList.remove('open');document.getElementById('zoomBar').classList.remove('open')}
-addEventListener('keydown',e=>{if(e.key==='Escape')closeZoom()});
-function goBack(){if(document.getElementById('zoom').classList.contains('open')){closeZoom();return}if(currentPage===8)show(prevPage);else if(currentPage===9)show(7);else if(currentPage>1)show(currentPage-1)}
-function show(n,from){if(n===8)prevPage=from||currentPage;currentPage=n;document.querySelectorAll('main > section').forEach(x=>x.classList.remove('active'));S(n).classList.add('active');document.getElementById('backNav').hidden=(n===1);
- if(n===7){document.getElementById('a').textContent=state.attend||'Не выбрано';document.getElementById('c').textContent=state.attend==='К сожалению, не смогу'?'—':state.count;document.getElementById('d').textContent=state.drinks.join(', ')||'—'}
- window.scrollTo(0,0);const sc=S(n);if(sc.scrollTo)sc.scrollTo(0,0)}
+function goBack(){if(currentPage===8)show(prevPage);else if(currentPage===9)show(7);else if(currentPage===7&&state.attend==='К сожалению, не смогу')show(4);else if(currentPage>1)show(currentPage-1)}
+function show(n,from){if(n===8)prevPage=from||currentPage;currentPage=n;document.querySelectorAll('main > section').forEach(x=>x.classList.remove('active'));S(n).classList.add('active');document.getElementById('backNav').hidden=(n===1);document.getElementById('app').classList.toggle('cover',n===1);
+ if(n===7){document.getElementById('a').textContent=state.attend||'Не выбрано';document.getElementById('c').textContent=state.attend==='К сожалению, не смогу'?'—':state.count;document.getElementById('d').textContent=state.drinks.join(', ')||'—';document.getElementById('formErr').textContent=''}
+ const sc=S(n);sc.scrollTop=0}
+function setGuest(g){const el=document.getElementById('forLine');if(g&&g.name)el.textContent='Для: '+g.name}
 function message(){return `Юбилей Андрея Белинского — 21 декабря 2026\nИмя: ${first.value.trim()} ${last.value.trim()}\nПрисутствие: ${state.attend}\nКоличество гостей: ${state.attend==='К сожалению, не смогу'?'0':state.count}\nНапитки: ${state.drinks.join(', ')||'не указаны'}`}
 const CFG=window.INVITE_CONFIG||{},TX=CFG.TEXT||{};
 const base=()=>String(CFG.ENDPOINT||'').replace(/\/+$/,'');
@@ -137,7 +257,7 @@ function anonId(){let v=null;try{v=localStorage.getItem('invite:anon-id')}catch(
 const q=new URLSearchParams(location.search);const guestId=(q.get('g')||'').trim().slice(0,64).replace(/[^\w\-.]/g,'');let guest=null;
 if(q.get('debug'))document.body.classList.add('debug');
 function fj(url,opts,ms){const c=new AbortController(),t=setTimeout(()=>c.abort(),ms||8000);return fetch(url,{...(opts||{}),signal:c.signal}).then(r=>{clearTimeout(t);return r.json().catch(()=>({})).then(j=>({ok:r.ok,status:r.status,json:j}))},e=>{clearTimeout(t);throw e})}
-function loadGuest(){if(!guestId)return Promise.resolve(null);const done=g=>{guest=g;if(g){if(g.first&&!first.value)first.value=g.first;if(g.last&&!last.value)last.value=g.last}return g};
+function loadGuest(){if(!guestId)return Promise.resolve(null);const done=g=>{guest=g;if(g){setGuest(g);if(g.first&&!first.value)first.value=g.first;if(g.last&&!last.value)last.value=g.last}return g};
  if(base())return fj(base()+'/guest?g='+encodeURIComponent(guestId),{},6000).then(r=>done(r.ok&&r.json&&r.json.guest||null),()=>null);
  return fj(CFG.GUESTS_URL||'guests.json',{cache:'no-cache'},6000).then(r=>{const l=Array.isArray(r.json)?r.json:(r.json&&r.json.guests)||[];return done(l.find(x=>x.id===guestId)||null)},()=>null)}
 loadGuest();
@@ -147,11 +267,10 @@ function buildAnswer(){const no=state.attend==='К сожалению, не см
 function send(a){if(!base())return CFG.DEMO===true?Promise.resolve({demo:true}):Promise.reject({code:'no_endpoint'});
  return fj(base()+'/rsvp',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(a)},12000).then(r=>{if(r.ok&&r.json&&r.json.ok===true)return r.json;throw{code:'server',status:r.status}},e=>{throw e&&e.code?e:{code:'network'}})}
 function retrySend(){thRetry.disabled=true;thRetry.textContent='Отправляем…';const done=()=>{thRetry.disabled=false;thRetry.textContent='Отправить ответ'};send(lastAnswer).then(r=>{done();showThanks(true,!!r.demo)},()=>{done();showThanks(false)})}
-function confirmAnswer(){if(!first.value.trim()||!last.value.trim()){alert('Пожалуйста, укажите имя и фамилию');return}if(!state.attend){alert('Пожалуйста, выберите, придёте ли вы');show(4);return}lastAnswer=buildAnswer();const btn=document.getElementById('confirmBtn');btn.disabled=true;const old=btn.textContent;btn.textContent='Отправляем…';send(lastAnswer).then(r=>{btn.disabled=false;btn.textContent=old;try{localStorage.setItem('birthday_rsvp',JSON.stringify(lastAnswer))}catch(e){}showThanks(true,!!r.demo)},()=>{btn.disabled=false;btn.textContent=old;showThanks(false)})}
+function confirmAnswer(){if(!first.value.trim()||!last.value.trim()){formErr.textContent='Пожалуйста, укажите имя и фамилию';return}if(!state.attend){show(4);return}lastAnswer=buildAnswer();const btn=document.getElementById('confirmBtn');btn.disabled=true;const old=btn.textContent;formErr.textContent='';btn.textContent='Отправляем…';send(lastAnswer).then(r=>{btn.disabled=false;btn.textContent=old;try{localStorage.setItem('birthday_rsvp',JSON.stringify(lastAnswer))}catch(e){}showThanks(true,!!r.demo)},()=>{btn.disabled=false;btn.textContent=old;showThanks(false)})}
 async function shareAnswer(){const t=message();if(navigator.share){try{await navigator.share({title:'Ответ на приглашение',text:t});return}catch(e){}}try{await navigator.clipboard.writeText(t);alert('Ответ скопирован. Вставьте его в сообщение Андрею и отправьте.')}catch(e){prompt('Скопируйте ответ:',t)}}
 function calendar(){const content=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Birthday Invite//RU','BEGIN:VEVENT','UID:andrey50-20261221@invitation','DTSTAMP:20261029T090000Z','DTSTART:20261221T143000Z','DTEND:20261221T200000Z','SUMMARY:Юбилей Андрея Белинского — 50 лет','LOCATION:ЦМТ, Краснопресненская наб. 12, зал Дорчестер, подъезд 10','DESCRIPTION:Сбор гостей 17:30, банкет 18:00','END:VEVENT','END:VCALENDAR'].join('\r\n')+'\r\n';const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type:'text/calendar;charset=utf-8'}));a.download='yubiley-andreya-21-dekabrya.ics';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),2000)}
-show(1);
-function showThanks(ok,demo){const t=S(9);thH.textContent=ok?TX.okTitle:TX.errTitle;thP.textContent=ok?(demo?(TX.demoText||'Ваш ответ сохранён. До встречи 21 декабря!'):TX.okText):TX.errText;document.getElementById('demoTag').hidden=!(ok&&demo);const nt=document.getElementById('thNote');nt.hidden=!(ok&&demo);nt.textContent=TX.demoNote||'';
- thRetry.hidden=ok;thCopy.hidden=ok;thCal.hidden=!ok;show(9)}
+
+function showThanks(ok,demo){thH.textContent=ok?TX.okTitle:TX.errTitle;thP.textContent=ok?(demo?(TX.demoText||'Ваш ответ принят. До встречи 21 декабря!'):TX.okText):TX.errText;document.getElementById('demoTag').hidden=!(ok&&demo);thRetry.hidden=ok;thCopy.hidden=ok;thCal.hidden=!ok;show(9)}
 show(1);
 </script></body></html>

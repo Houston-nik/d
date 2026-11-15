@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Андрею 50 — 21 декабря, Москва</title>
+<meta name="description" content="Приглашение на вечер в честь 50-летия Андрея. 21 декабря 2026, зал «Дорчестер», ЦМТ, Москва. Подтвердите присутствие — этот вечер он хочет провести с вами.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%230E1420'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='Georgia' font-size='12' fill='%23E8D5B0'%3E50%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#0B0E16;
+  --bg-2:#121722;
+  --card:#181E2C;
+  --ink:#F4EFE6;
+  --muted:#B8AFA2;
+  --gold:#C9A56A;
+  --gold-s:#E8D5B0;
+  --gold-d:#8C6A32;
+  --line:rgba(201,165,106,.22);
+  --ok:#7D9A6A;
+  --serif:"Cormorant Garamond","Iowan Old Style",Georgia,serif;
+  --sans:"Manrope",system-ui,sans-serif;
+  --sh:0 28px 60px -30px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:78px}
+body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+img{max-width:100%;display:block;height:auto}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{width:min(1120px,calc(100% - 40px));margin-inline:auto}
+.skip{position:absolute;left:-999px;top:8px;background:#000;color:#fff;padding:8px 12px;z-index:200}
+.skip:focus{left:8px}
+h1,h2,h3,.serif{font-family:var(--serif);font-weight:500}
+
+/* header */
+.hdr{position:fixed;top:0;left:0;right:0;z-index:80;transition:background .3s,border-color .3s,box-shadow .3s;border-bottom:1px solid transparent}
+.hdr .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.mono{display:flex;align-items:center;gap:10px;color:var(--gold-s);min-width:0}
+.mono-mark{width:40px;height:40px;border-radius:50%;border:1px solid rgba(232,213,176,.5);display:grid;place-items:center;font-family:var(--serif);font-size:15px;color:var(--gold-s);flex:none}
+.mono-txt{font-family:var(--serif);font-size:20px;font-weight:500;letter-spacing:.03em;line-height:1}
+.mono-txt small{display:block;font-family:var(--sans);font-size:10px;font-weight:650;letter-spacing:.16em;text-transform:uppercase;opacity:.75;margin-top:3px}
+.nav{display:flex;align-items:center;gap:2px}
+.nav a{padding:10px 12px;border-radius:999px;font-weight:600;font-size:13.5px;color:rgba(244,239,230,.86)}
+.nav a:hover,.nav a:focus-visible{background:rgba(255,255,255,.08);color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;min-height:46px;border-radius:999px;border:0;font-weight:700;font-size:14.5px;cursor:pointer;transition:transform .2s,background .2s,box-shadow .2s,color .2s,border-color .2s;white-space:nowrap}
+.btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.btn:hover{transform:translateY(-1px)}
+.btn i{font-size:18px}
+.btn-gold{background:linear-gradient(180deg,#E8D5B0,#C9A56A);color:#1A140C;box-shadow:0 12px 28px -14px rgba(201,165,106,.9)}
+.btn-gold:hover{background:linear-gradient(180deg,#F3E6C9,#D4B57A)}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(232,213,176,.45)}
+.btn-ghost:hover{background:rgba(232,213,176,.1)}
+.btn-line{background:transparent;color:var(--gold-s);border:1.5px solid var(--gold)}
+.btn-line:hover{background:var(--gold);color:#1A140C}
+.hdr-cta{padding:10px 18px;min-height:42px;font-size:13.5px}
+.burger{display:none;width:44px;height:44px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);align-items:center;justify-content:center;flex-direction:column;gap:5px;cursor:pointer}
+.burger span{display:block;width:18px;height:2px;background:#fff;border-radius:2px}
+.hdr.scrolled{background:rgba(11,14,22,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom-color:var(--line);box-shadow:0 8px 30px -18px rgba(0,0,0,.7)}
+
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;color:#fff;isolation:isolate;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:-2}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 32%}
+.hero-shade{position:absolute;inset:0;z-index:-1;background:
+  linear-gradient(180deg, rgba(8,10,18,.58) 0%, rgba(8,10,18,.22) 26%, rgba(8,10,18,.42) 52%, rgba(8,10,18,.94) 100%),
+  linear-gradient(90deg, rgba(8,10,18,.4) 0%, rgba(8,10,18,.08) 46%, rgba(8,10,18,.35) 100%)}
+.hero .wrap{padding:108px 0 48px;text-align:center;width:min(860px,calc(100% - 40px))}
+.kicker{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-s);margin:0 0 14px;text-shadow:0 1px 10px rgba(0,0,0,.55)}
+.kicker::before,.kicker::after{content:"";width:28px;height:1px;background:var(--gold-s);opacity:.7}
+.hero-names{margin:0 0 8px;line-height:.9}
+.hero-names .nm{display:block;font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(34px,8.4vw,58px);letter-spacing:.02em;text-shadow:0 4px 28px rgba(0,0,0,.55)}
+.hero-names .num{display:block;font-family:var(--serif);font-weight:600;font-size:clamp(92px,26vw,168px);line-height:.8;letter-spacing:-.03em;color:var(--gold-s);text-shadow:0 8px 40px rgba(0,0,0,.55);margin:2px 0 6px}
+.hero-lead{margin:0 auto 8px;max-width:22ch;font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(22px,4.6vw,32px);line-height:1.25;color:#F6F0E8;text-shadow:0 3px 18px rgba(0,0,0,.6)}
+.hero-date{margin:16px 0 0;font-size:15px;font-weight:600;color:#f6f0e8;letter-spacing:.04em;text-shadow:0 2px 12px rgba(0,0,0,.55)}
+.hero-date b{font-weight:800}
+.count{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;max-width:480px;margin:18px auto 22px}
+.count-item{background:rgba(8,10,18,.5);border:1px solid rgba(232,213,176,.28);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:14px;padding:12px 6px 10px;box-shadow:0 10px 30px -18px rgba(0,0,0,.7)}
+.count-item b{display:block;font-family:var(--serif);font-size:clamp(26px,6vw,38px);font-weight:600;line-height:1;color:#fff}
+.count-item span{display:block;margin-top:3px;font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-s)}
+.hero-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:10px}
+
+/* sections */
+section{padding:88px 0}
+.sec-kicker{margin:0 0 10px;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+h2{font-size:clamp(34px,5.2vw,56px);line-height:1.08;margin:0 0 16px;font-weight:500;letter-spacing:.01em}
+.lead{font-size:17.5px;color:var(--muted);margin:0;max-width:46ch}
+.center{text-align:center}
+.center .lead{margin-inline:auto}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+.reveal.is-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+
+/* letter */
+.letter-sec{background:var(--bg-2)}
+.letter-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+.letter-pic{position:relative;border-radius:24px;overflow:hidden;box-shadow:var(--sh);min-height:520px}
+.letter-pic img{width:100%;height:100%;object-fit:cover;object-position:center 12%;position:absolute;inset:0}
+.letter-pic .shade{position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(8,10,18,.55) 100%)}
+.letter p{margin:0 0 14px;font-size:20px;line-height:1.55;color:var(--ink);font-family:var(--serif);font-weight:500}
+.letter .sign{font-family:var(--serif);font-style:italic;font-size:30px;margin-top:22px;color:var(--gold-s)}
+
+/* eras */
+.eras-sec{background:var(--bg)}
+.film{margin-top:40px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+.frame{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--sh)}
+.frame-pic{position:relative;aspect-ratio:4/3;overflow:hidden}
+.frame-pic img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.frame:hover .frame-pic img{transform:scale(1.04)}
+.frame-pic .shade{position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(8,10,18,.55) 100%)}
+.frame-body{padding:14px 14px 16px}
+.frame-body span{display:block;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.frame-body p{margin:0;font-family:var(--serif);font-size:20px;line-height:1.25;color:var(--ink)}
+.eras-note{margin:18px 0 0;color:var(--muted);font-size:13.5px}
+
+/* expect */
+.expect{background:var(--bg-2)}
+.expect-grid{margin-top:40px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.expect-card{position:relative;border-radius:20px;overflow:hidden;min-height:280px;box-shadow:var(--sh);border:1px solid var(--line)}
+.expect-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.expect-card .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,10,18,.15) 0%,rgba(8,10,18,.82) 100%)}
+.expect-card .cap{position:absolute;left:0;right:0;bottom:0;padding:20px 18px}
+.expect-card h3{margin:0 0 6px;font-size:26px;font-weight:500}
+.expect-card p{margin:0;color:rgba(244,239,230,.82);font-size:14.5px;line-height:1.4}
+
+/* place */
+.place{background:var(--bg)}
+.venue-band{position:relative;margin-top:28px;border-radius:24px;overflow:hidden;height:280px;box-shadow:var(--sh)}
+.venue-band img{width:100%;height:100%;object-fit:cover;object-position:center}
+.venue-band .shade{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(8,10,18,.72) 100%)}
+.venue-band span{position:absolute;left:22px;bottom:18px;font-family:var(--serif);font-size:24px;color:var(--gold-s)}
+.place-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:stretch;margin-top:22px}
+.place-card{background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:var(--sh);display:flex;flex-direction:column}
+.place-info{padding:24px 24px 26px;display:flex;flex-direction:column;gap:12px;flex:1}
+.place-info h3{margin:0;font-size:28px}
+.addr{display:flex;gap:10px;align-items:flex-start;margin:0;color:var(--muted);font-size:15px}
+.addr i{color:var(--gold);font-size:18px;margin-top:2px;flex:none}
+.place-info .btn{align-self:flex-start;margin-top:8px}
+.map-col{display:flex;flex-direction:column;min-height:100%}
+.map-wrap{flex:1;min-height:320px;border-radius:24px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh)}
+.map-wrap iframe{width:100%;height:100%;min-height:320px;border:0;filter:grayscale(.15) contrast(1.05)}
+.map-credit{margin:8px 0 0;font-size:12px;color:var(--muted)}
+
+/* dress */
+.dress{background:var(--bg-2);text-align:center}
+.dress .lead{margin-inline:auto}
+.palette{margin:36px auto 0;display:flex;flex-wrap:wrap;justify-content:center;gap:22px 28px;max-width:720px}
+.swatch{display:flex;flex-direction:column;align-items:center;gap:10px}
+.swatch i{display:block;width:64px;height:64px;border-radius:50%;border:1px solid rgba(232,213,176,.28);box-shadow:0 8px 20px -12px rgba(0,0,0,.7)}
+.swatch span{font-size:13px;font-weight:600;color:var(--muted)}
+
+/* rsvp */
+.rsvp{background:var(--bg)}
+.rsvp-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:28px;align-items:stretch}
+.rsvp-visual{position:relative;border-radius:24px;overflow:hidden;min-height:420px;box-shadow:var(--sh)}
+.rsvp-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rsvp-visual .shade{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(8,10,18,.8) 100%)}
+.rsvp-visual .cap{position:absolute;left:0;right:0;bottom:0;padding:24px}
+.rsvp-visual .cap b{display:block;font-family:var(--serif);font-size:32px;font-weight:500}
+.rsvp-visual .cap span{color:rgba(244,239,230,.8);font-size:14.5px}
+.form-card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:28px 26px 30px;box-shadow:var(--sh)}
+.form-card h3{margin:0 0 8px;font-size:32px}
+.hint{margin:0 0 22px;color:var(--muted);font-size:14.5px}
+.field{margin:0 0 16px}
+.field label,.label-like{display:block;font-size:13px;font-weight:650;margin:0 0 6px;color:var(--gold-s)}
+.field input[type=text],.field select,.field textarea{
+  width:100%;background:#101522;border:1px solid var(--line);border-radius:14px;padding:12px 14px;color:var(--ink);outline:none
+}
+.field textarea{min-height:110px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold)}
+.radios,.checks{display:flex;flex-wrap:wrap;gap:8px}
+.choice{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:#101522;cursor:pointer;font-size:14px;font-weight:600}
+.choice:has(input:checked){border-color:var(--gold);background:rgba(201,165,106,.12);color:var(--gold-s)}
+.choice input{accent-color:var(--gold)}
+.hidden{display:none}
+.form-card .btn{width:100%;margin-top:6px}
+.thanks{display:none;text-align:center;padding:28px 8px 12px}
+.thanks.is-on{display:block}
+.thanks-ico{width:64px;height:64px;border-radius:50%;border:1px solid var(--gold);display:grid;place-items:center;margin:0 auto 16px;color:var(--gold-s);font-size:28px}
+.thanks h3{margin:0 0 10px;font-size:48px}
+.thanks p{margin:0 auto 22px;max-width:34ch;color:var(--muted);font-size:16.5px}
+.thanks .count{margin:0 auto}
+
+/* footer */
+footer{padding:42px 0 56px;text-align:center;border-top:1px solid var(--line);background:var(--bg-2)}
+footer .mono-mark{margin:0 auto 12px}
+footer .fn{font-family:var(--serif);font-size:24px;margin:0 0 4px;color:var(--gold-s)}
+footer .fd{margin:0 0 12px;color:var(--muted);font-size:14px}
+footer .note{margin:0;color:#7E776E;font-size:12.5px}
+
+/* mobile nav */
+.mnav{display:none}
+@media (max-width:880px){
+  .nav{display:none}
+  .burger{display:flex}
+  .mnav{display:none;position:fixed;top:68px;left:0;right:0;background:rgba(11,14,22,.97);border-bottom:1px solid var(--line);padding:12px 20px 20px;z-index:79;flex-direction:column;gap:4px}
+  .mnav.open{display:flex}
+  .mnav a{padding:12px 10px;font-weight:650;color:var(--ink);border-radius:10px}
+  .letter-grid,.place-grid,.rsvp-grid{grid-template-columns:1fr;gap:28px}
+  .letter-pic{min-height:420px}
+  .expect-grid{grid-template-columns:1fr 1fr}
+  .film{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:560px){
+  .wrap{width:min(1120px,calc(100% - 28px))}
+  .hdr-cta{display:none}
+  .hdr .wrap{height:62px}
+  .hero .wrap{padding:86px 0 32px}
+  .kicker{margin-bottom:10px}
+  .hero-names .nm{font-size:clamp(30px,9vw,40px)}
+  .hero-names .num{font-size:clamp(84px,24vw,120px);margin:0 0 4px}
+  .hero-lead{font-size:clamp(20px,5.2vw,24px)}
+  .hero-date{margin-top:12px;font-size:14px}
+  .count{margin:14px auto 18px;gap:6px}
+  .count-item{padding:10px 4px 8px;border-radius:12px}
+  .count-item b{font-size:26px}
+  .hero-actions .btn{min-height:48px;padding:13px 22px;width:min(100%,320px)}
+  section{padding:64px 0}
+  .expect-grid{grid-template-columns:1fr}
+  .film{grid-template-columns:1fr}
+  .letter-pic{min-height:360px}
+  .venue-band{height:200px}
+  .form-card{padding:22px 18px 24px}
+  .thanks h3{font-size:40px}
+  .mnav{top:62px}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">К содержанию</a>
+<header class="hdr" id="hdr">
+  <div class="wrap">
+    <a class="mono" href="#top">
+      <span class="mono-mark">50</span>
+      <span class="mono-txt">Андрею 50<small>21 декабря</small></span>
+    </a>
+    <nav class="nav" aria-label="Разделы">
+      <a href="#letter">Письмо</a>
+      <a href="#years">50 лет</a>
+      <a href="#expect">Вечер</a>
+      <a href="#place">Место</a>
+      <a href="#rsvp">Ответ</a>
+    </nav>
+    <a class="btn btn-gold hdr-cta" href="#rsvp">Я приду</a>
+    <button class="burger" id="burger" type="button" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<nav class="mnav" id="mnav" aria-label="Мобильное меню">
+  <a href="#letter">Письмо</a>
+  <a href="#years">50 лет</a>
+  <a href="#expect">Вечер</a>
+  <a href="#place">Место</a>
+  <a href="#dress">Дресс-код</a>
+  <a href="#rsvp">Я приду</a>
+</nav>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="hero-bg"><img src="img/hero.jpg" alt="Вечерний зал, свечи и люстры" width="1280" height="720"></div>
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="kicker">Личное приглашение</p>
+    <h1 class="hero-names">
+      <span class="nm">Андрею</span>
+      <span class="num">50</span>
+    </h1>
+    <p class="hero-lead">И этот вечер он хочет провести с вами</p>
+    <p class="hero-date">Понедельник, <b>21 декабря 2026</b>, 18:00 · Москва</p>
+    <div class="count" aria-label="До встречи">
+      <div class="count-item"><b id="d-d">0</b><span>дней</span></div>
+      <div class="count-item"><b id="d-h">00</b><span>часов</span></div>
+      <div class="count-item"><b id="d-m">00</b><span>минут</span></div>
+      <div class="count-item"><b id="d-s">00</b><span>секунд</span></div>
+    </div>
+    <div class="hero-actions">
+      <a class="btn btn-gold" href="#rsvp"><i class="ph ph-paper-plane-tilt"></i> Я приду</a>
+      <a class="btn btn-ghost" href="#expect">Что вас ждёт</a>
+    </div>
+  </div>
+</section>
+
+<section class="letter-sec" id="letter">
+  <div class="wrap letter-grid reveal">
+    <div class="letter-pic">
+      <img src="img/portrait.jpg" alt="Портрет Андрея" width="675" height="900">
+      <div class="shade" aria-hidden="true"></div>
+    </div>
+    <div class="letter">
+      <p class="sec-kicker">Несколько слов</p>
+      <h2>От Андрея</h2>
+      <p>Мне исполняется пятьдесят. Я не хочу шумного официоза — я хочу провести этот вечер за одним столом с вами.</p>
+      <p>Приходите. Мне будет важно, что вы рядом.</p>
+      <p class="sign">Андрей</p>
+    </div>
+  </div>
+</section>
+
+<section class="eras-sec" id="years">
+  <div class="wrap">
+    <p class="sec-kicker reveal">Немного жизни</p>
+    <h2 class="reveal">50 лет за минуту</h2>
+    <p class="lead reveal">Пять кадров — от двора до этого вечера. Их можно заменить семейными снимками.</p>
+    <div class="film">
+      <article class="frame reveal">
+        <div class="frame-pic"><img src="img/era-child.jpg" alt="Мальчик с велосипедом во дворе" width="1100" height="825"><div class="shade" aria-hidden="true"></div></div>
+        <div class="frame-body"><span>Детство</span><p>Двор, велосипед и длинный свет августа</p></div>
+      </article>
+      <article class="frame reveal">
+        <div class="frame-pic"><img src="img/era-youth.jpg" alt="Молодые друзья смеются на улице" width="1100" height="825"><div class="shade" aria-hidden="true"></div></div>
+        <div class="frame-body"><span>Юность</span><p>Друзья и ощущение, что всё впереди</p></div>
+      </article>
+      <article class="frame reveal">
+        <div class="frame-pic"><img src="img/era-family.jpg" alt="Семейный обед за домашним столом" width="1100" height="825"><div class="shade" aria-hidden="true"></div></div>
+        <div class="frame-body"><span>Семья</span><p>Главные люди и самый тихий смысл</p></div>
+      </article>
+      <article class="frame reveal">
+        <div class="frame-pic"><img src="img/era-work.jpg" alt="Мужчина за работой в кабинете" width="1100" height="825"><div class="shade" aria-hidden="true"></div></div>
+        <div class="frame-body"><span>Дело</span><p>Годы работы, которые сложились в путь</p></div>
+      </article>
+      <article class="frame reveal">
+        <div class="frame-pic"><img src="img/era-now.jpg" alt="Андрей у окна вечернего города" width="1100" height="825"><div class="shade" aria-hidden="true"></div></div>
+        <div class="frame-body"><span>Сегодня</span><p>Вечер, к которому мы идём</p></div>
+      </article>
+    </div>
+    <p class="eras-note">Подписи тоже можно заменить — здесь они как ориентир.</p>
+  </div>
+</section>
+
+<section class="expect" id="expect">
+  <div class="wrap">
+    <p class="sec-kicker center reveal">Программа вечера</p>
+    <h2 class="center reveal">Что вас ждёт</h2>
+    <p class="lead center reveal">Не расписание по минутам, а то, ради чего стоит приехать и остаться допоздна.</p>
+    <div class="expect-grid">
+      <article class="expect-card reveal">
+        <img src="img/dinner.jpg" alt="Праздничная тарелка при свечах" width="1100" height="825">
+        <div class="shade" aria-hidden="true"></div>
+        <div class="cap"><h3>Ужин</h3><p>За общим столом в зале «Дорчестер», без суеты и длинных речей к еде.</p></div>
+      </article>
+      <article class="expect-card reveal">
+        <img src="img/music.jpg" alt="Живая музыка в зале" width="1100" height="825">
+        <div class="shade" aria-hidden="true"></div>
+        <div class="cap"><h3>Живая музыка</h3><p>Тихий джаз за спиной разговоров — чтобы вечеру было что помнить.</p></div>
+      </article>
+      <article class="expect-card reveal">
+        <img src="img/toast.jpg" alt="Бокалы встречаются в тосте" width="1100" height="825">
+        <div class="shade" aria-hidden="true"></div>
+        <div class="cap"><h3>Тосты</h3><p>Короткие, тёплые, без обязанности. Если есть слово — будет момент его сказать.</p></div>
+      </article>
+      <article class="expect-card reveal">
+        <img src="img/surprise.jpg" alt="Свет из-за бархатного занавеса" width="1100" height="825">
+        <div class="shade" aria-hidden="true"></div>
+        <div class="cap"><h3>Сюрприз вечера</h3><p>О нём лучше не читать заранее. Останется тайной до этой ночи.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="place" id="place">
+  <div class="wrap">
+    <p class="sec-kicker reveal">Место</p>
+    <h2 class="reveal">ЦМТ, зал «Дорчестер»</h2>
+    <p class="lead reveal">Краснопресненская наб., 12, подъезд № 10, первый этаж. Английский зал со светом люстр и тихим баром у входа.</p>
+    <div class="venue-band reveal">
+      <img src="img/venue.jpg" alt="Зал «Дорчестер»: бар, кресла и банкетные столы" width="1280" height="720">
+      <div class="shade" aria-hidden="true"></div>
+      <span>Зал «Дорчестер»</span>
+    </div>
+    <div class="place-grid reveal">
+      <div class="place-card">
+        <div class="place-info">
+          <h3>Как найти</h3>
+          <p class="addr"><i class="ph ph-map-pin"></i><span>Центр международной торговли<br>Краснопресненская наб., 12<br>Подъезд № 10, зал «Дорчестер»</span></p>
+          <p class="addr"><i class="ph ph-clock"></i><span>Сбор гостей в 18:00, понедельник, 21 декабря</span></p>
+          <p class="addr"><i class="ph ph-train"></i><span>Метро «Выставочная» — около 12 минут пешком. На машине удобна парковка ЦМТ, въезд с набережной и с Мантулинской.</span></p>
+          <a class="btn btn-gold" href="https://www.openstreetmap.org/?mlat=55.753895&amp;mlon=37.556576#map=17/55.753895/37.556576" target="_blank" rel="noopener noreferrer">
+            <i class="ph ph-navigation-arrow"></i> Как добраться
+          </a>
+        </div>
+      </div>
+      <div class="map-col">
+        <div class="map-wrap">
+          <iframe title="Карта: ЦМТ, Краснопресненская набережная, 12" src="https://www.openstreetmap.org/export/embed.html?bbox=37.5505%2C55.7510%2C37.5626%2C55.7568&amp;layer=mapnik&amp;marker=55.753895%2C37.556576" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <p class="map-credit">Карта: OpenStreetMap</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dress" id="dress">
+  <div class="wrap reveal">
+    <p class="sec-kicker">Как одеться</p>
+    <h2>Дресс-код: вечерний элегантный</h2>
+    <p class="lead">Тёмный костюм или платье, спокойные ткани, без спортивного стиля. Ориентир по цвету — палитра зала и тёплого света.</p>
+    <div class="palette" aria-label="Цветовая палитра">
+      <div class="swatch"><i style="background:#F3EEE6"></i><span>Слоновая кость</span></div>
+      <div class="swatch"><i style="background:#C9A56A"></i><span>Шампань</span></div>
+      <div class="swatch"><i style="background:#6E2A3A"></i><span>Бургунди</span></div>
+      <div class="swatch"><i style="background:#1A2340"></i><span>Чернильный</span></div>
+      <div class="swatch"><i style="background:#1C1A19"></i><span>Графит</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="rsvp" id="rsvp">
+  <div class="wrap rsvp-grid">
+    <div class="rsvp-visual reveal">
+      <img src="img/rsvp.jpg" alt="Конверт, перьевая ручка и бокалы" width="1100" height="825">
+      <div class="shade" aria-hidden="true"></div>
+      <div class="cap"><b>Ждём ваш ответ</b><span>Ответ сразу уйдёт организатору в таблицу, а не останется только у вас в телефоне</span></div>
+    </div>
+    <div class="form-card reveal">
+      <div id="form-wrap">
+        <h3>Подтвердите присутствие</h3>
+        <p class="hint">Имя, придёте ли вы, с парой или без, какие напитки поставить и пожелание имениннику.</p>
+        <form id="rsvp-form" action="#" method="post">
+          <div class="field">
+            <label for="name">Ваше имя</label>
+            <input id="name" name="name" type="text" autocomplete="name" required maxlength="80">
+          </div>
+          <div class="field">
+            <span class="label-like" id="come-label">Вы придёте?</span>
+            <div class="radios" role="radiogroup" aria-labelledby="come-label">
+              <label class="choice"><input type="radio" name="coming" value="yes" required checked> Да, с радостью</label>
+              <label class="choice"><input type="radio" name="coming" value="no"> К сожалению, не смогу</label>
+            </div>
+          </div>
+          <div class="field" id="company-wrap">
+            <span class="label-like" id="company-label">С парой или без</span>
+            <div class="radios" role="radiogroup" aria-labelledby="company-label">
+              <label class="choice"><input type="radio" name="company" value="solo" checked> Приду один</label>
+              <label class="choice"><input type="radio" name="company" value="couple"> Приду с парой</label>
+            </div>
+          </div>
+          <div class="field" id="drinks-wrap">
+            <span class="label-like" id="drinks-label">Какие напитки предпочитаете</span>
+            <div class="checks" role="group" aria-labelledby="drinks-label">
+              <label class="choice"><input type="checkbox" name="drink" value="Вино красное"> Вино красное</label>
+              <label class="choice"><input type="checkbox" name="drink" value="Вино белое"> Вино белое</label>
+              <label class="choice"><input type="checkbox" name="drink" value="Игристое"> Игристое</label>
+              <label class="choice"><input type="checkbox" name="drink" value="Крепкое"> Крепкое</label>
+              <label class="choice"><input type="checkbox" name="drink" value="Безалкогольное"> Безалкогольное</label>
+            </div>
+          </div>
+          <div class="field">
+            <label for="wish">Пожелание имениннику</label>
+            <textarea id="wish" name="wish" maxlength="600"></textarea>
+          </div>
+          <button class="btn btn-gold" type="submit"><i class="ph ph-paper-plane-tilt"></i> Отправить ответ</button>
+        </form>
+      </div>
+      <div class="thanks" id="thanks" aria-live="polite">
+        <div class="thanks-ico"><i class="ph ph-champagne"></i></div>
+        <h3>Спасибо</h3>
+        <p id="thanks-text">Ваш ответ уже у организатора. До встречи 21 декабря.</p>
+        <div class="count" id="thanks-count" aria-label="До встречи">
+          <div class="count-item"><b id="t-d">0</b><span>дней</span></div>
+          <div class="count-item"><b id="t-h">00</b><span>часов</span></div>
+          <div class="count-item"><b id="t-m">00</b><span>минут</span></div>
+          <div class="count-item"><b id="t-s">00</b><span>секунд</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="mono-mark">50</div>
+    <p class="fn">Андрею 50</p>
+    <p class="fd">21 декабря 2026 · зал «Дорчестер», ЦМТ</p>
+    <p class="note">Демо-версия. Кадры, подписи и время сбора можно заменить</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* После деплоя Apps Script вставьте сюда URL веб-приложения, оканчивающийся на /exec */
+  var RSVP_ENDPOINT = "";
+
+  var hdr = document.getElementById('hdr');
+  var burger = document.getElementById('burger');
+  var mnav = document.getElementById('mnav');
+  function onScroll(){ hdr.classList.toggle('scrolled', window.scrollY > 40); }
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+  burger.addEventListener('click', function(){
+    var open = mnav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  mnav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ mnav.classList.remove('open'); burger.setAttribute('aria-expanded','false'); });
+  });
+
+  var target = new Date('2026-12-21T18:00:00+03:00').getTime();
+  var els = [
+    {d:document.getElementById('d-d'), h:document.getElementById('d-h'), m:document.getElementById('d-m'), s:document.getElementById('d-s')},
+    {d:document.getElementById('t-d'), h:document.getElementById('t-h'), m:document.getElementById('t-m'), s:document.getElementById('t-s')}
+  ];
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function tick(){
+    var diff = target - Date.now();
+    if (diff < 0) diff = 0;
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor(diff / 3600000) % 24;
+    var m = Math.floor(diff / 60000) % 60;
+    var s = Math.floor(diff / 1000) % 60;
+    els.forEach(function(el){
+      el.d.textContent = d;
+      el.h.textContent = pad(h);
+      el.m.textContent = pad(m);
+      el.s.textContent = pad(s);
+    });
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); } });
+    }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.reveal').forEach(function(n){ io.observe(n); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(n){ n.classList.add('is-in'); });
+  }
+
+  var form = document.getElementById('rsvp-form');
+  var companyWrap = document.getElementById('company-wrap');
+  var drinksWrap = document.getElementById('drinks-wrap');
+  function syncComing(){
+    var yes = form.coming.value === 'yes';
+    companyWrap.classList.toggle('hidden', !yes);
+    drinksWrap.classList.toggle('hidden', !yes);
+  }
+  form.querySelectorAll('input[name="coming"]').forEach(function(r){
+    r.addEventListener('change', syncComing);
+  });
+  function showThanks(yes, name){
+    var text = yes
+      ? (name ? name + ', ваш ответ уже у организатора. Андрей будет рад видеть вас 21 декабря.' : 'Ваш ответ уже у организатора. До встречи 21 декабря.')
+      : (name ? name + ', спасибо, что написали. Будет не хватать, и мы благодарны за ответ.' : 'Спасибо, что написали. Будет не хватать, и мы благодарны за ответ.');
+    document.getElementById('thanks-text').textContent = text;
+    document.getElementById('thanks-count').style.display = yes ? '' : 'none';
+    document.getElementById('form-wrap').classList.add('hidden');
+    document.getElementById('thanks').classList.add('is-on');
+    document.getElementById('thanks').scrollIntoView({behavior:'smooth', block:'center'});
+  }
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var yes = form.coming.value === 'yes';
+    var name = (form.name.value || '').trim();
+    var drinks = [];
+    form.querySelectorAll('input[name="drink"]:checked').forEach(function(ch){ drinks.push(ch.value); });
+    var payload = {
+      name: name,
+      coming: yes ? 'yes' : 'no',
+      company: yes ? (form.company.value || 'solo') : '',
+      drinks: yes ? drinks : [],
+      wish: (form.wish.value || '').trim()
+    };
+    showThanks(yes, name);
+    if (!RSVP_ENDPOINT) return;
+    try {
+      fetch(RSVP_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {'Content-Type': 'text/plain;charset=utf-8'},
+        body: JSON.stringify(payload)
+      }).catch(function(){});
+    } catch (err) {}
+  });
+})();
+</script>
+</body>
+</html>

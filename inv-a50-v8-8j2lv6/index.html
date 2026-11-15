@@ -248,12 +248,53 @@ p,.d,.n,.t,small,b{overflow-wrap:break-word;text-wrap:pretty}
 #tfRes .tn{font-family:"Marck Script",cursive;font-weight:400;font-size:40px;line-height:1.15;background:linear-gradient(180deg,#F7DFA8,#D9A960 60%,#F2D196);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
 .btn,.btn.ghost,.rs .btn{border-radius:999px}
 @media(max-width:359px){.table-card .tn,#tfRes .tn{font-size:34px}.th-table p{font-size:20px}}
+
+/* v14 nav */
+html{scroll-padding-top:calc(60px + env(safe-area-inset-top,0px))}
+.hdr{position:fixed;top:0;left:50%;transform:translateX(-50%);width:min(100%,480px);z-index:4;padding-top:env(safe-area-inset-top,0px);pointer-events:none;transition:background .3s,border-color .3s,box-shadow .3s;border-bottom:1px solid transparent}
+.hdr-in{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 12px;pointer-events:none}
+.mono{display:flex;align-items:center;gap:10px;min-width:0;text-decoration:none;color:inherit;pointer-events:auto}
+.mono-mark{width:40px;height:40px;border-radius:50%;border:1px solid rgba(224,190,128,.75);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px;letter-spacing:.06em;color:#F1DDB0;background:rgba(18,12,8,.32);flex:none}
+.mono-txt{display:none;font-weight:600;font-size:17px;line-height:1.15;color:#F1DDB0;letter-spacing:.02em}
+.mono-txt small{display:block;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#E6D5B5;margin-top:2px}
+.hdr:not(.scrolled) .mono{visibility:hidden;pointer-events:none}
+.burger{margin-left:auto;width:44px;height:44px;border-radius:14px;border:1px solid rgba(224,190,128,.7);background:rgba(18,12,8,.35);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;pointer-events:auto;-webkit-appearance:none;appearance:none;padding:0}
+.burger span{display:block;width:18px;height:2px;background:#E8D2A6;border-radius:2px;transition:transform .2s,opacity .2s}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.hdr.scrolled{background:rgba(18,12,8,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom-color:var(--line);box-shadow:0 8px 24px rgba(0,0,0,.28);pointer-events:auto}
+.hdr.scrolled .hdr-in{pointer-events:auto}
+.hdr.scrolled .mono-txt{display:block}
+.hdr.scrolled .mono-mark,.hdr.scrolled .burger{background:rgba(18,12,8,.5)}
+.mnav{display:none;position:fixed;top:calc(56px + env(safe-area-inset-top,0px) + 8px);left:50%;transform:translateX(-50%);width:min(calc(100% - 24px),456px);z-index:4;flex-direction:column;gap:2px;padding:8px;background:rgba(18,12,8,.92);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:18px;box-shadow:0 16px 40px rgba(0,0,0,.45)}
+.mnav.open{display:flex}
+.mnav a,.mnav button{display:block;width:100%;padding:14px 16px;border:0;border-radius:14px;background:transparent;color:#F6EFE0;font:inherit;font-weight:600;font-size:20px;line-height:1.3;text-align:left;text-decoration:none;cursor:pointer;-webkit-appearance:none;appearance:none}
+.mnav a:active,.mnav button:active,.mnav a:hover,.mnav button:hover{background:rgba(201,164,106,.2);color:#F1DDB0}
 </style>
 </head>
 <body>
 <div class="bgblur"></div><div class="bgcol"></div>
 
 <main id="site">
+  <header class="hdr" id="hdr">
+    <div class="hdr-in">
+      <a class="mono" href="#cover" id="mono" aria-label="На обложку">
+        <span class="mono-mark">АБ</span>
+        <span class="mono-txt">Андрей · 50<small>21.12.2026</small></span>
+      </a>
+      <button class="burger" type="button" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="mnav"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <nav class="mnav" id="mnav" hidden aria-label="Разделы">
+    <a href="#greet">Приглашение</a>
+    <a href="#prog">Программа</a>
+    <a href="#place">Место</a>
+    <a href="#dress">Дресс-код</a>
+    <button type="button" id="mnavRsvp">Подтвердить присутствие</button>
+    <button type="button" id="mnavTable" hidden>Номер стола</button>
+  </nav>
+
   <!-- 1. обложка: картинка Андрея целиком, без текста поверх -->
   <section id="cover"><img class="coverimg" src="img/cover-b.webp" width="880" height="1242" alt="Приглашение на юбилей Андрея Белинского: 50 лет. Первые 50 лет были разминкой. 21 декабря 2026, ЦМТ"></section>
 
@@ -309,7 +350,7 @@ p,.d,.n,.t,small,b{overflow-wrap:break-word;text-wrap:pretty}
       </ul>
     </div>
     <img class="ph" src="img/table.webp" alt="Сервировка праздничного стола" width="900" height="675" loading="lazy">
-    <div class="card">
+    <div class="card" id="dress">
       <div class="lab">Дресс-код</div>
       <div class="div"><i></i></div>
       <div class="two dress">
@@ -325,7 +366,7 @@ p,.d,.n,.t,small,b{overflow-wrap:break-word;text-wrap:pretty}
       </div>
     </div>
     <img class="ph wide" src="img/hall-wide.webp" alt="Зал «Дорчестер» с роялем" width="1000" height="562" loading="lazy">
-    <div class="card venue">
+    <div class="card venue" id="place">
       <div class="lab">Место проведения</div>
       <div class="div"><i></i></div>
       <div class="two">
@@ -473,10 +514,10 @@ function showStep(n){['att','count','drinks','form','thanks'].forEach(function(s
  [].forEach.call(document.querySelectorAll('#s-count .opt2'),function(b){b.classList.toggle('on',Number(b.dataset.count)===state.count)});
  [].forEach.call(document.querySelectorAll('#s-att .opt2'),function(b){b.classList.toggle('on',b.dataset.att===state.attend)})}
 function go(n){stack.push(n);showStep(n)}
-function openRsvp(){lockOn();$('route').hidden=true;if($('tableOv'))$('tableOv').hidden=true;$('rsvp').hidden=false;stack=[];go('att')}
+function openRsvp(){closeNav();lockOn();$('route').hidden=true;if($('tableOv'))$('tableOv').hidden=true;$('rsvp').hidden=false;stack=[];go('att')}
 function closeOv(){$('rsvp').hidden=true;$('route').hidden=true;if($('tableOv'))$('tableOv').hidden=true;lockOff()}
 function back(){var cur=stack.pop();if(cur==='thanks'||!stack.length){closeOv();return}showStep(stack[stack.length-1])}
-function openRoute(){var fromRsvp=!$('rsvp').hidden;var fromTable=$('tableOv')&&!$('tableOv').hidden;lockOn();$('rsvp').hidden=true;if($('tableOv'))$('tableOv').hidden=true;$('route').hidden=false;$('route').dataset.from=fromRsvp?'rsvp':(fromTable?'table':'');$('route').scrollTop=0}
+function openRoute(){if(typeof closeNav==='function')closeNav();var fromRsvp=!$('rsvp').hidden;var fromTable=$('tableOv')&&!$('tableOv').hidden;lockOn();$('rsvp').hidden=true;if($('tableOv'))$('tableOv').hidden=true;$('route').hidden=false;$('route').dataset.from=fromRsvp?'rsvp':(fromTable?'table':'');$('route').scrollTop=0}
 function routeBack(){$('route').hidden=true;if($('route').dataset.from==='rsvp'){$('rsvp').hidden=false}else if($('route').dataset.from==='table'&&$('tableOv')){$('tableOv').hidden=false}else lockOff()}
 document.querySelectorAll('[data-rsvp]').forEach(function(b){b.onclick=openRsvp});
 document.querySelectorAll('[data-route]').forEach(function(b){b.onclick=openRoute});
@@ -549,13 +590,15 @@ function showTableCard(j){
   }
 }
 function initTable(){
-  var ask=$('tableAsk');
+  var ask=$('tableAsk'), mt=$('mnavTable');
   if(tableOpen()){
     if(ask) ask.hidden=false;
+    if(mt) mt.hidden=false;
     var n=savedName();
     if(n) getTable(n.first,n.last).then(showTableCard,function(){});
   }else{
     if(ask) ask.hidden=true;
+    if(mt) mt.hidden=true;
     if($('tableCard')) $('tableCard').hidden=true;
   }
 }
@@ -589,6 +632,55 @@ if($('tfGo')) $('tfGo').onclick=function(){
     }
   },function(){btn.disabled=false;btn.textContent='Показать';$('tfErr').textContent='Не удалось узнать номер. Попробуйте ещё раз.';});
 };
+
+/* --- меню --- */
+function closeNav(){
+  var n=$('mnav'), b=$('burger');
+  if(!n||!b) return;
+  n.hidden=true; n.classList.remove('open');
+  b.setAttribute('aria-expanded','false');
+}
+function openNav(){
+  var n=$('mnav'), b=$('burger');
+  if(!n||!b) return;
+  n.hidden=false; n.classList.add('open');
+  b.setAttribute('aria-expanded','true');
+}
+function syncHdr(){
+  var h=$('hdr'), c=$('cover');
+  if(!h) return;
+  var th=c?Math.max(90, Math.round(c.offsetHeight*0.16)):90;
+  h.classList.toggle('scrolled', window.scrollY>th);
+}
+function goSection(id){
+  closeNav();
+  var el=$(id);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+if($('burger')) $('burger').addEventListener('click', function(e){
+  e.stopPropagation();
+  if(this.getAttribute('aria-expanded')==='true') closeNav(); else openNav();
+});
+if($('mnav')){
+  $('mnav').querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var href=a.getAttribute('href')||'';
+      if(href.charAt(0)==='#'){ e.preventDefault(); goSection(href.slice(1)); }
+      else closeNav();
+    });
+  });
+}
+if($('mono')) $('mono').addEventListener('click', function(e){ e.preventDefault(); goSection('cover'); });
+if($('mnavRsvp')) $('mnavRsvp').addEventListener('click', function(){ closeNav(); openRsvp(); });
+if($('mnavTable')) $('mnavTable').addEventListener('click', function(){ closeNav(); if(typeof openTableOv==='function') openTableOv(); });
+document.addEventListener('click', function(e){
+  if(!$('burger')||$('burger').getAttribute('aria-expanded')!=='true') return;
+  if($('mnav').contains(e.target)||$('burger').contains(e.target)) return;
+  closeNav();
+});
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeNav(); });
+window.addEventListener('scroll', function(){ syncHdr(); }, {passive:true});
+syncHdr();
 initTable();
 })();
 </script>

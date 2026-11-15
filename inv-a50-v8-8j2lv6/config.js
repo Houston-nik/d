@@ -5,7 +5,6 @@ window.INVITE_CONFIG = {
   // true: пока ENDPOINT пуст, показывать успех (демо, ответ никуда не уходит).
   // false: при пустом ENDPOINT показывается честная ошибка отправки. Для боевой версии false.
   DEMO: true,
-  GUESTS_URL: "guests.json",
   TEXT: {
     okTitle: "Спасибо!",
     demoText: "Ваш ответ принят. До встречи 21\u00a0декабря!",

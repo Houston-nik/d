@@ -97,7 +97,7 @@ function doPost(e){
 
 /** Запустить один раз из редактора: создаёт листы «Итоги» и «Ответы». */
 function setup(){
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = SpreadsheetApp.getActiveSpreadsheet() || SpreadsheetApp.openById('1w7F15LspTvREiwPYUjo0ohsmBCBegKlI-lOlCaFOmaw');
   PropertiesService.getScriptProperties().setProperty('SS_ID', ss.getId());
   ss.setSpreadsheetTimeZone('Europe/Moscow');
   ss.rename('Юбилей Андрея — ответы гостей');

@@ -220,6 +220,8 @@ p,.d,.n,.t,small,b{overflow-wrap:break-word;text-wrap:pretty}
 .rs .dr img{width:34px;height:50px}
 .rs .dr .bx{position:absolute;top:6px;right:6px;width:18px;height:18px;border-radius:5px}
 .rs .dr .dl{overflow-wrap:normal;word-break:normal;hyphens:none;padding-right:16px}
+.rs .dr.on{border:2px solid #F6D891;padding:5px 7px 5px 5px;background:rgba(48,31,14,.78);box-shadow:0 0 14px rgba(246,216,145,.75),0 0 3px rgba(246,216,145,.9),inset 0 0 14px rgba(246,216,145,.22)}
+.rs .opt2.on{border:2px solid #F6D891;box-shadow:0 0 14px rgba(246,216,145,.75),inset 0 0 14px rgba(246,216,145,.2)}
 @media(max-width:374px){.rt{font-size:36px}.rs .dr{font-size:16px}.opt2 .ol{font-size:16px;letter-spacing:.1em}.rk{padding-left:80px;font-size:12px;letter-spacing:.22em}}
 </style>
 </head>
@@ -412,7 +414,7 @@ var lastAnswer=null,stack=[],scrollY0=0;
 
 /* --- напитки --- */
 (function(){var g=$('drinks');DRINKS.forEach(function(l,i){var b=document.createElement('button');b.type='button';b.className='dr';b.setAttribute('aria-pressed','false');
- b.innerHTML='<span class="bx"><svg viewBox="0 0 16 16"><path d="M3 8.500l3.200 3.200L13 4.500"/></svg></span><img alt="" width="105" height="140" src="img/d-'+DIMG[i]+'.webp"><span class="dl"></span>';b.lastChild.textContent=l;b.onclick=function(){toggle(l)};g.appendChild(b)})})();
+ b.innerHTML='<span class="bx"><svg viewBox="0 0 16 16"><path d="M3 8.500l3.200 3.200L13 4.500"/></svg></span><img alt="" width="105" height="140" src="img/d-'+DIMG[i]+'.webp"><span class="dl"></span>';b.lastChild.textContent=l.replace('не пью','не\u00a0пью');b.onclick=function(){toggle(l)};g.appendChild(b)})})();
 function toggle(l){var d=state.drinks;if(l===NONE){state.drinks=d.indexOf(NONE)>=0?[]:[NONE]}else{d=d.filter(function(x){return x!==NONE});state.drinks=d.indexOf(l)>=0?d.filter(function(x){return x!==l}):d.concat(l)}paint()}
 function paint(){[].forEach.call($('drinks').children,function(b,i){var on=state.drinks.indexOf(DRINKS[i])>=0;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on)})}
 

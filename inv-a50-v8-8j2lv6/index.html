@@ -27,7 +27,7 @@
 :root{--gold:#C9A46A;--goldd:#8A6529;--cream:#F6EFE0;--ink:#3A2C1E;--light:#F5EBD6;--panel:rgba(22,15,10,.68);--line:rgba(201,164,106,.55)}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:18px;line-height:1.5;color:var(--light);background:#120c08;font-style:normal;overflow-x:hidden}
+body{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:20px;line-height:1.5;color:var(--light);background:#120c08;font-style:normal;overflow-x:hidden}
 button,input{font:inherit;color:inherit}
 [hidden]{display:none!important}
 svg{display:block}
@@ -39,11 +39,11 @@ body.lock{overflow:hidden}
 #site{position:relative;z-index:1;width:min(100%,480px);margin:0 auto}
 body.lock #site{visibility:hidden}
 /* общие типографские роли */
-.lab{font-weight:600;font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);line-height:1.4}
+.lab{font-weight:600;font-size:14px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);line-height:1.4}
 .big50{font-weight:500;font-size:112px;line-height:.9;background:linear-gradient(180deg,#C48A3E 0%,#FFDDA0 48%,#BD8339 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;filter:drop-shadow(0 2px 6px rgba(60,35,10,.45));padding:6px 4px}
 .script{font-family:"Marck Script",cursive;font-weight:400;font-size:34px;line-height:1.15}
 .h1{font-weight:500;font-size:34px;line-height:1.1}
-.btn{display:flex;align-items:center;justify-content:center;width:100%;height:52px;border-radius:2px;border:1px solid var(--gold);background:linear-gradient(180deg,#E0BE80,#C49A55);color:#2a1b0c;font-weight:700;font-size:15px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;text-decoration:none;-webkit-appearance:none;appearance:none}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;height:52px;border-radius:2px;border:1px solid var(--gold);background:linear-gradient(180deg,#E0BE80,#C49A55);color:#2a1b0c;font-weight:700;font-size:16px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;text-decoration:none;-webkit-appearance:none;appearance:none}
 .btn.ghost{background:rgba(18,12,8,.35);color:var(--light);border-color:var(--gold)}
 .btn:disabled{opacity:.6}
 .div{display:flex;align-items:center;gap:10px;justify-content:center;color:var(--gold)}
@@ -51,30 +51,23 @@ body.lock #site{visibility:hidden}
 .div::after{transform:scaleX(-1)}
 .div i{width:5px;height:5px;transform:rotate(45deg);background:currentColor}
 .ico{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
-/* 1. обложка */
-.cover{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;padding:34px 22px 24px;text-align:center;background:#2a2036 url(img/cover.webp) 62% 0/cover no-repeat;overflow:hidden}
-.cover::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,14,28,.7) 0%,rgba(22,14,28,.62) 30%,rgba(22,14,28,.68) 50%,rgba(18,12,10,.5) 62%,rgba(14,9,6,.66) 78%,rgba(14,9,6,.9) 100%)}
-.cover>*{position:relative}
-.cover .lab{color:#E9CD98;text-shadow:0 1px 8px rgba(10,6,12,.85)}
-.cover .top{display:flex;flex-direction:column;align-items:center;gap:8px}
-.cover .rule{width:210px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:2px 0}
-.cover .script{color:#F6E7C6;margin-top:6px;text-shadow:0 2px 10px rgba(20,10,5,.6)}
-.cover .after{margin-top:12px;display:flex;flex-direction:column;align-items:center;gap:8px}
-.cover .sp{flex:1;min-height:20px}
+.coverimg{display:block;width:100%;height:auto;aspect-ratio:2/3;background:#2a2036}
+.sep1{padding:18px 16px 8px}
+.sep1 .btns{display:grid;gap:12px}
 .info{display:grid;grid-template-columns:1fr 1fr 1.15fr;border:1px solid var(--line);background:rgba(18,12,8,.58);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);padding:14px 4px;margin-bottom:16px}
 .info>div{padding:0 8px;display:flex;flex-direction:column;align-items:center;gap:4px;border-left:1px solid var(--line);font-size:16px;line-height:1.25}
 .info>div:first-child{border-left:0}
 .info .ico{width:30px;height:30px;color:var(--gold);margin-bottom:2px}
 .info b{font-weight:600;text-transform:uppercase;letter-spacing:.04em;font-size:16px}
-.info small{font-size:14px;font-weight:500;color:#E6D5B5;line-height:1.25}
-.cover .btns{display:grid;gap:12px}
+.info .addr{grid-column:1/-1;border-left:0;border-top:1px solid var(--line);margin-top:12px;padding-top:10px;font-size:16px;line-height:1.3;text-align:center;display:block}
+.info small{font-size:16px;font-weight:500;color:#E6D5B5;line-height:1.25}
 /* 2. приветствие */
-.greet{min-height:100vh;min-height:100svh;padding:28px 16px 28px;display:flex;flex-direction:column;justify-content:flex-start}
+.greet{padding:20px 16px 20px;display:flex;flex-direction:column;justify-content:flex-start}
 .panel{background:var(--panel);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid var(--line);padding:26px 22px}
 .greet .script{color:#F1DDB0}
 .greet h2{font-family:"Marck Script",cursive;font-weight:400;font-size:30px;line-height:1.15;color:#F1DDB0;margin-bottom:12px}
 .greet p{margin-bottom:12px}
-.greet .sign{display:block;margin-top:6px;font-size:18px}
+.greet .sign{display:block;margin-top:6px;font-size:20px}
 .greet .sign span{font-family:"Marck Script",cursive;font-weight:400;font-size:26px;line-height:1.2;color:#F1DDB0;display:block;margin-top:2px}
 .greet .btn{margin-top:16px}
 .greet .grow{flex:1}
@@ -90,17 +83,17 @@ body.lock #site{visibility:hidden}
 .tl li{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start;padding-left:2px}
 .tl .ico{margin-top:2px}
 .tl .t{font-weight:600;font-size:22px;line-height:1.1}
-.tl .n{font-weight:600;font-size:17px;line-height:1.3;margin-top:3px}
-.tl .d{font-weight:500;font-size:16px;line-height:1.35;color:#5A4630;margin-top:1px}
+.tl .n{font-weight:600;font-size:19px;line-height:1.3;margin-top:3px}
+.tl .d{font-weight:500;font-size:18px;line-height:1.35;color:#5A4630;margin-top:1px}
 .two{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start}
-.dress .n{font-weight:600;font-size:17px;text-transform:uppercase;letter-spacing:.08em;line-height:1.3}
-.dress .n small{display:block;margin-top:2px;font-weight:600;font-size:15px;text-transform:none;letter-spacing:0;color:#5A4630}
-.dress .d,.gift .d{font-weight:500;font-size:16px;line-height:1.4;color:#5A4630;margin-top:3px}
-.gift .d{font-size:17px;color:var(--ink)}
+.dress .n{font-weight:600;font-size:19px;text-transform:uppercase;letter-spacing:.08em;line-height:1.3}
+.dress .n small{display:block;margin-top:2px;font-weight:600;font-size:16px;text-transform:none;letter-spacing:0;color:#5A4630}
+.dress .d,.gift .d{font-weight:500;font-size:18px;line-height:1.4;color:#5A4630;margin-top:3px}
+.gift .d{font-size:19px;color:var(--ink)}
 .card .sep{height:1px;background:linear-gradient(90deg,transparent,#C9A46A,transparent);margin:20px 0}
 .venue .big{font-weight:600;font-size:22px;line-height:1.2}
-.venue .d{font-weight:500;font-size:16px;line-height:1.4;color:#5A4630}
-.venue .addr{font-size:15px;margin-top:6px}
+.venue .d{font-weight:500;font-size:18px;line-height:1.4;color:#5A4630}
+.venue .addr{font-size:16px;margin-top:6px}
 .venue .btn{margin-top:16px;color:#2a1b0c}
 .cta{padding:8px 16px calc(36px + env(safe-area-inset-bottom));text-align:center}
 .cta .panel{padding:24px 22px}
@@ -110,7 +103,7 @@ body.lock #site{visibility:hidden}
 .ov{position:fixed;inset:0;z-index:5;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 .ovcol{width:min(100%,480px);margin:0 auto;min-height:100%;padding:0 16px calc(28px + env(safe-area-inset-bottom));display:flex;flex-direction:column}
 .ovtop{height:60px;flex:none;display:flex;align-items:center;position:sticky;top:0;z-index:2}
-.back{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 14px 0 10px;background:rgba(18,12,8,.6);border:1px solid var(--line);color:var(--light);font-weight:700;font-size:15px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.back{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 14px 0 10px;background:rgba(18,12,8,.6);border:1px solid var(--line);color:var(--light);font-weight:700;font-size:16px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .back svg{width:18px;height:18px;fill:none;stroke:var(--gold);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .step{display:none}
 .step.on{display:block}
@@ -121,7 +114,7 @@ body.lock #site{visibility:hidden}
 .opt{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:10px 16px;text-align:left;background:rgba(10,7,4,.45);border:1px solid var(--line);font-weight:600;font-size:19px;line-height:1.25;cursor:pointer;-webkit-appearance:none;appearance:none;width:100%}
 .opt:active,.opt.on{background:rgba(201,164,106,.28);border-color:#E0BE80}
 .opt svg{flex:none;width:22px;height:22px;fill:none;stroke:var(--gold);stroke-width:1.4}
-.opt small{display:block;font-weight:500;font-size:15px;color:#DCCBA8}
+.opt small{display:block;font-weight:500;font-size:16px;color:#DCCBA8}
 .drinks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
 .dr{display:flex;align-items:center;gap:10px;min-height:56px;padding:8px 12px;background:rgba(10,7,4,.45);border:1px solid var(--line);font-weight:600;font-size:17px;line-height:1.15;text-align:left;cursor:pointer;-webkit-appearance:none;appearance:none}
 .dr .bx{flex:none;width:20px;height:20px;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center}
@@ -132,6 +125,7 @@ body.lock #site{visibility:hidden}
 .dr.wide{grid-column:1/-1}
 .fld{display:block;margin-bottom:12px}
 .fld span{display:block;margin-bottom:4px}
+.fld span.lab{font-size:17px;letter-spacing:.1em}
 input[type=text]{width:100%;height:52px;padding:0 14px;background:rgba(10,7,4,.55);border:1px solid var(--line);color:#FFF7E6;font-weight:500;font-size:17px;border-radius:0;outline:0;-webkit-appearance:none;appearance:none}
 input[type=text]:focus{border-color:#E0BE80}
 .hp{position:absolute;left:-9999px;opacity:0;height:0;width:0}
@@ -140,19 +134,17 @@ input[type=text]:focus{border-color:#E0BE80}
 .sum b{font-weight:600;color:var(--gold);flex:none}
 .err{color:#FFC9B0;font-weight:600;margin:0 0 12px;min-height:0}
 .err:empty{display:none}
-.tag{display:inline-block;border:1px solid var(--line);color:var(--gold);font-weight:600;font-size:13px;letter-spacing:.2em;text-transform:uppercase;padding:2px 10px;margin-bottom:14px}
+.tag{display:inline-block;border:1px solid var(--line);color:var(--gold);font-weight:600;font-size:14px;letter-spacing:.2em;text-transform:uppercase;padding:2px 10px;margin-bottom:14px}
 .stack{display:grid;gap:10px;margin-top:18px}
 .route img{width:100%;height:auto;display:block;border:1px solid var(--line);background:#fff;cursor:zoom-in}
-.route .hint{font-size:15px;color:#DCCBA8;margin:8px 0 14px}
+.route .hint{font-size:16px;color:#DCCBA8;margin:8px 0 14px}
 .route ul{list-style:none;display:grid;gap:10px;margin:4px 0 18px}
 .route li{display:grid;grid-template-columns:12px 1fr;gap:10px}
-.route li::before{content:"";width:6px;height:6px;margin-top:11px;transform:rotate(45deg);background:var(--gold)}
+.route li::before{content:"";width:6px;height:6px;margin-top:13px;transform:rotate(45deg);background:var(--gold)}
 .zoom{position:fixed;inset:0;z-index:9;background:#0b0705;overflow:auto;-webkit-overflow-scrolling:touch;display:none}
 .zoom.on{display:block}
 .zoom img{width:240%;max-width:none;display:block}
 .zoom .back{position:fixed;top:10px;left:10px;z-index:10}
-@media(min-width:600px){.cover{min-height:min(100vh,860px)}}
-@media(max-height:790px){.cover{padding:20px 20px 16px}.cover .top{gap:4px}.cover .script{margin-top:2px}.cover .after{margin-top:6px}.info{padding:10px 2px;margin-bottom:10px}.info>div{gap:1px;line-height:1.15}.cover .btns{gap:8px}.cover .btn{height:48px}}
 @media(max-width:359px){.big50{font-size:96px}.script{font-size:30px}}
 html,body,button,input{font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
 .route img,.zoom img{height:auto}
@@ -162,20 +154,11 @@ html,body,button,input{font-variant-numeric:lining-nums;font-feature-settings:"l
 <div class="bgblur"></div><div class="bgcol"></div>
 
 <main id="site">
-  <!-- 1. обложка -->
-  <section class="cover" id="cover">
-    <div class="top">
-      <div class="lab">Приглашение</div>
-      <div class="rule"></div>
-      <div class="lab">Юбилейный вечер</div>
-      <div class="big50" aria-label="50">50</div>
-      <div class="script">Первые 50 лет были разминкой</div>
-      <div class="rule"></div>
-      <div class="lab">Продолжение следует…</div>
-      <div class="rule"></div>
-      <div class="lab">Андрей Белинский</div>
-    </div>
-    <div class="sp"></div>
+  <!-- 1. обложка: картинка Андрея целиком, без текста поверх -->
+  <section id="cover"><img class="coverimg" src="img/cover.webp" width="1024" height="1536" alt="Приглашение на юбилей Андрея Белинского: 50 лет. Первые 50 лет были разминкой. 21 декабря 2026, ЦМТ"></section>
+
+  <!-- разделитель между экранами: дата, время, место -->
+  <section class="sep1" id="sep1">
     <div class="info">
       <div>
         <svg class="ico" viewBox="0 0 32 32"><rect x="5" y="7" width="22" height="20" rx="2"/><path d="M5 13h22M11 4v6M21 4v6"/><path d="M10 18h3M15 18h3M20 18h2M10 22h3M15 22h3"/></svg>
@@ -187,8 +170,9 @@ html,body,button,input{font-variant-numeric:lining-nums;font-feature-settings:"l
       </div>
       <div>
         <svg class="ico" viewBox="0 0 32 32"><path d="M16 29s9-8.2 9-15a9 9 0 0 0-18 0c0 6.800 9 15 9 15z"/><circle cx="16" cy="14" r="3.500"/></svg>
-        <b>ЦМТ</b><small>Зал «Дорчестер»</small><small>Подъезд № 10</small><small>Москва, Краснопресненская наб., 12</small>
+        <b>ЦМТ</b><small>Зал «Дорчестер»</small><small>Подъезд № 10</small>
       </div>
+      <div class="addr">Москва, Краснопресненская набережная, 12</div>
     </div>
     <div class="btns">
       <button class="btn" type="button" id="openInv">Открыть приглашение</button>
@@ -225,7 +209,7 @@ html,body,button,input{font-variant-numeric:lining-nums;font-feature-settings:"l
         <li><svg class="ico" viewBox="0 0 32 32"><path d="M6 16h20v11H6zM6 21c3 2 5-2 8 0s5-2 8 0 4 0 4 0M16 16v-4M16 6c1.500 2 1.500 3 0 4-1.500-1-1.500-2 0-4z"/></svg>
           <div><div class="t">21:00</div><div class="n">Торт и праздничный тост</div></div></li>
         <li><svg class="ico" viewBox="0 0 32 32"><path d="M12 5c.8 5 2.500 6.700 7 7.500-4.500.8-6.200 2.500-7 7.500-.8-5-2.500-6.700-7-7.500 4.500-.8 6.200-2.500 7-7.500zM24 17c.5 3 1.500 4 4 4.500-2.500.5-3.500 1.500-4 4.500-.5-3-1.500-4-4-4.500 2.500-.5 3.500-1.500 4-4.500z"/></svg>
-          <div><div class="n" style="font-size:19px;margin-top:0">Дальше — танцуем!</div><div class="d">Продолжение вечера в кругу друзей</div></div></li>
+          <div><div class="n" style="margin-top:0">Дальше — танцуем!</div><div class="d">Продолжение вечера в кругу друзей</div></div></li>
       </ul>
     </div>
     <img class="ph" src="img/table.webp" alt="Сервировка праздничного стола" width="900" height="675" loading="lazy">
@@ -250,8 +234,12 @@ html,body,button,input{font-variant-numeric:lining-nums;font-feature-settings:"l
       <div class="div"><i></i></div>
       <div class="two">
         <svg class="ico" viewBox="0 0 32 32"><path d="M16 29s9-8.2 9-15a9 9 0 0 0-18 0c0 6.800 9 15 9 15z"/><circle cx="16" cy="14" r="3.500"/></svg>
-        <div><div class="big">ЦМТ</div><div class="n" style="font-weight:600;font-size:18px">Зал «Дорчестер»</div><div class="n" style="font-weight:600;font-size:18px">Подъезд № 10</div><div class="d addr">Москва,<br>Краснопресненская набережная, 12</div></div>
+        <div><div class="big">ЦМТ</div><div class="n" style="font-weight:600;font-size:20px">Зал «Дорчестер»</div><div class="n" style="font-weight:600;font-size:20px">Подъезд № 10</div><div class="d addr">Москва,<br>Краснопресненская набережная, 12</div></div>
       </div>
+      <div class="sep"></div>
+      <div class="lab">Парковка</div>
+      <div class="div"><i></i></div>
+      <div class="d" style="text-align:center">Территория ЦМТ — платная парковка. При выезде вам выдадут бесплатные карты на выезд. Оплачивать парковку не требуется.</div>
       <button class="btn" type="button" data-route>Схема проезда</button>
     </div>
   </section>
@@ -260,6 +248,7 @@ html,body,button,input{font-variant-numeric:lining-nums;font-feature-settings:"l
     <div class="panel">
       <div class="h1">Жду вашего ответа</div>
       <p>Подтвердите, пожалуйста, присутствие и выберите напитки.</p>
+      <p><b style="font-weight:700">Пожалуйста, ответьте до 10 декабря.</b></p>
       <button class="btn" type="button" data-rsvp>Выбрать вариант</button>
     </div>
   </section>
@@ -283,7 +272,7 @@ html,body,button,input{font-variant-numeric:lining-nums;font-feature-settings:"l
       <section class="step" id="s-count">
         <div class="lab">Гости</div>
         <div class="h1">Сколько вас будет?</div>
-        <p class="lead" id="seatsNote"></p>
+        <p class="lead">Выберите подходящий вариант.</p>
         <div class="opts">
           <button class="opt" type="button" data-count="1">Один</button>
           <button class="opt" type="button" data-count="2">Вдвоём</button>
@@ -333,9 +322,9 @@ html,body,button,input{font-variant-numeric:lining-nums;font-feature-settings:"l
       <img src="img/route.webp" alt="Схема проезда к ЦМТ: въезд, парковка и подъезд № 10" id="routeImg" width="1312" height="1199" loading="lazy">
       <p class="hint">Нажмите на схему, чтобы открыть её крупно.</p>
       <ul>
-        <li>Въезд с Краснопресненской набережной, ближайший к Москва-Сити.</li>
-        <li>Территория ЦМТ платная. При выезде выдают бесплатные карты на выезд.</li>
-        <li>Подъезд № 10, вход в клубный корпус Plaza Garden, зал «Дорчестер».</li>
+        <li><div><div class="lab" style="margin-bottom:2px">Въезд</div>Последний въезд с Краснопресненской набережной, ближайший к Москва-Сити.</div></li>
+        <li><div><div class="lab" style="margin-bottom:2px">Парковка</div>Территория ЦМТ — платная парковка. При выезде вам выдадут бесплатные карты на выезд. Оплачивать парковку не требуется.</div></li>
+        <li><div><div class="lab" style="margin-bottom:2px">Подъезд № 10</div>Вход в клубный корпус Plaza Garden, зал «Дорчестер».</div></li>
       </ul>
       <div class="lab" style="margin-bottom:6px">Адрес</div>
       <p style="font-size:16px">ЦМТ, Москва, Краснопресненская набережная, 12</p>
@@ -352,10 +341,7 @@ var DRINKS=['Шампанское / игристое','Белое вино','К�
 var NONE='Алкоголь не пью';
 var ATT_LABEL={yes:'Да, приду',maybe:'Пока не знаю',no:'К сожалению, не смогу'};
 var state={attend:'',count:1,drinks:[]};
-var guest=null,lastAnswer=null,stack=[],scrollY0=0;
-var q=new URLSearchParams(location.search);
-var guestId=(q.get('g')||'').trim().slice(0,64).replace(/[^\w\-.]/g,'');
-var base=function(){return String(CFG.ENDPOINT||'').replace(/\/+$/,'')};
+var lastAnswer=null,stack=[],scrollY0=0;
 
 /* --- напитки --- */
 (function(){var g=$('drinks');DRINKS.forEach(function(l,i){var b=document.createElement('button');b.type='button';b.className='dr'+(i===DRINKS.length-1?' wide':'');b.setAttribute('aria-pressed','false');
@@ -365,21 +351,13 @@ function paint(){[].forEach.call($('drinks').children,function(b,i){var on=state
 
 /* --- гость --- */
 function fj(url,opts,ms){var c=new AbortController(),t=setTimeout(function(){c.abort()},ms||8000);var o=opts||{};o.signal=c.signal;return fetch(url,o).then(function(r){clearTimeout(t);return r.json().catch(function(){return{}}).then(function(j){return{ok:r.ok,status:r.status,json:j}})},function(e){clearTimeout(t);throw e})}
-function setGuest(g){guest=g;
- if(g&&g.first&&!$('first').value)$('first').value=g.first;if(g&&g.last&&!$('last').value)$('last').value=g.last}
-/* Личная ссылка ?g=<id>: id уходит вместе с ответом. Имя гостя на странице не показываем нигде.
-   Без ENDPOINT (демо) ничего не запрашиваем. */
-function loadGuest(){if(!guestId||!base())return;
- fj(base()+'/guest?g='+encodeURIComponent(guestId),{},6000).then(function(r){setGuest(r.ok&&r.json&&r.json.guest||null)},function(){});
- fj(base()+'/rsvp?g='+encodeURIComponent(guestId),{},6000).then(function(r){var a=r.ok&&r.json&&r.json.answer;if(a&&ATT_LABEL[a.attend]){state.attend=a.attend;state.count=a.count||1;state.drinks=(a.drinks||[]).slice();if(a.first)$('first').value=a.first;if(a.last)$('last').value=a.last;paint()}},function(){})}
-loadGuest();
-function seats(){return guest?Math.max(1,Math.min(2,Number(guest.seats)||1)):2}
+function seats(){return 2}
 
 /* --- оверлеи и шаги --- */
 function lockOn(){if(!document.body.classList.contains('lock')){scrollY0=window.scrollY;document.body.classList.add('lock')}}
 function lockOff(){document.body.classList.remove('lock');window.scrollTo(0,scrollY0)}
 function showStep(n){['att','count','drinks','form','thanks'].forEach(function(s){$('s-'+s).classList.toggle('on',s===n)});$('rsvp').scrollTop=0;
- if(n==='form')fillForm();if(n==='count')$('seatsNote').textContent=guest&&guest.seats>1?'Мест по вашему приглашению: '+Math.min(2,guest.seats)+'.':'';
+ if(n==='form')fillForm();
  [].forEach.call(document.querySelectorAll('#s-count .opt'),function(b){b.classList.toggle('on',Number(b.dataset.count)===state.count)});
  [].forEach.call(document.querySelectorAll('#s-att .opt'),function(b){b.classList.toggle('on',b.dataset.att===state.attend)})}
 function go(n){stack.push(n);showStep(n)}
@@ -403,11 +381,11 @@ $('thEdit').onclick=function(){stack=[];go('att')};
 function fillForm(){var s=$('sum');s.textContent='';var rows=[['Присутствие',ATT_LABEL[state.attend]||'—']];
  if(state.attend!=='no'){rows.push(['Гостей',String(state.count)]);rows.push(['Напитки',state.drinks.join(', ')||'не выбраны'])}
  rows.forEach(function(r){var d=document.createElement('div'),b=document.createElement('b'),v=document.createElement('span');b.textContent=r[0]+':';v.textContent=r[1];d.appendChild(b);d.appendChild(v);s.appendChild(d)});$('formErr').textContent=''}
-function anonId(){var v=null;try{v=localStorage.getItem('invite:anon-id')}catch(e){}if(!v){v='open-'+Math.random().toString(36).slice(2,10);try{localStorage.setItem('invite:anon-id',v)}catch(e){}}return v}
-function buildAnswer(){var no=state.attend==='no';return{guestId:guest?guest.id:(guestId||anonId()),known:!!guest,first:$('first').value.trim(),last:$('last').value.trim(),attend:state.attend,count:no?0:state.count,drinks:no?[]:state.drinks.slice(),comment:'',website:$('website').value}}
+function buildAnswer(){var no=state.attend==='no';return{sentAt:new Date().toISOString(),first:$('first').value.trim(),last:$('last').value.trim(),attend:state.attend,count:no?0:state.count,drinks:no?[]:state.drinks.slice(),comment:'',website:$('website').value}}
 /* успех только при ответе сервера 2xx и {ok:true}; пустой ENDPOINT: успех только в DEMO */
-function post(a){if(!base())return CFG.DEMO===true?Promise.resolve({demo:true}):Promise.reject({code:'no_endpoint'});
- return fj(base()+'/rsvp',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(a)},12000).then(function(r){if(r.ok&&r.json&&r.json.ok===true)return r.json;throw{code:'server',status:r.status}},function(e){throw e&&e.code?e:{code:'network'}})}
+function post(a){var url=String(CFG.SHEET_URL||'');
+ if(CFG.SHEET_ENABLED!==true||!url)return CFG.DEMO===true?Promise.resolve({demo:true}):Promise.reject({code:'no_endpoint'});
+ return fj(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(a),redirect:'follow'},15000).then(function(r){if(r.ok&&r.json&&r.json.ok===true)return r.json;throw{code:'server',status:r.status}},function(e){throw e&&e.code?e:{code:'network'}})}
 function submit(a,btn,label){btn.disabled=true;btn.textContent='Отправляем…';$('formErr').textContent='';
  post(a).then(function(r){btn.disabled=false;btn.textContent=label;try{localStorage.setItem('birthday_rsvp',JSON.stringify(a))}catch(e){}thanks(true,!!r.demo)},function(){btn.disabled=false;btn.textContent=label;thanks(false)})}
 $('send').onclick=function(){if(!$('first').value.trim()||!$('last').value.trim()){$('formErr').textContent='Пожалуйста, укажите имя и фамилию.';return}

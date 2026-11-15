@@ -268,3 +268,5 @@ section{padding:56px 28px}
 
 .bokeh svg{position:absolute;left:0;top:0;width:100%;height:230px;overflow:visible}
 .bokeh path{fill:none;stroke:rgba(201,161,90,.4);stroke-width:1;vector-effect:non-scaling-stroke}
+
+.todo--note,figcaption.todo{display:none!important}

@@ -1,12 +1,12 @@
 // Настройки приглашения. Секретов здесь нет и быть не должно.
 window.INVITE_CONFIG = {
   // Отправка ответов в Google Таблицу через Apps Script (веб-приложение).
-  // ВЫКЛЮЧЕНО. Включение: вставить адрес веб-приложения в SHEET_URL и поставить SHEET_ENABLED: true.
-  SHEET_ENABLED: false,
-  SHEET_URL: "",
+  // ВКЛЮЧЕНО: ответы уходят в Google Таблицу.
+  SHEET_ENABLED: true,
+  SHEET_URL: "https://script.google.com/macros/s/AKfycbwawIMHG2BcshzheYwnZxS9qiDXld94yirzCl_mLNUhnRF0Si0UG7tktEz-NwUmo7CL/exec",
   // true: пока отправка выключена, показывать успех (демо, ответ никуда не уходит).
   // false: при выключенной отправке показывается честная ошибка. Для боевой версии false.
-  DEMO: true,
+  DEMO: false,
   TEXT: {
     okTitle: "Спасибо!",
     demoText: "Ваш ответ принят. До встречи 21\u00a0декабря!",

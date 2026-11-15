@@ -1,0 +1,161 @@
+/**
+ * Приём ответов с приглашения Андрея Белинского → лист «Ответы».
+ * Размещение: Расширения → Apps Script → вставить этот файл → Развернуть → Веб-приложение
+ * (Выполнять от имени: Я; Доступ: Все). Адрес веб-приложения вписать в config.js (SHEET_URL).
+ * Секретов в коде нет. Ответ одного гостя = одна строка: повторный ответ обновляет её.
+ *
+ * Лист «Ответы»: шапка во 2-й строке, данные с 3-й.
+ * Столбцы A–R:
+ *   A Дата и время, B Имя, C Фамилия, D Статус, E Кол-во гостей,
+ *   F–M напитки (1 или пусто, порядок как в DRINKS),
+ *   N Комментарий, O Первый ответ (ставится только при первой записи),
+ *   P Ключ (служебный, по нему находится повторный ответ),
+ *   Q Напитки (подписи через запятую — для чтения; итоги считают по F–M),
+ *   R Стол (номер вписывает Андрей вручную; doPost это поле не затирает).
+ * Подписи статуса совпадают с экраном приглашения (ATT_LABEL).
+ */
+var SHEET = 'Ответы';
+var HEADER_ROW = 2;          // шапка на второй строке, данные с третьей
+var DRINKS = ['Шампанское / игристое','Белое вино','Красное вино','Виски','Коньяк','Джин','Водка','Алкоголь не пью'];
+var ATT = {yes:'Конечно, буду!', maybe:'Пока под вопросом', no:'К сожалению, не смогу'};
+// С этой даты (МСК) гость может узнать номер стола
+var TABLE_FROM = new Date('2026-12-15T00:00:00+03:00');
+
+function ss_(){
+  var id = PropertiesService.getScriptProperties().getProperty('SS_ID');
+  return id ? SpreadsheetApp.openById(id) : SpreadsheetApp.getActiveSpreadsheet();
+}
+function json_(o){ return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }
+function clean_(v, n){ return String(v == null ? '' : v).replace(/[\u0000-\u001f]/g,' ').replace(/\s+/g,' ').trim().slice(0, n); }
+// ключ строки: нижний регистр, ё = е (повторный ответ с тем же именем обновляет строку)
+function key_(first, last){ return (first + ' ' + last).toLowerCase().replace(/ё/g,'е'); }
+// защита от формул: текст, начинающийся с = + - @, записываем с апострофом-префиксом
+function safe_(t){ return /^[=+\-@]/.test(t) ? "'" + t : t; }
+
+function doGet(e){
+  var p = (e && e.parameter) || {};
+  var first = clean_(p.first, 60), last = clean_(p.last, 60);
+  if (!first || !last) return json_({ok:true, service:'rsvp'});
+  if (new Date() < TABLE_FROM) return json_({ok:true, status:'early'});
+  try {
+    var key = key_(first, last);
+    var sh = ss_().getSheetByName(SHEET);
+    var first_row = HEADER_ROW + 1;
+    var last_row = Math.max(sh.getLastRow(), HEADER_ROW);
+    var keys = last_row >= first_row ? sh.getRange(first_row, 16, last_row - HEADER_ROW, 1).getValues() : [];
+    var row = 0;
+    for (var i = 0; i < keys.length; i++){
+      if (keys[i][0] === key) { row = first_row + i; break; }
+    }
+    if (!row) return json_({ok:true, status:'notfound'});
+    var table = String(sh.getRange(row, 18).getDisplayValue() || '').replace(/\s+/g,' ').trim();
+    if (!table) return json_({ok:true, status:'notset'});
+    return json_({ok:true, status:'found', table:table});
+  } catch (err) {
+    return json_({ok:false, error:'server'});
+  }
+}
+
+function doPost(e){
+  var lock = LockService.getScriptLock();
+  try {
+    var a = JSON.parse((e && e.postData && e.postData.contents) || '{}');
+    if (a.website) return json_({ok:true});                       // ловушка для ботов
+    var first = clean_(a.first, 60), last = clean_(a.last, 60);
+    if (!first || !last || !ATT[a.attend]) return json_({ok:false, error:'bad_request'});
+    var no = a.attend === 'no';
+    var count = no ? 0 : Math.max(1, Math.min(2, Number(a.count) || 1));
+    var picked = no ? [] : (Array.isArray(a.drinks) ? a.drinks : []);
+    var drinkCells = DRINKS.map(function(d){ return picked.indexOf(d) >= 0 ? 1 : ''; });
+    var comment = safe_(clean_(a.comment, 300));
+    var now = new Date(), key = key_(first, last);
+
+    lock.waitLock(20000);
+    var sh = ss_().getSheetByName(SHEET);
+    var first_row = HEADER_ROW + 1;
+    var last_row = Math.max(sh.getLastRow(), HEADER_ROW);
+    var keys = last_row >= first_row ? sh.getRange(first_row, 16, last_row - HEADER_ROW, 1).getValues() : [];
+    var row = 0, used = 0;
+    for (var i = 0; i < keys.length; i++){
+      if (keys[i][0] !== '') used = i + 1;
+      if (keys[i][0] === key) { row = first_row + i; break; }
+    }
+    var isNew = !row;
+    if (isNew) row = first_row + used;                             // первая свободная строка
+    // Пишем только A–N (1–14), при новой строке O (15), затем P и Q (16–17). Столбец R не трогаем.
+    sh.getRange(row, 1, 1, 14).setValues([[now, safe_(first), safe_(last), ATT[a.attend], count].concat(drinkCells, [comment])]);
+    if (isNew) sh.getRange(row, 15).setValue(now);                 // «Первый ответ» не меняется при правке
+    sh.getRange(row, 16).setValue(key);
+    sh.getRange(row, 17).setValue(safe_(picked.join(', ')));       // «Напитки» через запятую
+    return json_({ok:true, updated:!isNew});
+  } catch (err) {
+    return json_({ok:false, error:'server'});
+  } finally {
+    try { lock.releaseLock(); } catch (x) {}
+  }
+}
+
+/** Запустить один раз из редактора: создаёт листы «Итоги» и «Ответы». */
+function setup(){
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  PropertiesService.getScriptProperties().setProperty('SS_ID', ss.getId());
+  ss.setSpreadsheetTimeZone('Europe/Moscow');
+  ss.rename('Юбилей Андрея — ответы гостей');
+  var it = ss.getSheetByName('Итоги') || ss.insertSheet('Итоги', 0);
+  var an = ss.getSheetByName(SHEET) || ss.insertSheet(SHEET, 1);
+  ss.getSheets().forEach(function(s){ if (s.getName()!=='Итоги' && s.getName()!==SHEET) ss.deleteSheet(s); });
+
+  // Ответы
+  an.clear();
+  an.getRange('A1').setValue('Юбилей Андрея — ответы гостей').setFontWeight('bold').setFontSize(12);
+  var head = ['Дата и время','Имя','Фамилия','Статус','Гостей','Шампанское','Белое вино','Красное вино','Виски','Коньяк','Джин','Водка','Без алкоголя','Комментарий','Первый ответ','Ключ','Напитки','Стол'];
+  an.getRange(2,1,1,head.length).setValues([head]).setFontWeight('bold').setBackground('#EFEFEF')
+    .setHorizontalAlignment('center').setVerticalAlignment('middle').setWrap(true);
+  an.setFrozenRows(2);
+  an.getRange('A3:A').setNumberFormat('dd.mm.yyyy hh:mm');
+  an.getRange('O3:O').setNumberFormat('dd.mm.yyyy hh:mm');
+  an.getRange('E3:M').setHorizontalAlignment('center');
+  an.getRange('R3:R').setHorizontalAlignment('center').setFontWeight('bold');
+  an.getRange('P2:P').setFontColor('#999999').setFontSize(8);
+  var w = [130,110,120,150,60,95,80,85,60,65,55,60,95,220,130,110,200,60];
+  for (var i=0;i<w.length;i++) an.setColumnWidth(i+1, w[i]);
+  if (an.getFilter()) an.getFilter().remove();
+  an.getRange(2,1,an.getMaxRows()-1,head.length).createFilter();
+
+  // Итоги
+  it.clear();
+  var R = "'"+SHEET+"'!";
+  var rows = [
+    ['Юбилей Андрея — итоги',''],
+    ['21 декабря 2026 · ЦМТ, зал «Дорчестер»',''],
+    ['',''],
+    ['Ответы',''],
+    ['Всего','=COUNTA('+R+'B3:B)'],
+    ['Будут','=COUNTIF('+R+'D3:D;"'+ATT.yes+'")'],
+    ['Под вопросом','=COUNTIF('+R+'D3:D;"'+ATT.maybe+'")'],
+    ['Не смогут','=COUNTIF('+R+'D3:D;"'+ATT.no+'")'],
+    ['',''],
+    ['Гостей',''],
+    ['Придут','=SUMIF('+R+'D3:D;"'+ATT.yes+'";'+R+'E3:E)'],
+    ['Возможно','=SUMIF('+R+'D3:D;"'+ATT.maybe+'";'+R+'E3:E)'],
+    ['Итого максимум','=B11+B12'],
+    ['','']
+  ];
+  it.getRange(1,1,rows.length,2).setFormulas(rows.map(function(r){return [r[0].charAt(0)==='='?r[0]:'', r[1]];}));
+  it.getRange(1,1,rows.length,1).setValues(rows.map(function(r){return [r[0]];}));
+  var cols = ['F','G','H','I','J','K','L','M'];
+  var names = ['Шампанское / игристое','Белое вино','Красное вино','Виски','Коньяк','Джин','Водка','Без алкоголя'];
+  it.getRange(15,1,1,3).setValues([['Напиток','Гостей','Анкет']]).setFontWeight('bold').setBackground('#EFEFEF');
+  for (var j=0;j<cols.length;j++){
+    var c = R+cols[j]+'3:'+cols[j];
+    it.getRange(16+j,1).setValue(names[j]);
+    it.getRange(16+j,2).setFormula('=SUMIFS('+R+'E3:E;'+R+'D3:D;"'+ATT.yes+'";'+c+';1)+SUMIFS('+R+'E3:E;'+R+'D3:D;"'+ATT.maybe+'";'+c+';1)');
+    it.getRange(16+j,3).setFormula('=COUNTIFS('+R+'D3:D;"'+ATT.yes+'";'+c+';1)+COUNTIFS('+R+'D3:D;"'+ATT.maybe+'";'+c+';1)');
+  }
+  it.getRange('A1').setFontWeight('bold').setFontSize(14);
+  it.getRange('A2').setFontColor('#666666');
+  ['A4','A10'].forEach(function(a){ it.getRange(a).setFontWeight('bold').setBackground('#EFEFEF'); it.getRange(a.replace('A','B')).setBackground('#EFEFEF'); });
+  it.getRange('B4:C23').setHorizontalAlignment('center');
+  it.setColumnWidth(1, 220); it.setColumnWidth(2, 90); it.setColumnWidth(3, 90);
+  ss.setActiveSheet(it);
+}

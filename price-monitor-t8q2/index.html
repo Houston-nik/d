@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Мониторинг цен конкурентов: SSD в 5 магазинах</title>
+<meta name="description" content="Демо: сбор цен с пяти интернет-магазинов, сопоставление одинаковых товаров, база SQLite и дашборд. Данные реальные, снимок на дату сбора.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230F1B2D'/%3E%3Cpath d='M7 22l6-7 5 4 7-10' fill='none' stroke='%2333C4A0' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+@font-face{font-family:"Manrope";font-weight:200 800;font-display:swap;src:url(assets/manrope-cyr.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Manrope";font-weight:200 800;font-display:swap;src:url(assets/manrope-lat.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{
+  --ink:#0F1B2D; --ink2:#1B2B44; --muted:#5B6678; --line:#DCE0E6; --paper:#F4F5F2; --card:#fff;
+  --acc:#0E7C66; --acc-d:#095A4A; --acc-bg:#DDF3EC; --acc-l:#33C4A0;
+  --up:#B4352A; --up-bg:#FBE6E3; --down:#0E7C66; --warn:#9A6B12; --warn-bg:#FBF0D6;
+  --r:16px; --sh:0 18px 40px -26px rgba(15,27,45,.45);
+  --font:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;font-family:var(--font);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;line-height:1.55;overflow-x:hidden}
+a{color:inherit}
+button,input,select{font:inherit;color:inherit}
+.wrap{width:min(1180px,calc(100% - 32px));margin-inline:auto}
+.num{font-variant-numeric:tabular-nums}
+
+/* шапка */
+.hdr{position:sticky;top:0;z-index:50;background:rgba(15,27,45,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff}
+.hdr .wrap{display:flex;align-items:center;gap:18px;height:62px}
+.logo{font-weight:800;letter-spacing:.01em;font-size:17px;white-space:nowrap;display:flex;align-items:baseline;gap:8px}
+.logo b{color:var(--acc-l)}
+.logo small{font-weight:600;color:#9FB0C8;font-size:12px}
+.nav{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{padding:9px 12px;border-radius:999px;text-decoration:none;font-size:14px;font-weight:600;color:#D5DEEC;white-space:nowrap}
+.nav a:hover,.nav a:focus-visible{background:rgba(255,255,255,.1);color:#fff;outline:0}
+
+/* первый экран */
+.hero{background:linear-gradient(180deg,var(--ink) 0%,#16263F 100%);color:#fff;padding:54px 0 0;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:0;background:
+  repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 88px),
+  repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 88px);pointer-events:none}
+.hero .wrap{position:relative}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--acc-l)}
+.hero h1{font-size:clamp(30px,5.2vw,54px);line-height:1.06;margin:14px 0 14px;font-weight:800;letter-spacing:-.02em;max-width:900px}
+.hero p.lead{font-size:clamp(16px,2vw,19px);color:#C4D0E2;max-width:760px;margin:0 0 30px}
+.stamp{display:inline-flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;color:#DCE6F5;border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:10px 14px;background:rgba(255,255,255,.05);margin-bottom:34px}
+.stamp b{color:#fff}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.14);border-radius:18px 18px 0 0;overflow:hidden}
+.kpi{background:#132239;padding:22px 22px 20px}
+.kpi .v{font-size:clamp(30px,4.4vw,46px);font-weight:800;letter-spacing:-.02em;line-height:1;color:#fff}
+.kpi .v small{font-size:.45em;color:var(--acc-l);margin-left:4px;font-weight:700}
+.kpi .t{margin-top:8px;font-size:14px;color:#AFC0D8;line-height:1.35}
+
+/* секции */
+section{padding:60px 0 8px}
+.sec-h{display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
+.sec-n{font-weight:800;font-size:15px;color:var(--acc);letter-spacing:.06em}
+h2{font-size:clamp(24px,3.4vw,34px);line-height:1.12;margin:0;letter-spacing:-.015em;font-weight:800}
+.sec-p{color:var(--muted);max-width:780px;margin:6px 0 22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh)}
+
+/* панель управления */
+.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+.tools .grow{flex:1 1 220px}
+.in,.sel{height:42px;border:1px solid var(--line);border-radius:12px;background:#fff;padding:0 14px;min-width:0;width:100%}
+.in:focus,.sel:focus{outline:2px solid var(--acc-l);outline-offset:1px}
+.btn{height:42px;padding:0 18px;border-radius:12px;border:1px solid var(--ink);background:var(--ink);color:#fff;font-weight:700;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.btn:hover{background:var(--ink2)}
+.btn.alt{background:#fff;color:var(--ink);border-color:var(--line)}
+.btn.alt:hover{border-color:var(--ink)}
+.btn.acc{background:var(--acc);border-color:var(--acc)}
+.btn.acc:hover{background:var(--acc-d)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+.seg button{border:0;background:transparent;padding:0 14px;height:40px;cursor:pointer;font-weight:700;color:var(--muted)}
+.seg button[aria-pressed=true]{background:var(--ink);color:#fff}
+label.chk{display:inline-flex;gap:8px;align-items:center;font-size:14px;color:var(--muted);cursor:pointer;white-space:nowrap}
+
+/* таблица */
+.tbl-wrap{overflow:auto;max-height:78vh;border-radius:var(--r)}
+table.pt{border-collapse:separate;border-spacing:0;width:100%;min-width:920px;font-size:14.5px}
+.pt th,.pt td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+.pt th{position:sticky;top:0;background:#EEF1F4;z-index:3;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);cursor:pointer;user-select:none}
+.pt th:hover{color:var(--ink)}
+.pt th.on{color:var(--ink)}
+.pt th.on:after{content:" ▾";}
+.pt th.on.asc:after{content:" ▴"}
+.pt .l{text-align:left}
+.pt td.name{position:sticky;left:0;background:#fff;z-index:2;min-width:250px;max-width:290px;white-space:normal;box-shadow:1px 0 0 var(--line)}
+.pt th.name{left:0;z-index:4}
+.pt tbody tr:hover td{background:#F8FAFB}
+.pt tbody tr:hover td.name{background:#F8FAFB}
+.pt .nm{font-weight:700;line-height:1.25;display:block}
+.pt .mp{font-size:12px;color:var(--muted)}
+.pt td.sel-c{width:38px;text-align:center;padding-inline:8px}
+.pt td.price{font-variant-numeric:tabular-nums}
+.pt td.price a{text-decoration:none;font-weight:600;border-bottom:1px dotted transparent}
+.pt td.price a:hover{border-bottom-color:currentColor}
+.pt td.min{background:var(--acc-bg)}
+.pt td.min a{color:var(--acc-d);font-weight:800}
+.pt tbody tr:hover td.min{background:#CDEDE3}
+.pt td.off a{color:#8A93A3;font-style:italic;font-weight:500}
+.pt td.na{color:#B0B7C3}
+.fz{font-size:11px;color:var(--warn);font-weight:800;margin-left:3px;cursor:help}
+.chg{display:block;font-size:11.5px;font-weight:700;margin-top:1px}
+.chg.up{color:var(--up)}
+.chg.dn{color:var(--down)}
+.sp{font-weight:800}
+.sp.hi{color:var(--up)}
+.sp small{display:block;font-weight:600;color:var(--muted);font-size:11.5px}
+.who{font-weight:700;text-align:left}
+.legend{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--muted);margin:14px 2px 0}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:6px;font-style:normal}
+
+/* корзина */
+.bk{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:16px}
+.bk .c{padding:18px 16px;border-radius:14px;background:#fff;border:1px solid var(--line);position:relative}
+.bk .c.best{border-color:var(--acc);background:var(--acc-bg)}
+.bk .c .s{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.bk .c .t{font-size:clamp(20px,2.4vw,27px);font-weight:800;letter-spacing:-.015em;margin:6px 0 2px}
+.bk .c .d{font-size:13px;color:var(--muted)}
+.bk .c .rk{position:absolute;top:12px;right:14px;font-weight:800;font-size:13px;color:var(--muted)}
+.bk .c.best .rk{color:var(--acc-d)}
+.verdict{padding:20px 22px;margin-bottom:16px;display:grid;grid-template-columns:1.2fr 1fr;gap:20px;align-items:center}
+.verdict h3{margin:0 0 6px;font-size:19px}
+.verdict p{margin:0;color:var(--muted)}
+.verdict .big{font-size:clamp(26px,3.6vw,38px);font-weight:800;color:var(--acc-d);letter-spacing:-.02em}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.chart{padding:18px 18px 12px}
+.chart h3{margin:0 0 2px;font-size:16px}
+.chart p{margin:0 0 10px;font-size:13px;color:var(--muted)}
+.cv{position:relative;height:300px}
+.cv.tall{height:360px}
+
+/* изменения цен */
+table.sm{border-collapse:collapse;width:100%;font-size:14px}
+.sm th,.sm td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left}
+.sm th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:#EEF1F4}
+.sm td.r,.sm th.r{text-align:right}
+.note{padding:16px 18px;border-radius:14px;background:var(--warn-bg);color:#5A4208;font-size:14px;margin-top:14px}
+.note b{color:#3E2D04}
+
+/* как сделано */
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;counter-reset:s}
+.step{padding:20px 18px;border-radius:14px;background:#fff;border:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
+.step .n{font-size:40px;font-weight:800;line-height:1;color:var(--acc);letter-spacing:-.03em}
+.step h3{margin:6px 0 0;font-size:16px}
+.step .f{font-size:26px;font-weight:800;letter-spacing:-.02em}
+.step p{margin:0;font-size:13.5px;color:var(--muted)}
+.byai{margin-top:16px;padding:22px 24px;border-radius:var(--r);background:var(--ink);color:#fff;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
+.byai p{margin:0;font-size:clamp(16px,2vw,19px);line-height:1.45}
+.byai b{color:var(--acc-l)}
+.limits{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.lim{padding:16px 18px;border-radius:14px;background:#fff;border:1px solid var(--line);font-size:14px}
+.lim b{display:block;margin-bottom:3px}
+.dl{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+footer{margin-top:60px;background:var(--ink);color:#9FB0C8;padding:30px 0 40px;font-size:13.5px}
+footer p{margin:0 0 6px;max-width:900px}
+
+@media (max-width:980px){
+  .bk{grid-template-columns:repeat(3,1fr)}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .grid2,.verdict,.byai{grid-template-columns:1fr}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:640px){
+  .hdr .wrap{gap:10px}.logo small{display:none}
+  section{padding-top:44px}
+  .bk{grid-template-columns:repeat(2,1fr)}
+  .steps,.limits{grid-template-columns:1fr}
+  .kpi{padding:16px 14px}
+  .pt td.name{min-width:180px;max-width:190px}
+  .tbl-wrap{max-height:70vh}
+  .hero{padding-top:36px}
+}
+.hint-m{display:none;margin:0 0 8px;font-size:13px;color:var(--muted)}
+@media (max-width:640px){.hint-m{display:block}}
+@media print{.hdr,.tools,.dl{display:none}}
+</style>
+</head>
+<body>
+<header class="hdr"><div class="wrap">
+  <div class="logo"><b>Прайс-радар</b><small>демо мониторинга цен</small></div>
+  <nav class="nav" aria-label="Разделы"><a href="#table">Таблица</a><a href="#basket">Корзина</a><a href="#spread">Разброс</a><a href="#dynamics">Динамика</a><a href="#how">Как сделано</a></nav>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <div class="eyebrow">Демонстрация: сбор, сопоставление, аналитика</div>
+  <h1>Мониторинг цен конкурентов: один и тот же SSD в пяти магазинах</h1>
+  <p class="lead">Парсер сам собрал цены с пяти сайтов, понял, что это одни и те же модели, сложил всё в базу и построил эту страницу. Без API, без сторонних сервисов. Цены настоящие.</p>
+  <div class="stamp" id="stamp"></div>
+  <div class="kpis" id="kpis"></div>
+</div></div>
+
+<main class="wrap">
+
+<section id="table">
+  <div class="sec-h"><span class="sec-n">01</span><h2>Сводная таблица: модель × магазин</h2></div>
+  <p class="sec-p">Зелёным выделена лучшая цена по модели. Цена в ячейке ведёт на карточку товара в магазине. Отметьте строки галочкой, чтобы посчитать корзину ниже.</p>
+  <div class="tools">
+    <div class="seg" id="runSeg" role="group" aria-label="Прогон сбора"></div>
+    <div class="grow"><input class="in" id="q" type="search" placeholder="Поиск: модель, бренд или артикул" aria-label="Поиск"></div>
+    <div><select class="sel" id="brand" aria-label="Бренд"></select></div>
+    <label class="chk"><input type="checkbox" id="onlyHi"> разброс больше 15%</label>
+    <button class="btn alt" id="csv" type="button">Скачать CSV</button>
+    <a class="btn acc" href="prices.xlsx" download>Скачать Excel</a>
+  </div>
+  <p class="hint-m">Таблица широкая: листайте её вправо.</p>
+  <div class="card tbl-wrap"><table class="pt" id="pt"><thead></thead><tbody></tbody></table></div>
+  <div class="legend">
+    <span><i style="background:var(--acc-bg);border:1px solid #BFE5D8"></i>лучшая цена среди товаров «в наличии»</span>
+    <span><i style="background:#fff;border:1px dashed #8A93A3"></i><em>курсив серым</em>: «под заказ», в минимум не входит</span>
+    <span><span class="fz">≈</span> сопоставлено по названию, у магазина нет артикула (наведите курсор)</span>
+    <span><b style="color:var(--up)">▲</b> <b style="color:var(--down)">▼</b> цена изменилась с прошлого прогона</span>
+  </div>
+</section>
+
+<section id="basket">
+  <div class="sec-h"><span class="sec-n">02</span><h2>Где выгоднее корзина</h2></div>
+  <p class="sec-p">Считается по отмеченным в таблице моделям: сколько стоит купить всё в одном магазине и сколько получится, если брать каждую модель там, где она дешевле.</p>
+  <div class="tools">
+    <button class="btn alt" id="selAll" type="button">Отметить все</button>
+    <button class="btn alt" id="selNone" type="button">Снять отметки</button>
+    <span id="selCnt" style="color:var(--muted);font-size:14px"></span>
+  </div>
+  <div class="bk" id="bk"></div>
+  <div class="card verdict" id="verdict"></div>
+  <div class="card chart"><h3>Стоимость корзины по магазинам, ₽</h3><p id="bkNote"></p><div class="cv"><canvas id="chBasket"></canvas></div></div>
+</section>
+
+<section id="spread">
+  <div class="sec-h"><span class="sec-n">03</span><h2>Разброс цен</h2></div>
+  <p class="sec-p">Одна и та же модель в разных магазинах стоит по-разному. Ниже видно, кто чаще всех дешевле и у кого самые большие расхождения.</p>
+  <div class="grid2">
+    <div class="card chart"><h3>Сколько раз магазин был самым дешёвым</h3><p>из всех моделей в таблице, при совпадении цен засчитывается всем</p><div class="cv"><canvas id="chWins"></canvas></div></div>
+    <div class="card chart"><h3>Насколько магазин в среднем дороже лучшей цены, %</h3><p>среднее по моделям: (цена магазина − лучшая цена) / лучшая цена</p><div class="cv"><canvas id="chPrem"></canvas></div></div>
+  </div>
+  <div class="card chart" style="margin-top:16px"><h3>Десять моделей с самым большим разбросом цены, %</h3><p>от лучшей до самой высокой цены среди товаров «в наличии»</p><div class="cv tall"><canvas id="chTop"></canvas></div></div>
+</section>
+
+<section id="dynamics">
+  <div class="sec-h"><span class="sec-n">04</span><h2>Динамика между прогонами</h2></div>
+  <p class="sec-p" id="dynP"></p>
+  <div class="grid2">
+    <div class="card chart"><h3>Корзина из всех моделей по прогонам, ₽</h3><p id="dynNote"></p><div class="cv"><canvas id="chDyn"></canvas></div></div>
+    <div class="card" style="padding:18px;overflow:auto"><h3 style="margin:0 0 10px;font-size:16px">Прогоны сбора</h3><table class="sm" id="runsT"></table></div>
+  </div>
+  <div class="card" style="padding:18px;margin-top:16px;overflow:auto"><h3 style="margin:0 0 10px;font-size:16px">Изменения цен между прогонами</h3><div id="chgBox"></div></div>
+  <div class="note" id="histNote"></div>
+</section>
+
+<section id="how">
+  <div class="sec-h"><span class="sec-n">05</span><h2>Как это сделано</h2></div>
+  <p class="sec-p">Все цифры ниже настоящие: так прошла эта работа от запроса до страницы, которую вы смотрите.</p>
+  <div class="steps" id="steps"></div>
+  <div class="byai" id="byai"></div>
+  <h3 style="margin:34px 0 12px;font-size:20px">Что важно знать об этих данных</h3>
+  <div class="limits" id="limits"></div>
+  <div class="dl">
+    <a class="btn acc" href="prices.xlsx" download>Таблица в Excel</a>
+    <a class="btn alt" href="monitor.db" download>База SQLite</a>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">
+  <p>Демонстрационная страница. Данные собраны с открытых страниц интернет-магазинов в указанные дату и время и не являются офертой: актуальную цену и наличие смотрите на сайте магазина.</p>
+  <p>Названия магазинов и брендов принадлежат их владельцам и приведены для иллюстрации.</p>
+</div></footer>
+
+<script src="assets/chart.umd.min.js"></script>
+<script>
+const D = {"runs": [{"n": 1, "started": "2026-11-18T11:22:26+03:00", "finished": "2026-11-18T11:24:06+03:00", "duration": 101, "positions": 2143, "sites": {"Регард": 336, "OLDI": 420, "КНС": 420, "e2e4": 346, "НИКС": 621}}, {"n": 2, "started": "2026-11-18T11:50:00+03:00", "finished": "2026-11-18T11:52:06+03:00", "duration": 126, "positions": 2137, "sites": {"Регард": 336, "OLDI": 420, "КНС": 420, "e2e4": 346, "НИКС": 615}}, {"n": 3, "started": "2026-11-18T12:18:00+03:00", "finished": "2026-11-18T12:24:02+03:00", "duration": 362, "positions": 2141, "sites": {"Регард": 336, "OLDI": 420, "КНС": 420, "e2e4": 345, "НИКС": 618}}], "shops": ["Регард", "КНС", "e2e4", "НИКС", "OLDI"], "products": [{"id": 1, "mpn": "MZ77E500BW", "brand": "Samsung", "name": "Samsung 870 EVO 500 ГБ", "cap": 500, "offers": {"Регард": {"offer_id": 1, "sku": "378531", "title": "Накопитель SSD 500GB Samsung 870 EVO (MZ-77E500BW)", "url": "https://www.regard.ru/product/378531/nakopitel-ssd-500gb-samsung-870-evo-mz-77e500bw", "match": "артикул", "score": 100, "dup": 1, "prices": [21770, 21770, 21770], "stock": [true, true, true]}, "КНС": {"offer_id": 2, "sku": "642803", "title": "SSD диск Samsung 870 EVO 500Gb MZ-77E500BW", "url": "https://www.kns.ru/product/ssd-disk-samsung-870-evo-500gb-mz-77e500bw/", "match": "артикул", "score": 100, "dup": 1, "prices": [21325, 21325, 21325], "stock": [true, true, true]}, "e2e4": {"offer_id": 3, "sku": "844771", "title": "SSD Samsung 870 EVO 500Gb 2.5\" SATA3 (MZ-77E500BW)", "url": "https://e2e4online.ru/catalog/item/ssd-samsung-870-evo-500gb-2-5-sata3-mz-77e500bw-844771/", "match": "артикул", "score": 100, "dup": 1, "prices": [22100, 22100, 22100], "stock": [false, false, false]}, "НИКС": {"offer_id": 4, "sku": "492380", "title": "SSD Samsung 870 EVO < MZ-77E500BW > (500 Гб, 2.5\", SATA, 3D TLC)", "url": "https://www.nix.ru/autocatalog/ssd_samsung/SSD-500-Gb-SATA-6Gb-s-Samsung-870-EVO-MZ-77E500B-W-CN-KR-RTL-25-V-NAND-3bit-MLC_492380.html", "match": "артикул", "score": 100, "dup": 1, "prices": [24123, 24123, 24123], "stock": [null, null, null]}, "OLDI": {"offer_id": 5, "sku": "02010624", "title": "SSD накопитель Samsung 870 EVO 500 Gb SATA-III MZ-77E500BW", "url": "https://www.oldi.ru/catalog/element/02010624/", "match": "артикул", "score": 100, "dup": 1, "prices": [21450, 21450, 21450], "stock": [null, null, null]}}}, {"id": 2, "mpn": "MZ77E1T0BW", "brand": "Samsung", "name": "Samsung 870 EVO 1 ТБ", "cap": 1000, "offers": {"Регард": {"offer_id": 6, "sku": "378532", "title": "Накопитель SSD 1TB Samsung 870 EVO (MZ-77E1T0BW)", "url": "https://www.regard.ru/product/378532/nakopitel-ssd-1tb-samsung-870-evo-mz-77e1t0bw", "match": "артикул", "score": 100, "dup": 1, "prices": [33990, 33990, 33990], "stock": [true, true, true]}, "КНС": {"offer_id": 7, "sku": "642945", "title": "SSD диск Samsung 870 EVO 1Tb MZ-77E1T0BW", "url": "https://www.kns.ru/product/ssd-disk-samsung-870-evo-1tb-mz-77e1t0bw/", "match": "артикул", "score": 100, "dup": 1, "prices": [33445, 33445, 33445], "stock": [true, true, true]}, "e2e4": {"offer_id": 8, "sku": "844774", "title": "SSD Samsung 870 EVO 1Tb 2.5\" SATA3 (MZ-77E1T0BW)", "url": "https://e2e4online.ru/catalog/item/ssd-samsung-870-evo-1tb-2-5-sata3-mz-77e1t0bw-844774/", "match": "артикул", "score": 100, "dup": 1, "prices": [34998, 34998, 34998], "stock": [false, false, false]}, "НИКС": {"offer_id": 9, "sku": "492378", "title": "SSD Samsung 870 EVO < MZ-77E1T0BW > (1 Тб, 2.5\", SATA, 3D TLC)", "url": "https://www.nix.ru/autocatalog/ssd_samsung/SSD-1-Tb-SATA-6Gb-s-Samsung-870-EVO-MZ-77E1T0B-W-EU-RTL-25-V-NAND-3bit-MLC_492378.html", "match": "артикул", "score": 100, "dup": 1, "prices": [38251, 38251, 38251], "stock": [null, null, null]}, "OLDI": {"offer_id": 10, "sku": "01928900", "title": "SSD накопитель Samsung 870 EVO 1 Tb SATA-III MZ-77E1T0BW", "url": "https://www.oldi.ru/catalog/element/01928900/", "match": "артикул", "score": 100, "dup": 1, "prices": [32470, 32470, 32470], "stock": [null, null, null]}}}, {"id": 3, "mpn": "MZV9P1T0BW", "brand": "Samsung", "name": "Samsung 990 PRO 1 ТБ", "cap": 1000, "offers": {"Регард": {"offer_id": 11, "sku": "459278", "title": "Накопитель SSD 1TB Samsung 990 PRO (MZ-V9P1T0BW)", "url": "https://www.regard.ru/product/459278/nakopitel-ssd-1tb-samsung-990-pro-mz-v9p1t0bw", "match": "артикул", "score": 100, "dup": 1, "prices": [25990, 25990, 25990], "stock": [true, true, true]}, "КНС": {"offer_id": 12, "sku": "686886", "title": "SSD диск Samsung 990 PRO 1Tb MZ-V9P1T0BW", "url": "https://www.kns.ru/product/ssd-disk-samsung-990-pro-1tb-mz-v9p1t0bw/", "match": "артикул", "score": 100, "dup": 1, "prices": [26573, 26573, 26573], "stock": [true, true, true]}, "e2e4": {"offer_id": 13, "sku": "1133682", "title": "SSD Samsung 990 Pro 1Tb M.2 2280 PCIe 4.0 x4 (MZ-V9P1T0BW)", "url": "https://e2e4online.ru/catalog/item/ssd-samsung-990-pro-1tb-m-2-2280-pcie-4-0-x4-mz--1133682/", "match": "артикул", "score": 100, "dup": 1, "prices": [26598, 26598, 26598], "stock": [false, false, false]}, "НИКС": {"offer_id": 14, "sku": "693330", "title": "SSD Samsung 990 PRO < MZ-V9P1T0BW > (1 Тб, M.2 PCI-E, Gen4 x4, 3D TLC)", "url": "https://www.nix.ru/autocatalog/ssd_samsung/SSD-1-Tb-M2-2280-M-Samsung-990-PRO-Series-MZ-V9P1T0BW-RTL_693330.html", "match": "артикул", "score": 100, "dup": 1, "prices": [26979, 26979, 26979], "stock": [null, null, null]}, "OLDI": {"offer_id": 15, "sku": "02024666", "title": "SSD накопитель Samsung 990 PRO 1 Tb PCI-E 4.0 х4 MZ-V9P1T0BW", "url": "https://www.oldi.ru/catalog/element/02024666/", "match": "артикул", "score": 100, "dup": 1, "prices": [26560, 26560, 26560], "stock": [null, null, null]}}}, {"id": 4, "mpn": "MZV9P2T0BW", "brand": "Samsung", "name": "Samsung 990 PRO 2 ТБ", "cap": 2000, "offers": {"Регард": {"offer_id": 16, "sku": "459279", "title": "Накопитель SSD 2TB Samsung 990 PRO (MZ-V9P2T0BW)", "url": "https://www.regard.ru/product/459279/nakopitel-ssd-2tb-samsung-990-pro-mz-v9p2t0bw", "match": "артикул", "score": 100, "dup": 1, "prices": [41990, 41990, 41990], "stock": [true, true, true]}, "КНС": {"offer_id": 17, "sku": "686887", "title": "SSD диск Samsung 990 PRO 2Tb MZ-V9P2T0BW", "url": "https://www.kns.ru/product/ssd-disk-samsung-990-pro-2tb-mz-v9p2t0bw/", "match": "артикул", "score": 100, "dup": 1, "prices": [44982, 44982, 44982], "stock": [true, true, true]}, "e2e4": {"offer_id": 18, "sku": "1133686", "title": "SSD Samsung 990 Pro 2Tb M.2 2280 PCIe 4.0 x4 (MZ-V9P2T0BW)", "url": "https://e2e4online.ru/catalog/item/ssd-samsung-990-pro-2tb-m-2-2280-pcie-4-0-x4-mz--1133686/", "match": "артикул", "score": 100, "dup": 1, "prices": [46400, 46400, 46400], "stock": [false, false, false]}, "НИКС": {"offer_id": 19, "sku": "701009", "title": "SSD Samsung 990 PRO < MZ-V9P2T0BW > (2 Тб, M.2 PCI-E, Gen4 x4, 3D TLC)", "url": "https://www.nix.ru/autocatalog/ssd_samsung/SSD-2-Tb-M2-2280-M-Samsung-990-PRO-Series-MZ-V9P2T0BW-RTL_701009.html", "match": "артикул", "score": 100, "dup": 1, "prices": [47032, 47032, 47032], "stock": [null, null, null]}, "OLDI": {"offer_id": 20, "sku": "02024665", "title": "SSD накопитель Samsung 990 PRO 2 Tb PCI-E 4.0 х4 MZ-V9P2T0BW", "url": "https://www.oldi.ru/catalog/element/02024665/", "match": "артикул", "score": 100, "dup": 1, "prices": [42890, 42890, 42890], "stock": [null, null, null]}}}, {"id": 5, "mpn": "SA400S37480G", "brand": "Kingston", "name": "Kingston A400 480 ГБ", "cap": 480, "offers": {"Регард": {"offer_id": 21, "sku": "7005", "title": "Накопитель SSD 480GB Kingston A400 (SA400S37/480G)", "url": "https://www.regard.ru/product/7005/nakopitel-ssd-480gb-kingston-a400-sa400s37-480g", "match": "артикул", "score": 100, "dup": 1, "prices": [9720, 9720, 9720], "stock": [true, true, true]}, "КНС": {"offer_id": 22, "sku": "539313", "title": "SSD диск Kingston A400 480Gb SA400S37/480G", "url": "https://www.kns.ru/product/ssd-disk-kingston-sa400s37-480g/", "match": "артикул", "score": 100, "dup": 1, "prices": [9788, 9788, 9788], "stock": [true, true, true]}, "e2e4": {"offer_id": 23, "sku": "557608", "title": "SSD Kingston A400 480Gb 2.5\" SATA3 (SA400S37/480G)", "url": "https://e2e4online.ru/catalog/item/ssd-kingston-a400-480gb-2-5-sata3-sa400s37-480g-557608/", "match": "артикул", "score": 100, "dup": 1, "prices": [10400, 10400, 10400], "stock": [true, true, true]}, "НИКС": {"offer_id": 24, "sku": "299693", "title": "SSD Kingston A400 < SA400S37 / 480G > (480 Гб, 2.5\", SATA, TLC)", "url": "https://www.nix.ru/autocatalog/ssd_kingston/SSD-480-Gb-SATA-6Gb-s-Kingston-A400-SA400S37-480G-IN-RTL-25-TLC_299693.html", "match": "артикул", "score": 100, "dup": 2, "prices": [10972, 10972, 10972], "stock": [null, null, null]}, "OLDI": {"offer_id": 25, "sku": "0483337", "title": "SSD накопитель Kingston A400 480 Gb SATA-III SA400S37/480G", "url": "https://www.oldi.ru/catalog/element/0483337/", "match": "артикул", "score": 100, "dup": 1, "prices": [9840, 9840, 9840], "stock": [null, null, null]}}}, {"id": 6, "mpn": "SA400S37960G", "brand": "Kingston", "name": "Kingston A400 960 ГБ", "cap": 960, "offers": {"Регард": {"offer_id": 26, "sku": "278654", "title": "Накопитель SSD 960GB Kingston A400 (SA400S37/960G)", "url": "https://www.regard.ru/product/278654/nakopitel-ssd-960gb-kingston-a400-sa400s37-960g", "match": "артикул", "score": 100, "dup": 1, "prices": [14540, 14540, 14540], "stock": [true, true, true]}, "КНС": {"offer_id": 27, "sku": "564149", "title": "SSD диск Kingston A400 960Gb SA400S37/960G", "url": "https://www.kns.ru/product/ssd-disk-kingston-sa400s37-960g/", "match": "артикул", "score": 100, "dup": 1, "prices": [14203, 14203, 14203], "stock": [true, true, true]}, "e2e4": {"offer_id": 28, "sku": "604457", "title": "SSD Kingston A400 960Gb 2.5\" SATA3 (SA400S37/960G)", "url": "https://e2e4online.ru/catalog/item/ssd-kingston-a400-960gb-2-5-sata3-sa400s37-960g-604457/", "match": "артикул", "score": 100, "dup": 1, "prices": [16100, 16100, 16100], "stock": [true, true, true]}, "НИКС": {"offer_id": 29, "sku": "344705", "title": "SSD Kingston A400 < SA400S37 / 960G > (960 Гб, 2.5\", SATA, TLC)", "url": "https://www.nix.ru/autocatalog/ssd_kingston/SSD-960-Gb-SATA-6Gb-s-Kingston-A400-SA400S37-960G-25-TLC_344705.html", "match": "артикул", "score": 100, "dup": 1, "prices": [13772, 13761, 13761], "stock": [null, null, null]}, "OLDI": {"offer_id": 30, "sku": "0995340", "title": "SSD накопитель Kingston SSDNow A400 960 Gb SATA-III", "url": "https://www.oldi.ru/catalog/element/0995340/", "match": "нечёткое", "score": 94, "dup": 1, "prices": [14640, 14640, 14640], "stock": [null, null, null]}}}, {"id": 7, "mpn": "SFYR2S1T0", "brand": "Kingston", "name": "Kingston FURY Renegade G5 1 ТБ", "cap": 1000, "offers": {"Регард": {"offer_id": 31, "sku": "493166", "title": "Накопитель SSD 1TB Kingston FURY Renegade G5 (SFYR2S/1T0)", "url": "https://www.regard.ru/product/493166/nakopitel-ssd-1tb-kingston-fury-renegade-g5-sfyr2s-1t0", "match": "артикул", "score": 100, "dup": 1, "prices": [49340, 49340, 49340], "stock": [true, true, true]}, "КНС": {"offer_id": 32, "sku": "759289", "title": "SSD диск Kingston Fury Renegade G5 1Tb SFYR2S/1T0", "url": "https://www.kns.ru/product/ssd-disk-kingston-fury-renegade-g5-1tb-sfyr2s-1t0/", "match": "артикул", "score": 100, "dup": 1, "prices": [37860, 37860, 37860], "stock": [true, true, true]}, "e2e4": {"offer_id": 33, "sku": "1373505", "title": "SSD Kingston Fury Renegade G5 1Tb M.2 2280 PCIe 5.0 x4 (SFYR2S/1T0)", "url": "https://e2e4online.ru/catalog/item/ssd-kingston-fury-renegade-g5-1tb-m-2-2280-pcie-5-1373505/", "match": "артикул", "score": 100, "dup": 1, "prices": [37200, 37200, 37200], "stock": [false, false, false]}, "НИКС": {"offer_id": 34, "sku": "894939", "title": "SSD Kingston Fury Renegade G5 < SFYR2S / 1T0 > (1 Тб, M.2 PCI-E, Gen5 x4, 3D TLC)", "url": "https://www.nix.ru/autocatalog/ssd_kingston/SSD-1-Tb-M2-2280-M-Kingston-Fury-Renegade-G5-SFYR2S-1T0_894939.html", "match": "артикул", "score": 100, "dup": 1, "prices": [40431, 40431, 40431], "stock": [null, null, null]}, "OLDI": {"offer_id": 35, "sku": "02153001", "title": "Твердотельный диск 1Tb Kingston Fury Renegade G5 M.2, NVMe,PCI-E 5.0 x4 [R/W - 14700/11000 MB/s]", "url": "https://www.oldi.ru/catalog/element/02153001/", "match": "нечёткое", "score": 100, "dup": 1, "prices": [37640, 37640, 37640], "stock": [null, null, null]}}}, {"id": 8, "mpn": "WDS500G3B0A", "brand": "WD", "name": "WD Blue SA510 500 ГБ", "cap": 500, "offers": {"Регард": {"offer_id": 36, "sku": "445181", "title": "Накопитель SSD 500GB WD Blue SA510 (WDS500G3B0A)", "url": "https://www.regard.ru/product/445181/nakopitel-ssd-500gb-wd-blue-sa510-wds500g3b0a", "match": "артикул", "score": 100, "dup": 1, "prices": [13710, 13710, 13710], "stock": [true, true, true]}, "КНС": {"offer_id": 37, "sku": "682017", "title": "SSD диск WD Blue SA510 500Gb WDS500G3B0A", "url": "https://www.kns.ru/product/ssd-disk-wd-blue-500gb-wds500g3b0a/", "match": "артикул", "score": 100, "dup": 1, "prices": [13536, 13536, 13536], "stock": [true, true, true]}, "e2e4": {"offer_id": 38, "sku": "1113126", "title": "SSD Western Digital Blue SA510 500Gb 2.5\" SATA3 (WDS500G3B0A)", "url": "https://e2e4online.ru/catalog/item/ssd-western-digital-blue-sa510-500gb-2-5-sata3-w-1113126/", "match": "артикул", "score": 100, "dup": 1, "prices": [15400, 15400, 15400], "stock": [false, false, false]}, "НИКС": {"offer_id": 39, "sku": "676580", "title": "SSD Western Digital Blue SA510 < WDS500G3B0A > (500 Гб, 2.5\", SATA, 3D TLC)", "url": "https://www.nix.ru/autocatalog/ssd_wd/SSD-500-Gb-SATA-6Gb-s-WD-Blue-SA510-WDS500G3B0A-25-TLC_676580.html", "match": "артикул", "score": 100, "dup": 1, "prices": [13226, 13226, 13226], "stock": [null, null, null]}, "OLDI": {"offer_id": 40, "sku": "02013078", "title": "SSD накопитель Western Digital Blue SA510 500 Gb SATA-III WDS500G3B0A", "url": "https://www.oldi.ru/catalog/element/02013078/", "match": "артикул", "score": 100, "dup": 1, "prices": [13290, 13290, 13290], "stock": [null, null, null]}}}, {"id": 9, "mpn": "WDS100T3B0A", "brand": "WD", "name": "WD Blue SA510 1 ТБ", "cap": 1000, "offers": {"Регард": {"offer_id": 41, "sku": "446530", "title": "Накопитель SSD 1TB WD Blue SA510 (WDS100T3B0A)", "url": "https://www.regard.ru/product/446530/nakopitel-ssd-1tb-wd-blue-sa510-wds100t3b0a", "match": "артикул", "score": 100, "dup": 1, "prices": [18110, 18110, 18110], "stock": [true, true, true]}, "КНС": {"offer_id": 42, "sku": "681038", "title": "SSD диск WD Blue SA510 1Tb WDS100T3B0A", "url": "https://www.kns.ru/product/ssd-disk-wd-blue-sa510-1tb-wds100t3b0a/", "match": "артикул", "score": 100, "dup": 1, "prices": [18243, 18243, 18243], "stock": [true, true, true]}, "e2e4": {"offer_id": 43, "sku": "1113123", "title": "SSD Western Digital Blue SA510 1Tb 2.5\" SATA3 (WDS100T3B0A)", "url": "https://e2e4online.ru/catalog/item/ssd-western-digital-blue-sa510-1tb-2-5-sata3-wds-1113123/", "match": "артикул", "score": 100, "dup": 1, "prices": [21100, 21100, 21100], "stock": [false, false, false]}, "НИКС": {"offer_id": 44, "sku": "679015", "title": "SSD Western Digital Blue SA510 < WDS100T3B0A > (1 Тб, 2.5\", SATA, 3D TLC)", "url": "https://www.nix.ru/autocatalog/ssd_wd/SSD-1-Tb-SATA-6Gb-s-WD-Blue-SA510-WDS100T3B0A-25-TLC_679015.html", "match": "артикул", "score": 100, "dup": 1, "prices": [17916, 17916, 17916], "stock": [null, null, null]}, "OLDI": {"offer_id": 45, "sku": "02011357", "title": "SSD накопитель Western Digital BLUE SA510 1 Tb SATA-III", "url": "https://www.oldi.ru/catalog/element/02011357/", "match": "нечёткое", "score": 94, "dup": 1, "prices": [18510, 18510, 18510], "stock": [null, null, null]}}}, {"id": 10, "mpn": "WDS100T2X0E", "brand": "WD", "name": "WD Black SN850X 1 ТБ", "cap": 1000, "offers": {"Регард": {"offer_id": 46, "sku": "451109", "title": "Накопитель SSD 1TB WD Black SN850X (WDS100T2X0E)", "url": "https://www.regard.ru/product/451109/nakopitel-ssd-1tb-wd-black-sn850x-wds100t2x0e", "match": "артикул", "score": 100, "dup": 1, "prices": [27430, 27430, 27430], "stock": [true, true, true]}, "КНС": {"offer_id": 47, "sku": "686799", "title": "SSD диск WD Black SN850X 1Tb WDS100T2X0E", "url": "https://www.kns.ru/product/ssd-disk-wd-black-sn850x-1tb-wds100t2x0e/", "match": "артикул", "score": 100, "dup": 1, "prices": [27614, 27614, 27614], "stock": [true, true, true]}, "e2e4": {"offer_id": 48, "sku": "1116383", "title": "SSD Western Digital Black SN850X 1Tb M.2 2280 PCIe 4.0 x4 (WDS100T2X0E)", "url": "https://e2e4online.ru/catalog/item/ssd-western-digital-black-sn850x-1tb-m-2-2280-pcie-1116383/", "match": "артикул", "score": 100, "dup": 1, "prices": [30800, 30800, 30800], "stock": [false, false, false]}, "НИКС": {"offer_id": 49, "sku": "686488", "title": "SSD Western Digital Black SN850X < WDS100T2X0E > (1 Тб, M.2 PCI-E, Gen4 x4, TLC)", "url": "https://www.nix.ru/autocatalog/ssd_wd/SSD-1-Tb-M2-2280-M-WD-Black-SN850X-WDS100T2X0E_686488.html", "match": "артикул", "score": 100, "dup": 1, "prices": [26603, 26603, 26603], "stock": [null, null, null]}, "OLDI": {"offer_id": 50, "sku": "02020369", "title": "SSD накопитель Western Digital SN850X 1 Tb PCI-E 4.0 х4 WDS100T2X0E", "url": "https://www.oldi.ru/catalog/element/02020369/", "match": "артикул", "score": 100, "dup": 1, "prices": [25850, 25850, 25850], "stock": [null, null, null]}}}, {"id": 11, "mpn": "CT240BX500SSD1", "brand": "Crucial", "name": "Crucial BX500 240 ГБ", "cap": 240, "offers": {"Регард": {"offer_id": 51, "sku": "296153", "title": "Накопитель SSD 240GB Crucial BX500 (CT240BX500SSD1)", "url": "https://www.regard.ru/product/296153/nakopitel-ssd-240gb-crucial-bx500-ct240bx500ssd1", "match": "артикул", "score": 100, "dup": 1, "prices": [7350, 7350, 7350], "stock": [true, true, true]}, "КНС": {"offer_id": 52, "sku": "576853", "title": "SSD диск Crucial BX500 240Gb CT240BX500SSD1", "url": "https://www.kns.ru/product/ssd-disk-crucial-ct240bx500ssd1/", "match": "артикул", "score": 100, "dup": 1, "prices": [6248, 6248, 6248], "stock": [true, true, true]}, "e2e4": {"offer_id": 53, "sku": "635560", "title": "SSD Crucial BX500 240Gb 2.5\" SATA3 (CT240BX500SSD1)", "url": "https://e2e4online.ru/catalog/item/ssd-crucial-bx500-240gb-2-5-sata3-ct240bx500ssd1-635560/", "match": "артикул", "score": 100, "dup": 1, "prices": [8100, 8100, 8100], "stock": [false, false, false]}, "НИКС": {"offer_id": 54, "sku": "394860", "title": "SSD Crucial BX500 < CT240BX500SSD1 > (240 Гб, 2.5\", SATA, 3D TLC)", "url": "https://www.nix.ru/autocatalog/ssd_crucial/SSD-240-Gb-SATA-6Gb-s-Crucial-BX500-CT240BX500SSD1-25-3D-TLC_394860.html", "match": "артикул", "score": 100, "dup": 1, "prices": [8049, 8049, 8049], "stock": [null, null, null]}, "OLDI": {"offer_id": 55, "sku": "0643458", "title": "SSD накопитель Crucial BX500 240 Gb SATA-III", "url": "https://www.oldi.ru/catalog/element/0643458/", "match": "нечёткое", "score": 100, "dup": 1, "prices": [6900, 6900, 6900], "stock": [null, null, null]}}}, {"id": 12, "mpn": "CT500BX500SSD1", "brand": "Crucial", "name": "Crucial BX500 500 ГБ", "cap": 500, "offers": {"Регард": {"offer_id": 56, "sku": "454833", "title": "Накопитель SSD 500GB Crucial BX500 (CT500BX500SSD1)", "url": "https://www.regard.ru/product/454833/nakopitel-ssd-500gb-crucial-bx500-ct500bx500ssd1", "match": "артикул", "score": 100, "dup": 1, "prices": [11570, 11570, 11570], "stock": [true, true, true]}, "КНС": {"offer_id": 57, "sku": "685638", "title": "SSD диск Crucial BX500 500Gb CT500BX500SSD1", "url": "https://www.kns.ru/product/ssd-disk-crucial-bx500-500gb-ct500bx500ssd1/", "match": "артикул", "score": 100, "dup": 1, "prices": [12370, 12370, 12370], "stock": [true, true, true]}, "e2e4": {"offer_id": 58, "sku": "1126522", "title": "SSD Crucial BX500 500Gb 2.5\" SATA3 (CT500BX500SSD1)", "url": "https://e2e4online.ru/catalog/item/ssd-crucial-bx500-500gb-2-5-sata3-ct500bx500ssd1-1126522/", "match": "артикул", "score": 100, "dup": 1, "prices": [11298, 11298, 11298], "stock": [false, false, false]}, "НИКС": {"offer_id": 59, "sku": "687741", "title": "SSD Crucial BX500 < CT500BX500SSD1 > (500 Гб, 2.5\", SATA, 3D TLC)", "url": "https://www.nix.ru/autocatalog/ssd_crucial/SSD-500-Gb-SATA-6Gb-s-Crucial-BX500-CT500BX500SSD1-25_687741.html", "match": "артикул", "score": 100, "dup": 1, "prices": [12481, 12481, 12481], "stock": [null, null, null]}, "OLDI": {"offer_id": 60, "sku": "02022275", "title": "SSD накопитель Crucial BX500 500 Gb SATA-III", "url": "https://www.oldi.ru/catalog/element/02022275/", "match": "нечёткое", "score": 100, "dup": 1, "prices": [12210, 12210, 12210], "stock": [null, null, null]}}}, {"id": 13, "mpn": "CT500P310SSD8", "brand": "Crucial", "name": "Crucial P310 500 ГБ", "cap": 500, "offers": {"Регард": {"offer_id": 61, "sku": "759272", "title": "Накопитель SSD 500GB Crucial P310 (CT500P310SSD8)", "url": "https://www.regard.ru/product/759272/nakopitel-ssd-500gb-crucial-p310-ct500p310ssd8", "match": "артикул", "score": 100, "dup": 1, "prices": [12710, 12710, 12710], "stock": [true, true, true]}, "КНС": {"offer_id": 62, "sku": "766697", "title": "SSD диск Crucial P310 500Gb CT500P310SSD8", "url": "https://www.kns.ru/product/ssd-disk-crucial-p310-500gb-ct500p310ssd8/", "match": "артикул", "score": 100, "dup": 1, "prices": [12370, 12370, 12370], "stock": [true, true, true]}, "e2e4": {"offer_id": 63, "sku": "1397799", "title": "SSD Crucial P310 500Gb M.2 2280 PCIe 4.0 x4 (CT500P310SSD8)", "url": "https://e2e4online.ru/catalog/item/ssd-crucial-p310-500gb-m-2-2280-pcie-4-0-x4-ct50-1397799/", "match": "артикул", "score": 100, "dup": 1, "prices": [14500, 14500, 14500], "stock": [false, false, false]}, "НИКС": {"offer_id": 64, "sku": "944374", "title": "SSD Crucial < CT500P310SSD8 > (500 Гб, M.2 PCI-E, Gen4 x4)", "url": "https://www.nix.ru/autocatalog/ssd_crucial/SSD-500-Gb-M2-2230-M-Crucial-P310-CT500P310SSD8_944374.html", "match": "артикул", "score": 100, "dup": 1, "prices": [11981, 11981, 11981], "stock": [null, null, null]}, "OLDI": {"offer_id": 65, "sku": "02156661", "title": "Твердотельный накопитель SSD Crucial P310 500GB PCIe Gen4 NVMe 2280 M.2 SSD CT500P310SSD8", "url": "https://www.oldi.ru/catalog/element/02156661/", "match": "артикул", "score": 100, "dup": 1, "prices": [12610, 12610, 12610], "stock": [null, null, null]}}}, {"id": 14, "mpn": "ASU650SS256GTR", "brand": "ADATA", "name": "ADATA SU650 256 ГБ", "cap": 256, "offers": {"Регард": {"offer_id": 66, "sku": "401058", "title": "Накопитель SSD 256GB ADATA SU650 (ASU650SS-256GT-R)", "url": "https://www.regard.ru/product/401058/nakopitel-ssd-256gb-adata-su650-asu650ss-256gt-r", "match": "артикул", "score": 100, "dup": 1, "prices": [4560, 4560, 4560], "stock": [true, true, true]}, "КНС": {"offer_id": 67, "sku": "659385", "title": "SSD диск ADATA Ultimate SU650 256Gb ASU650SS-256GT-R", "url": "https://www.kns.ru/product/ssd-disk-adata-su650-256gb-asu650ss-256gt-r/", "match": "артикул", "score": 100, "dup": 1, "prices": [4248, 4248, 4248], "stock": [true, true, true]}, "e2e4": {"offer_id": 68, "sku": "937228", "title": "SSD ADATA Ultimate SU650 256Gb 2.5\" SATA3 (ASU650SS-256GT-R)", "url": "https://e2e4online.ru/catalog/item/ssd-adata-ultimate-su650-256gb-2-5-sata3-asu650ss-937228/", "match": "артикул", "score": 100, "dup": 1, "prices": [4400, 4400, 4400], "stock": [false, false, true]}, "НИКС": {"offer_id": 69, "sku": "545768", "title": "SSD ADATA Ultimate SU650 < ASU650SS-256GT-R > (256 Гб, 2.5\", SATA, 3D TLC)", "url": "https://www.nix.ru/autocatalog/ssd_a_data/SSD-256-Gb-SATA-6Gb-s-ADATA-Ultimate-SU650-ASU650SS-256GT-R-25_545768.html", "match": "артикул", "score": 100, "dup": 1, "prices": [5035, 5035, 5035], "stock": [null, null, null]}, "OLDI": {"offer_id": 70, "sku": "01962749", "title": "Накопитель SSD A-Data SATA III 256Gb ASU650SS-256GT-R Ultimate SU650 2.5\"", "url": "https://www.oldi.ru/catalog/element/01962749/", "match": "артикул", "score": 100, "dup": 1, "prices": [4160, 4160, 4160], "stock": [null, null, null]}}}, {"id": 15, "mpn": "ASU650SS512GTR", "brand": "ADATA", "name": "ADATA SU650 512 ГБ", "cap": 512, "offers": {"Регард": {"offer_id": 71, "sku": "401060", "title": "Накопитель SSD 512GB ADATA SU650 (ASU650SS-512GT-R)", "url": "https://www.regard.ru/product/401060/nakopitel-ssd-512gb-adata-su650-asu650ss-512gt-r", "match": "артикул", "score": 100, "dup": 1, "prices": [7930, 7930, 7930], "stock": [true, true, true]}, "КНС": {"offer_id": 72, "sku": "659536", "title": "SSD диск ADATA Ultimate SU650 512Gb ASU650SS-512GT-R", "url": "https://www.kns.ru/product/ssd-disk-adata-ultimate-su650-512gb-asu650ss-512gt-r/", "match": "артикул", "score": 100, "dup": 1, "prices": [7747, 7747, 7747], "stock": [true, true, true]}, "e2e4": {"offer_id": 73, "sku": "937229", "title": "SSD ADATA Ultimate SU650 512Gb 2.5\" SATA3 (ASU650SS-512GT-R)", "url": "https://e2e4online.ru/catalog/item/ssd-adata-ultimate-su650-512gb-2-5-sata3-asu650ss-937229/", "match": "артикул", "score": 100, "dup": 1, "prices": [7800, 7800, 7800], "stock": [true, true, true]}, "НИКС": {"offer_id": 74, "sku": "548346", "title": "SSD ADATA Ultimate SU650 < ASU650SS-512GT-R > (512 Гб, 2.5\", SATA, 3D TLC)", "url": "https://www.nix.ru/autocatalog/ssd_a_data/SSD-512-Gb-SATA-6Gb-s-ADATA-Ultimate-SU650-ASU650SS-512GT-R-25-3D-TLC_548346.html", "match": "артикул", "score": 100, "dup": 1, "prices": [8717, 8717, 8717], "stock": [null, null, null]}, "OLDI": {"offer_id": 75, "sku": "01962750", "title": "SSD накопитель A-Data SU650 512 Gb SATA-III", "url": "https://www.oldi.ru/catalog/element/01962750/", "match": "нечёткое", "score": 94, "dup": 1, "prices": [7660, 7660, 7660], "stock": [null, null, null]}}}, {"id": 16, "mpn": "ASU650SS960GTR", "brand": "ADATA", "name": "ADATA SU650 960 ГБ", "cap": 960, "offers": {"Регард": {"offer_id": 76, "sku": "308225", "title": "Накопитель SSD 960GB ADATA Ultimate SU650 (ASU650SS-960GT-R)", "url": "https://www.regard.ru/product/308225/nakopitel-ssd-960gb-adata-ultimate-su650-asu650ss-960gt-r", "match": "артикул", "score": 100, "dup": 1, "prices": [14140, 14140, 14140], "stock": [true, true, true]}, "КНС": {"offer_id": 77, "sku": "587710", "title": "SSD диск ADATA Ultimate SU650 960Gb ASU650SS-960GT-R", "url": "https://www.kns.ru/product/ssd-disk-a-data-ultimate-su650-960gb-asu650ss-960gt-r/", "match": "артикул", "score": 100, "dup": 1, "prices": [13744, 13744, 13744], "stock": [true, true, true]}, "e2e4": {"offer_id": 78, "sku": "680510", "title": "SSD ADATA Ultimate SU650 960Gb 2.5\" SATA3 (ASU650SS-960GT-R)", "url": "https://e2e4online.ru/catalog/item/ssd-adata-ultimate-su650-960gb-2-5-sata3-asu650ss-680510/", "match": "артикул", "score": 100, "dup": 1, "prices": [16100, 16100, 16100], "stock": [false, false, false]}, "НИКС": {"offer_id": 79, "sku": "398884", "title": "SSD ADATA Ultimate SU650 < ASU650SS-960GT-R > (960 Гб, 2.5\", SATA, 3D TLC)", "url": "https://www.nix.ru/autocatalog/ssd_a_data/SSD-960-Gb-SATA-6Gb-s-ADATA-Ultimate-SU650-ASU650SS-960GT-R-25-3D-TLC_398884.html", "match": "артикул", "score": 100, "dup": 1, "prices": [13317, 13317, 13317], "stock": [null, null, null]}, "OLDI": {"offer_id": 80, "sku": "01030507", "title": "SSD накопитель ADATA SU650 960 Gb SATA-III", "url": "https://www.oldi.ru/catalog/element/01030507/", "match": "нечёткое", "score": 94, "dup": 1, "prices": [13970, 13970, 13970], "stock": [null, null, null]}}}, {"id": 17, "mpn": "ALEG710256GCS", "brand": "ADATA", "name": "ADATA Legend 710 256 ГБ", "cap": 256, "offers": {"Регард": {"offer_id": 81, "sku": "462665", "title": "Накопитель SSD 256GB ADATA Legend 710 (ALEG-710-256GCS)", "url": "https://www.regard.ru/product/462665/nakopitel-ssd-256gb-adata-legend-710-aleg-710-256gcs", "match": "артикул", "score": 100, "dup": 1, "prices": [7290, 7290, 7290], "stock": [true, true, true]}, "КНС": {"offer_id": 82, "sku": "687597", "title": "SSD диск ADATA Legend 710 256Gb ALEG-710-256GCS", "url": "https://www.kns.ru/product/ssd-disk-adata-legend-710-256gb-aleg-710-256gcs/", "match": "артикул", "score": 100, "dup": 1, "prices": [7455, 7455, 7455], "stock": [true, true, true]}, "e2e4": {"offer_id": 83, "sku": "1143221", "title": "SSD ADATA LEGEND 710 256Gb M.2 2280 PCIe 3.0 x4 (ALEG-710-256GCS)", "url": "https://e2e4online.ru/catalog/item/ssd-adata-legend-710-256gb-m-2-2280-pcie-3-0-x4-aleg-1143221/", "match": "артикул", "score": 100, "dup": 1, "prices": [7575, 7575, 7575], "stock": [true, true, true]}, "НИКС": {"offer_id": 84, "sku": "694249", "title": "SSD ADATA LEGEND 710 < ALEG-710-256GCS > (256 Гб, M.2 PCI-E, Gen3 x4, 3D TLC)", "url": "https://www.nix.ru/autocatalog/ssd_a_data/SSD-256-Gb-M2-2280-M-ADATA-LEGEND-710-ALEG-710-256GCS_694249.html", "match": "артикул", "score": 100, "dup": 1, "prices": [8417, 8417, 8417], "stock": [null, null, null]}, "OLDI": {"offer_id": 85, "sku": "02028077", "title": "SSD накопитель A-Data Legend 710 256 Gb PCI-E 3.0 x4", "url": "https://www.oldi.ru/catalog/element/02028077/", "match": "нечёткое", "score": 100, "dup": 1, "prices": [7480, 7480, 7480], "stock": [null, null, null]}}}, {"id": 18, "mpn": "ALEG7101TCS", "brand": "ADATA", "name": "ADATA Legend 710 1 ТБ", "cap": 1000, "offers": {"Регард": {"offer_id": 86, "sku": "462664", "title": "Накопитель SSD 1TB ADATA Legend 710 (ALEG-710-1TCS)", "url": "https://www.regard.ru/product/462664/nakopitel-ssd-1tb-adata-legend-710-aleg-710-1tcs", "match": "артикул", "score": 100, "dup": 1, "prices": [17170, 17170, 17170], "stock": [true, true, true]}, "КНС": {"offer_id": 87, "sku": "691269", "title": "SSD диск ADATA Legend 710 1Tb ALEG-710-1TCS", "url": "https://www.kns.ru/product/ssd-disk-adata-legend-710-1tb-aleg-710-1tcs/", "match": "артикул", "score": 100, "dup": 1, "prices": [16493, 16493, 16493], "stock": [true, true, true]}, "e2e4": {"offer_id": 88, "sku": "1143216", "title": "SSD ADATA LEGEND 710 1Tb M.2 2280 PCIe 3.0 x4 (ALEG-710-1TCS)", "url": "https://e2e4online.ru/catalog/item/ssd-adata-legend-710-1tb-m-2-2280-pcie-3-0-x4-aleg-1143216/", "match": "артикул", "score": 100, "dup": 1, "prices": [19700, 19700, 19700], "stock": [false, false, false]}, "НИКС": {"offer_id": 89, "sku": "728109", "title": "SSD ADATA LEGEND 710 < ALEG-710-1TCS > (1 Тб, M.2 PCI-E, Gen3 x4, 3D TLC)", "url": "https://www.nix.ru/autocatalog/ssd_a_data/SSD-1-Tb-M2-2280-M-ADATA-LEGEND-710-ALEG-710-1TCS_728109.html", "match": "артикул", "score": 100, "dup": 1, "prices": [18502, 18502, 18502], "stock": [null, null, null]}, "OLDI": {"offer_id": 90, "sku": "02027678", "title": "SSD накопитель ADATA Legend 710 1 Tb PCI-E 3.0 x4 ALEG-710-1TCS", "url": "https://www.oldi.ru/catalog/element/02027678/", "match": "артикул", "score": 100, "dup": 1, "prices": [16820, 16820, 16820], "stock": [null, null, null]}}}, {"id": 19, "mpn": "SLEG860500GCS", "brand": "ADATA", "name": "ADATA Legend 860 500 ГБ", "cap": 500, "offers": {"Регард": {"offer_id": 91, "sku": "724597", "title": "Накопитель SSD 500GB ADATA Legend 860 (SLEG-860-500GCS)", "url": "https://www.regard.ru/product/724597/nakopitel-ssd-500gb-adata-legend-860-sleg-860-500gcs", "match": "артикул", "score": 100, "dup": 1, "prices": [10890, 10890, 10890], "stock": [true, true, true]}, "КНС": {"offer_id": 92, "sku": "749218", "title": "SSD диск ADATA Legend 860 500Gb SLEG-860-500GCS", "url": "https://www.kns.ru/product/ssd-disk-adata-legend-860-500gb-sleg-860-500gcs/", "match": "артикул", "score": 100, "dup": 1, "prices": [10246, 10246, 10246], "stock": [true, true, true]}, "e2e4": {"offer_id": 93, "sku": "1341277", "title": "SSD ADATA Legend 860 500Gb M.2 2280 PCIe 4.0 x4 (SLEG-860-500GCS)", "url": "https://e2e4online.ru/catalog/item/ssd-adata-legend-860-500gb-m-2-2280-pcie-4-0-x4-sleg-1341277/", "match": "артикул", "score": 100, "dup": 1, "prices": [10700, 10700, 10700], "stock": [true, true, true]}, "НИКС": {"offer_id": 94, "sku": "860917", "title": "SSD ADATA LEGEND 860 < SLEG-860-500GCS > (500 Гб, M.2 PCI-E, Gen4 x4, QLC)", "url": "https://www.nix.ru/autocatalog/ssd_a_data/SSD-500-Gb-M2-2280-M-ADATA-LEGEND-860-SLEG-860-500GCS_860917.html", "match": "артикул", "score": 100, "dup": 1, "prices": [11844, 11844, 11844], "stock": [null, null, null]}, "OLDI": {"offer_id": 95, "sku": "02147152", "title": "SSD накопитель ADATA Legend 860 500 Gb PCI-E 4.0 х4 SLEG-860-500GCS", "url": "https://www.oldi.ru/catalog/element/02147152/", "match": "артикул", "score": 100, "dup": 1, "prices": [10470, 10470, 10470], "stock": [null, null, null]}}}, {"id": 20, "mpn": "SLEG900P2TCS", "brand": "ADATA", "name": "ADATA Legend 900 PRO 2 ТБ", "cap": 2000, "offers": {"Регард": {"offer_id": 96, "sku": "739925", "title": "Накопитель SSD 2TB ADATA Legend 900 PRO (SLEG-900P-2TCS)", "url": "https://www.regard.ru/product/739925/nakopitel-ssd-2tb-adata-legend-900-pro-sleg-900p-2tcs", "match": "артикул", "score": 100, "dup": 1, "prices": [33990, 33990, 33990], "stock": [true, true, true]}, "КНС": {"offer_id": 97, "sku": "757924", "title": "SSD диск ADATA Legend 900 Pro 2Tb SLEG-900P-2TCS", "url": "https://www.kns.ru/product/ssd-disk-adata-legend-900-pro-2tb-sleg-900p-2tcs/", "match": "артикул", "score": 100, "dup": 1, "prices": [35861, 35861, 35861], "stock": [true, true, true]}, "e2e4": {"offer_id": 98, "sku": "1370782", "title": "SSD ADATA Legend 900 PRO 2Tb M.2 2280 PCIe 4.0 x4 (SLEG-900P-2TCS)", "url": "https://e2e4online.ru/catalog/item/ssd-adata-legend-900-pro-2tb-m-2-2280-pcie-4-0-x4-1370782/", "match": "артикул", "score": 100, "dup": 1, "prices": [40600, 40600, 40600], "stock": [false, false, false]}, "НИКС": {"offer_id": 99, "sku": "885984", "title": "SSD ADATA LEGEND 900 PRO < SLEG-900P-2TCS > (2 Тб, M.2 PCI-E, Gen4 x4, 3D TLC)", "url": "https://www.nix.ru/autocatalog/ssd_a_data/SSD-2-Tb-M2-2280-M-ADATA-LEGEND-900-PRO-SLEG-900P-2TCS_885984.html", "match": "артикул", "score": 100, "dup": 1, "prices": [38251, 38251, 38251], "stock": [null, null, null]}, "OLDI": {"offer_id": 100, "sku": "02154428", "title": "Накопитель SSD M.2 2280 2TB NVMe PCIE 4.0 x4 7400/6000 SLEG-900P-2TCS ADATA", "url": "https://www.oldi.ru/catalog/element/02154428/", "match": "артикул", "score": 100, "dup": 1, "prices": [36240, 36240, 36240], "stock": [null, null, null]}}}, {"id": 21, "mpn": "AP480GAS340G1", "brand": "Apacer", "name": "Apacer AS340 480 ГБ", "cap": 480, "offers": {"Регард": {"offer_id": 101, "sku": "297769", "title": "Накопитель SSD 480GB Apacer AS340 (AP480GAS340G-1)", "url": "https://www.regard.ru/product/297769/nakopitel-ssd-480gb-apacer-as340-ap480gas340g-1", "match": "артикул", "score": 100, "dup": 1, "prices": [6840, 6840, 6840], "stock": [true, true, true]}, "КНС": {"offer_id": 102, "sku": "578485", "title": "SSD диск Apacer AS340 Panther 480Gb AP480GAS340G-1", "url": "https://www.kns.ru/product/ssd-disk-apacer-ap480gas340g-1/", "match": "артикул", "score": 100, "dup": 1, "prices": [6497, 6497, 6497], "stock": [true, true, true]}, "e2e4": {"offer_id": 103, "sku": "657056", "title": "SSD Apacer AS340 Panther 480Gb 2.5\" SATA3 (AP480GAS340G-1)", "url": "https://e2e4online.ru/catalog/item/ssd-apacer-as340-panther-480gb-2-5-sata3-ap480gas340g-657056/", "match": "артикул", "score": 100, "dup": 1, "prices": [7650, 7650, 7650], "stock": [false, false, false]}, "НИКС": {"offer_id": 104, "sku": "418877", "title": "SSD Apacer AS340 Panther < AP480GAS340G-1 > (480 Гб, 2.5\", SATA, 3D TLC)", "url": "https://www.nix.ru/autocatalog/ssd_apacer/SSD-480-Gb-SATA-6Gb-s-Apacer-AS340-Panther-AP480GAS340G-1-25-3D-TLC_418877.html", "match": "артикул", "score": 100, "dup": 1, "prices": [7003, 7003, 7003], "stock": [null, null, null]}, "OLDI": {"offer_id": 105, "sku": "01822062", "title": "SSD накопитель Apacer AS340 PANTHER 480 Gb SATA-III", "url": "https://www.oldi.ru/catalog/element/01822062/", "match": "нечёткое", "score": 100, "dup": 1, "prices": [6660, 6660, 6660], "stock": [null, null, null]}}}, {"id": 22, "mpn": "AP1TBAS3501", "brand": "Apacer", "name": "Apacer AS350 1 ТБ", "cap": 1000, "offers": {"Регард": {"offer_id": 106, "sku": "387036", "title": "Накопитель SSD 1TB Apacer AS350 (AP1TBAS350-1)", "url": "https://www.regard.ru/product/387036/nakopitel-ssd-1tb-apacer-as350-ap1tbas350-1", "match": "артикул", "score": 100, "dup": 1, "prices": [14200, 14200, 14200], "stock": [true, true, true]}, "КНС": {"offer_id": 107, "sku": "658500", "title": "SSD диск Apacer AS350 Panther 1Tb AP1TBAS350-1", "url": "https://www.kns.ru/product/ssd-disk-apacer-as350-panther-1tb-ap1tbas350-1/", "match": "артикул", "score": 100, "dup": 1, "prices": [13911, 13911, 13911], "stock": [true, true, true]}, "e2e4": {"offer_id": 108, "sku": "1116179", "title": "SSD Apacer AS350 Panther 1Tb 2.5\" SATA3 (AP1TBAS350-1)", "url": "https://e2e4online.ru/catalog/item/ssd-apacer-as350-panther-1tb-2-5-sata3-ap1tbas350-1116179/", "match": "артикул", "score": 100, "dup": 1, "prices": [15800, 15800, 15800], "stock": [false, false, false]}, "НИКС": {"offer_id": 109, "sku": "598351", "title": "SSD Apacer AS350 Panther < AP1TBAS350-1 > (1 Тб, 2.5\", SATA, 3D TLC)", "url": "https://www.nix.ru/autocatalog/ssd_apacer/SSD-1-Tb-SATA-6Gb-s-Apacer-AS350-Panther-AP1TBAS350-1-25-3D-TLC_598351.html", "match": "артикул", "score": 100, "dup": 1, "prices": [15706, 15706, 15706], "stock": [null, null, null]}, "OLDI": {"offer_id": 110, "sku": "01952717", "title": "Твердотельный накопитель Apacer Panther AS350 ver. 2.0, 2.5\" SATA III, 3D TLC, 1 ТБ", "url": "https://www.oldi.ru/catalog/element/01952717/", "match": "нечёткое", "score": 94, "dup": 1, "prices": [13650, 13650, 13650], "stock": [null, null, null]}}}, {"id": 23, "mpn": "NT01SA500256S3X", "brand": "Netac", "name": "Netac SA500 256 ГБ", "cap": 256, "offers": {"Регард": {"offer_id": 111, "sku": "442523", "title": "Накопитель SSD 256GB Netac SA500 (NT01SA500-256-S3X)", "url": "https://www.regard.ru/product/442523/nakopitel-ssd-256gb-netac-sa500-nt01sa500-256-s3x", "match": "артикул", "score": 100, "dup": 1, "prices": [4340, 4340, 4340], "stock": [true, true, true]}, "КНС": {"offer_id": 112, "sku": "679912", "title": "SSD диск Netac SA500 256Gb NT01SA500-256-S3X", "url": "https://www.kns.ru/product/ssd-disk-netac-sa500-256gb-nt01sa500-256-s3x/", "match": "артикул", "score": 100, "dup": 1, "prices": [4040, 4040, 4040], "stock": [true, true, true]}, "e2e4": {"offer_id": 113, "sku": "1098887", "title": "SSD Netac SA500 256Gb 2.5\" SATA3 (NT01SA500-256-S3X)", "url": "https://e2e4online.ru/catalog/item/ssd-netac-sa500-256gb-2-5-sata3-nt01sa500-256-s3x-1098887/", "match": "артикул", "score": 100, "dup": 1, "prices": [5175, 5175, 5175], "stock": [true, true, true]}, "НИКС": {"offer_id": 114, "sku": "668575", "title": "SSD Netac SA500 < NT01SA500-256-S3X > (256 Гб, 2.5\", SATA)", "url": "https://www.nix.ru/autocatalog/ssd_netac/SSD-256-Gb-SATA-6Gb-s-Netac-SA500-NT01SA500-256-S3X-25_668575.html", "match": "артикул", "score": 100, "dup": 1, "prices": [5110, 5110, 5110], "stock": [null, null, null]}, "OLDI": {"offer_id": 115, "sku": "02008759", "title": "Накопитель SSD Netac SATA III 256Gb NT01SA500-256-S3X SA500 2.5\"", "url": "https://www.oldi.ru/catalog/element/02008759/", "match": "артикул", "score": 100, "dup": 1, "prices": [4000, 4000, 4000], "stock": [null, null, null]}}}, {"id": 24, "mpn": "NT01SA500512S3X", "brand": "Netac", "name": "Netac SA500 512 ГБ", "cap": 512, "offers": {"Регард": {"offer_id": 116, "sku": "442525", "title": "Накопитель SSD 512GB Netac SA500 (NT01SA500-512-S3X)", "url": "https://www.regard.ru/product/442525/nakopitel-ssd-512gb-netac-sa500-nt01sa500-512-s3x", "match": "артикул", "score": 100, "dup": 1, "prices": [7470, 7470, 7470], "stock": [true, true, true]}, "КНС": {"offer_id": 117, "sku": "679358", "title": "SSD диск Netac SA500 512Gb NT01SA500-512-S3X", "url": "https://www.kns.ru/product/ssd-disk-netac-sa500-512gb-nt01sa500-512-s3x/", "match": "артикул", "score": 100, "dup": 1, "prices": [7330, 7330, 7330], "stock": [true, true, true]}, "e2e4": {"offer_id": 118, "sku": "1095951", "title": "SSD Netac SA500 512Gb 2.5\" SATA3 (NT01SA500-512-S3X)", "url": "https://e2e4online.ru/catalog/item/ssd-netac-sa500-512gb-2-5-sata3-nt01sa500-512-s3x-1095951/", "match": "артикул", "score": 100, "dup": 1, "prices": [7350, 7350, 7350], "stock": [true, true, true]}, "НИКС": {"offer_id": 119, "sku": "668616", "title": "SSD Netac SA500 < NT01SA500-512-S3X > (512 Гб, 2.5\", SATA)", "url": "https://www.nix.ru/autocatalog/ssd_netac/SSD-512-Gb-SATA-6Gb-s-Netac-SA500-NT01SA500-512-S3X-25_668616.html", "match": "артикул", "score": 100, "dup": 1, "prices": [7804, 7804, 7804], "stock": [null, null, null]}, "OLDI": {"offer_id": 120, "sku": "02014717", "title": "SSD накопитель Netac SA500 512 Gb SATA-III", "url": "https://www.oldi.ru/catalog/element/02014717/", "match": "нечёткое", "score": 100, "dup": 1, "prices": [7830, 7830, 7830], "stock": [null, null, null]}}}, {"id": 25, "mpn": "NT01NV2000256E4X", "brand": "Netac", "name": "Netac NV2000 256 ГБ", "cap": 256, "offers": {"Регард": {"offer_id": 121, "sku": "7961", "title": "Накопитель SSD 256GB Netac NV2000 (NT01NV2000-256-E4X)", "url": "https://www.regard.ru/product/7961/nakopitel-ssd-256gb-netac-nv2000-nt01nv2000-256-e4x", "match": "артикул", "score": 100, "dup": 1, "prices": [5790, 5790, 5790], "stock": [true, true, true]}, "КНС": {"offer_id": 122, "sku": "659522", "title": "SSD диск Netac NV2000 256Gb NT01NV2000-256-E4X", "url": "https://www.kns.ru/product/ssd-disk-netac-nv2000-256gb-nt01nv2000-256-e4x/", "match": "артикул", "score": 100, "dup": 1, "prices": [5331, 5331, 5331], "stock": [true, true, true]}, "e2e4": {"offer_id": 123, "sku": "937903", "title": "SSD Netac NV2000 256Gb M.2 2280 PCIe 3.0 x4 (NT01NV2000-256-E4X)", "url": "https://e2e4online.ru/catalog/item/ssd-netac-nv2000-256gb-m-2-2280-pcie-3-0-x4-nt01nv2000-937903/", "match": "артикул", "score": 100, "dup": 1, "prices": [5925, 5925, 5925], "stock": [false, false, false]}, "НИКС": {"offer_id": 124, "sku": "533363", "title": "SSD Netac NV2000 < NT01NV2000-256-E4X > (256 Гб, M.2 PCI-E, Gen3 x4)", "url": "https://www.nix.ru/autocatalog/ssd_netac/SSD-256-Gb-M2-2280-M-Netac-NV2000-NT01NV2000-256-E4X_533363.html", "match": "артикул", "score": 100, "dup": 1, "prices": [6237, 6237, 6237], "stock": [null, null, null]}, "OLDI": {"offer_id": 125, "sku": "01961986", "title": "Твердотельный накопитель SSD M.2 Netac 256Gb NV2000 Series <NT01NV2000-256-E4X> Retail (PCI-E 3.1 x4, up to 2500/1000MBs, 3D NAND, 150TBW, NVMe 1.4, 22х80mm)", "url": "https://www.oldi.ru/catalog/element/01961986/", "match": "артикул", "score": 100, "dup": 1, "prices": [5410, 5410, 5410], "stock": [null, null, null]}}}, {"id": 26, "mpn": "NT01N930E512GE4X", "brand": "Netac", "name": "Netac N930E Pro 512 ГБ", "cap": 512, "offers": {"Регард": {"offer_id": 126, "sku": "8216", "title": "Накопитель SSD 512GB Netac N930E Pro (NT01N930E-512G-E4X)", "url": "https://www.regard.ru/product/8216/nakopitel-ssd-512gb-netac-n930e-pro-nt01n930e-512g-e4x", "match": "артикул", "score": 100, "dup": 1, "prices": [9410, 9410, 9410], "stock": [true, true, true]}, "КНС": {"offer_id": 127, "sku": "631355", "title": "SSD диск Netac N930E Pro 512Gb NT01N930E-512G-E4X", "url": "https://www.kns.ru/product/ssd-disk-netac-n930e-pro-512gb-nt01n930e-512g-e4x/", "match": "артикул", "score": 100, "dup": 1, "prices": [8871, 8871, 8871], "stock": [true, true, true]}, "e2e4": {"offer_id": 128, "sku": "792489", "title": "SSD Netac N930E Pro 512Gb M.2 2280 PCIe 3.0 x4 (NT01N930E-512G-E4X)", "url": "https://e2e4online.ru/catalog/item/ssd-netac-n930e-pro-512gb-m-2-2280-pcie-3-0-x4-nt01n930e-792489/", "match": "артикул", "score": 100, "dup": 1, "prices": [10400, 10400, 10400], "stock": [true, true, true]}, "НИКС": {"offer_id": 129, "sku": "475294", "title": "SSD Netac N930E Pro < NT01N930E-512G-E4X > (512 Гб, M.2 PCI-E, Gen3 x4, 3D TLC)", "url": "https://www.nix.ru/autocatalog/ssd_netac/SSD-512-Gb-M2-2280-M-Netac-N930E-Pro-NT01N930E-512G-E4X-RTL_475294.html", "match": "артикул", "score": 100, "dup": 1, "prices": [9168, 9168, 9168], "stock": [null, null, null]}, "OLDI": {"offer_id": 130, "sku": "01374888", "title": "SSD накопитель Netac N930E Pro 512 Gb PCI-E 3.0 x4", "url": "https://www.oldi.ru/catalog/element/01374888/", "match": "нечёткое", "score": 100, "dup": 1, "prices": [8970, 8970, 8970], "stock": [null, null, null]}}}, {"id": 27, "mpn": "PBE240GS25SSDR", "brand": "Patriot", "name": "Patriot Burst Elite 240 ГБ", "cap": 240, "offers": {"Регард": {"offer_id": 131, "sku": "379297", "title": "Накопитель SSD 240GB Patriot Burst Elite (PBE240GS25SSDR)", "url": "https://www.regard.ru/product/379297/nakopitel-ssd-240gb-patriot-burst-elite-pbe240gs25ssdr", "match": "артикул", "score": 100, "dup": 1, "prices": [4380, 4380, 4380], "stock": [true, true, true]}, "КНС": {"offer_id": 132, "sku": "643887", "title": "SSD диск Patriot Burst Elite 240Gb PBE240GS25SSDR", "url": "https://www.kns.ru/product/ssd-disk-patriot-burst-elite-240gb-pbe240gs25ssdr/", "match": "артикул", "score": 100, "dup": 1, "prices": [4082, 4082, 4082], "stock": [true, true, true]}, "e2e4": {"offer_id": 133, "sku": "848813", "title": "SSD Patriot BURST ELITE 240Gb 2.5\" SATA3 (PBE240GS25SSDR)", "url": "https://e2e4online.ru/catalog/item/ssd-patriot-burst-elite-240gb-2-5-sata3-pbe240gs-848813/", "match": "артикул", "score": 100, "dup": 1, "prices": [4800, 4800, 4800], "stock": [false, false, false]}, "НИКС": {"offer_id": 134, "sku": "499138", "title": "SSD Patriot Burst Elite < PBE240GS25SSDR > (240 Гб, 2.5\", SATA, 3D TLC)", "url": "https://www.nix.ru/autocatalog/ssd_patriot/SSD-240-Gb-SATA-6Gb-s-Patriot-Burst-Elite-PBE240GS25SSDR-25-3D-QLC_499138.html", "match": "артикул", "score": 100, "dup": 1, "prices": [3971, 3971, 3971], "stock": [null, null, null]}, "OLDI": {"offer_id": 135, "sku": "01931368", "title": "SSD накопитель Patriot Burst Elite 240 Gb SATA-III", "url": "https://www.oldi.ru/catalog/element/01931368/", "match": "нечёткое", "score": 100, "dup": 1, "prices": [4080, 4080, 4080], "stock": [null, null, null]}}}, {"id": 28, "mpn": "PBE480GS25SSDR", "brand": "Patriot", "name": "Patriot Burst Elite 480 ГБ", "cap": 480, "offers": {"Регард": {"offer_id": 136, "sku": "380417", "title": "Накопитель SSD 480GB Patriot Burst Elite (PBE480GS25SSDR)", "url": "https://www.regard.ru/product/380417/nakopitel-ssd-480gb-patriot-burst-elite-pbe480gs25ssdr", "match": "артикул", "score": 100, "dup": 1, "prices": [7220, 7220, 7220], "stock": [true, true, true]}, "КНС": {"offer_id": 137, "sku": "643888", "title": "SSD диск Patriot Burst Elite 480Gb PBE480GS25SSDR", "url": "https://www.kns.ru/product/ssd-disk-patriot-burst-elite-480gb-pbe480gs25ssdr/", "match": "артикул", "score": 100, "dup": 1, "prices": [6872, 6872, 6872], "stock": [true, true, true]}, "e2e4": {"offer_id": 138, "sku": "851452", "title": "SSD Patriot BURST ELITE 480Gb 2.5\" SATA3 (PBE480GS25SSDR)", "url": "https://e2e4online.ru/catalog/item/ssd-patriot-burst-elite-480gb-2-5-sata3-pbe480gs-851452/", "match": "артикул", "score": 100, "dup": 1, "prices": [7898, 7898, 7898], "stock": [false, false, false]}, "НИКС": {"offer_id": 139, "sku": "495516", "title": "SSD Patriot Burst Elite < PBE480GS25SSDR > (480 Гб, 2.5\", SATA)", "url": "https://www.nix.ru/autocatalog/ssd_patriot/SSD-480-Gb-SATA-6Gb-s-Patriot-Burst-Elite-PBE480GS25SSDR-25_495516.html", "match": "артикул", "score": 100, "dup": 1, "prices": [6914, 6914, 6914], "stock": [null, null, null]}, "OLDI": {"offer_id": 140, "sku": "01931369", "title": "SSD накопитель Patriot Burst Elite 480 Gb SATA-III", "url": "https://www.oldi.ru/catalog/element/01931369/", "match": "нечёткое", "score": 100, "dup": 1, "prices": [7030, 7030, 7030], "stock": [null, null, null]}}}, {"id": 29, "mpn": "P300P512GM28", "brand": "Patriot", "name": "Patriot P300 512 ГБ", "cap": 512, "offers": {"Регард": {"offer_id": 141, "sku": "345242", "title": "Накопитель SSD 512GB Patriot P300 (P300P512GM28) RTL", "url": "https://www.regard.ru/product/345242/nakopitel-ssd-512gb-patriot-p300-p300p512gm28-rtl", "match": "артикул", "score": 100, "dup": 1, "prices": [9550, 9550, 9550], "stock": [true, true, true]}, "КНС": {"offer_id": 142, "sku": "618132", "title": "SSD диск Patriot P300 512Gb P300P512GM28", "url": "https://www.kns.ru/product/ssd-disk-patriot-p300-512gb-p300p512gm28/", "match": "артикул", "score": 100, "dup": 1, "prices": [9413, 9413, 9413], "stock": [true, true, true]}, "e2e4": {"offer_id": 143, "sku": "739189", "title": "SSD Patriot P300 512Gb M.2 2280 PCIe 3.0 x4 (P300P512GM28)", "url": "https://e2e4online.ru/catalog/item/ssd-patriot-p300-512gb-m-2-2280-pcie-3-0-x4-p300-739189/", "match": "артикул", "score": 100, "dup": 1, "prices": [11000, 11000, 11000], "stock": [false, false, false]}, "НИКС": {"offer_id": 144, "sku": "456970", "title": "SSD Patriot P300 < P300P512GM28 > (512 Гб, M.2 PCI-E, Gen3 x4, QLC)", "url": "https://www.nix.ru/autocatalog/ssd_patriot/SSD-512-Gb-M2-2280-M-Patriot-P300-P300P512GM28-3D-TLC_456970.html", "match": "артикул", "score": 100, "dup": 1, "prices": [10070, 10070, 10070], "stock": [null, null, null]}, "OLDI": {"offer_id": 145, "sku": "0725274", "title": "SSD накопитель PATRIOT P300 512 Gb PCI-E 3.0 x4", "url": "https://www.oldi.ru/catalog/element/0725274/", "match": "нечёткое", "score": 94, "dup": 1, "prices": [9940, 9940, 9940], "stock": [null, null, null]}}}, {"id": 30, "mpn": "P320P1TBM28", "brand": "Patriot", "name": "Patriot P320 1 ТБ", "cap": 1000, "offers": {"Регард": {"offer_id": 146, "sku": "708796", "title": "Накопитель SSD 1TB Patriot P320 (P320P1TBM28)", "url": "https://www.regard.ru/product/708796/nakopitel-ssd-1tb-patriot-p320-p320p1tbm28", "match": "артикул", "score": 100, "dup": 1, "prices": [16420, 16420, 16420], "stock": [true, true, true]}, "КНС": {"offer_id": 147, "sku": "738325", "title": "SSD диск Patriot P320 1Tb P320P1TBM28", "url": "https://www.kns.ru/product/ssd-disk-patriot-p320-1tb-p320p1tbm28/", "match": "артикул", "score": 100, "dup": 1, "prices": [16035, 16035, 16035], "stock": [true, true, true]}, "e2e4": {"offer_id": 148, "sku": "1331145", "title": "SSD Patriot P320 1Tb M.2 2280 PCIe 3.0 x4 (P320P1TBM28)", "url": "https://e2e4online.ru/catalog/item/ssd-patriot-p320-1tb-m-2-2280-pcie-3-0-x4-p320p1-1331145/", "match": "артикул", "score": 100, "dup": 2, "prices": [18600, 18600, 18600], "stock": [false, false, false]}, "НИКС": {"offer_id": 149, "sku": "829568", "title": "SSD Patriot P320 < P320P1TBM28 > (1 Тб, M.2 PCI-E, Gen3 x4)", "url": "https://www.nix.ru/autocatalog/ssd_patriot/SSD-1-Tb-M2-2280-M-Patriot-P320-P320P1TBM28-3D-TLC_829568.html", "match": "артикул", "score": 100, "dup": 1, "prices": [15549, 15537, 15537], "stock": [null, null, null]}, "OLDI": {"offer_id": 150, "sku": "02136537", "title": "SSD накопитель PATRIOT P320 1 Tb PCI-E 3.0 x4", "url": "https://www.oldi.ru/catalog/element/02136537/", "match": "нечёткое", "score": 100, "dup": 1, "prices": [16020, 16020, 16020], "stock": [null, null, null]}}}], "stats": {"positions": 2143, "offers": 150, "by_mpn": 134, "fuzzy": 16, "groups_all": 893}};
+const META = {"collectSec": 101, "dbRows": 2776, "elapsed": "1 ч 25 мин", "elapsedNote": "включая ожидание между повторными прогонами сбора"};
+const SH = D.shops, NR = D.runs.length;
+let cur = NR - 1;
+const sel = new Set(D.products.map(p => p.id));
+let sortKey = "spread", sortAsc = false;
+const $ = s => document.querySelector(s);
+const fmt = n => n == null ? "—" : Math.round(n).toLocaleString("ru-RU") + "\u00A0₽";
+const fnum = n => Math.round(n).toLocaleString("ru-RU");
+const pct = n => (n >= 0 ? "+" : "−") + Math.abs(n).toFixed(1).replace(".", ",") + "%";
+const dtm = iso => { const d = new Date(iso); return d.toLocaleDateString("ru-RU", {day:"2-digit", month:"long", timeZone:"Europe/Moscow"}) + ", " + d.toLocaleTimeString("ru-RU", {hour:"2-digit", minute:"2-digit", timeZone:"Europe/Moscow"}); };
+const tm = iso => new Date(iso).toLocaleTimeString("ru-RU", {hour:"2-digit", minute:"2-digit", timeZone:"Europe/Moscow"});
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const dur = sec => sec >= 3600 ? Math.floor(sec/3600) + " ч " + Math.round(sec%3600/60) + " мин" : sec >= 90 ? Math.round(sec/60) + " мин" : sec + " с";
+
+const priceAt = (o, r) => o ? o.prices[r] : null;
+const availAt = (o, r) => o && o.prices[r] != null && o.stock[r] !== false;
+function info(p, r) {
+  let av = [], all = [];
+  SH.forEach(s => { const o = p.offers[s]; const v = priceAt(o, r); if (v == null) return; all.push([s, v]); if (availAt(o, r)) av.push([s, v]); });
+  const base = av.length ? av : all;
+  if (!base.length) return {min: null, max: null, wins: [], sp: 0, spR: 0};
+  const min = Math.min(...base.map(x => x[1])), max = Math.max(...base.map(x => x[1]));
+  return {min, max, wins: base.filter(x => x[1] === min).map(x => x[0]), sp: (max - min) / min * 100, spR: max - min};
+}
+
+/* --- шапка и цифры --- */
+function head() {
+  const r0 = D.runs[0], rl = D.runs[NR - 1];
+  $("#stamp").innerHTML = "<span>Снимок цен: <b>" + dtm(r0.started) + " (МСК)</b></span>" +
+    (NR > 1 ? "<span>Последний прогон: <b>" + dtm(rl.started) + "</b></span>" : "") +
+    "<span>Прогонов: <b>" + NR + "</b></span>";
+  const st = D.stats, shops = SH.length;
+  const k = [
+    [D.products.length, "", "одинаковых моделей SSD найдено сразу в пяти магазинах"],
+    [shops, "", "интернет-магазинов опрошено: " + SH.join(", ")],
+    [fnum(st.offers), "", "цен в таблице; из " + fnum(st.positions) + " собранных позиций каталога"],
+    [dur(META.collectSec), "", "ушло на сбор одного прогона со всех сайтов, с паузами между запросами"]
+  ];
+  $("#kpis").innerHTML = k.map(x => '<div class="kpi"><div class="v num">' + x[0] + '<small>' + x[1] + '</small></div><div class="t">' + x[2] + '</div></div>').join("");
+}
+
+/* --- таблица --- */
+function runSeg() {
+  $("#runSeg").innerHTML = D.runs.map((r, i) => '<button type="button" data-r="' + i + '" aria-pressed="' + (i === cur) + '">Прогон ' + (i + 1) + ' · ' + tm(r.started) + '</button>').join("");
+  document.querySelectorAll("#runSeg button").forEach(b => b.onclick = () => { cur = +b.dataset.r; runSeg(); renderAll(); });
+}
+function brands() {
+  const bs = [...new Set(D.products.map(p => p.brand))].sort();
+  $("#brand").innerHTML = '<option value="">Все бренды</option>' + bs.map(b => '<option>' + esc(b) + '</option>').join("");
+}
+function rowsData() {
+  const q = $("#q").value.trim().toLowerCase(), b = $("#brand").value, hi = $("#onlyHi").checked;
+  let rows = D.products.map(p => ({p, i: info(p, cur)}));
+  rows = rows.filter(x => (!q || (x.p.name + " " + x.p.mpn + " " + x.p.brand).toLowerCase().includes(q)) && (!b || x.p.brand === b) && (!hi || x.i.sp > 15));
+  const key = sortKey;
+  rows.sort((a, c) => {
+    let va, vc;
+    if (key === "name") { va = a.p.name; vc = c.p.name; return sortAsc ? va.localeCompare(vc, "ru") : vc.localeCompare(va, "ru"); }
+    if (key === "spread") { va = a.i.sp; vc = c.i.sp; }
+    else if (key === "min") { va = a.i.min; vc = c.i.min; }
+    else { va = priceAt(a.p.offers[key], cur); vc = priceAt(c.p.offers[key], cur); if (va == null) va = Infinity; if (vc == null) vc = Infinity; }
+    return sortAsc ? va - vc : vc - va;
+  });
+  return rows;
+}
+function renderTable() {
+  const th = [['<th class="sel-c"><input type="checkbox" id="chkAll" aria-label="Отметить все видимые"></th>'],
+    ['<th class="l name' + (sortKey === "name" ? " on" + (sortAsc ? " asc" : "") : "") + '" data-k="name">Модель</th>']];
+  SH.forEach(s => th.push('<th class="' + (sortKey === s ? "on" + (sortAsc ? " asc" : "") : "") + '" data-k="' + s + '">' + esc(s) + '</th>'));
+  th.push('<th class="l">Дешевле всего</th>');
+  th.push('<th class="' + (sortKey === "spread" ? "on" + (sortAsc ? " asc" : "") : "") + '" data-k="spread">Разброс</th>');
+  $("#pt thead").innerHTML = "<tr>" + th.join("") + "</tr>";
+  const rows = rowsData();
+  $("#pt tbody").innerHTML = rows.map(({p, i}) => {
+    const tds = SH.map(s => {
+      const o = p.offers[s];
+      const v = priceAt(o, cur);
+      if (v == null) return '<td class="price na">нет в выгрузке</td>';
+      const isMin = availAt(o, cur) && v === i.min || (!SH.some(x => availAt(p.offers[x], cur)) && v === i.min);
+      let ch = "";
+      if (cur > 0) { const pv = priceAt(o, cur - 1); if (pv != null && pv !== v) { const d = v - pv; ch = '<span class="chg ' + (d > 0 ? "up" : "dn") + '">' + (d > 0 ? "▲ +" : "▼ −") + fnum(Math.abs(d)) + '</span>'; } }
+      const fz = o.match !== "артикул" ? '<span class="fz" title="Сопоставлено по названию: в названии у магазина нет артикула. Уверенность ' + o.score + '%">≈</span>' : "";
+      const off = o.stock[cur] === false;
+      return '<td class="price' + (isMin ? " min" : "") + (off ? " off" : "") + '"><a href="' + esc(o.url) + '" target="_blank" rel="noopener" title="' + esc(o.title) + (off ? " (под заказ)" : "") + '">' + fnum(v) + '</a>' + fz + ch + '</td>';
+    }).join("");
+    return '<tr><td class="sel-c"><input type="checkbox" data-id="' + p.id + '"' + (sel.has(p.id) ? " checked" : "") + ' aria-label="В корзину"></td>' +
+      '<td class="l name"><span class="nm">' + esc(p.name) + '</span><span class="mp">' + esc(p.mpn) + '</span></td>' + tds +
+      '<td class="who">' + esc(i.wins.join(", ")) + '</td>' +
+      '<td class="sp ' + (i.sp > 15 ? "hi" : "") + '">' + i.sp.toFixed(1).replace(".", ",") + '%<small>' + fmt(i.spR) + '</small></td></tr>';
+  }).join("") || '<tr><td colspan="9" class="l" style="padding:24px">Ничего не найдено</td></tr>';
+  document.querySelectorAll("#pt th[data-k]").forEach(h => h.onclick = () => { const k = h.dataset.k; if (sortKey === k) sortAsc = !sortAsc; else { sortKey = k; sortAsc = k === "name" || (k !== "spread"); } renderTable(); });
+  document.querySelectorAll("#pt tbody input[data-id]").forEach(c => c.onchange = () => { const id = +c.dataset.id; c.checked ? sel.add(id) : sel.delete(id); renderBasket(); });
+  const ca = $("#chkAll"); ca.checked = rows.length && rows.every(x => sel.has(x.p.id));
+  ca.onchange = () => { rows.forEach(x => ca.checked ? sel.add(x.p.id) : sel.delete(x.p.id)); renderTable(); renderBasket(); };
+}
+
+/* --- корзина --- */
+let chB;
+function renderBasket() {
+  const S = D.products.filter(p => sel.has(p.id));
+  $("#selCnt").textContent = "Отмечено моделей: " + S.length + " из " + D.products.length;
+  const tot = {};
+  SH.forEach(s => { let t = 0, miss = 0, off = 0; S.forEach(p => { const o = p.offers[s], v = priceAt(o, cur); if (v == null) miss++; else { t += v; if (o.stock[cur] === false) off++; } }); tot[s] = {t, miss, off}; });
+  const full = SH.filter(s => tot[s].miss === 0 && S.length);
+  const order = [...SH].sort((a, b) => (tot[a].miss - tot[b].miss) || (tot[a].t - tot[b].t));
+  const best = full.length ? full.slice().sort((a, b) => tot[a].t - tot[b].t)[0] : null;
+  const bestT = best ? tot[best].t : null;
+  $("#bk").innerHTML = SH.map(s => {
+    const rank = order.indexOf(s) + 1, x = tot[s];
+    const diff = best && x.miss === 0 && s !== best ? "на " + fnum(x.t - bestT) + " ₽ дороже (" + pct((x.t - bestT) / bestT * 100) + ")" : (s === best ? "самая низкая сумма" : "");
+    const extra = x.miss ? "нет " + x.miss + " поз. в выгрузке" : (x.off ? "из них «под заказ»: " + x.off : "");
+    return '<div class="c' + (s === best ? " best" : "") + '"><span class="rk">' + rank + ' место</span><div class="s">' + esc(s) + '</div><div class="t num">' + (S.length ? fnum(x.t) + "&nbsp;₽" : "—") + '</div><div class="d">' + diff + '</div><div class="d">' + extra + '</div></div>';
+  }).join("");
+  // по минимумам
+  let mins = 0, shopsUsed = new Set(), cnt = 0;
+  S.forEach(p => { const i = info(p, cur); if (i.min != null) { mins += i.min; cnt++; i.wins.slice(0, 1).forEach(w => shopsUsed.add(w)); } });
+  const worstFull = full.length ? Math.max(...full.map(s => tot[s].t)) : null;
+  if (!S.length) { $("#verdict").innerHTML = "<div><h3>Отметьте модели в таблице</h3><p>Корзина считается по отмеченным строкам.</p></div><div></div>"; }
+  else {
+    const sav1 = best ? bestT - mins : 0;
+    $("#verdict").innerHTML = '<div><h3>' + (best ? "Одним заказом выгоднее всего в магазине «" + esc(best) + "»" : "Ни в одном магазине нет всех отмеченных моделей") + '</h3><p>' +
+      (best ? "Это " + fnum(bestT) + " ₽ за " + S.length + " мод. Самый дорогой магазин из полных корзин: " + fnum(worstFull) + " ₽, разница " + fnum(worstFull - bestT) + " ₽ (" + pct((worstFull - bestT) / bestT * 100) + "). " : "") +
+      "Если брать каждую модель там, где она дешевле, корзина выйдет " + fnum(mins) + " ₽, но придётся заказывать в " + shopsUsed.size + " магазинах" + (best ? ": экономия против лучшего одного магазина " + fnum(sav1) + " ₽ (" + (sav1 / bestT * 100).toFixed(1).replace(".", ",") + "%)." : ".") + '</p></div>' +
+      '<div><div class="big num">' + fnum(mins) + ' ₽</div><p>корзина «по минимумам» из ' + cnt + ' мод., без учёта доставки</p></div>';
+  }
+  $("#bkNote").textContent = "Только товары, цены которых есть в выгрузке. Доставка и бонусы магазинов не учтены.";
+  const lab = SH.slice(), dat = SH.map(s => S.length ? tot[s].t : 0);
+  const cols = SH.map(s => s === best ? "#0E7C66" : "#8FA3BF");
+  if (chB) chB.destroy();
+  chB = new Chart($("#chBasket"), {type: "bar", data: {labels: lab, datasets: [{data: dat, backgroundColor: cols, borderRadius: 6}]},
+    options: {indexAxis: "y", maintainAspectRatio: false, plugins: {legend: {display: false}, tooltip: {callbacks: {label: c => fnum(c.parsed.x) + " ₽"}}}, scales: {x: {beginAtZero: true, ticks: {callback: v => fnum(v)}}, y: {grid: {display: false}}}}});
+}
+
+/* --- разброс --- */
+let chW, chP, chT;
+function renderSpread() {
+  const wins = {}, prem = {}, pc = {};
+  SH.forEach(s => { wins[s] = 0; prem[s] = 0; pc[s] = 0; });
+  D.products.forEach(p => { const i = info(p, cur); i.wins.forEach(w => wins[w]++); SH.forEach(s => { const v = priceAt(p.offers[s], cur); if (v != null && i.min) { prem[s] += (v - i.min) / i.min * 100; pc[s]++; } }); });
+  const mk = (id, old, cfg) => { if (old) old.destroy(); return new Chart($(id), cfg); };
+  chW = mk("#chWins", chW, {type: "bar", data: {labels: SH, datasets: [{data: SH.map(s => wins[s]), backgroundColor: "#0E7C66", borderRadius: 6}]}, options: {maintainAspectRatio: false, plugins: {legend: {display: false}}, scales: {y: {beginAtZero: true, ticks: {precision: 0}}, x: {grid: {display: false}}}}});
+  chP = mk("#chPrem", chP, {type: "bar", data: {labels: SH, datasets: [{data: SH.map(s => pc[s] ? +(prem[s] / pc[s]).toFixed(1) : 0), backgroundColor: "#C0572B", borderRadius: 6}]}, options: {maintainAspectRatio: false, plugins: {legend: {display: false}, tooltip: {callbacks: {label: c => c.parsed.y.toString().replace(".", ",") + "%"}}}, scales: {y: {beginAtZero: true, ticks: {callback: v => v + "%"}}, x: {grid: {display: false}}}}});
+  const top = D.products.map(p => ({p, i: info(p, cur)})).sort((a, b) => b.i.sp - a.i.sp).slice(0, 10);
+  chT = mk("#chTop", chT, {type: "bar", data: {labels: top.map(x => x.p.name), datasets: [{data: top.map(x => +x.i.sp.toFixed(1)), backgroundColor: "#0F1B2D", borderRadius: 6}]}, options: {indexAxis: "y", maintainAspectRatio: false, plugins: {legend: {display: false}, tooltip: {callbacks: {label: c => c.parsed.x.toString().replace(".", ",") + "%  (" + fnum(top[c.dataIndex].i.spR) + " ₽ между лучшей и худшей ценой)"}}}, scales: {x: {beginAtZero: true, ticks: {callback: v => v + "%"}}, y: {grid: {display: false}}}}});
+}
+
+/* --- динамика --- */
+let chD;
+function renderDynamics() {
+  const r0 = D.runs[0], rl = D.runs[NR - 1];
+  const spanSec = (new Date(rl.started) - new Date(r0.started)) / 1000;
+  $("#dynP").textContent = NR > 1 ? "Сбор был запущен " + NR + " раза подряд с интервалом около " + dur(Math.round(spanSec / (NR - 1) / 60) * 60) + ". Так видно, как цены меняются между прогонами и как система помечает изменения." : "Пока сделан один прогон.";
+  $("#runsT").innerHTML = '<tr><th>№</th><th>Начало (МСК)</th><th class="r">Длительность</th><th class="r">Позиций</th></tr>' + D.runs.map((r, i) => '<tr><td>' + (i + 1) + '</td><td>' + dtm(r.started) + '</td><td class="r">' + dur(r.duration) + '</td><td class="r num">' + fnum(r.positions) + '</td></tr>').join("");
+  const labs = D.runs.map((r, i) => (i + 1) + " · " + tm(r.started));
+  const ds = SH.map((s, k) => ({label: s, data: D.runs.map((r, ri) => { let t = 0; for (const p of D.products) { const v = priceAt(p.offers[s], ri); if (v == null) return null; t += v; } return t; }), borderWidth: 2.5, tension: .25, pointRadius: 5, borderColor: ["#0E7C66", "#0F1B2D", "#C0572B", "#6B7FA3", "#C79A1B"][k], backgroundColor: ["#0E7C66", "#0F1B2D", "#C0572B", "#6B7FA3", "#C79A1B"][k]}));
+  if (chD) chD.destroy();
+  chD = new Chart($("#chDyn"), {type: "line", data: {labels: labs, datasets: ds}, options: {maintainAspectRatio: false, plugins: {legend: {position: "bottom"}, tooltip: {callbacks: {label: c => c.dataset.label + ": " + (c.parsed.y == null ? "нет данных" : fnum(c.parsed.y) + " ₽")}}}, scales: {y: {ticks: {callback: v => fnum(v)}}, x: {grid: {display: false}}}}});
+  $("#dynNote").textContent = "Сумма цен всех " + D.products.length + " моделей в каждом магазине. Если линия прямая, цены не менялись.";
+  // изменения
+  const ch = [];
+  for (let r = 1; r < NR; r++) D.products.forEach(p => SH.forEach(s => { const a = priceAt(p.offers[s], r - 1), b = priceAt(p.offers[s], r); if (a != null && b != null && a !== b) ch.push({r, p, s, a, b}); }));
+  if (!ch.length) $("#chgBox").innerHTML = '<p style="margin:0;color:var(--muted)">За время между прогонами ни одна из ' + (D.products.length * SH.length) + ' цен не изменилась. Магазины меняют цены не каждый час, поэтому на таком коротком окне это нормально. Пометки «▲ ▼» в таблице появятся сами, как только цена сдвинется.</p>';
+  else $("#chgBox").innerHTML = '<table class="sm"><tr><th>Прогон</th><th>Модель</th><th>Магазин</th><th class="r">Было</th><th class="r">Стало</th><th class="r">Изменение</th></tr>' +
+    ch.map(c => '<tr><td>' + (c.r) + ' → ' + (c.r + 1) + '</td><td>' + esc(c.p.name) + '</td><td>' + esc(c.s) + '</td><td class="r num">' + fnum(c.a) + '</td><td class="r num">' + fnum(c.b) + '</td><td class="r num" style="font-weight:800;color:' + (c.b > c.a ? "var(--up)" : "var(--down)") + '">' + (c.b > c.a ? "▲ " : "▼ ") + pct((c.b - c.a) / c.a * 100) + '</td></tr>').join("") + '</table>';
+  $("#histNote").innerHTML = "<b>Честно про историю.</b> Истории цен за недели у нас нет: система запущена сегодня, поэтому на странице только реальные прогоны этого дня (" + NR + " шт.), без выдуманных графиков. Чем дольше работает сбор, тем длиннее будет линия: достаточно запускать скрипт по расписанию.";
+}
+
+/* --- как сделано --- */
+function how() {
+  const st = D.stats, nOff = st.offers, art = st.by_mpn, fz = st.fuzzy;
+  const FZSHOPS = [...new Set(D.products.flatMap(p => SH.filter(s => p.offers[s] && p.offers[s].match !== "артикул")))].join(", ");
+  const steps = [
+    ["1", "Сбор", fnum(st.positions), "позиций с " + SH.length + " сайтов за " + dur(META.collectSec) + ". Запросы по одному с паузой, как обычный посетитель; правила robots.txt учтены."],
+    ["2", "Сопоставление", D.products.length + " мод.", "одинаковые товары нашлись по артикулу производителя (" + art + " цен из " + nOff + ") и по названию, где артикула нет (" + fz + " цен у " + FZSHOPS + ", помечены ≈)."],
+    ["3", "База", "SQLite", "в базе " + fnum(META.dbRows) + " строк: каталог, товары, предложения магазинов, цены по прогонам. Файл можно скачать ниже."],
+    ["4", "Аналитика", "5 срезов", "лучшая цена, разброс, победы магазинов, корзина, изменения между прогонами, всё считается из базы."],
+    ["5", "Дашборд", "1 страница", "статичная страница с таблицей, графиками и выгрузкой в CSV и Excel; открывается с телефона без установки."]
+  ];
+  $("#steps").innerHTML = steps.map(s => '<div class="step"><div class="n">' + s[0] + '</div><h3>' + s[1] + '</h3><div class="f num">' + s[2] + '</div><p>' + s[3] + '</p></div>').join("");
+  $("#byai").innerHTML = '<p><b>Задачу выполнил ИИ-сотрудник:</b> сбор с ' + SH.length + ' сайтов, сопоставление ' + D.products.length + ' моделей, база, дашборд. От запроса до готовой страницы <b>' + META.elapsed + '</b>' + (META.elapsedNote ? " (" + META.elapsedNote + ")" : "") + '. Без API и сторонних сервисов.</p>';
+  const lim = [
+    ["Цены Москвы, как у обычного гостя сайта", "Без личных скидок, бонусов и промокодов. У НИКС цена «от»: минимальная из предложений на витрине."],
+    ["Наличие учтено не везде", "У Регард, КНС и e2e4 сайт показывает наличие, и «под заказ» в лучшую цену не попадает. У НИКС и OLDI этого признака в списке нет."],
+    ["Сопоставление не бывает на 100%", "По артикулу оно точное. Где артикула нет в названии (OLDI), модель определяется по бренду, серии и объёму; такие ячейки помечены ≈ и их стоит проверить."],
+    ["Сайты меняются", "Если магазин сменит вёрстку, парсер этого сайта надо поправить. Поэтому в реальной работе закладывается поддержка."]
+  ];
+  $("#limits").innerHTML = lim.map(l => '<div class="lim"><b>' + l[0] + '</b>' + l[1] + '</div>').join("");
+}
+
+/* --- CSV --- */
+$("#csv").onclick = () => {
+  const rows = rowsData();
+  const h = ["Модель", "Артикул", "Бренд"].concat(SH, ["Лучшая цена", "Где дешевле", "Разброс, %", "Разброс, руб."]);
+  const lines = [h].concat(rows.map(({p, i}) => [p.name, p.mpn, p.brand].concat(SH.map(s => { const v = priceAt(p.offers[s], cur); return v == null ? "" : v; }), [i.min, i.wins.join(" / "), i.sp.toFixed(1).replace(".", ","), i.spR])));
+  const csv = "\uFEFF" + lines.map(r => r.map(c => '"' + String(c).replace(/"/g, '""') + '"').join(";")).join("\r\n");
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv], {type: "text/csv;charset=utf-8"})); a.download = "prices-run" + (cur + 1) + ".csv"; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+};
+
+$("#q").oninput = renderTable; $("#brand").onchange = renderTable; $("#onlyHi").onchange = renderTable;
+$("#selAll").onclick = () => { D.products.forEach(p => sel.add(p.id)); renderTable(); renderBasket(); };
+$("#selNone").onclick = () => { sel.clear(); renderTable(); renderBasket(); };
+function renderAll() { renderTable(); renderBasket(); renderSpread(); }
+head(); brands(); runSeg(); renderAll(); renderDynamics(); how();
+</script>
+</body>
+</html>

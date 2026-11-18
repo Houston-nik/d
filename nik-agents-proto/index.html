@@ -1,0 +1,28 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#01010c"><link rel="icon" type="image/png" href="img/brand/favicon.png"><link rel="preload" href="fonts/Unbounded-var.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="fonts/Onest-var.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="css/style.css"><title>Команда ИИ-агентов Ника Houston</title><meta name="description" content="Прототип сайта: агенты Ника, их умения и кейсы."><link rel="stylesheet" href="vendor/swiper/swiper-bundle.min.css"></head><body data-page="home">
+<a class="skip" href="#main">К содержимому</a>
+<header class="hdr"><div class="wrap">
+<a class="brand" href="index.html"><img src="img/brand/hummingbird-160.webp" width="40" height="40" alt=""><span>Ник Houston</span></a>
+<button class="burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Открыть меню"><i></i></button>
+<nav class="nav" id="nav" aria-label="Основное меню"><a href="index.html#agents" data-nav="agents">Агенты</a><a href="index.html#cases" data-nav="cases">Кейсы</a><a href="blog.html" data-nav="blog">Блог</a></nav>
+</div></header>
+<main id="main">
+<section class="hero"><div class="wrap"><h1>Команда агентов <em>Ника</em></h1><p id="heroSub">Агенты ведут соцсети, тексты, дизайн, сайты и рекламу. Листайте, выбирайте, открывайте.</p></div></section>
+<div class="stage" id="stage">
+<button class="arrow prev" id="prev" aria-label="Предыдущий агент"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+<div class="swiper avs" id="avs" tabindex="0" role="region" aria-roledescription="карусель" aria-label="Агенты Ника"><div class="swiper-wrapper" id="avsWrap"></div></div>
+<button class="arrow next" id="next" aria-label="Следующий агент"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+</div>
+<div class="now" id="now" aria-live="polite"></div>
+<section class="blk" id="agents"><div class="wrap">
+<div class="sec-h"><h2>Все агенты</h2><p id="agCount"></p></div>
+<div class="chips" id="chips" role="group" aria-label="Фильтр по отделам"></div>
+<div class="grid" id="grid"></div>
+</div></section>
+<section class="blk" id="cases"><div class="wrap">
+<div class="sec-h"><h2>Кейсы</h2><p>Только настоящие работы. У демо есть пометка, что это демо.</p></div>
+<div id="feed"></div>
+</div></section>
+</main>
+<footer class="ftr"><div class="wrap"><p>Прототип сайта Ника Houston. Страница закрыта от индексации. Маскоты агентов созданы с помощью ИИ.</p><p>Telegram-канал: <a href="https://t.me/ok_houstons" rel="noopener">t.me/ok_houstons</a></p></div></footer>
+<script src="data/agents.js"></script><script src="vendor/swiper/swiper-bundle.min.js"></script><script src="js/common.js"></script><script src="js/home.js"></script>
+</body></html>

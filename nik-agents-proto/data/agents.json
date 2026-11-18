@@ -26,26 +26,8 @@
     "dir": "layers/administrator/",
     "files": {
      "body": "body.webp",
-     "head": "head.webp",
-     "eyes": "eyes.webp",
-     "prop": "prop.webp"
-    },
-    "pivots": {
-     "head": [
-      54.4,
-      58.3
-     ],
-     "eyes": [
-      54.8,
-      43.4
-     ],
-     "prop": [
-      76.3,
-      79.4
-     ]
-    },
-    "prop_on_top": false,
-    "note": "временные слои, вырезаны из клетки 01 для проверки движка"
+     "eyes": "eyes.webp"
+    }
    }
   },
   {
@@ -60,7 +42,14 @@
     "Ведёт профиль в TenChat: посты, подписчики, переписка"
    ],
    "video_url": "",
-   "avatar": "img/avatars/02"
+   "avatar": "img/avatars/02",
+   "layers": {
+    "dir": "layers/tenchat-smm/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "pr-menedzher",
@@ -74,7 +63,14 @@
     "Готовит публикации и упоминания для PR"
    ],
    "video_url": "",
-   "avatar": "img/avatars/03"
+   "avatar": "img/avatars/03",
+   "layers": {
+    "dir": "layers/pr-menedzher/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "designer",
@@ -88,7 +84,14 @@
     "Рисует обложки, баннеры и визуалы для площадок"
    ],
    "video_url": "",
-   "avatar": "img/avatars/04"
+   "avatar": "img/avatars/04",
+   "layers": {
+    "dir": "layers/designer/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "smm-odnoklassniki",
@@ -102,7 +105,14 @@
     "Ведёт группы и страницы в Одноклассниках"
    ],
    "video_url": "",
-   "avatar": "img/avatars/05"
+   "avatar": "img/avatars/05",
+   "layers": {
+    "dir": "layers/smm-odnoklassniki/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "vebinary",
@@ -116,7 +126,14 @@
     "Готовит и проводит вебинары: сценарий, анонсы, запись"
    ],
    "video_url": "",
-   "avatar": "img/avatars/06"
+   "avatar": "img/avatars/06",
+   "layers": {
+    "dir": "layers/vebinary/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "vcru-avtopublikator",
@@ -130,7 +147,14 @@
     "Публикует материалы на vc.ru по расписанию"
    ],
    "video_url": "",
-   "avatar": "img/avatars/07"
+   "avatar": "img/avatars/07",
+   "layers": {
+    "dir": "layers/vcru-avtopublikator/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "pr-menedzher-2",
@@ -144,7 +168,14 @@
     "Второй PR-агент: письма в редакции и упоминания в СМИ"
    ],
    "video_url": "",
-   "avatar": "img/avatars/08"
+   "avatar": "img/avatars/08",
+   "layers": {
+    "dir": "layers/pr-menedzher-2/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "smm-tiktok-i-vertikalnye-video",
@@ -158,7 +189,14 @@
     "Делает вертикальные видео и сценарии для TikTok"
    ],
    "video_url": "",
-   "avatar": "img/avatars/09"
+   "avatar": "img/avatars/09",
+   "layers": {
+    "dir": "layers/smm-tiktok-i-vertikalnye-video/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "rassylki-email-i-messendzhery",
@@ -172,7 +210,14 @@
     "Собирает рассылки по почте и в мессенджерах"
    ],
    "video_url": "",
-   "avatar": "img/avatars/10"
+   "avatar": "img/avatars/10",
+   "layers": {
+    "dir": "layers/rassylki-email-i-messendzhery/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "strateg-ca",
@@ -186,7 +231,14 @@
     "Исследует аудиторию и конкурентов, формулирует офферы"
    ],
    "video_url": "",
-   "avatar": "img/avatars/11"
+   "avatar": "img/avatars/11",
+   "layers": {
+    "dir": "layers/strateg-ca/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "smm-telegram-dzen-max",
@@ -200,7 +252,14 @@
     "Ведёт Telegram, Дзен и MAX: посты, рубрики, расписание"
    ],
    "video_url": "",
-   "avatar": "img/avatars/12"
+   "avatar": "img/avatars/12",
+   "layers": {
+    "dir": "layers/smm-telegram-dzen-max/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "yandeks-biznes-i-karty",
@@ -214,7 +273,14 @@
     "Оформляет карточки в Яндекс Бизнесе и на Картах"
    ],
    "video_url": "",
-   "avatar": "img/avatars/13"
+   "avatar": "img/avatars/13",
+   "layers": {
+    "dir": "layers/yandeks-biznes-i-karty/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "yandeks-direkt",
@@ -228,7 +294,14 @@
     "Собирает и ведёт кампании в Яндекс Директе"
    ],
    "video_url": "",
-   "avatar": "img/avatars/14"
+   "avatar": "img/avatars/14",
+   "layers": {
+    "dir": "layers/yandeks-direkt/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "vcru-smm",
@@ -242,7 +315,14 @@
     "Ведёт сообщество на vc.ru: идеи, посты, ответы"
    ],
    "video_url": "",
-   "avatar": "img/avatars/15"
+   "avatar": "img/avatars/15",
+   "layers": {
+    "dir": "layers/vcru-smm/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "content-marketer",
@@ -256,7 +336,14 @@
     "Составляет контент-план и пишет посты и статьи"
    ],
    "video_url": "",
-   "avatar": "img/avatars/16"
+   "avatar": "img/avatars/16",
+   "layers": {
+    "dir": "layers/content-marketer/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "tenchat-avtomatizaciya",
@@ -270,7 +357,14 @@
     "Автоматизирует рутину в TenChat"
    ],
    "video_url": "",
-   "avatar": "img/avatars/17"
+   "avatar": "img/avatars/17",
+   "layers": {
+    "dir": "layers/tenchat-avtomatizaciya/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "tilda-marketer",
@@ -284,7 +378,14 @@
     "Собирает и дорабатывает сайты на Тильде"
    ],
    "video_url": "",
-   "avatar": "img/avatars/18"
+   "avatar": "img/avatars/18",
+   "layers": {
+    "dir": "layers/tilda-marketer/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "analitik-otdela",
@@ -298,7 +399,14 @@
     "Считает результаты отдела и показывает, что работает"
    ],
    "video_url": "",
-   "avatar": "img/avatars/19"
+   "avatar": "img/avatars/19",
+   "layers": {
+    "dir": "layers/analitik-otdela/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "x-smm",
@@ -312,7 +420,14 @@
     "Ведёт аккаунт в X: короткие посты и ответы"
    ],
    "video_url": "",
-   "avatar": "img/avatars/20"
+   "avatar": "img/avatars/20",
+   "layers": {
+    "dir": "layers/x-smm/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "dizayner-prezentaciy",
@@ -326,7 +441,14 @@
     "Верстает презентации и слайды для показов"
    ],
    "video_url": "",
-   "avatar": "img/avatars/21"
+   "avatar": "img/avatars/21",
+   "layers": {
+    "dir": "layers/dizayner-prezentaciy/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "lawyer",
@@ -340,7 +462,14 @@
     "Проверяет тексты и сайты на соответствие законам об интернете"
    ],
    "video_url": "",
-   "avatar": "img/avatars/22"
+   "avatar": "img/avatars/22",
+   "layers": {
+    "dir": "layers/lawyer/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "pochta",
@@ -354,7 +483,14 @@
     "Разбирает входящую почту и готовит ответы"
    ],
    "video_url": "",
-   "avatar": "img/avatars/23"
+   "avatar": "img/avatars/23",
+   "layers": {
+    "dir": "layers/pochta/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "instagram-smm",
@@ -368,7 +504,14 @@
     "Ведёт Instagram: посты, сторис, подписи"
    ],
    "video_url": "",
-   "avatar": "img/avatars/24"
+   "avatar": "img/avatars/24",
+   "layers": {
+    "dir": "layers/instagram-smm/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "vk-smm",
@@ -382,7 +525,14 @@
     "Ведёт сообщества во ВКонтакте"
    ],
    "video_url": "",
-   "avatar": "img/avatars/25"
+   "avatar": "img/avatars/25",
+   "layers": {
+    "dir": "layers/vk-smm/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "lichnye-soobscheniya-tg",
@@ -396,7 +546,14 @@
     "Отвечает на личные сообщения в Telegram"
    ],
    "video_url": "",
-   "avatar": "img/avatars/26"
+   "avatar": "img/avatars/26",
+   "layers": {
+    "dir": "layers/lichnye-soobscheniya-tg/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "kreator-idey",
@@ -410,7 +567,14 @@
     "Придумывает идеи для постов, роликов и рубрик"
    ],
    "video_url": "",
-   "avatar": "img/avatars/27"
+   "avatar": "img/avatars/27",
+   "layers": {
+    "dir": "layers/kreator-idey/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "marketpleysy-wb-i-ozon",
@@ -424,7 +588,14 @@
     "Готовит карточки товаров для Wildberries и Ozon"
    ],
    "video_url": "",
-   "avatar": "img/avatars/28"
+   "avatar": "img/avatars/28",
+   "layers": {
+    "dir": "layers/marketpleysy-wb-i-ozon/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "seo-specialist",
@@ -438,7 +609,14 @@
     "Собирает семантику, проверяет сайты, пишет метатеги"
    ],
    "video_url": "",
-   "avatar": "img/avatars/29"
+   "avatar": "img/avatars/29",
+   "layers": {
+    "dir": "layers/seo-specialist/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "videomarketolog",
@@ -452,7 +630,14 @@
     "Пишет сценарии и планирует видео для площадок"
    ],
    "video_url": "",
-   "avatar": "img/avatars/30"
+   "avatar": "img/avatars/30",
+   "layers": {
+    "dir": "layers/videomarketolog/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "blog-platformy",
@@ -466,7 +651,14 @@
     "Публикует статьи на блог-платформах"
    ],
    "video_url": "",
-   "avatar": "img/avatars/31"
+   "avatar": "img/avatars/31",
+   "layers": {
+    "dir": "layers/blog-platformy/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "linkedin-i-delovye-seti",
@@ -480,7 +672,14 @@
     "Ведёт профиль в LinkedIn и деловых сетях"
    ],
    "video_url": "",
-   "avatar": "img/avatars/32"
+   "avatar": "img/avatars/32",
+   "layers": {
+    "dir": "layers/linkedin-i-delovye-seti/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "rayter",
@@ -494,7 +693,14 @@
     "Пишет тексты: посты, статьи, описания"
    ],
    "video_url": "",
-   "avatar": "img/avatars/33"
+   "avatar": "img/avatars/33",
+   "layers": {
+    "dir": "layers/rayter/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "tg-rerayter",
@@ -508,7 +714,14 @@
     "Переписывает чужие посты для Telegram своими словами"
    ],
    "video_url": "",
-   "avatar": "img/avatars/34"
+   "avatar": "img/avatars/34",
+   "layers": {
+    "dir": "layers/tg-rerayter/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "redaktor-kopirayter",
@@ -522,7 +735,14 @@
     "Правит стиль и ошибки, доводит тексты до чистовика"
    ],
    "video_url": "",
-   "avatar": "img/avatars/35"
+   "avatar": "img/avatars/35",
+   "layers": {
+    "dir": "layers/redaktor-kopirayter/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "dzen-smm",
@@ -536,7 +756,14 @@
     "Ведёт канал на Дзене: статьи, заголовки, обложки"
    ],
    "video_url": "",
-   "avatar": "img/avatars/36"
+   "avatar": "img/avatars/36",
+   "layers": {
+    "dir": "layers/dzen-smm/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "specialist-avito",
@@ -550,7 +777,14 @@
     "Оформляет объявления и профиль на Авито"
    ],
    "video_url": "",
-   "avatar": "img/avatars/37"
+   "avatar": "img/avatars/37",
+   "layers": {
+    "dir": "layers/specialist-avito/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "prodvizhenie-bez-byudzheta",
@@ -564,7 +798,14 @@
     "Ищет способы продвижения, которые не требуют рекламного бюджета"
    ],
    "video_url": "",
-   "avatar": "img/avatars/38"
+   "avatar": "img/avatars/38",
+   "layers": {
+    "dir": "layers/prodvizhenie-bez-byudzheta/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "partnerki",
@@ -578,7 +819,14 @@
     "Ищет партнёрские программы и готовит оформление для них"
    ],
    "video_url": "",
-   "avatar": "img/avatars/39"
+   "avatar": "img/avatars/39",
+   "layers": {
+    "dir": "layers/partnerki/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "reputaciya-serm",
@@ -592,7 +840,14 @@
     "Следит за отзывами и упоминаниями, готовит ответы"
    ],
    "video_url": "",
-   "avatar": "img/avatars/40"
+   "avatar": "img/avatars/40",
+   "layers": {
+    "dir": "layers/reputaciya-serm/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "karuseli-inst",
@@ -606,7 +861,14 @@
     "Собирает карусели для Instagram"
    ],
    "video_url": "",
-   "avatar": "img/avatars/41"
+   "avatar": "img/avatars/41",
+   "layers": {
+    "dir": "layers/karuseli-inst/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "smm-instagram-i-threads",
@@ -620,7 +882,14 @@
     "Ведёт Instagram и Threads"
    ],
    "video_url": "",
-   "avatar": "img/avatars/42"
+   "avatar": "img/avatars/42",
+   "layers": {
+    "dir": "layers/smm-instagram-i-threads/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "dizayner-kreativov",
@@ -634,7 +903,14 @@
     "Делает креативы для рекламы и постов"
    ],
    "video_url": "",
-   "avatar": "img/avatars/43"
+   "avatar": "img/avatars/43",
+   "layers": {
+    "dir": "layers/dizayner-kreativov/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "wp-solnyshko",
@@ -648,7 +924,14 @@
     "Пишет тексты и блоки для сайтов на WordPress, помогает конверсии"
    ],
    "video_url": "",
-   "avatar": "img/avatars/44"
+   "avatar": "img/avatars/44",
+   "layers": {
+    "dir": "layers/wp-solnyshko/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "telegram-menedzher",
@@ -662,7 +945,14 @@
     "Ведёт Telegram-каналы и чаты"
    ],
    "video_url": "",
-   "avatar": "img/avatars/45"
+   "avatar": "img/avatars/45",
+   "layers": {
+    "dir": "layers/telegram-menedzher/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "landing-maker",
@@ -676,7 +966,14 @@
     "Делает лендинги и одностраничные сайты"
    ],
    "video_url": "",
-   "avatar": "img/avatars/46"
+   "avatar": "img/avatars/46",
+   "layers": {
+    "dir": "layers/landing-maker/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "max-smm",
@@ -690,7 +987,14 @@
     "Ведёт каналы и сообщества в MAX"
    ],
    "video_url": "",
-   "avatar": "img/avatars/47"
+   "avatar": "img/avatars/47",
+   "layers": {
+    "dir": "layers/max-smm/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "marketing-director",
@@ -704,7 +1008,14 @@
     "Ставит задачи отделу маркетинга и собирает результат"
    ],
    "video_url": "",
-   "avatar": "img/avatars/48"
+   "avatar": "img/avatars/48",
+   "layers": {
+    "dir": "layers/marketing-director/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "razbor-kompanii",
@@ -718,7 +1029,14 @@
     "Разбирает компанию: продукт, аудитория, сильные и слабые места"
    ],
    "video_url": "",
-   "avatar": "img/avatars/49"
+   "avatar": "img/avatars/49",
+   "layers": {
+    "dir": "layers/razbor-kompanii/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "vk-novosti",
@@ -732,7 +1050,14 @@
     "Готовит новости для сообществ ВКонтакте"
    ],
    "video_url": "",
-   "avatar": "img/avatars/50"
+   "avatar": "img/avatars/50",
+   "layers": {
+    "dir": "layers/vk-novosti/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "tiktok-smm",
@@ -746,7 +1071,14 @@
     "Ведёт аккаунт в TikTok"
    ],
    "video_url": "",
-   "avatar": "img/avatars/51"
+   "avatar": "img/avatars/51",
+   "layers": {
+    "dir": "layers/tiktok-smm/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "pinterest",
@@ -760,7 +1092,14 @@
     "Ведёт доски и пины в Pinterest"
    ],
    "video_url": "",
-   "avatar": "img/avatars/52"
+   "avatar": "img/avatars/52",
+   "layers": {
+    "dir": "layers/pinterest/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "targetolog-vk-reklamy",
@@ -774,7 +1113,14 @@
     "Собирает и ведёт кампании в VK Рекламе"
    ],
    "video_url": "",
-   "avatar": "img/avatars/53"
+   "avatar": "img/avatars/53",
+   "layers": {
+    "dir": "layers/targetolog-vk-reklamy/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   },
   {
    "slug": "freelancer",
@@ -819,7 +1165,14 @@
      "k": "Отклик",
      "v": "только после «да» Ника"
     }
-   ]
+   ],
+   "layers": {
+    "dir": "layers/freelancer/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp"
+    }
+   }
   }
  ],
  "cases": [

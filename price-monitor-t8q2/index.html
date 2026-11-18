@@ -175,6 +175,25 @@ table.sm{border-collapse:collapse;width:100%;font-size:14px}
 footer{margin-top:90px;background:var(--surf);box-shadow:inset 0 1px 0 var(--line);color:var(--muted);padding:34px 0 44px;font-size:13.5px}
 footer p{margin:0 0 6px;max-width:900px}
 
+/* маскот */
+.mx{display:inline-block;width:.74em;height:.74em;vertical-align:-.075em;margin:0 .015em;position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;transform-origin:50% 100%;user-select:none}
+.mx svg{display:block;width:100%;height:100%;overflow:visible}
+.mx-sh{fill:rgba(10,10,10,.14)}
+.mx-eyes{transform:translate(calc(var(--ex,0)*1px),calc(var(--ey,0)*1px));transition:transform .14s ease-out}
+.mx-eye{transform-box:fill-box;transform-origin:50% 50%;transition:transform .09s ease-in}
+.mx.is-blink .mx-eye{transform:scaleY(.08)}
+.mx.is-wink .mx-eye.l{transform:scaleY(.08)}
+.mx.is-wink .mx-eye.r{transform:scaleY(.62)}
+.mx.is-squint .mx-eye{transform:scaleY(.3)}
+.mx.is-jump{animation:mxjump .62s cubic-bezier(.3,.7,.4,1)}
+@keyframes mxjump{0%{transform:scale(1,1)}18%{transform:scale(1.1,.86)}48%{transform:translateY(-.42em) scale(.94,1.08)}74%{transform:translateY(0) scale(1.08,.9)}100%{transform:scale(1,1)}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.mx-defs{position:absolute;width:0;height:0;overflow:hidden}
+.mx-big{width:92px;height:92px;margin:0;vertical-align:baseline;position:relative;z-index:1;flex:none}
+.byai .mx-big{justify-self:end}
+@media (max-width:980px){.byai .mx-big{justify-self:start;width:76px;height:76px}}
+@media (prefers-reduced-motion:reduce){.mx-eyes,.mx-eye{transition:none}.mx.is-jump{animation:none}}
+
 /* появление при прокрутке */
 .is-js .rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0ms)}
 .is-js .rv.is-in{opacity:1;transform:none}
@@ -209,6 +228,7 @@ footer p{margin:0 0 6px;max-width:900px}
 </style>
 </head>
 <body>
+<svg class="mx-defs" aria-hidden="true" focusable="false"><defs><radialGradient id="mxg" cx="34%" cy="28%" r="85%"><stop offset="0" stop-color="#8DBBFF"/><stop offset=".32" stop-color="#3B82F6"/><stop offset=".68" stop-color="#2563EB"/><stop offset="1" stop-color="#1B3A9E"/></radialGradient><radialGradient id="mxs" cx="50%" cy="50%" r="50%"><stop offset=".72" stop-color="#0B1D63" stop-opacity="0"/><stop offset="1" stop-color="#0B1D63" stop-opacity=".38"/></radialGradient></defs></svg>
 <header class="hdr">
   <div class="logo"><svg viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="9" fill="#0A0A0A"/><path d="M7 20l5-6 4 3 7-8" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b>Прайс-радар</b><small>демо мониторинга цен</small></div></div>
   <nav class="nav" aria-label="Разделы"><a href="#table">Таблица</a><a href="#basket">Корзина</a><a href="#spread">Разброс</a><a href="#dynamics">Динамика</a><a href="#how">Как сделано</a></nav>
@@ -217,7 +237,7 @@ footer p{margin:0 0 6px;max-width:900px}
 
 <div class="hero"><div class="wrap">
   <div class="eyebrow">Демонстрация: сбор, сопоставление, аналитика</div>
-  <h1>Мониторинг цен конкурентов: один и тот же SSD в пяти магазинах</h1>
+  <h1>М<span class="mx" data-mx><svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><ellipse class="mx-sh" cx="50" cy="96" rx="26" ry="3.6"/><circle cx="50" cy="50" r="46" fill="url(#mxg)"/><circle cx="50" cy="50" r="46" fill="url(#mxs)"/><g class="mx-eyes"><ellipse class="mx-eye l" cx="36.5" cy="53" rx="7.2" ry="11" fill="#fff"/><ellipse class="mx-eye r" cx="63.5" cy="53" rx="7.2" ry="11" fill="#fff"/></g><ellipse cx="31" cy="22" rx="15" ry="8" transform="rotate(-28 31 22)" fill="#fff" opacity=".5"/><ellipse cx="72" cy="80" rx="9" ry="3.4" transform="rotate(-30 72 80)" fill="#fff" opacity=".16"/></svg></span><span class="sr">о</span>ниторинг цен конкурентов: один и тот же SSD в пяти магазинах</h1>
   <p class="lead">Парсер сам собрал цены с пяти сайтов, понял, что это одни и те же модели, сложил всё в базу и построил эту страницу. Без API, без сторонних сервисов. Цены настоящие.</p>
   <div class="stamp" id="stamp"></div>
   <div class="kpis" id="kpis"></div>
@@ -312,6 +332,7 @@ let cur = NR - 1;
 const sel = new Set(D.products.map(p => p.id));
 let sortKey = "spread", sortAsc = false;
 const $ = s => document.querySelector(s);
+const MXSVG = '<svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><ellipse class="mx-sh" cx="50" cy="96" rx="26" ry="3.6"/><circle cx="50" cy="50" r="46" fill="url(#mxg)"/><circle cx="50" cy="50" r="46" fill="url(#mxs)"/><g class="mx-eyes"><ellipse class="mx-eye l" cx="36.5" cy="53" rx="7.2" ry="11" fill="#fff"/><ellipse class="mx-eye r" cx="63.5" cy="53" rx="7.2" ry="11" fill="#fff"/></g><ellipse cx="31" cy="22" rx="15" ry="8" transform="rotate(-28 31 22)" fill="#fff" opacity=".5"/><ellipse cx="72" cy="80" rx="9" ry="3.4" transform="rotate(-30 72 80)" fill="#fff" opacity=".16"/></svg>';
 const fmt = n => n == null ? "—" : Math.round(n).toLocaleString("ru-RU") + "\u00A0₽";
 const fnum = n => Math.round(n).toLocaleString("ru-RU");
 const pct = n => (n >= 0 ? "+" : "−") + Math.abs(n).toFixed(1).replace(".", ",") + "%";
@@ -485,7 +506,7 @@ function how() {
     ["5", "Дашборд", "1 страница", "статичная страница с таблицей, графиками и выгрузкой в CSV и Excel; открывается с телефона без установки."]
   ];
   $("#steps").innerHTML = steps.map(s => '<div class="step"><div class="n">' + s[0] + '</div><h3>' + s[1] + '</h3><div class="f num">' + s[2] + '</div><p>' + s[3] + '</p></div>').join("");
-  $("#byai").innerHTML = '<p><b>Задачу выполнил ИИ-сотрудник:</b> сбор с ' + SH.length + ' сайтов, сопоставление ' + D.products.length + ' моделей, база, дашборд. От запроса до готовой страницы <b>' + META.elapsed + '</b>' + (META.elapsedNote ? " (" + META.elapsedNote + ")" : "") + '. Без API и сторонних сервисов.</p>';
+  $("#byai").innerHTML = '<p><b>Задачу выполнил ИИ-сотрудник:</b> сбор с ' + SH.length + ' сайтов, сопоставление ' + D.products.length + ' моделей, база, дашборд. От запроса до готовой страницы <b>' + META.elapsed + '</b>' + (META.elapsedNote ? " (" + META.elapsedNote + ")" : "") + '. Без API и сторонних сервисов.</p><span class="mx mx-big" data-mx>' + MXSVG + '</span>';
   const lim = [
     ["Цены Москвы, как у обычного гостя сайта", "Без личных скидок, бонусов и промокодов. У НИКС цена «от»: минимальная из предложений на витрине."],
     ["Наличие учтено не везде", "У Регард, КНС и e2e4 сайт показывает наличие, и «под заказ» в лучшую цену не попадает. У НИКС и OLDI этого признака в списке нет."],
@@ -517,6 +538,40 @@ head(); brands(); runSeg(); renderAll(); renderDynamics(); how();
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { const t = e.target; t.classList.add("is-in"); io.unobserve(t); setTimeout(() => { t.classList.remove("rv", "is-in"); t.style.removeProperty("--d"); }, 1300); } }), {rootMargin: "0px 0px -6% 0px"});
   els.forEach((el, i) => { el.classList.add("rv"); el.style.setProperty("--d", (i % 5) * 60 + "ms"); io.observe(el); });
   setTimeout(() => document.querySelectorAll(".rv:not(.is-in)").forEach(el => { const r = el.getBoundingClientRect(); if (r.top < innerHeight) el.classList.add("is-in"); }), 600);
+})();
+
+/* --- маскот: моргает, следит за курсором, реагирует на клик --- */
+(function () {
+  const mx = [...document.querySelectorAll("[data-mx]")];
+  if (!mx.length) return;
+  const rm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const R = (a, b) => a + Math.random() * (b - a);
+  const flash = (el, cls, ms) => { el.classList.add(cls); setTimeout(() => el.classList.remove(cls), ms); };
+  // моргание: у каждого свой случайный интервал
+  if (!rm) mx.forEach(el => {
+    const loop = () => { setTimeout(() => { flash(el, "is-blink", 130); if (Math.random() < .25) setTimeout(() => flash(el, "is-blink", 130), 260); loop(); }, R(2200, 6200)); };
+    setTimeout(loop, R(600, 2500));
+  });
+  // глаза следят за указателем или касанием, в покое мягко осматриваются
+  let tx = null, ty = null, lastMove = 0, raf = 0;
+  const aim = (el, x, y) => {
+    const r = el.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    let dx = x - cx, dy = y - cy; const d = Math.hypot(dx, dy) || 1, k = Math.min(1, d / 160);
+    el.style.setProperty("--ex", (dx / d * 6.5 * k).toFixed(2)); el.style.setProperty("--ey", (dy / d * 7 * k).toFixed(2));
+  };
+  const upd = () => { raf = 0; if (tx != null) mx.forEach(el => aim(el, tx, ty)); };
+  if (!rm) {
+    const mv = e => { tx = e.clientX; ty = e.clientY; lastMove = Date.now(); if (!raf) raf = requestAnimationFrame(upd); };
+    addEventListener("pointermove", mv, {passive: true}); addEventListener("pointerdown", mv, {passive: true});
+    addEventListener("scroll", () => { if (tx != null && !raf) raf = requestAnimationFrame(upd); }, {passive: true});
+    setInterval(() => { if (Date.now() - lastMove > 4000) mx.forEach(el => { const a = R(0, 6.28), m = Math.random() < .3 ? 0 : R(2, 6); el.style.setProperty("--ex", (Math.cos(a) * m).toFixed(2)); el.style.setProperty("--ey", (Math.sin(a) * m * .7).toFixed(2)); }); }, 2600);
+  }
+  // клик: подпрыгнул и подмигнул или прищурился
+  mx.forEach(el => el.addEventListener("click", () => {
+    const wink = Math.random() < .55;
+    if (!rm) { el.classList.remove("is-jump"); void el.offsetWidth; el.classList.add("is-jump"); setTimeout(() => el.classList.remove("is-jump"), 700); }
+    flash(el, wink ? "is-wink" : "is-squint", 650);
+  }));
 })();
 </script>
 </body>

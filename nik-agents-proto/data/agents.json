@@ -21,7 +21,32 @@
     "Держит порядок в команде агентов: доступы, задачи, настройки"
    ],
    "video_url": "",
-   "avatar": "img/avatars/01"
+   "avatar": "img/avatars/01",
+   "layers": {
+    "dir": "layers/administrator/",
+    "files": {
+     "body": "body.webp",
+     "head": "head.webp",
+     "eyes": "eyes.webp",
+     "prop": "prop.webp"
+    },
+    "pivots": {
+     "head": [
+      54.4,
+      58.3
+     ],
+     "eyes": [
+      54.8,
+      43.4
+     ],
+     "prop": [
+      76.3,
+      79.4
+     ]
+    },
+    "prop_on_top": false,
+    "note": "временные слои, вырезаны из клетки 01 для проверки движка"
+   }
   },
   {
    "slug": "tenchat-smm",

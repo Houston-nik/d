@@ -61,7 +61,18 @@ p{margin:0}
 .stage .avs{padding:70px 0 56px;overflow:visible;--s:128px;outline-offset:-4px}
 .avs .swiper-slide{width:var(--s);height:var(--s);will-change:transform;cursor:pointer}
 .av{width:100%;height:100%;border-radius:50%;background:var(--surface-2);border:2px solid var(--line);display:flex;align-items:flex-end;justify-content:center;overflow:hidden;position:relative}
-.av img{width:88%;height:88%;object-fit:contain;object-position:center bottom;margin-bottom:3%}
+.av img,.av .fig{position:absolute;left:6%;top:8%;width:88%;height:88%;object-fit:contain;object-position:center bottom}
+.fig img{left:0;top:0;width:100%;height:100%}
+.fig .l{position:absolute;inset:0}
+.fig .hg{position:absolute;inset:0;transform-origin:var(--hx) var(--hy)}
+.fig .l-eyes{transform-origin:var(--ex) var(--ey);transition:transform .06s linear}
+.fig .l-eyes.blink{transform:scaleY(.1)}
+.fig .l-prop{transform-origin:var(--px) var(--py)}
+.fig.anim .hg{animation:nod 3.6s ease-in-out infinite}
+.fig.anim .l-prop{animation:sway 2.8s ease-in-out infinite}
+@keyframes nod{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+@keyframes sway{0%,100%{transform:rotate(-4.5deg)}50%{transform:rotate(4.5deg)}}
+@media(prefers-reduced-motion:reduce){.fig .hg,.fig .l-prop,.fig .l-eyes{animation:none!important;transform:none!important}}
 .swiper-slide-active .av{border-color:var(--pink);box-shadow:0 0 0 4px rgba(255,63,208,.18),0 0 26px 2px rgba(255,63,208,.55),0 0 52px 6px rgba(46,230,255,.2)}
 .arrow{position:absolute;top:50%;z-index:20;width:52px;height:52px;margin-top:-26px;border-radius:50%;border:2px solid var(--line);background:var(--surface);color:var(--text);cursor:pointer;display:grid;place-items:center;padding:0;transition:border-color .2s,color .2s}
 .arrow:hover{border-color:var(--pink);color:var(--pink)}
@@ -92,7 +103,7 @@ section.blk{padding:clamp(48px,8vw,96px) 0 0}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 18px 18px;display:flex;flex-direction:column;transition:border-color .2s,transform .2s}
 .card:hover{border-color:var(--violet);transform:translateY(-3px)}
-.card .av{width:88px;height:88px;margin-bottom:16px}
+.card .av{width:88px;height:88px;margin-bottom:16px;flex:none}
 .card h3{font-size:16px;margin-bottom:8px}
 .card p{color:var(--muted);font-size:15px;line-height:1.45;flex:1;margin-bottom:16px}
 .card .btn{min-height:42px;font-size:15px;align-self:flex-start}
@@ -137,7 +148,8 @@ section.blk{padding:clamp(48px,8vw,96px) 0 0}
 .ag{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,5vw,72px);padding-top:28px;align-items:start}
 .ag .face{display:flex;flex-direction:column;gap:22px}
 .ag .big{width:min(100%,300px);aspect-ratio:1;border-radius:50%;background:var(--surface-2);border:3px solid var(--pink);box-shadow:0 0 0 7px rgba(255,63,208,.16),0 0 50px 6px rgba(255,63,208,.45),0 0 100px 14px rgba(46,230,255,.18);display:flex;align-items:flex-end;justify-content:center;overflow:hidden;margin:8px 0 14px 10px}
-.ag .big img{width:90%;height:90%;object-fit:contain;object-position:center bottom}
+.ag .big{position:relative}
+.ag .big img{position:absolute;left:6%;top:8%;width:88%;height:88%;object-fit:contain;object-position:center bottom}
 .ag h1{font-size:clamp(30px,4.4vw,52px)}
 .ag .dep{color:var(--cyan);font-weight:500;font-size:18px;margin-top:-10px}
 .ag .lead{color:var(--muted);font-size:18px;max-width:40ch}

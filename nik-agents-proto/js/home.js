@@ -6,7 +6,7 @@
     document.getElementById('heroSub').textContent=A.length+' '+NIK.agentWord(A.length)+' ведут соцсети, тексты, дизайн, сайты и рекламу. Листайте, выбирайте, открывайте.';
     /* карусель */
     var wrap=document.getElementById('avsWrap');
-    wrap.innerHTML=A.map(function(a,i){return '<div class="swiper-slide" role="group" aria-roledescription="слайд" aria-label="'+E(a.name)+', '+(i+1)+' из '+A.length+'"><div class="av"><img src="'+NIK.avatar(a,256)+'" width="256" height="256" alt="Маскот: '+E(a.name)+'" draggable="false"></div></div>'}).join('');
+    wrap.innerHTML=A.map(function(a,i){return '<div class="swiper-slide" role="group" aria-roledescription="слайд" aria-label="'+E(a.name)+', '+(i+1)+' из '+A.length+'"><div class="av">'+(NIK.layerFig(a,'Маскот: '+a.name)||'<img src="'+NIK.avatar(a,256)+'" width="256" height="256" alt="Маскот: '+E(a.name)+'" draggable="false">')+'</div></div>'}).join('');
     var now=document.getElementById('now');
     function show(i){
       var a=A[i];
@@ -31,7 +31,7 @@
     }
     function sync(){show(sw.realIndex)}
     sw.on('progress',paint);sw.on('setTranslate',paint);sw.on('slideChange',sync);sw.on('resize',function(){sw.params.spaceBetween=window.innerWidth<761?30:44;sw.update();paint()});
-    sync();sw.update();paint();
+    sync();sw.update();paint();NIK.initAvatarAnim(sw);
     window.__sw=sw;
     /* сетка и фильтр */
     var grid=document.getElementById('grid'),chips=document.getElementById('chips'),cnt=document.getElementById('agCount'),cur='Все';

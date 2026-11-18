@@ -86,10 +86,9 @@ h3{font-size:24px;line-height:1.25}
 .top{position:sticky;top:0;z-index:20;background:var(--bg)}
 .top .in{display:flex;align-items:center;gap:44px;height:84px;padding:0 56px}
 .logo{font-family:var(--display);font-size:30px;text-decoration:none;line-height:1;letter-spacing:.01em}
-.nav{display:flex;gap:30px;font-size:15px;margin-right:auto;margin-left:12px}
+.nav{display:flex;gap:30px;font-size:15px;margin-left:auto;margin-right:12px}
 .nav a{text-decoration:none;color:var(--muted)}
 .nav a:hover{color:var(--ink)}
-.tel{font-size:15px;text-decoration:none;white-space:nowrap}
 .menu{display:none;font:400 15px var(--text);background:none;border:1px solid var(--ink);padding:10px 16px;color:var(--ink);border-radius:12px;cursor:pointer}
 .drawer{display:none}
 
@@ -153,23 +152,16 @@ h1{font-size:62px;line-height:1.1;letter-spacing:-.005em;max-width:12.5em;text-w
 /* about */
 .about{background:var(--bg2)}
 .abt{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:72px;align-items:center}
-.abt figure img{width:100%;height:auto;border-radius:24px;aspect-ratio:4/3;object-fit:cover}
+.abt figure img{width:100%;height:auto;border-radius:24px;aspect-ratio:4/3;object-fit:cover;object-position:60% 50%}
 .abt .intro{margin-top:18px;color:#3A4740;font-size:17px;max-width:30em}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:28px 32px;margin-top:40px;padding-top:28px;border-top:1px solid var(--ink)}
-.stats b{display:block;font:400 54px/1 var(--display);color:var(--olive)}
-.stats span{display:block;font-size:14.5px;color:var(--muted);margin-top:8px;line-height:1.45}
-.stats small{display:block;margin-top:2px;font-size:12.5px;color:var(--ink);font-weight:500}
-.demo-note{margin-top:24px;font-size:13px;color:var(--muted)}
 
-/* reviews */
-.reviews .head{max-width:36em}
-.reviews .head p{margin-top:14px;color:var(--muted);font-size:17px}
-.rv{display:grid;grid-template-columns:repeat(3,1fr);margin-top:52px;border-top:1px solid var(--ink)}
-.rv blockquote{padding:28px 32px 0 0;font-size:17px;line-height:1.6}
-.rv blockquote+blockquote{padding-left:32px;border-left:1px solid var(--line)}
-.rv cite{display:block;font-style:normal;margin-top:18px;font-size:14px;color:var(--muted)}
-.rv cite b{display:block;font-weight:500;color:var(--ink);font-size:15px}
-
+.get{list-style:none;margin-top:32px;border-top:1px solid var(--ink)}
+.get li{padding:18px 0 20px;border-bottom:1px solid var(--line);color:#3A4740;font-size:15.5px}
+.get b{display:block;font:400 22px/1.25 var(--display);color:var(--ink);margin-bottom:4px}
+.brief{margin-top:40px;padding-top:26px;border-top:1px solid rgba(255,255,255,.28);max-width:26em}
+.brief h3{color:#fff;font-size:22px;margin-bottom:12px}
+.brief ul{list-style:none}
+.brief li{padding:11px 0;border-bottom:1px solid rgba(255,255,255,.16);color:#DCE5DA;font-size:16px}
 /* faq */
 .faq{background:var(--bg2)}
 .fq{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:72px;align-items:start}
@@ -188,41 +180,34 @@ h1{font-size:62px;line-height:1.1;letter-spacing:-.005em;max-width:12.5em;text-w
 .ct{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:72px;align-items:start}
 .contacts h2{color:#fff}
 .contacts .intro{margin-top:16px;color:#C9D4C8;font-size:17px;max-width:28em}
-.info{margin-top:40px;font-style:normal;display:grid;gap:22px;border-top:1px solid rgba(255,255,255,.28);padding-top:28px;max-width:30em}
-.info div{display:grid;grid-template-columns:130px 1fr;gap:12px;font-size:16px}
-.info dt{color:#A9B9AB;font-size:14px;padding-top:2px}
-.info a{text-decoration:none}
 .contacts .form{padding:30px}
 
 /* footer */
-footer{background:#233229;color:#B7C4B8;padding:48px 0 40px;font-size:14px}
-.ft{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
-.ft b{display:block;color:#fff;font-weight:500;margin-bottom:8px;font-size:15px}
-.ft a{color:#fff}
-.fnote{margin-top:36px;padding-top:20px;border-top:1px solid rgba(255,255,255,.18);display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-size:13px}
+footer{background:#233229;color:#B7C4B8;padding:36px 0;font-size:13px}
+footer a{color:#fff}
+.fnote{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
 
 @media (max-width:1100px){
   .wrap{padding:0 28px}.sec{padding:80px 0}
-  .nav,.tel{display:none}.top .in{padding:0 28px;gap:16px;justify-content:space-between}.menu{display:block}.top .btn.sm{margin-left:auto}
+  .nav{display:none}.top .in{padding:0 28px;gap:16px;justify-content:space-between}.menu{display:block}.top .btn.sm{margin-left:auto}
   .drawer{display:block;position:absolute;left:0;right:0;top:100%;background:var(--bg);border-top:1px solid var(--line);padding:8px 28px 28px;box-shadow:0 24px 30px -24px rgba(30,40,32,.5)}
   .drawer[hidden]{display:none}
   .drawer a.nl{display:block;font:400 26px/1 var(--display);text-decoration:none;padding:18px 0;border-bottom:1px solid var(--line)}
-  .drawer .dtel{display:block;margin:20px 0 14px;text-decoration:none;font-size:16px}
-  .drawer .btn{width:100%}
+  .drawer .btn{width:100%;margin-top:22px}
   .hero{grid-template-columns:1fr;min-height:0}
   .copy{padding:28px 28px 40px}
   h1{font-size:50px}
-  .view{border-radius:0;min-height:560px}
-  .view .form{left:28px;right:auto}
+  .view{min-height:0;display:flex;flex-direction:column;border-radius:24px 24px 0 0;margin:0 28px 40px}
+  .view>img{position:relative;height:auto;aspect-ratio:1.6/1;max-height:520px;flex:none;object-position:30% 50%}
+  .view .form{position:relative;right:auto;left:auto;top:auto;width:auto;max-width:520px;margin:-28px 24px 0;padding:24px}
+  .view .form .sub{display:block}
+  .abt figure img{aspect-ratio:3/2}
   h2{font-size:38px}
   .svc,.abt,.fq,.ct{grid-template-columns:1fr;gap:40px}
   .svc .head{position:static}
   .steps ol{grid-template-columns:1fr 1fr}
   .steps li{padding:26px 24px 30px 0}.steps li+li{padding-left:0;border-left:0}.steps li:nth-child(even){padding-left:24px;border-left:1px solid var(--line)}
   .steps li:nth-child(n+3){border-top:1px solid var(--line)}
-  .rv{grid-template-columns:1fr}
-  .rv blockquote,.rv blockquote+blockquote{padding:26px 0;border-left:0}
-  .rv blockquote+blockquote{border-top:1px solid var(--line)}
 }
 @media (max-width:640px){
   .wrap{padding:0 20px}.sec{padding:60px 0}
@@ -236,20 +221,18 @@ footer{background:#233229;color:#B7C4B8;padding:48px 0 40px;font-size:14px}
   .cta{flex-direction:column;align-items:stretch;gap:14px;margin-top:24px}
   .cta .btn{width:100%}.cta .link{text-align:center}
   .facts{display:none}
-  .view{min-height:0;display:flex;flex-direction:column;border-radius:24px 24px 0 0}
-  .view>img{position:relative;height:280px;flex:none;object-position:20% 60%}
-  .view .form{position:relative;right:auto;left:auto;top:auto;width:auto;margin:-22px 14px 14px;padding:22px 20px}
+  .view{margin:0;border-radius:24px 24px 0 0}
+  .view>img{aspect-ratio:1.6/1;max-height:none;object-position:25% 50%}
+  .view .form{margin:-22px 14px 14px;padding:22px 20px}
+  .view .form .sub{display:none}
   h2{font-size:30px}h3{font-size:21px}
   .svc li{padding:20px 0 22px}
   .steps ol{grid-template-columns:1fr;margin-top:36px}
   .steps li,.steps li:nth-child(even){padding:22px 0 24px;border-left:0}
   .steps li+li{border-top:1px solid var(--line)}
   .steps .n{font-size:48px;margin-bottom:12px}
-  .stats{gap:24px 18px}.stats b{font-size:42px}
   .fq summary{font-size:19px;padding:18px 36px 18px 0}.fq summary::after{top:14px}
-  .info div{grid-template-columns:1fr;gap:2px}
   .contacts .form{padding:22px 20px}
-  .ft{grid-template-columns:1fr;gap:24px}
 }
 </style>
 </head>
@@ -258,19 +241,17 @@ footer{background:#233229;color:#B7C4B8;padding:48px 0 40px;font-size:14px}
   <div class="in">
     <a class="logo" href="#top">Лемма</a>
     <nav class="nav" aria-label="Разделы">
-      <a href="#uslugi">Услуги</a><a href="#etapy">Этапы</a><a href="#o-nas">О нас</a><a href="#voprosy">Вопросы</a><a href="#kontakty">Контакты</a>
+      <a href="#uslugi">Услуги</a><a href="#etapy">Этапы</a><a href="#rezultat">Результат</a><a href="#voprosy">Вопросы</a><a href="#zayavka-2">Заявка</a>
     </nav>
-    <a class="tel" href="tel:+74952101840">+7 (495) 210-18-40</a>
     <a class="btn sm" href="#zayavka">Оставить заявку</a>
     <button class="menu" id="menuBtn" type="button" aria-expanded="false" aria-controls="drawer">Меню</button>
   </div>
   <nav class="drawer" id="drawer" aria-label="Разделы" hidden>
     <a class="nl" href="#uslugi">Услуги</a>
     <a class="nl" href="#etapy">Этапы</a>
-    <a class="nl" href="#o-nas">О нас</a>
+    <a class="nl" href="#rezultat">Результат</a>
     <a class="nl" href="#voprosy">Вопросы</a>
-    <a class="nl" href="#kontakty">Контакты</a>
-    <a class="dtel" href="tel:+74952101840">+7 (495) 210-18-40</a>
+    <a class="nl" href="#zayavka-2">Заявка</a>
     <a class="btn" href="#zayavka">Оставить заявку</a>
   </nav>
 </header>
@@ -285,15 +266,15 @@ footer{background:#233229;color:#B7C4B8;padding:48px 0 40px;font-size:14px}
       <a class="link" href="#uslugi">Смотреть услуги</a>
     </div>
     <div class="facts">
-      <p><b>Бриф в день заявки</b>Тема, методичка, срок сдачи</p>
-      <p><b>Пн–Пт, 10:00–19:00</b>Отвечает методист</p>
+      <p><b>Авторство остаётся у вас</b>Текст пишете вы</p>
+      <p><b>Один этап или вся работа</b>Берём столько, сколько нужно</p>
     </div>
   </section>
   <section class="view" aria-label="Заявка на консультацию">
     <img src="img/hero-1400.webp" srcset="img/hero-800.webp 800w, img/hero-1400.webp 1400w" sizes="(max-width:1100px) 100vw, 48vw" width="1400" height="803" alt="Рука с карандашом над разлинованным блокнотом" fetchpriority="high">
     <form class="form lead-form" id="zayavka" novalidate>
       <h2>Оставить заявку</h2>
-      <p class="sub">Напишите тему и срок сдачи — методист ответит в рабочий день.</p>
+      <p class="sub">Напишите тему и срок сдачи, методист свяжется с вами.</p>
       <label class="fld">Имя<input type="text" name="name" autocomplete="name" required><span class="err" data-err="name"></span></label>
       <label class="fld">Телефон<input type="tel" name="phone" class="phone-mask" inputmode="tel" autocomplete="tel" placeholder="+7" required><span class="err" data-err="phone"></span></label>
       <label class="ok"><input type="checkbox" name="consent" required><span>Согласен на обработку персональных данных и с <a href="policy.html">политикой конфиденциальности</a></span></label>
@@ -324,46 +305,32 @@ footer{background:#233229;color:#B7C4B8;padding:48px 0 40px;font-size:14px}
   <div class="wrap">
     <div class="head">
       <h2>Этапы работы</h2>
-      <p>Четыре понятных шага. Сроки фиксируем после брифа, ориентир первого ответа — в день обращения.</p>
+      <p>Четыре понятных шага. Сроки фиксируем после брифа.</p>
     </div>
     <ol>
-      <li><span class="n">1</span><h3>Заявка и бриф</h3><p>Присылаете тему, методичку и дедлайн. В тот же рабочий день уточняем объём и формат сопровождения.</p></li>
-      <li><span class="n">2</span><h3>План и график</h3><p>Согласуем оглавление, список источников и график глав. Пример: заявка 01.11.2025 — план готов 03.11.2025.</p></li>
+      <li><span class="n">1</span><h3>Заявка и бриф</h3><p>Присылаете тему, методичку и дедлайн. Уточняем объём и формат сопровождения.</p></li>
+      <li><span class="n">2</span><h3>План и график</h3><p>Согласуем оглавление, список источников и график глав.</p></li>
       <li><span class="n">3</span><h3>Сопровождение по главам</h3><p>Разбираем черновики порциями, держим критерии преподавателя и не даём работе уехать от темы.</p></li>
       <li><span class="n">4</span><h3>Финальная проверка</h3><p>Смотрим целостность, оформление и речь к защите. Материалы и авторство остаются у вас.</p></li>
     </ol>
   </div>
 </section>
 
-<section class="sec about" id="o-nas">
+<section class="sec about" id="rezultat">
   <div class="wrap abt">
     <figure>
       <img src="img/about-1200.webp" srcset="img/about-700.webp 700w, img/about-1200.webp 1200w" sizes="(max-width:1100px) 100vw, 46vw" width="1200" height="800" alt="Рука с ручкой над раскрытым блокнотом, на запястье часы" loading="lazy">
     </figure>
     <div>
-      <h2>Почему обращаются в Лемму</h2>
+      <h2>Что вы получаете</h2>
       <p class="intro">Работаем спокойно и предметно: не обещаем «сдать за ночь», а держим методику, сроки и понятный диалог.</p>
-      <dl class="stats">
-        <div><b>9</b><span>лет методического сопровождения учебных и научных текстов<small>Практика</small></span></div>
-        <div><b>1200</b><span>разборов тем, планов и черновиков за последние сезоны<small>Консультации</small></span></div>
-        <div><b>24</b><span>часа — ориентир, за который даём первый содержательный ответ<small>Первый разбор</small></span></div>
-        <div><b>4</b><span>этапа от заявки до консультации перед сдачей и защитой<small>Формат</small></span></div>
-      </dl>
-      <p class="demo-note">Демо-версия: цифры даны для примера.</p>
-    </div>
-  </div>
-</section>
-
-<section class="sec reviews" id="otzyvy">
-  <div class="wrap">
-    <div class="head">
-      <h2>Отзывы</h2>
-      <p>Что пишут после сдачи работы. Имена сокращены, детали тем не публикуем. В демо-версии отзывы даны для примера.</p>
-    </div>
-    <div class="rv">
-      <blockquote>Пришла с сырой темой и дедлайном через месяц. За два дня собрали план глав, потом правили черновик по частям. Преподаватель принял с первого раза.<cite><b>Елена К.</b>магистратура, обращение 14.02.2025</cite></blockquote>
-      <blockquote>Нужна была помощь со статьёй: метод описан, выводы плыли. Разобрали логику результатов, я переписал сам. Журнал принял после одной правки.<cite><b>Игорь С.</b>аспирантура, обращение 03.04.2025</cite></blockquote>
-      <blockquote>Больше всего помог разбор оформления и ссылок по методичке. Не пришлось переделывать список литературы за ночь до нормоконтроля.<cite><b>Мария А.</b>бакалавриат, обращение 21.09.2025</cite></blockquote>
+      <ul class="get">
+        <li><b>План и список источников</b>Оглавление, гипотеза и база литературы до основного текста.</li>
+        <li><b>Комментарии к главам</b>Разбор черновика: логика, цитирование и оформление.</li>
+        <li><b>Проверенное оформление</b>Список литературы и ссылки приведены в соответствие с методичкой.</li>
+        <li><b>Разбор доклада и слайдов</b>Типичные вопросы комиссии и понятная речь к защите.</li>
+        <li><b>Консультация перед защитой</b>Финальная проверка целостности работы. Материалы и авторство остаются у вас.</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -377,7 +344,7 @@ footer{background:#233229;color:#B7C4B8;padding:48px 0 40px;font-size:14px}
     <div>
       <details open><summary>Вы пишете работу за студента?</summary><p>Нет. Мы консультируем и сопровождаем: план, источники, разбор черновика, оформление и речь к защите. Текст пишете вы, авторство остаётся вашим.</p></details>
       <details><summary>С какими направлениями работаете?</summary><p>Экономика, менеджмент, педагогика, социология, юриспруденция, технические и естественно-научные темы на уровне курсовой, выпускной работы, статьи и тезисов.</p></details>
-      <details><summary>Как быстро можно начать?</summary><p>Первый ответ — в день заявки, если она пришла в рабочие часы. Первое содержательное занятие по материалам обычно укладывается в 24 часа.</p></details>
+      <details><summary>Как быстро можно начать?</summary><p>Начинаем с брифа: получаем тему, методичку и дедлайн, после этого вместе фиксируем сроки.</p></details>
       <details><summary>Что нужно прислать для старта?</summary><p>Тему или рабочее название, методические указания, срок сдачи и то, что уже написано. Чем точнее бриф, тем быстрее план.</p></details>
       <details><summary>Можно взять только один этап?</summary><p>Да. Часто берут только структуру, только разбор черновика или только подготовку к защите. Полное сопровождение собираем по запросу.</p></details>
     </div>
@@ -388,14 +355,16 @@ footer{background:#233229;color:#B7C4B8;padding:48px 0 40px;font-size:14px}
   <div class="wrap ct">
     <div>
       <h2>Оставить заявку на консультацию</h2>
-      <p class="intro">Напишите тему и срок сдачи. Методист отвечает в рабочий день.</p>
-      <dl class="info">
-        <div><dt>Компания</dt><dd>ООО «Лемма»</dd></div>
-        <div><dt>Телефон</dt><dd><a href="tel:+74952101840">+7 (495) 210-18-40</a></dd></div>
-        <div><dt>Почта</dt><dd><a href="mailto:hello@lemma-study.ru">hello@lemma-study.ru</a></dd></div>
-        <div><dt>Адрес</dt><dd>г. Москва, ул. Покровка, 27</dd></div>
-        <div><dt>Часы работы</dt><dd>Пн–Пт, 10:00–19:00</dd></div>
-      </dl>
+      <p class="intro">Напишите тему и срок сдачи. Чем точнее бриф, тем быстрее план.</p>
+      <div class="brief">
+        <h3>Что нужно для старта</h3>
+        <ul>
+          <li>Тема или рабочее название</li>
+          <li>Методические указания</li>
+          <li>Срок сдачи</li>
+          <li>То, что уже написано</li>
+        </ul>
+      </div>
     </div>
     <form class="form lead-form" id="zayavka-2" novalidate>
       <h3>Заявка</h3>
@@ -412,13 +381,8 @@ footer{background:#233229;color:#B7C4B8;padding:48px 0 40px;font-size:14px}
 
 <footer>
   <div class="wrap">
-    <div class="ft">
-      <div><b>ООО «Лемма»</b>Методическое сопровождение учебных и научных работ</div>
-      <div><b>Контакты</b>+7 (495) 210-18-40<br>hello@lemma-study.ru<br>г. Москва, ул. Покровка, 27</div>
-      <div><b>Реквизиты</b>ИНН 7701987654<br>КПП 770101001<br>ОГРН 1234567890456</div>
-    </div>
     <div class="fnote">
-      <span>Демо-версия. Цифры, цены и отзывы даны для примера</span>
+      <span>Лемма — методическое сопровождение учебных и научных работ. Демо-версия сайта.</span>
       <span><a href="policy.html">Политика конфиденциальности</a>. Фото: Thought Catalog и Alejandro Escamilla, Unsplash, CC0</span>
     </div>
   </div>
@@ -465,7 +429,7 @@ footer{background:#233229;color:#B7C4B8;padding:48px 0 40px;font-size:14px}
       if(phone.length<11){f.elements.phone.focus();return;}
       var box=document.createElement('div');box.className='done';box.setAttribute('role','status');
       var h3=document.createElement('h3');h3.textContent='Спасибо, '+name+'. Заявка принята';
-      var p=document.createElement('p');p.textContent='Методист свяжется с вами по телефону в рабочий день, Пн–Пт, 10:00–19:00.';
+      var p=document.createElement('p');p.textContent='Методист свяжется с вами по указанному телефону.';
       var d=document.createElement('p');d.className='demo';d.textContent='Демо-версия: форма проверяется только в браузере, данные никуда не отправляются и не сохраняются.';
       box.appendChild(h3);box.appendChild(p);box.appendChild(d);
       f.replaceChildren(box);box.tabIndex=-1;box.focus();

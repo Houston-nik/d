@@ -2,11 +2,11 @@
   'use strict';
   var E=NIK.esc,reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   NIK.load().then(function(D){
-    var A=D.agents,C=D.cases;
-    document.getElementById('heroSub').textContent=A.length+' '+NIK.agentWord(A.length)+' ведут соцсети, тексты, дизайн, сайты и рекламу. Листайте, выбирайте, открывайте.';
+    var ALL=D.agents,A=NIK.ready(ALL),C=D.cases,TOTAL=ALL.length;
+    document.getElementById('heroSub').textContent='Готово '+A.length+' из '+TOTAL+'. Остальные маскоты Дизайнер сдаёт партиями, они появятся здесь сразу. Листайте, выбирайте, открывайте.';
     /* карусель */
     var wrap=document.getElementById('avsWrap');
-    wrap.innerHTML=A.map(function(a,i){return '<div class="swiper-slide" role="group" aria-roledescription="слайд" aria-label="'+E(a.name)+', '+(i+1)+' из '+A.length+'"><div class="av">'+'<img src="'+NIK.avatar(a,256)+'" width="256" height="256" alt="Маскот: '+E(a.name)+'" draggable="false">'+'</div></div>'}).join('');
+    wrap.innerHTML=A.map(function(a,i){return '<div class="swiper-slide" role="group" aria-roledescription="слайд" aria-label="'+E(a.name)+', '+(i+1)+' из '+A.length+'"><div class="av">'+NIK.layerFig(a)+'</div></div>'}).join('');
     var now=document.getElementById('now');
     function show(i){
       var a=A[i];
@@ -18,8 +18,8 @@
     function dia(q){return D0*Math.exp(-K*q)}
     function stp(k){return CIRC*((dia(k)+dia(k+1))/2-OV*dia(k+1))}
     function xOf(p){var a=Math.min(Math.abs(p),16),n=Math.floor(a),fr=a-n,acc=0;for(var k=0;k<n;k++)acc+=stp(k);acc+=fr*stp(n);return acc}
-    function measure(){D0=el.querySelector('.swiper-slide').offsetWidth||250;if(D0<200){OV=0.34;K=0.15}else{OV=0.26;K=0.13}}
-    var sw=new Swiper(el,{loop:true,loopAdditionalSlides:10,centeredSlides:true,slidesPerView:'auto',spaceBetween:0,
+    function measure(){D0=el.querySelector('.swiper-slide').offsetWidth||250;if(D0<200){OV=0.34;K=0.15}else{OV=0.26;K=0.13}if(A.length<=8)OV=D0<200?0.38:0.1}
+    var sw=new Swiper(el,{loop:false,initialSlide:A.length>2?1:0,centeredSlides:true,slidesPerView:'auto',spaceBetween:0,
       slideToClickedSlide:true,grabCursor:true,watchSlidesProgress:true,speed:reduce?0:450,
       keyboard:{enabled:true,onlyInViewport:true},
       navigation:{prevEl:'#prev',nextEl:'#next'},
@@ -35,20 +35,20 @@
         sl[i].style.zIndex=Math.max(1,100-Math.round(ap));
       }
     }
-    function sync(){show(sw.realIndex)}
+    function sync(){show(sw.activeIndex)}
     sw.on('progress',paint);sw.on('setTranslate',paint);sw.on('slideChange',sync);sw.on('resize',function(){measure();sw.update();paint()});
-    measure();sync();sw.update();paint();NIK.initAvatarAnim(sw,A);
+    measure();sync();sw.update();paint();NIK.initAvatarAnim(sw);
     window.__sw=sw;
     /* сетка и фильтр */
     var grid=document.getElementById('grid'),chips=document.getElementById('chips'),cnt=document.getElementById('agCount'),cur='Все';
     function renderChips(){
-      var all=['Все'].concat(D.departments);
+      var all=['Все'].concat(D.departments.filter(function(d){return A.some(function(a){return a.department===d})}));
       chips.innerHTML=all.map(function(d){var n=d==='Все'?A.length:A.filter(function(a){return a.department===d}).length;return '<button class="chip" type="button" data-d="'+E(d)+'" aria-pressed="'+(d===cur)+'">'+E(d)+' '+n+'</button>'}).join('');
     }
     function renderGrid(){
       var L=cur==='Все'?A:A.filter(function(a){return a.department===cur});
-      cnt.textContent=cur==='Все'?('Показаны все '+A.length+'.'):('Показано '+L.length+' из '+A.length+'.');
-      grid.innerHTML=L.map(function(a){return '<article class="card"><div class="av"><img src="'+NIK.avatar(a,256)+'" width="256" height="256" loading="lazy" alt="Маскот: '+E(a.name)+'"></div><h3>'+E(a.name)+'</h3><p>'+E(a.skills_short)+'</p><a class="btn ghost" href="'+NIK.agentUrl(a)+'" aria-label="Подробнее об агенте: '+E(a.name)+'">Подробнее</a></article>'}).join('');
+      cnt.textContent='Готово '+A.length+' из '+TOTAL+'.'+(cur==='Все'?'':' В этом отделе: '+L.length+'.');
+      grid.innerHTML=L.map(function(a){return '<article class="card"><div class="av">'+NIK.layerFig(a,true)+'</div><h3>'+E(a.name)+'</h3><p>'+E(a.skills_short)+'</p><a class="btn ghost" href="'+NIK.agentUrl(a)+'" aria-label="Подробнее об агенте: '+E(a.name)+'">Подробнее</a></article>'}).join('')+(cur==='Все'&&TOTAL>A.length?'<div class="soon"><strong>Ещё '+(TOTAL-A.length)+' '+NIK.agentWord(TOTAL-A.length)+' скоро</strong><span>Маскоты приходят партиями. Новый агент появляется здесь, как только готовы его слои.</span></div>':'');
     }
     chips.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;cur=b.getAttribute('data-d');renderChips();renderGrid();var f=chips.querySelector('[aria-pressed=true]');if(f)f.focus()});
     renderChips();renderGrid();

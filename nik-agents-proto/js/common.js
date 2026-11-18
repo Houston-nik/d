@@ -8,8 +8,7 @@
     });
   };
   NIK.agentUrl=function(a){return 'agent.html?id='+encodeURIComponent(a.slug)};
-  NIK.avatar=function(a,size){return a.avatar+'-'+(size||256)+'.webp'};
-  NIK.agentWord=function(n){var m=n%10,h=n%100;return (m==1&&h!=11)?'агент':(m>=2&&m<=4&&(h<12||h>14))?'агента':'агентов'};
+    NIK.agentWord=function(n){var m=n%10,h=n%100;return (m==1&&h!=11)?'агент':(m>=2&&m<=4&&(h<12||h>14))?'агента':'агентов'};
   // меню
   var b=document.getElementById('burger'),n=document.getElementById('nav');
   if(b&&n){
@@ -21,7 +20,7 @@
   if(pg==='blog'){var l=document.querySelector('[data-nav=blog]');if(l)l.setAttribute('aria-current','page')}
   // карточка кейса, общая для главной и страницы агента
   NIK.caseCard=function(c,agents,hideAgent){
-    var ag=!hideAgent&&c.agents&&c.agents.length?c.agents.map(function(s){var a=agents.filter(function(x){return x.slug===s})[0];return a?'<a class="btn ghost" href="'+NIK.agentUrl(a)+'">Агент: '+NIK.esc(a.name)+'</a>':''}).join(''):'';
+    var ag=!hideAgent&&c.agents&&c.agents.length?c.agents.map(function(s){var a=agents.filter(function(x){return x.slug===s&&x.layers})[0];return a?'<a class="btn ghost" href="'+NIK.agentUrl(a)+'">Агент: '+NIK.esc(a.name)+'</a>':''}).join(''):'';
     return '<article class="case"><div class="cv"><img src="'+NIK.esc(c.cover)+'" width="640" height="400" loading="lazy" alt="Первый экран: '+NIK.esc(c.title)+'"></div><div class="tx"><span class="type">'+NIK.esc(c.type)+'</span><h3>'+NIK.esc(c.title)+'</h3><p>'+NIK.esc(c.summary)+'</p><div class="acts"><a class="btn" href="'+NIK.esc(c.url)+'" target="_blank" rel="noopener">Открыть демо</a>'+ag+'</div></div></article>';
   };
 })();

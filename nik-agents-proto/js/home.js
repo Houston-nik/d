@@ -3,7 +3,7 @@
   var E=NIK.esc,reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   NIK.load().then(function(D){
     var ALL=D.agents,A=NIK.ready(ALL),C=D.cases,TOTAL=ALL.length;
-    document.getElementById('heroSub').textContent=(A.length<TOTAL?'Готово '+A.length+' из '+TOTAL+'. Остальные маскоты Дизайнер сдаёт партиями, они появятся здесь сразу. Листайте, выбирайте, открывайте.':TOTAL+' агентов, у каждого своя работа. Листайте, выбирайте, открывайте.');
+    document.getElementById('heroSub').textContent=A.length+' '+NIK.agentWord(A.length)+', ежедневно выполняющих задачи на уровне реального сотрудника.';
     /* карусель */
     var wrap=document.getElementById('avsWrap');
     wrap.innerHTML=A.map(function(a,i){return '<div class="swiper-slide" role="group" aria-roledescription="слайд" aria-label="'+E(a.name)+', '+(i+1)+' из '+A.length+'"><div class="av">'+NIK.layerFig(a)+'</div></div>'}).join('');

@@ -264,8 +264,8 @@
      "eyes_closed": "eyes-closed.webp"
     },
     "eyes_center": [
-     63.56,
-     52.26
+     64.5,
+     53.48
     ]
    }
   },
@@ -333,7 +333,19 @@
     "Оформляет карточки в Яндекс Бизнесе и на Картах"
    ],
    "video_url": "",
-   "avatar": "img/avatars/13"
+   "avatar": "img/avatars/13",
+   "layers": {
+    "dir": "layers/yandeks-biznes-i-karty/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp",
+     "eyes_closed": "eyes-closed.webp"
+    },
+    "eyes_center": [
+     62.9,
+     47.23
+    ]
+   }
   },
   {
    "slug": "yandeks-direkt",
@@ -347,7 +359,19 @@
     "Собирает и ведёт кампании в Яндекс Директе"
    ],
    "video_url": "",
-   "avatar": "img/avatars/14"
+   "avatar": "img/avatars/14",
+   "layers": {
+    "dir": "layers/yandeks-direkt/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp",
+     "eyes_closed": "eyes-closed.webp"
+    },
+    "eyes_center": [
+     67.07,
+     42.02
+    ]
+   }
   },
   {
    "slug": "vcru-smm",
@@ -361,7 +385,19 @@
     "Ведёт сообщество на vc.ru: идеи, посты, ответы"
    ],
    "video_url": "",
-   "avatar": "img/avatars/15"
+   "avatar": "img/avatars/15",
+   "layers": {
+    "dir": "layers/vcru-smm/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp",
+     "eyes_closed": "eyes-closed.webp"
+    },
+    "eyes_center": [
+     57.58,
+     47.15
+    ]
+   }
   },
   {
    "slug": "content-marketer",
@@ -375,7 +411,19 @@
     "Составляет контент-план и пишет посты и статьи"
    ],
    "video_url": "",
-   "avatar": "img/avatars/16"
+   "avatar": "img/avatars/16",
+   "layers": {
+    "dir": "layers/content-marketer/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp",
+     "eyes_closed": "eyes-closed.webp"
+    },
+    "eyes_center": [
+     64.19,
+     44.13
+    ]
+   }
   },
   {
    "slug": "tenchat-avtomatizaciya",
@@ -389,7 +437,19 @@
     "Автоматизирует рутину в TenChat"
    ],
    "video_url": "",
-   "avatar": "img/avatars/17"
+   "avatar": "img/avatars/17",
+   "layers": {
+    "dir": "layers/tenchat-avtomatizaciya/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp",
+     "eyes_closed": "eyes-closed.webp"
+    },
+    "eyes_center": [
+     55.72,
+     51.07
+    ]
+   }
   },
   {
    "slug": "tilda-marketer",
@@ -403,7 +463,19 @@
     "Собирает и дорабатывает сайты на Тильде"
    ],
    "video_url": "",
-   "avatar": "img/avatars/18"
+   "avatar": "img/avatars/18",
+   "layers": {
+    "dir": "layers/tilda-marketer/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp",
+     "eyes_closed": "eyes-closed.webp"
+    },
+    "eyes_center": [
+     65.3,
+     45.12
+    ]
+   }
   },
   {
    "slug": "analitik-otdela",
@@ -417,7 +489,19 @@
     "Считает результаты отдела и показывает, что работает"
    ],
    "video_url": "",
-   "avatar": "img/avatars/19"
+   "avatar": "img/avatars/19",
+   "layers": {
+    "dir": "layers/analitik-otdela/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp",
+     "eyes_closed": "eyes-closed.webp"
+    },
+    "eyes_center": [
+     55.03,
+     48.99
+    ]
+   }
   },
   {
    "slug": "x-smm",
@@ -431,7 +515,19 @@
     "Ведёт аккаунт в X: короткие посты и ответы"
    ],
    "video_url": "",
-   "avatar": "img/avatars/20"
+   "avatar": "img/avatars/20",
+   "layers": {
+    "dir": "layers/x-smm/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp",
+     "eyes_closed": "eyes-closed.webp"
+    },
+    "eyes_center": [
+     67.2,
+     44.87
+    ]
+   }
   },
   {
    "slug": "dizayner-prezentaciy",
@@ -445,7 +541,19 @@
     "Верстает презентации и слайды для показов"
    ],
    "video_url": "",
-   "avatar": "img/avatars/21"
+   "avatar": "img/avatars/21",
+   "layers": {
+    "dir": "layers/dizayner-prezentaciy/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp",
+     "eyes_closed": "eyes-closed.webp"
+    },
+    "eyes_center": [
+     64.63,
+     53.73
+    ]
+   }
   },
   {
    "slug": "lawyer",
@@ -485,7 +593,19 @@
     "Разбирает входящую почту и готовит ответы"
    ],
    "video_url": "",
-   "avatar": "img/avatars/23"
+   "avatar": "img/avatars/23",
+   "layers": {
+    "dir": "layers/pochta/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp",
+     "eyes_closed": "eyes-closed.webp"
+    },
+    "eyes_center": [
+     60.1,
+     48.45
+    ]
+   }
   },
   {
    "slug": "instagram-smm",

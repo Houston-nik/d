@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Пятый стол — кейтеринг в Санкт-Петербурге (демо-макет)</title>
+<meta name="description" content="Демо-макет лендинга кейтеринга в Санкт-Петербурге: фуршеты, банкеты, кофе-брейки и сеты с доставкой. Цены и данные для примера.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://houston-nik.github.io/d/catering-spb-demo/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Пятый стол (демо)">
+<meta property="og:title" content="Пятый стол: кейтеринг в Петербурге. Демо-макет лендинга">
+<meta property="og:description" content="Фуршеты, банкеты, кофе-брейки и сеты с доставкой: форматы, меню, как заказать, форма заявки. Цены и данные для примера.">
+<meta property="og:image" content="https://houston-nik.github.io/d/catering-spb-demo/og.jpg?p=1">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://houston-nik.github.io/d/catering-spb-demo/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1d3538">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231d3538'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' font-weight='700' fill='%23f2f1ec' text-anchor='middle'%3E5%3C/text%3E%3C/svg%3E">
+<link rel="preload" href="fonts/Literata-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Onest-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/hero.webp" as="image" fetchpriority="high">
+<!--
+  Фото (Pexels, лицензия Pexels: бесплатно, в том числе для коммерческого использования, указание автора не обязательно, но указываем):
+  hero.webp    — "Delicious served on buffet table", Olga Lioncat — https://www.pexels.com/photo/delicious-served-on-buffet-table-7245480/
+  furshet.webp — "Elegant Three-Tiered Appetizer Tray for Event Catering", Sergei Starostin — https://www.pexels.com/photo/elegant-three-tiered-appetizer-tray-for-event-catering-34293333/
+  banket.webp  — "Banquet tables with served food and drinks", Kseniia Lopyreva — https://www.pexels.com/photo/banquet-tables-with-served-food-and-drinks-4959899/
+  coffee.webp  — "Delicious Pastries and Coffee on a Tray", Nadiia Kosarieva — https://www.pexels.com/photo/delicious-pastries-and-coffee-on-a-tray-36805814/
+  sets.webp    — "Close-up of Fresh Wrap Sandwich in Lunch Box", Novkov Visuals — https://www.pexels.com/photo/close-up-of-fresh-wrap-sandwich-in-lunch-box-34644340/
+  serve.webp   — "Catering Event with Gourmet Appetizers on Tray", Novkov Visuals — https://www.pexels.com/photo/catering-event-with-gourmet-appetizers-on-tray-34321369/
+  Шрифты: Literata (SIL OFL), Onest (SIL OFL), подмножество кириллица+латиница, локально.
+  Макет демонстрационный: название, цены, меню, телефон — вымышлены. Нет отзывов, логотипов клиентов и статистики.
+-->
+<style>
+@font-face{font-family:"Literata";src:url(fonts/Literata-var.woff2) format("woff2");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Onest";src:url(fonts/Onest-var.woff2) format("woff2");font-weight:100 900;font-display:swap}
+
+:root{
+  --paper:#f2f1ec;      /* штукатурка */
+  --card:#fbfaf6;       /* бумага меню */
+  --ink:#17232b;        /* чернила */
+  --muted:#59656b;
+  --petrol:#1d3538;     /* тёмная балтийская зелень */
+  --petrol-2:#2a4a4e;
+  --berry:#9b2c3f;      /* брусника */
+  --berry-d:#7d2232;
+  --line:#d4d3cb;
+  --serif:"Literata",Georgia,"Times New Roman",serif;
+  --sans:"Onest",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --wrap:1180px;
+  --pad:20px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1rem/1.6 var(--sans);font-variant-numeric:lining-nums;-webkit-font-smoothing:antialiased;padding-bottom:76px}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.1;letter-spacing:-.015em;margin:0}
+p{margin:0}
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 var(--pad)}
+:focus-visible{outline:3px solid var(--berry);outline-offset:3px;border-radius:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;border:0;border-radius:3px;background:var(--berry);color:#fff;font:600 1rem/1 var(--sans);text-decoration:none;cursor:pointer;transition:background .2s}
+.btn:hover{background:var(--berry-d)}
+.btn[disabled]{opacity:.6;cursor:default}
+
+/* шапка */
+.top{position:relative;z-index:5;background:var(--paper);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;min-height:64px;gap:16px}
+.brand{font:600 1.35rem/1 var(--serif);text-decoration:none;letter-spacing:-.01em;white-space:nowrap}
+.brand small{display:block;font:500 .7rem/1.2 var(--sans);color:var(--muted);letter-spacing:0;margin-top:3px}
+.nav{display:none}
+.top .tel{font-weight:600;text-decoration:none;white-space:nowrap;font-size:.95rem}
+.top .tel i{display:none;font-style:normal;font-weight:400;color:var(--muted);font-size:.72rem;margin-left:6px}
+.top .tel{font-size:.88rem}
+
+/* hero */
+.hero{display:grid}
+.hero-text{padding:36px var(--pad) 36px;max-width:640px}
+.hero h1{font-size:clamp(2.15rem,9.2vw,3.05rem);font-weight:600}
+.hero .lead{margin-top:20px;font-size:1.06rem;max-width:34em;color:#27363e}
+.hero .acts{margin-top:28px;display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center}
+.hero .acts a.alt{font-weight:500;text-underline-offset:4px;text-decoration-thickness:1px}
+.hero .fine{margin-top:22px;font-size:.82rem;color:var(--muted);max-width:36em}
+.hero-photo{aspect-ratio:4/3;overflow:hidden;background:var(--petrol-2)}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 55%}
+
+/* секции */
+section{scroll-margin-top:12px}
+.sec{padding:64px 0}
+.sec h2{font-size:clamp(1.75rem,6.4vw,2.6rem);max-width:18em}
+.sec .sub{margin-top:14px;color:var(--muted);max-width:38em}
+
+/* форматы */
+.tabs{margin-top:30px;display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--ink)}
+.tab{appearance:none;background:none;border:0;border-bottom:1px solid var(--line);padding:16px 4px 14px;text-align:left;font:600 1.15rem/1.2 var(--serif);color:var(--muted);cursor:pointer;position:relative;letter-spacing:-.01em}
+.tab:nth-child(odd){padding-right:12px}
+.tab[aria-selected=true]{color:var(--ink)}
+.tab[aria-selected=true]::after{content:"";position:absolute;left:0;right:12px;bottom:-1px;height:3px;background:var(--berry)}
+.tab:hover{color:var(--ink)}
+.panel{margin-top:28px}
+.panel[hidden]{display:none}
+.panel-in{display:grid;gap:24px}
+.panel img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:2px}
+.panel p.d{font-size:1.08rem;max-width:30em}
+.facts{margin:22px 0 0;display:grid}
+.facts div{display:grid;grid-template-columns:8.5em 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.facts div:last-child{border-bottom:1px solid var(--line)}
+.facts dt{color:var(--muted);font-size:.9rem}
+.facts dd{margin:0}
+.panel .go{margin-top:22px}
+.fadein{animation:fadein .35s ease both}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+
+/* меню */
+.menu-sec{background:var(--petrol);color:var(--paper);padding:64px 0}
+.menu-sec .sub{color:#b9c9c8;margin-top:14px;max-width:38em}
+.menu-card{margin-top:34px;background:var(--card);color:var(--ink);padding:10px;border-radius:2px}
+.menu-card-in{border:1px solid var(--ink);outline:1px solid var(--ink);outline-offset:-6px;padding:34px 24px 30px}
+.menu-card h3{font-size:1.5rem;text-align:center}
+.menu-card .tag{display:block;text-align:center;font-size:.82rem;color:var(--muted);margin-top:6px}
+.mcols{display:grid;gap:34px;margin-top:30px}
+.mgroup h4{font:600 .95rem/1.2 var(--sans);margin:0 0 6px;padding-bottom:8px;border-bottom:1px solid var(--ink)}
+.mrow{display:flex;align-items:baseline;gap:8px;padding:9px 0}
+.mrow .n{flex:0 1 auto}
+.mrow .n b{font-weight:600;display:block}
+.mrow .n small{display:block;color:var(--muted);font-size:.84rem;line-height:1.4;margin-top:1px}
+.mrow::before{content:none}
+.mrow .n{flex:1 1 auto}
+.mrow .dots{display:none;flex:1 1 20px;min-width:14px;border-bottom:2px dotted #a9a89f;transform:translateY(-4px);align-self:flex-end;margin-bottom:6px}
+.mrow .pr{flex:0 0 auto;font-family:var(--serif);font-weight:600;font-size:1.05rem;white-space:nowrap;text-align:right}
+.mrow .pr em{display:block;font:400 .66rem/1 var(--sans);font-style:normal;color:var(--berry);margin-top:3px}
+.mrow .pr span{font:400 .8rem var(--sans);color:var(--muted)}
+.menu-card .foot{margin-top:26px;padding-top:16px;border-top:1px solid var(--line);font-size:.85rem;color:var(--muted);text-align:center}
+
+/* как заказать */
+.how{display:grid;gap:30px}
+.how img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:2px}
+.steps{list-style:none;margin:30px 0 0;padding:0;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:14px;padding:18px 0;border-top:1px solid var(--line)}
+.steps li:last-child{border-bottom:1px solid var(--line)}
+.steps li::before{content:counter(s);font:600 2rem/1 var(--serif);color:var(--berry)}
+.steps b{display:block;font:600 1.12rem/1.3 var(--serif);margin-bottom:4px}
+.steps span{color:#3a474e}
+
+/* форма */
+.order-sec{background:#e8e7df;padding:64px 0}
+.order{display:grid;gap:32px}
+form{display:grid;gap:18px}
+.row2{display:grid;gap:18px}
+label.f{display:grid;gap:6px;font-size:.9rem;font-weight:500}
+.f input,.f select{width:100%;min-height:52px;padding:0 14px;border:1px solid #8a8d88;border-radius:3px;background:#fff;color:var(--ink);font:400 1rem var(--sans)}
+.f input:focus-visible,.f select:focus-visible{outline:3px solid var(--berry);outline-offset:1px}
+.f input:user-invalid{border-color:var(--berry)}
+.est{background:var(--card);border:1px solid var(--ink);padding:18px 20px;border-radius:2px}
+.est b{font:600 1.55rem/1.2 var(--serif);display:block;margin-top:2px}
+.est small{display:block;color:var(--muted);font-size:.82rem;margin-top:6px;line-height:1.45}
+.chk{display:grid;grid-template-columns:24px 1fr;gap:12px;align-items:start;font-size:.88rem;color:#32403f;line-height:1.5}
+.chk input{width:22px;height:22px;margin:1px 0 0;accent-color:var(--berry)}
+.chk a{text-underline-offset:3px}
+.ok{display:none;background:var(--card);border-left:4px solid var(--berry);padding:16px 18px;font-size:.95rem}
+.ok.show{display:block}
+.side h2{font-size:clamp(1.75rem,6.4vw,2.6rem)}
+.side p{margin-top:14px;max-width:30em;color:#32403f}
+.side ul{margin:22px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.side li{padding-left:20px;position:relative}
+.side li::before{content:"";position:absolute;left:0;top:.72em;width:10px;height:2px;background:var(--berry)}
+
+/* FAQ */
+.faq{margin-top:28px;border-top:1px solid var(--ink)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:18px 36px 18px 0;font:600 1.1rem/1.35 var(--serif);position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";position:absolute;right:6px;top:50%;width:10px;height:10px;border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:translateY(-70%) rotate(45deg);transition:transform .2s}
+.faq details[open] summary::after{transform:translateY(-30%) rotate(-135deg)}
+.faq details p{padding:0 0 20px;max-width:40em;color:#34424a}
+
+/* подвал */
+footer{background:var(--ink);color:#d6dad9;padding:48px 0 40px;font-size:.92rem}
+footer .g{display:grid;gap:26px}
+footer .brand{color:#fff}
+footer a{text-underline-offset:3px}
+footer .demo{padding-top:22px;border-top:1px solid #34444c;color:#aab5b6;font-size:.85rem;max-width:44em}
+#privacy{background:var(--card);padding:40px 0;font-size:.92rem;color:#34424a}
+#privacy h2{font-size:1.4rem;margin-bottom:12px}
+#privacy p{max-width:48em;margin-top:8px}
+
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--paper);border-top:1px solid var(--line);padding:10px var(--pad);transition:transform .25s}
+.sticky .btn{width:100%}
+.sticky.off{transform:translateY(110%)}
+
+@media (min-width:760px){
+  :root{--pad:32px}
+  .mrow .n{flex:0 1 auto}
+  .mrow .dots{display:block}
+  .top .tel i{display:inline}
+  .top .tel{font-size:.95rem}
+  .tabs{grid-template-columns:repeat(4,1fr)}
+  .tab:nth-child(odd){padding-right:4px}
+  .tab{padding-right:16px}
+  .tab[aria-selected=true]::after{right:16px}
+  .panel-in{grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+  .panel img{aspect-ratio:4/5}
+  .mcols{grid-template-columns:1fr 1fr;gap:56px}
+  .menu-card-in{padding:46px 48px 38px}
+  .row2{grid-template-columns:1fr 1fr}
+  .how{grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+}
+@media (min-width:1000px){
+  body{padding-bottom:0}
+  .sticky{display:none}
+  .nav{display:flex;gap:28px;font-size:.95rem}
+  .nav a{text-decoration:none;padding:6px 0;border-bottom:1px solid transparent}
+  .nav a:hover{border-color:var(--ink)}
+  .hero{grid-template-columns:minmax(0,5fr) minmax(0,6fr);min-height:640px}
+  .hero-text{align-self:center;padding:72px 56px 72px max(32px,calc((100vw - var(--wrap))/2 + 32px));max-width:none}
+  .hero h1{font-size:clamp(2.9rem,4.1vw,4.1rem)}
+  .hero-photo{aspect-ratio:auto;height:100%}
+  .sec,.menu-sec,.order-sec{padding:96px 0}
+  .order{grid-template-columns:5fr 6fr;gap:80px;align-items:start}
+  .faq-wrap{display:grid;grid-template-columns:4fr 7fr;gap:80px}
+  .faq-wrap .faq{margin-top:0}
+  .panel-in{grid-template-columns:5fr 6fr;align-items:start}
+  footer .g{grid-template-columns:1.2fr 1.2fr 1fr;gap:40px}
+  footer .demo{grid-column:1/-1}
+  .panel img{aspect-ratio:1/1}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .fadein{animation:none}
+  .sticky,.faq summary::after{transition:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" id="top">Пятый стол<small>кейтеринг в Санкт-Петербурге</small></a>
+    <nav class="nav" aria-label="Разделы">
+      <a href="#formats">Форматы</a><a href="#menu">Меню</a><a href="#how">Как заказать</a><a href="#faq">Вопросы</a>
+    </nav>
+    <a class="tel" href="tel:+78120000000">+7 (812) 000-00-00<i>пример</i></a>
+  </div>
+</header>
+
+<main>
+<section class="hero" aria-labelledby="h1">
+  <div class="hero-text">
+    <h1 id="h1">Кейтеринг в Петербурге: привезём, накроем, уберём</h1>
+    <p class="lead">Фуршеты, банкеты, кофе-брейки и сеты в офис. Напишите дату и число гостей: в течение рабочего дня пришлём меню и расчёт.</p>
+    <div class="acts">
+      <a class="btn" href="#order">Получить расчёт</a>
+      <a class="alt" href="#menu">Посмотреть меню</a>
+    </div>
+    <p class="fine">Демо-макет. Название, цены и меню вымышлены для примера.</p>
+  </div>
+  <div class="hero-photo"><img src="img/hero.webp" width="1600" height="1067" alt="Праздничный стол с закусками, салатами и фруктами на белой скатерти" fetchpriority="high"></div>
+</section>
+
+<section class="sec" id="formats" aria-labelledby="hf">
+  <div class="wrap">
+    <h2 id="hf">Четыре формата под ваш повод</h2>
+    <p class="sub">Выберите, как гостям удобнее: стоя, за столом, на перерыве или у рабочего места.</p>
+
+    <div class="tabs" role="tablist" aria-label="Форматы">
+      <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true">Фуршет</button>
+      <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1">Банкет</button>
+      <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1">Кофе-брейк</button>
+      <button class="tab" role="tab" id="t4" aria-controls="p4" aria-selected="false" tabindex="-1">Доставка сетов</button>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p1" aria-labelledby="t1" data-fmt="furshet">
+      <div class="panel-in">
+        <div>
+          <p class="d">Гости ходят, общаются и берут закуски руками. Подходит для презентаций, открытий, встреч с партнёрами и корпоративов стоя.</p>
+          <dl class="facts">
+            <div><dt>Гостей</dt><dd>от 15 до 300</dd></div>
+            <div><dt>Длительность</dt><dd>2–3 часа</dd></div>
+            <div><dt>Входит</dt><dd>закуски, напитки, посуда, сервировка, официанты по желанию</dd></div>
+            <div><dt>Цена</dt><dd>от 1 400 ₽ на гостя (пример)</dd></div>
+          </dl>
+          <a class="btn go" href="#order" data-pick="furshet">Рассчитать фуршет</a>
+        </div>
+        <img src="img/furshet.webp" width="900" height="1125" alt="Канапе с рыбной пастой и томаты с моцареллой на ярусной стеклянной подставке" loading="lazy">
+      </div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p2" aria-labelledby="t2" data-fmt="banket" hidden>
+      <div class="panel-in">
+        <div>
+          <p class="d">Гости сидят за столами, блюда подают по очереди. Для юбилеев, свадеб, ужинов с партнёрами и закрытых вечеров.</p>
+          <dl class="facts">
+            <div><dt>Гостей</dt><dd>от 20 до 200</dd></div>
+            <div><dt>Длительность</dt><dd>3–5 часов</dd></div>
+            <div><dt>Входит</dt><dd>закуски, горячее, десерт, напитки, текстиль, посуда, официанты</dd></div>
+            <div><dt>Цена</dt><dd>от 3 200 ₽ на гостя (пример)</dd></div>
+          </dl>
+          <a class="btn go" href="#order" data-pick="banket">Рассчитать банкет</a>
+        </div>
+        <img src="img/banket.webp" width="900" height="1125" alt="Банкетный стол с цветами, закусками, напитками и фруктами" loading="lazy">
+      </div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p3" aria-labelledby="t3" data-fmt="coffee" hidden>
+      <div class="panel-in">
+        <div>
+          <p class="d">Кофе, чай, выпечка и фрукты на перерыв в конференции, тренинге или переговорах. Накроем до начала, уберём после.</p>
+          <dl class="facts">
+            <div><dt>Гостей</dt><dd>от 10 до 500</dd></div>
+            <div><dt>Длительность</dt><dd>30–40 минут на перерыв</dd></div>
+            <div><dt>Входит</dt><dd>кофе и чай, выпечка, фрукты, вода, посуда, дозаправка столов</dd></div>
+            <div><dt>Цена</dt><dd>от 450 ₽ на гостя (пример)</dd></div>
+          </dl>
+          <a class="btn go" href="#order" data-pick="coffee">Рассчитать кофе-брейк</a>
+        </div>
+        <img src="img/coffee.webp" width="900" height="1125" alt="Капучино, ягодная тарталетка и пирожное на подносе" loading="lazy">
+      </div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p4" aria-labelledby="t4" data-fmt="sets" hidden>
+      <div class="panel-in">
+        <div>
+          <p class="d">Ланч-боксы и сеты в офис или на выезд. Каждая порция упакована отдельно, с приборами и салфетками. Привозим к назначенному времени.</p>
+          <dl class="facts">
+            <div><dt>Порций</dt><dd>от 10</dd></div>
+            <div><dt>Доставка</dt><dd>по Петербургу, в окно времени</dd></div>
+            <div><dt>Входит</dt><dd>основное блюдо, закуска, десерт, приборы, салфетки</dd></div>
+            <div><dt>Цена</dt><dd>от 650 ₽ за сет (пример)</dd></div>
+          </dl>
+          <a class="btn go" href="#order" data-pick="sets">Заказать сеты</a>
+        </div>
+        <img src="img/sets.webp" width="900" height="1125" alt="Сэндвичи-wrap с зеленью и ветчиной в картонном боксе" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="menu-sec" id="menu" aria-labelledby="hm">
+  <div class="wrap">
+    <h2 id="hm">Меню, из которого мы собираем ваш стол</h2>
+    <p class="sub">Это пример структуры. В рабочей версии здесь будет настоящее меню с вашими блюдами, весом и ценами.</p>
+
+    <div class="menu-card">
+      <div class="menu-card-in">
+        <h3>Пятый стол</h3>
+        <span class="tag">Образец меню, цены для примера</span>
+        <div class="mcols">
+          <div class="mgroup">
+            <h4>Наборы, цена на гостя</h4>
+            <div class="mrow"><div class="n"><b>Кофе-брейк «Утро»</b><small>кофе, чай, выпечка, фрукты</small></div><i class="dots"></i><div class="pr">450 ₽<em>пример</em></div></div>
+            <div class="mrow"><div class="n"><b>Сет «Офис»</b><small>основное, закуска, десерт, приборы</small></div><i class="dots"></i><div class="pr">650 ₽<em>пример</em></div></div>
+            <div class="mrow"><div class="n"><b>Фуршет «Невский»</b><small>10 закусок, 2 горячих, напитки</small></div><i class="dots"></i><div class="pr">1 400 ₽<em>пример</em></div></div>
+            <div class="mrow"><div class="n"><b>Банкет «Три подачи»</b><small>закуски, горячее, десерт, обслуживание</small></div><i class="dots"></i><div class="pr">3 200 ₽<em>пример</em></div></div>
+          </div>
+          <div class="mgroup">
+            <h4>Холодные закуски, цена за штуку</h4>
+            <div class="mrow"><div class="n"><b>Тарталетка с лососем</b><small>сливочный сыр, укроп, 35 г</small></div><i class="dots"></i><div class="pr">120 ₽<em>пример</em></div></div>
+            <div class="mrow"><div class="n"><b>Канапе с моцареллой</b><small>томат черри, базилик, 25 г</small></div><i class="dots"></i><div class="pr">90 ₽<em>пример</em></div></div>
+            <div class="mrow"><div class="n"><b>Крекер с паштетом</b><small>куриная печень, брусника, 30 г</small></div><i class="dots"></i><div class="pr">95 ₽<em>пример</em></div></div>
+            <div class="mrow"><div class="n"><b>Мини-сэндвич с ростбифом</b><small>горчица, рукола, 60 г</small></div><i class="dots"></i><div class="pr">140 ₽<em>пример</em></div></div>
+            <h4 style="margin-top:22px">Сладкое, цена за штуку</h4>
+            <div class="mrow"><div class="n"><b>Тарталетка с ягодами</b><small>заварной крем, 45 г</small></div><i class="dots"></i><div class="pr">110 ₽<em>пример</em></div></div>
+            <div class="mrow"><div class="n"><b>Эклер с карамелью</b><small>40 г</small></div><i class="dots"></i><div class="pr">100 ₽<em>пример</em></div></div>
+          </div>
+        </div>
+        <p class="foot">Аллергены, вегетарианские и постные позиции отмечаем в итоговом меню.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="how" aria-labelledby="hh">
+  <div class="wrap how">
+    <div>
+      <h2 id="hh">Как заказать</h2>
+      <p class="sub">Четыре шага от заявки до убранного стола.</p>
+      <ol class="steps">
+        <li><div><b>Оставляете заявку</b><span>Дата, число гостей и формат. Можно через форму ниже или по телефону.</span></div></li>
+        <li><div><b>Получаете меню и расчёт</b><span>В течение рабочего дня, с вариантами под ваш бюджет.</span></div></li>
+        <li><div><b>Согласовываем и вносим предоплату</b><span>Фиксируем меню, время и адрес. Размер предоплаты называем в расчёте.</span></div></li>
+        <li><div><b>Привозим, накрываем, убираем</b><span>Приезжаем заранее, накрываем стол, после мероприятия забираем посуду и мусор.</span></div></li>
+      </ol>
+    </div>
+    <img src="img/serve.webp" width="1200" height="800" alt="Официант подаёт поднос с закусками гостям на мероприятии" loading="lazy">
+  </div>
+</section>
+
+<section class="order-sec" id="order" aria-labelledby="ho">
+  <div class="wrap order">
+    <div class="side">
+      <h2 id="ho">Расскажите о мероприятии</h2>
+      <p>Достаточно даты и числа гостей. Остальное уточним по телефону или в мессенджере.</p>
+      <ul>
+        <li>Расчёт и меню придут в течение рабочего дня</li>
+        <li>Если даты уже заняты, скажем сразу и предложим ближайшие</li>
+        <li>Ничего оплачивать на этом шаге не нужно</li>
+      </ul>
+    </div>
+    <form id="f" novalidate>
+      <label class="f">Имя<input name="name" type="text" autocomplete="given-name" required></label>
+      <label class="f">Телефон<input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 ___ ___-__-__" required pattern="[+0-9 ()\-]{10,}"></label>
+      <div class="row2">
+        <label class="f">Дата мероприятия<input name="date" id="date" type="date" required></label>
+        <label class="f">Число гостей<input name="guests" id="guests" type="number" min="10" max="500" value="40" inputmode="numeric" required></label>
+      </div>
+      <label class="f">Формат
+        <select name="format" id="fmt">
+          <option value="furshet">Фуршет</option>
+          <option value="banket">Банкет</option>
+          <option value="coffee">Кофе-брейк</option>
+          <option value="sets">Доставка сетов</option>
+        </select>
+      </label>
+      <div class="est" aria-live="polite">
+        Ориентир по бюджету
+        <b id="est">от 56 000 ₽</b>
+        <small id="estn">Фуршет, 40 гостей. Простой пример расчёта по ценам «от», без напитков и аренды. Точную сумму назовём после меню.</small>
+      </div>
+      <label class="chk"><input type="checkbox" name="consent" required><span>Я согласен на обработку персональных данных для связи по заявке на условиях <a href="#privacy">политики обработки данных</a></span></label>
+      <button class="btn" type="submit">Получить расчёт</button>
+      <div class="ok" id="ok" role="status">Это демо-макет: заявка никуда не отправлена. В рабочей версии она приходит владельцу в Telegram и на почту.</div>
+    </form>
+  </div>
+</section>
+
+<section class="sec" id="faq" aria-labelledby="hq">
+  <div class="wrap faq-wrap">
+    <h2 id="hq">Частые вопросы</h2>
+    <div class="faq">
+      <details><summary>За сколько дней нужно заказывать?</summary><p>Фуршеты и кофе-брейки обычно собираем за 3–5 дней, банкеты лучше обсуждать за 2–3 недели. Если срок горит, напишите: скажем сразу, успеем или нет. (Сроки в макете для примера.)</p></details>
+      <details><summary>Вы работаете только по Петербургу?</summary><p>Работаем по городу и ближайшим пригородам. Стоимость выезда за КАД считаем отдельно и называем в расчёте.</p></details>
+      <details><summary>Какое минимальное число гостей?</summary><p>Кофе-брейк и сеты от 10 человек, фуршет от 15, банкет от 20. Для меньших компаний предложим сеты.</p></details>
+      <details><summary>Что с аллергиями, постом и вегетарианцами?</summary><p>Скажите заранее, и мы отметим подходящие блюда в меню. Для гостей с аллергиями подготовим отдельные порции с подписью.</p></details>
+      <details><summary>Посуда и официанты входят в цену?</summary><p>Посуду и сервировку считаем в расчёте. Официантов подключаем, если нужна подача или обслуживание на месте. Это отдельная строка в смете.</p></details>
+      <details><summary>Как оплатить?</summary><p>Предоплата после согласования меню, остаток по факту. Для компаний работаем по счёту с закрывающими документами.</p></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap g">
+    <div>
+      <a class="brand" href="#top">Пятый стол</a>
+      <p style="margin-top:10px">Кейтеринг в Санкт-Петербурге</p>
+    </div>
+    <div>
+      <a href="tel:+78120000000">+7 (812) 000-00-00</a> (пример)<br>
+      <a href="mailto:hello@example.ru">hello@example.ru</a> (пример)<br>
+      Реквизиты (ИНН, ОГРН) в рабочей версии
+    </div>
+    <p><a href="#privacy">Политика обработки персональных данных</a></p>
+    <p class="demo">Демо-макет, данные для примера. Название «Пятый стол», телефон, почта, цены и меню вымышлены. Фото со стоков Pexels, авторы указаны в коде страницы.</p>
+  </div>
+</footer>
+
+<section id="privacy" aria-labelledby="hp">
+  <div class="wrap">
+    <h2 id="hp">Политика обработки персональных данных</h2>
+    <p>Заглушка для демо. В рабочей версии здесь будет отдельная страница: кто оператор (наименование, ИНН), какие данные собираем (имя, телефон, дата и число гостей), для чего (связаться по заявке и подготовить расчёт), как долго храним и как отозвать согласие.</p>
+  </div>
+</section>
+
+<div class="sticky" id="sticky"><a class="btn" href="#order">Получить расчёт</a></div>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.tab')),
+      panels=[].slice.call(document.querySelectorAll('.panel'));
+  function show(i,focus){
+    tabs.forEach(function(t,k){t.setAttribute('aria-selected',k===i);t.tabIndex=k===i?0:-1});
+    panels.forEach(function(p,k){p.hidden=k!==i; if(k===i){p.classList.remove('fadein');void p.offsetWidth;p.classList.add('fadein')}});
+    if(focus)tabs[i].focus();
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){show(i)});
+    t.addEventListener('keydown',function(e){
+      var n=null;
+      if(e.key==='ArrowRight')n=(i+1)%tabs.length;
+      if(e.key==='ArrowLeft')n=(i+tabs.length-1)%tabs.length;
+      if(e.key==='Home')n=0; if(e.key==='End')n=tabs.length-1;
+      if(n!==null){e.preventDefault();show(n,true)}
+    });
+  });
+
+  var rate={furshet:1400,banket:3200,coffee:450,sets:650},
+      name={furshet:'Фуршет',banket:'Банкет',coffee:'Кофе-брейк',sets:'Доставка сетов'},
+      fmt=document.getElementById('fmt'),g=document.getElementById('guests'),
+      est=document.getElementById('est'),estn=document.getElementById('estn');
+  function fmtRub(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'\u00a0')}
+  function calc(){
+    var n=parseInt(g.value,10);
+    if(!n||n<1){est.textContent='—';return}
+    est.textContent='от '+fmtRub(n*rate[fmt.value])+'\u00a0₽';
+    estn.textContent=name[fmt.value]+', '+n+' гост'+(n%10===1&&n%100!==11?'ь':(n%10>=2&&n%10<=4&&(n%100<10||n%100>=20)?'я':'ей'))+'. Простой пример расчёта по ценам «от», без напитков и аренды. Точную сумму назовём после меню.';
+  }
+  fmt.addEventListener('change',calc);g.addEventListener('input',calc);
+  [].forEach.call(document.querySelectorAll('[data-pick]'),function(a){
+    a.addEventListener('click',function(){fmt.value=a.getAttribute('data-pick');calc()});
+  });
+
+  var d=document.getElementById('date'),t=new Date();
+  d.min=t.getFullYear()+'-'+('0'+(t.getMonth()+1)).slice(-2)+'-'+('0'+t.getDate()).slice(-2);
+
+  var f=document.getElementById('f'),ok=document.getElementById('ok');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!f.checkValidity()){f.reportValidity();return}
+    ok.classList.add('show');
+    ok.scrollIntoView({block:'nearest'});
+  });
+
+  var s=document.getElementById('sticky'),o=document.getElementById('order');
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(en){s.classList.toggle('off',en[0].isIntersecting)},{threshold:.15}).observe(o);
+  }
+})();
+</script>
+</body>
+</html>

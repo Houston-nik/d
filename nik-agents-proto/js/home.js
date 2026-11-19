@@ -39,19 +39,10 @@
     sw.on('progress',paint);sw.on('setTranslate',paint);sw.on('slideChange',sync);sw.on('resize',function(){measure();sw.update();paint()});
     measure();sync();sw.update();paint();NIK.initAvatarAnim(sw);
     window.__sw=sw;
-    /* сетка и фильтр */
-    var grid=document.getElementById('grid'),chips=document.getElementById('chips'),cnt=document.getElementById('agCount'),cur='Все';
-    function renderChips(){
-      var all=['Все'].concat(D.departments.filter(function(d){return A.some(function(a){return a.department===d})}));
-      chips.innerHTML=all.map(function(d){var n=d==='Все'?A.length:A.filter(function(a){return a.department===d}).length;return '<button class="chip" type="button" data-d="'+E(d)+'" aria-pressed="'+(d===cur)+'">'+E(d)+' '+n+'</button>'}).join('');
-    }
-    function renderGrid(){
-      var L=cur==='Все'?A:A.filter(function(a){return a.department===cur});
-      cnt.textContent='Готово '+A.length+' из '+TOTAL+'.'+(cur==='Все'?'':' В этом отделе: '+L.length+'.');
-      grid.innerHTML=L.map(function(a){return '<article class="card"><div class="av">'+NIK.layerFig(a,true)+'</div><h3>'+E(a.name)+'</h3><p>'+E(a.skills_short)+'</p><a class="btn ghost" href="'+NIK.agentUrl(a)+'" aria-label="Подробнее об агенте: '+E(a.name)+'">Подробнее</a></article>'}).join('')+(cur==='Все'&&TOTAL>A.length?'<div class="soon"><strong>Ещё '+(TOTAL-A.length)+' '+NIK.agentWord(TOTAL-A.length)+' скоро</strong><span>Маскоты приходят партиями. Новый агент появляется здесь, как только готовы его слои.</span></div>':'');
-    }
-    chips.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;cur=b.getAttribute('data-d');renderChips();renderGrid();var f=chips.querySelector('[aria-pressed=true]');if(f)f.focus()});
-    renderChips();renderGrid();
+    /* на главной только первый ряд, весь список на agents.html */
+    document.getElementById('agCount').textContent=A.length+' '+NIK.agentWord(A.length)+' в команде.';
+    document.getElementById('allBtn').textContent='Посмотреть всех '+A.length;
+    document.getElementById('grid').innerHTML=A.slice(0,4).map(NIK.agentCard).join('');
     /* кейсы */
     var feed=document.getElementById('feed');
     var f=C[0],rest=C.slice(1);

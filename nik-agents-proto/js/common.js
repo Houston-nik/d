@@ -8,6 +8,7 @@
     });
   };
   NIK.agentUrl=function(a){return 'agent.html?id='+encodeURIComponent(a.slug)};
+    NIK.agentCard=function(a){var E=NIK.esc;return '<article class="card"><div class="av">'+NIK.layerFig(a,true)+'</div><h3>'+E(a.name)+'</h3><p>'+E(a.skills_short)+'</p><a class="btn ghost" href="'+NIK.agentUrl(a)+'" aria-label="Подробнее об агенте: '+E(a.name)+'">Подробнее</a></article>'};
     NIK.agentWord=function(n){var m=n%10,h=n%100;return (m==1&&h!=11)?'агент':(m>=2&&m<=4&&(h<12||h>14))?'агента':'агентов'};
   // меню
   var b=document.getElementById('burger'),n=document.getElementById('nav');
@@ -17,6 +18,7 @@
     document.addEventListener('keydown',function(e){if(e.key==='Escape'&&n.classList.contains('open')){n.classList.remove('open');b.setAttribute('aria-expanded','false');b.focus()}});
   }
   var pg=document.body.getAttribute('data-page');
+  if(pg==='agents'){var la=document.querySelector('[data-nav=agents]');if(la)la.setAttribute('aria-current','page')}
   if(pg==='blog'){var l=document.querySelector('[data-nav=blog]');if(l)l.setAttribute('aria-current','page')}
   // карточка кейса, общая для главной и страницы агента
   NIK.caseCard=function(c,agents,hideAgent){

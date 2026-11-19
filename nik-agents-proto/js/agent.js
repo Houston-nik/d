@@ -6,7 +6,7 @@
   NIK.load().then(function(D){
     var ALL=D.agents,A=NIK.ready(ALL),i=-1;
     var cur=ALL.filter(function(x){return x.slug===id})[0];for(var k=0;k<A.length;k++)if(A[k].slug===id)i=k;
-    if(!cur){document.title='Агент не найден | Ник Houston';root.innerHTML='<div class="stub"><h1>Агент не найден</h1><p>Такого адреса нет. Выберите агента из списка.</p><a class="btn" href="index.html#agents">К агентам</a></div>';return}
+    if(!cur){document.title='Агент не найден | Ник Houston';root.innerHTML='<div class="stub"><h1>Агент не найден</h1><p>Такого адреса нет. Выберите агента из списка.</p><a class="btn" href="agents.html">К агентам</a></div>';return}
     var a=cur,prev=A[(i<0?0:i+A.length-1)%A.length],next=A[(i<0?A.length-1:i+1)%A.length];
     var port=a.layers?NIK.layerFig(a):'<div class="soonface"><span>Портрет скоро</span></div>';
     document.title=a.name+' | Ник Houston';
@@ -19,7 +19,7 @@
     var skills='<h2 class="h3s">Что умеет</h2><ul class="list">'+a.skills.map(function(s){return '<li>'+E(s)+'</li>'}).join('')+'</ul>';
     var cases=cs.length?'<div class="cases">'+cs.map(function(c){return NIK.caseCard(c,A,true)}).join('')+'</div>':'<div class="ph-case" style="max-width:520px"><strong>Кейс будет</strong><span>Работы этого агента появятся здесь, когда будут настоящие.</span></div>';
     root.innerHTML=
-      '<p class="crumbs"><a href="index.html#agents">Агенты</a> / '+E(a.name)+'</p>'+
+      '<p class="crumbs"><a href="agents.html">Агенты</a> / '+E(a.name)+'</p>'+
       '<div class="ag"><div class="face"><div class="big">'+port+'</div><h1>'+E(a.name)+'</h1><p class="dep">'+E(a.department)+'</p><p class="lead">'+E(a.skills_short)+'</p>'+facts+'</div>'+
       '<div class="laptop" role="group" aria-label="Видео об агенте"><div class="screen"><div class="poster">'+video+'</div></div><div class="base"></div></div></div>'+
       '<section class="blk"><div class="two"><div><h2 class="h3s">Об агенте</h2>'+desc+steps+'</div><div>'+skills+'</div></div></section>'+

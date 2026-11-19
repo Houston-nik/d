@@ -19,7 +19,7 @@
     function stp(k){return CIRC*((dia(k)+dia(k+1))/2-OV*dia(k+1))}
     function xOf(p){var a=Math.min(Math.abs(p),16),n=Math.floor(a),fr=a-n,acc=0;for(var k=0;k<n;k++)acc+=stp(k);acc+=fr*stp(n);return acc}
     function measure(){D0=el.querySelector('.swiper-slide').offsetWidth||250;if(D0<200){OV=0.34;K=0.15}else{OV=0.26;K=0.13}if(A.length<=8)OV=D0<200?0.38:0.1}
-    var sw=new Swiper(el,{loop:false,initialSlide:A.length>2?1:0,centeredSlides:true,slidesPerView:'auto',spaceBetween:0,
+    var sw=new Swiper(el,{loop:A.length>=24,loopAdditionalSlides:A.length>=24?10:0,initialSlide:A.length>=24?0:Math.min(5,Math.floor((A.length-1)/2)),centeredSlides:true,slidesPerView:'auto',spaceBetween:0,
       slideToClickedSlide:true,grabCursor:true,watchSlidesProgress:true,speed:reduce?0:450,
       keyboard:{enabled:true,onlyInViewport:true},
       navigation:{prevEl:'#prev',nextEl:'#next'},
@@ -35,7 +35,7 @@
         sl[i].style.zIndex=Math.max(1,100-Math.round(ap));
       }
     }
-    function sync(){show(sw.activeIndex)}
+    function sync(){show(sw.realIndex)}
     sw.on('progress',paint);sw.on('setTranslate',paint);sw.on('slideChange',sync);sw.on('resize',function(){measure();sw.update();paint()});
     measure();sync();sw.update();paint();NIK.initAvatarAnim(sw);
     window.__sw=sw;

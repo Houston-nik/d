@@ -47,7 +47,19 @@
     "Ведёт профиль в TenChat: посты, подписчики, переписка"
    ],
    "video_url": "",
-   "avatar": "img/avatars/02"
+   "avatar": "img/avatars/02",
+   "layers": {
+    "dir": "layers/tenchat-smm/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp",
+     "eyes_closed": "eyes-closed.webp"
+    },
+    "eyes_center": [
+     61.16,
+     47.23
+    ]
+   }
   },
   {
    "slug": "pr-menedzher",
@@ -61,7 +73,19 @@
     "Готовит публикации и упоминания для PR"
    ],
    "video_url": "",
-   "avatar": "img/avatars/03"
+   "avatar": "img/avatars/03",
+   "layers": {
+    "dir": "layers/pr-menedzher/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp",
+     "eyes_closed": "eyes-closed.webp"
+    },
+    "eyes_center": [
+     65.13,
+     41.33
+    ]
+   }
   },
   {
    "slug": "designer",
@@ -101,7 +125,19 @@
     "Ведёт группы и страницы в Одноклассниках"
    ],
    "video_url": "",
-   "avatar": "img/avatars/05"
+   "avatar": "img/avatars/05",
+   "layers": {
+    "dir": "layers/smm-odnoklassniki/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp",
+     "eyes_closed": "eyes-closed.webp"
+    },
+    "eyes_center": [
+     62.87,
+     48.43
+    ]
+   }
   },
   {
    "slug": "vebinary",
@@ -115,7 +151,19 @@
     "Готовит и проводит вебинары: сценарий, анонсы, запись"
    ],
    "video_url": "",
-   "avatar": "img/avatars/06"
+   "avatar": "img/avatars/06",
+   "layers": {
+    "dir": "layers/vebinary/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp",
+     "eyes_closed": "eyes-closed.webp"
+    },
+    "eyes_center": [
+     51.85,
+     50.67
+    ]
+   }
   },
   {
    "slug": "vcru-avtopublikator",
@@ -129,7 +177,19 @@
     "Публикует материалы на vc.ru по расписанию"
    ],
    "video_url": "",
-   "avatar": "img/avatars/07"
+   "avatar": "img/avatars/07",
+   "layers": {
+    "dir": "layers/vcru-avtopublikator/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp",
+     "eyes_closed": "eyes-closed.webp"
+    },
+    "eyes_center": [
+     66.99,
+     44.09
+    ]
+   }
   },
   {
    "slug": "pr-menedzher-2",
@@ -143,7 +203,19 @@
     "Второй PR-агент: письма в редакции и упоминания в СМИ"
    ],
    "video_url": "",
-   "avatar": "img/avatars/08"
+   "avatar": "img/avatars/08",
+   "layers": {
+    "dir": "layers/pr-menedzher-2/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp",
+     "eyes_closed": "eyes-closed.webp"
+    },
+    "eyes_center": [
+     52.88,
+     48.87
+    ]
+   }
   },
   {
    "slug": "smm-tiktok-i-vertikalnye-video",
@@ -157,7 +229,19 @@
     "Делает вертикальные видео и сценарии для TikTok"
    ],
    "video_url": "",
-   "avatar": "img/avatars/09"
+   "avatar": "img/avatars/09",
+   "layers": {
+    "dir": "layers/smm-tiktok-i-vertikalnye-video/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp",
+     "eyes_closed": "eyes-closed.webp"
+    },
+    "eyes_center": [
+     61.64,
+     46.15
+    ]
+   }
   },
   {
    "slug": "rassylki-email-i-messendzhery",
@@ -171,7 +255,19 @@
     "Собирает рассылки по почте и в мессенджерах"
    ],
    "video_url": "",
-   "avatar": "img/avatars/10"
+   "avatar": "img/avatars/10",
+   "layers": {
+    "dir": "layers/rassylki-email-i-messendzhery/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp",
+     "eyes_closed": "eyes-closed.webp"
+    },
+    "eyes_center": [
+     63.56,
+     52.26
+    ]
+   }
   },
   {
    "slug": "strateg-ca",
@@ -185,7 +281,19 @@
     "Исследует аудиторию и конкурентов, формулирует офферы"
    ],
    "video_url": "",
-   "avatar": "img/avatars/11"
+   "avatar": "img/avatars/11",
+   "layers": {
+    "dir": "layers/strateg-ca/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp",
+     "eyes_closed": "eyes-closed.webp"
+    },
+    "eyes_center": [
+     58.35,
+     47.92
+    ]
+   }
   },
   {
    "slug": "smm-telegram-dzen-max",
@@ -199,7 +307,19 @@
     "Ведёт Telegram, Дзен и MAX: посты, рубрики, расписание"
    ],
    "video_url": "",
-   "avatar": "img/avatars/12"
+   "avatar": "img/avatars/12",
+   "layers": {
+    "dir": "layers/smm-telegram-dzen-max/",
+    "files": {
+     "body": "body.webp",
+     "eyes": "eyes.webp",
+     "eyes_closed": "eyes-closed.webp"
+    },
+    "eyes_center": [
+     56.01,
+     46.66
+    ]
+   }
   },
   {
    "slug": "yandeks-biznes-i-karty",

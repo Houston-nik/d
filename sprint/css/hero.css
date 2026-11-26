@@ -23,6 +23,7 @@
 .ahero .nav{position:absolute;right:80px;top:72px;font:500 20px/1 "Golos Text",sans-serif;color:var(--muted)}
 .ahero .hero-h1{position:absolute;left:76px;top:245px;font:700 84px/1.1 Literata,serif;letter-spacing:-.025em;color:var(--ink);white-space:nowrap;font-variation-settings:"opsz" 72}
 .ahero .sub{position:absolute;left:79px;top:462px;width:560px;font:400 26px/1.4 "Golos Text",sans-serif;color:var(--muted)}
+.ahero .sub .sub-line{display:block}
 .ahero .btn2{position:absolute;left:80px;top:610px;height:84px;padding:0 44px;border-radius:999px;background:var(--pink);color:#fff;font:600 26px/84px "Golos Text",sans-serif;box-shadow:0 16px 30px rgba(209,20,155,.25);text-decoration:none;white-space:nowrap}
 .ahero .btn2:hover{background:#B80F87}
 .ahero .btn2:focus-visible{outline:3px solid var(--ink);outline-offset:4px}

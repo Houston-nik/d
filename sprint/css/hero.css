@@ -47,7 +47,10 @@ html.ahero-anim .ahero .lw{will-change:transform}
 .ahero .arr{position:absolute;left:1240px;top:150px;width:140px;z-index:13}
 .ahero .av{position:absolute;left:1090px;top:410px;width:290px;height:290px;border-radius:50%;z-index:7}
 .ahero .av::before{content:"";position:absolute;inset:6%;border-radius:50%;background:var(--circle);border:3px solid var(--ring);box-shadow:0 0 0 5px var(--bg),0 10px 24px rgba(60,40,120,.12)}
-.ahero .av img{position:absolute;left:12%;top:10%;width:76%;height:76%;object-fit:contain;filter:drop-shadow(0 6px 8px rgba(40,30,90,.18))}
+.ahero .av-fig{position:absolute;left:12%;top:10%;width:76%;height:76%;filter:drop-shadow(0 6px 8px rgba(40,30,90,.18))}
+.ahero .av-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.ahero .av-fig .l-eyes-c{opacity:0;pointer-events:none}
+.ahero .av-fig.blinking .l-eyes-c{opacity:1}
 /* ---------- Анимация (только при .js-anim; без JS и при reduced-motion — статичный v5) ---------- */
 html.ahero-anim .ahero .w1, html.ahero-anim .ahero .w2{transform:none}
 html.ahero-anim .ahero .tower .tc{opacity:0;transform:translateY(60px) rotate(var(--r,0deg))}
@@ -105,6 +108,6 @@ html.ahero-anim .ahero .play-fly .arr-head{animation:ahero-draw .12s ease-out .5
 }
 /* замер финальных позиций без учёта полёта карточки */
 .ahero.measuring .tower .tc{animation:none!important;opacity:1!important;transform:translateY(0) rotate(var(--r,0deg))!important}
-@media (prefers-reduced-motion:reduce){.ahero .tower .tc{opacity:1;animation:none!important}}
+@media (prefers-reduced-motion:reduce){.ahero .tower .tc{opacity:1;animation:none!important}.ahero .av-fig.blinking .l-eyes-c{opacity:0}}
 .ahero .pic{position:absolute;inset:0}
 @media (max-width:767px){.ahero .pic{position:relative;inset:auto}}

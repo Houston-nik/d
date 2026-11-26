@@ -267,3 +267,53 @@
   }
   (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(run);
 })();
+
+/* моргание маскота: слой век (как в nik-agents-proto), 140 мс, пауза 2,5–5 с, иногда двойное.
+   reduced-motion — не моргать. Пауза, если вкладка скрыта или герой вне экрана. Цикл карточек не трогаем. */
+(function () {
+  var fig = document.querySelector('.ahero .av-fig, .hero .av-fig, .av-fig');
+  if (!fig) return;
+  var hero = fig.closest('.ahero, .hero') || fig;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var BLINK = 140, GAP = 110;
+  var timer = null, token = 0, inView = true;
+  function clear() { fig.classList.remove('blinking'); if (timer) { clearTimeout(timer); timer = null; } }
+  function isActive() { return inView && !document.hidden && !reduce.matches; }
+  function blinkOnce(cb) {
+    fig.classList.add('blinking');
+    timer = setTimeout(function () { fig.classList.remove('blinking'); if (cb) cb(); }, BLINK);
+  }
+  function step(my) {
+    if (my !== token) return;
+    if (!isActive()) { timer = setTimeout(function () { step(my); }, 400); return; }
+    var again = function () { if (my !== token) return; timer = setTimeout(function () { step(my); }, 2500 + Math.random() * 2500); };
+    if (Math.random() < 0.25) {
+      blinkOnce(function () { timer = setTimeout(function () { if (my !== token) return; blinkOnce(again); }, GAP); });
+    } else blinkOnce(again);
+  }
+  function start() {
+    token++; clear();
+    if (reduce.matches) return;
+    var my = token;
+    var q = '';
+    try { q = (location.search || ''); } catch (e) {}
+    if (/[?&]blink=closed\b/.test(q)) { fig.classList.add('blinking'); return; }
+    if (/[?&]blink=0\b/.test(q)) return;
+    timer = setTimeout(function () { step(my); }, 400 + Math.random() * 400);
+  }
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) fig.classList.remove('blinking');
+  });
+  if ('IntersectionObserver' in window) {
+    try {
+      var io = new IntersectionObserver(function (ents) {
+        inView = !!(ents[0] && ents[0].isIntersecting);
+        if (!inView) fig.classList.remove('blinking');
+      }, { threshold: 0.2 });
+      io.observe(hero);
+    } catch (e) { inView = true; }
+  }
+  if (reduce.addEventListener) reduce.addEventListener('change', start);
+  else if (reduce.addListener) reduce.addListener(start);
+  start();
+})();

@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Передай рутину ИИ-сотруднику</title>
+<meta name="description" content="Передай рутину ИИ-сотруднику: без кода, без API, без промптов и скиллов. Бесплатная диагностика с Ником: разберём твою ситуацию за 15 минут.">
+<meta name="robots" content="noindex"><!-- превью: снять noindex при публикации по «да» Ника -->
+<meta property="og:title" content="Передай рутину ИИ-сотруднику">
+<meta property="og:description" content="Передай рутину ИИ-сотруднику: без кода, без API, без промптов и скиллов. Бесплатная диагностика с Ником: разберём твою ситуацию за 15 минут.">
+<meta property="og:type" content="website">
+<!-- og:image: обложку Дизайнера подключить после «да» Ника (нужен абсолютный URL на houston-nik.github.io/sprint/) -->
+<link rel="icon" href="img/hummingbird.webp" type="image/webp">
+<link rel="preload" href="fonts/Unbounded-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Onest-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Literata-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/GolosText-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css?v=8">
+<link rel="stylesheet" href="css/hero.css?v=8">
+<script>
+/* Класс ahero-anim ставится до первой отрисовки, чтобы не мигал финальный кадр. Без JS и при reduced-motion остаётся статичный v5. */
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('ahero-anim');
+</script>
+<!-- Яндекс Метрика: решение Ника 24.11 «Метрику ставим вместе с баннером cookie». Код — в js/main.js (баннер + загрузка только после «Принять»,
+     Вебвизор выключен). Номер счётчика METRIKA_ID в js/main.js = null: пока null, счётчик не грузится. Номер нужен от Ника. -->
+</head>
+<body>
+<a class="skip" href="#main">К&nbsp;содержанию</a>
+
+<main id="main">
+
+<!-- v8 «Практикум»: тексты launch-texts/landing-praktikum.md, структура LANDING-STRUCTURE-v2.md.
+     Первый экран — анимированный hero (макет v5). Кнопка, UTM, cookie-баннер и Метрика (METRIKA_ID = null) — js/main.js. -->
+
+<!-- Блок 1. ПЕРВЫЙ ЭКРАН: анимированный hero (макет Дизайнера v5, анимация v2).
+     Тексты и кнопка лендинга: 15 минут, t.me/Okay_Houston, data-cta (UTM и цель cta_diagnostika — js/main.js).
+     Шапка «Ник Хьюстон» внутри сцены, второй раз не дублируем. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="ahero-grain" x="0" y="0" width="1" height="1"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4"/><feColorMatrix values="0 0 0 0 .35  0 0 0 0 .3  0 0 0 0 .5  0 0 0 .16 0"/></filter></svg>
+<section class="ahero" data-slot="b1">
+ <div class="stage">
+  <div class="brand"><img src="img/hummingbird-alpha.png" alt="" width="44" height="44">Ник Хьюстон</div>
+  <div class="nav">Практикум · старт 15&nbsp;декабря · до&nbsp;10&nbsp;человек</div>
+  <h1 class="hero-h1" data-slot="b1-title">Передай <span class="lw w1">рутину</span><br>ИИ-<span class="lw w2">сотруднику</span></h1>
+  <p class="sub" data-slot="b1-points">Без кода, без&nbsp;API, без&nbsp;промптов. 4&nbsp;встречи, и&nbsp;твоя повторяющаяся задача уходит сотруднику.</p>
+  <a class="btn2" data-cta href="https://t.me/Okay_Houston?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BD%D0%B0%20%D0%B4%D0%B8%D0%B0%D0%B3%D0%BD%D0%BE%D1%81%D1%82%D0%B8%D0%BA%D1%83%2C%20%D0%BF%D1%80%D0%B8%D1%88%D1%91%D0%BB%20%D1%81%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0" target="_blank" rel="noopener">Бесплатная диагностика с&nbsp;Ником</a>
+  <p class="note" data-slot="b1-note">Приходи, разберём твою ситуацию за&nbsp;15&nbsp;минут</p>
+  <div class="pic" data-slot="b1-image">
+  <div class="tower" aria-hidden="true">
+    <div class="tc" style="--i:6;--r:0.5deg;--x:692px;--y:686px;z-index:24"></div>
+    <div class="tc" style="--i:5;--r:-0.9deg;--x:701px;--y:640px;z-index:25"></div>
+    <div class="tc" style="--i:4;--r:1.4deg;--x:694px;--y:593px;z-index:26"></div>
+    <div class="tc" style="--i:3;--r:-0.6deg;--x:702px;--y:547px;--mx:10px;--my:130px;z-index:27"></div>
+    <div class="tc" style="--i:2;--r:0.9deg;--x:693px;--y:501px;--mx:4px;--my:96px;z-index:28"></div>
+    <div class="tc" style="--i:1;--r:-1.2deg;--x:700px;--y:454px;--mx:9px;--my:62px;z-index:29"></div>
+    <div class="tc top" style="--i:0;--r:-3.5deg;--x:696px;--y:408px;--mx:6px;--my:28px;z-index:30"><b>Разобрать заявки</b><span>каждый день · час</span></div>
+    <div class="contact"></div>
+  </div>
+  <div class="tc fly paper" aria-hidden="true"><b>Разобрать заявки</b><span>каждый день · час</span></div>
+  <svg class="arr" viewBox="0 0 200 360" aria-hidden="true"><path class="arr-line" pathLength="1" d="M40 40 C160 30 190 200 110 330" fill="none" stroke="#D1149B" stroke-width="9" stroke-linecap="round"/><path class="arr-head" pathLength="1" d="M70 300 L108 336 L150 304" fill="none" stroke="#D1149B" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <div class="av"><img src="img/administrator.png" alt="ИИ-сотрудник"></div>
+  </div>
+ </div>
+</section>
+
+
+<!-- Блок 2. КОРОТКО О ФОРМАТЕ -->
+<section class="sec offer">
+  <div class="wrap">
+    <ul class="facts facts5" data-slot="b2-facts">
+      <li><b>Практикум</b></li>
+      <li><b>До&nbsp;10&nbsp;человек</b></li>
+      <li><b>4&nbsp;онлайн&#8209;встречи</b></li>
+      <li><b>Чат до&nbsp;28&nbsp;декабря</b></li>
+      <li><b>Старт 15&nbsp;декабря</b></li>
+    </ul>
+  </div>
+</section>
+
+<!-- Блок 3. ДЛЯ КОГО -->
+<section class="sec who">
+  <div class="wrap">
+    <h2 data-slot="b3-title">Для&nbsp;кого</h2>
+    <p class="sec-lead" data-slot="b3-lead">Для&nbsp;тех, кто делает повторяющуюся задачу сам, знает, как&nbsp;выглядит хороший результат, и&nbsp;хочет передать её&nbsp;ИИ-сотруднику.</p>
+    <ul class="cards4 portraits" data-slot="b3-list">
+      <li><b>Фрилансер, интегратор, небольшая студия.</b> Пока выполняешь заказ, упускаешь следующие. Сотрудник следит за&nbsp;выбранной биржей, отбирает проекты по&nbsp;твоим критериям и&nbsp;приносит подходящие заказы с&nbsp;черновиками откликов. Кому отвечать, решаешь ты.</li>
+      <li><b>Маркетолог, агентство, консультант.</b> Работы много, а&nbsp;показать новому клиенту нечего: результаты разбросаны по&nbsp;чатам. Сотрудник собирает переписку, отзыв и&nbsp;скриншоты в&nbsp;кейс и&nbsp;отмечает, какие результаты подтверждены, а&nbsp;чего не&nbsp;хватает.</li>
+      <li><b>Эксперт, автор канала.</b> Хочешь выходить к&nbsp;новой аудитории, но&nbsp;до&nbsp;поиска партнёров не&nbsp;доходят руки. Сотрудник подбирает площадки, объясняет выбор и&nbsp;готовит предложение о&nbsp;совместном эфире.</li>
+      <li><b>Предприниматель.</b> Клиенты пишут в&nbsp;мессенджеры вечером и&nbsp;в&nbsp;выходные. Сотрудник разбирает переписку, приносит список «кто спросил и&nbsp;замолчал» и&nbsp;черновики ответов. Отправляется после твоего «да».</li>
+    </ul>
+    <div class="not-for" data-slot="b3-not">
+      <p><b>Не&nbsp;подойдёт, если:</b></p>
+      <ul class="dash">
+        <li>хочется послушать про&nbsp;нейросети и&nbsp;ничего не&nbsp;делать;</li>
+        <li>нет повторяющейся задачи, которую ты&nbsp;уже&nbsp;делаешь сам.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Блок 4. ЧТО ПОЛУЧИШЬ -->
+<section class="sec get">
+  <div class="wrap">
+    <h2 data-slot="b4-title">Что&nbsp;получишь</h2>
+    <p class="statement" data-slot="b4-goal">Цель Практикума&nbsp;— один законченный рабочий процесс на&nbsp;твоей задаче, согласованный на&nbsp;диагностике до&nbsp;оплаты.</p>
+    <p class="sec-lead" data-slot="b4-p1">Внутри может быть один ИИ-сотрудник или&nbsp;связка из&nbsp;нескольких. Его ты&nbsp;настраиваешь сам, на&nbsp;своих материалах, и&nbsp;сам исправляешь настройки, когда результат не&nbsp;устраивает.</p>
+    <p class="sec-lead" data-slot="b4-p2">Плюс умение настроить следующего сотрудника под&nbsp;другую задачу по&nbsp;тому же принципу: разложить задачу, объяснить её&nbsp;сотруднику обычными словами, проверить результат, поставить «без&nbsp;моего „да“ наружу не&nbsp;уходит».</p>
+    <p class="sec-lead" data-slot="b4-grok">Сотрудник собирается в&nbsp;твоём аккаунте Grok Bot и&nbsp;остаётся у&nbsp;тебя. Подписку Grok Bot ты&nbsp;оплачиваешь сам, по&nbsp;тарифам сервиса.</p>
+    <p class="sec-lead" data-slot="b4-practice"><b>Делаешь практику&nbsp;— двигаешься к&nbsp;результату. Не&nbsp;делаешь&nbsp;— результата не&nbsp;будет.</b></p>
+    <p class="note" data-slot="b4-nopromise"><b>Чего не&nbsp;обещаю:</b> дохода, «замены сотрудника» и&nbsp;процентов экономии. Результат зависит от&nbsp;задачи и&nbsp;от&nbsp;того, как&nbsp;ты&nbsp;делаешь практику.</p>
+  </div>
+</section>
+
+<!-- Блок 5. КАК ПОПАСТЬ -->
+<section class="sec how">
+  <div class="wrap">
+    <h2 data-slot="b5-title">Как попасть</h2>
+    <p class="sec-lead" data-slot="b5-lead">Сначала бесплатная диагностика, 15&nbsp;минут. Это отбор до&nbsp;оплаты. На&nbsp;созвоне:</p>
+    <ul class="dash" data-slot="b5-list">
+      <li>ты&nbsp;показываешь последний реальный пример задачи;</li>
+      <li>фиксируем, что&nbsp;поступает на&nbsp;вход и&nbsp;что&nbsp;сотрудник должен вернуть на&nbsp;выходе;</li>
+      <li>смотрим, какие нужны доступы и&nbsp;платные сервисы;</li>
+      <li>решаем, успеваем ли собрать это&nbsp;за&nbsp;2&nbsp;недели.</li>
+    </ul>
+    <p class="sec-lead" data-slot="b5-result">По&nbsp;итогам один из&nbsp;трёх ответов: берём задачу как&nbsp;есть, сужаем её&nbsp;до&nbsp;части, которая успевается за&nbsp;2&nbsp;недели, или&nbsp;не&nbsp;берём. Оплата&nbsp;— только после диагностики и&nbsp;не&nbsp;позже 11&nbsp;декабря.</p>
+  </div>
+</section>
+
+<!-- Блок 6. ПРОГРАММА (названия встреч — Приложение № 1 оферты) -->
+<section class="sec program">
+  <div class="wrap">
+    <h2 data-slot="b6-title">Программа</h2>
+    <p class="sec-lead" data-slot="b6-lead">4&nbsp;встречи онлайн в&nbsp;Яндекс Телемосте, по&nbsp;60&nbsp;минут и&nbsp;дольше, время московское. Лекций нет, работа идёт на&nbsp;твоей задаче.</p>
+    <ol class="meets" data-slot="b6-list">
+      <li class="meet">
+        <div class="meet-date">Встреча 1, вторник 15&nbsp;декабря,&nbsp;19:00</div>
+        <h3>Запуск на&nbsp;своём материале</h3>
+        <p>Описываешь правила своей работы. Подбираем готовую основу или&nbsp;собираем роль с&nbsp;нуля. Сразу запускаешь сотрудника на&nbsp;своём материале.</p>
+      </li>
+      <li class="meet">
+        <div class="meet-date">Встреча 2, суббота 19&nbsp;декабря,&nbsp;11:00</div>
+        <h3>Разбор результата и&nbsp;настройка</h3>
+        <p>Разбираем первый результат. Уточняешь задачу обычными словами, добавляешь образцы, при&nbsp;необходимости связываешь несколько ролей. Между встречами даёшь сотруднику рабочее задание.</p>
+      </li>
+      <li class="meet">
+        <div class="meet-date">Встреча 3, вторник 22&nbsp;декабря,&nbsp;19:00</div>
+        <h3>Ошибки реальной работы</h3>
+        <p>Смотрим, что&nbsp;произошло в&nbsp;реальной работе: где сотрудник выбрал не&nbsp;то, что&nbsp;додумал, какое решение должен был передать тебе. Исправляешь настройки и&nbsp;запускаешь заново.</p>
+      </li>
+      <li class="meet">
+        <div class="meet-date">Встреча 4, суббота 26&nbsp;декабря,&nbsp;11:00</div>
+        <h3>Самостоятельный запуск</h3>
+        <p>Проводишь свежую задачу от&nbsp;начала до&nbsp;результата без&nbsp;подсказок. Затем настраиваешь ещё&nbsp;одну простую роль по&nbsp;тому же принципу.</p>
+      </li>
+    </ol>
+    <p class="note" data-slot="b6-shift">Время встречи можно сдвинуть, только если согласны все&nbsp;участники группы.</p>
+  </div>
+</section>
+
+<!-- Блок 7. ЧАТ -->
+<section class="sec chat">
+  <div class="wrap">
+    <h2 data-slot="b7-title">Чат</h2>
+    <p class="sec-lead" data-slot="b7-lead">Чат работает с&nbsp;15 по&nbsp;28&nbsp;декабря, отвечаю в&nbsp;течение дня.</p>
+    <p class="sec-lead" data-slot="b7-p">В&nbsp;чат приносишь конкретный пример: что&nbsp;поручил, что&nbsp;получил и&nbsp;где расходится с&nbsp;ожиданием. Например:</p>
+    <blockquote class="quote chat-quote" data-slot="b7-example"><p>«Поручил отобрать заказы на&nbsp;лендинги до&nbsp;30&nbsp;000&nbsp;₽. Получил 12, из&nbsp;них 5 на&nbsp;дизайн без&nbsp;вёрстки. Где не&nbsp;так?»</p></blockquote>
+    <p class="sec-lead" data-slot="b7-end">Вместе ищем причину. Правку и&nbsp;повторный запуск делаешь сам.</p>
+  </div>
+</section>
+
+<!-- Блок 8. ПОЧЕМУ Я (кейс с суммой и ссылка на пост 251 убраны по решению Ника) -->
+<section class="sec lead">
+  <div class="wrap">
+    <h2 data-slot="b8-title">Почему я</h2>
+    <p class="lead-p" data-slot="b8-p">Я&nbsp;Ник Хьюстон. Свою рутину отдаю ИИ-сотрудникам: они&nbsp;ищут заказы на&nbsp;биржах, разбирают мои мессенджеры и&nbsp;готовят черновики для&nbsp;канала. Кода для&nbsp;этого я&nbsp;не&nbsp;писал.</p>
+    <p class="lead-links" data-slot="b8-links"><a href="https://t.me/ok_houstons/257" target="_blank" rel="noopener">Как сотрудник разбирает мои чаты</a></p>
+    <p class="note" data-slot="b8-noreviews">Отзывов пока нет: это&nbsp;первый поток.</p>
+  </div>
+</section>
+
+<!-- Блок 9. ПРАВИЛА (формулировки Юриста п. 2.2) -->
+<section class="sec rules">
+  <div class="wrap rules-box">
+    <h2 data-slot="b9-title">Правила</h2>
+    <p data-slot="b9-intro">Здесь не&nbsp;отсиживаются. Из&nbsp;группы исключаем, если:</p>
+    <ul class="dash" data-slot="b9-list">
+      <li>пропустил 2&nbsp;встречи из&nbsp;4 без&nbsp;предупреждения;</li>
+      <li>дважды подряд не&nbsp;сдал практику, то&nbsp;есть не&nbsp;прислал отчёт в&nbsp;чат до&nbsp;срока, который я&nbsp;назвал на&nbsp;встрече (после первого раза&nbsp;— одно предупреждение);</li>
+      <li>хамишь, спамишь или&nbsp;выносишь из&nbsp;чата чужие данные (имена, контакты, скрины переписки, сведения о&nbsp;чужих клиентах). Тут сразу.</li>
+    </ul>
+    <p data-slot="b9-forever">Исключили&nbsp;— вернём деньги за&nbsp;то, что&nbsp;ты не&nbsp;успел пройти, по <a href="oferta/">оферте</a>. Обратно в&nbsp;этот и&nbsp;следующие потоки не&nbsp;возьмём.</p>
+  </div>
+</section>
+
+<!-- Блок 10. ЦЕНА И ОПЛАТА -->
+<section class="sec price">
+  <div class="wrap price-box">
+    <div class="price-main">
+      <h2 data-slot="b10-title">Цена и&nbsp;оплата</h2>
+      <div class="price-sum" data-slot="b10-sum">25&nbsp;000&nbsp;₽</div>
+      <div class="price-sub">за&nbsp;участие</div>
+    </div>
+    <ul class="price-list" data-slot="b10-list">
+      <li>Оплата после диагностики и&nbsp;не&nbsp;позже 11&nbsp;декабря. Одним платежом по&nbsp;СБП, чек «Мой налог» сразу. Я&nbsp;самозанятый (НПД).</li>
+      <li>В&nbsp;Практикуме до&nbsp;10&nbsp;человек. Стартуем 15.12 при&nbsp;любом числе участников. Цена и&nbsp;состав не&nbsp;зависят от&nbsp;числа участников.</li>
+      <li>Подписка Grok Bot оплачивается участником отдельно, по&nbsp;тарифам сервиса.</li>
+    </ul>
+    <div class="money" data-slot="b10-money">
+      <p>Передумал до&nbsp;первой встречи&nbsp;— вернём всё. Ушёл позже&nbsp;— вернём за&nbsp;то, что&nbsp;не&nbsp;успели пройти: каждая из&nbsp;4&nbsp;встреч стоит 5&nbsp;000&nbsp;₽, чат обратной связи&nbsp;— 5&nbsp;000&nbsp;₽ за&nbsp;14&nbsp;дней.</p>
+      <p>Возврат по&nbsp;СБП в&nbsp;течение 10&nbsp;дней. Подробно&nbsp;— в <a href="oferta/">оферте</a>.</p>
+    </div>
+    <div class="price-cta">
+      <a class="btn" data-cta href="https://t.me/Okay_Houston?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BD%D0%B0%20%D0%B4%D0%B8%D0%B0%D0%B3%D0%BD%D0%BE%D1%81%D1%82%D0%B8%D0%BA%D1%83%2C%20%D0%BF%D1%80%D0%B8%D1%88%D1%91%D0%BB%20%D1%81%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0" target="_blank" rel="noopener">Бесплатная диагностика с&nbsp;Ником</a>
+      <p class="micro" data-slot="legal-hint">Пишешь мне в&nbsp;Telegram&nbsp;— я&nbsp;вижу твоё имя и&nbsp;ник и&nbsp;использую их&nbsp;только чтобы договориться о&nbsp;созвоне. <a href="politika/">Политика</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- Блок 11. ДАТЫ -->
+<section class="sec dates">
+  <div class="wrap">
+    <h2 data-slot="b11-title">Даты</h2>
+    <dl class="timeline" data-slot="b11-list">
+      <div><dt>с&nbsp;1&nbsp;декабря</dt><dd>заявки на&nbsp;диагностику</dd></div>
+      <div><dt>до&nbsp;11&nbsp;декабря</dt><dd>набор и&nbsp;оплата</dd></div>
+      <div><dt>15, 19, 22 и&nbsp;26&nbsp;декабря</dt><dd>встречи: вт&nbsp;19:00, сб&nbsp;11:00&nbsp;МСК</dd></div>
+      <div><dt>с&nbsp;15 по&nbsp;28&nbsp;декабря</dt><dd>чат</dd></div>
+    </dl>
+    <p class="note dates-note" data-slot="b11-note">Время встречи можно сдвинуть, только если согласны все&nbsp;участники группы.</p>
+  </div>
+</section>
+
+<!-- Блок 12. ФИНАЛ -->
+<section class="sec final">
+  <div class="wrap final-box">
+    <h2 data-slot="b12-title">Начнём с <em>одной твоей задачи</em></h2>
+    <p data-slot="b12-p">Пришли голосом или&nbsp;текстом один пример: «Я&nbsp;регулярно делаю вот это. Хочу, чтобы сотрудник приносил мне вот такой результат». Созвонимся на&nbsp;15&nbsp;минут и&nbsp;решим, подходит ли задача для&nbsp;Практикума. Диагностика бесплатная и&nbsp;ни&nbsp;к&nbsp;чему не&nbsp;обязывает.</p>
+    <a class="btn btn-lg" data-cta href="https://t.me/Okay_Houston?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BD%D0%B0%20%D0%B4%D0%B8%D0%B0%D0%B3%D0%BD%D0%BE%D1%81%D1%82%D0%B8%D0%BA%D1%83%2C%20%D0%BF%D1%80%D0%B8%D1%88%D1%91%D0%BB%20%D1%81%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0" target="_blank" rel="noopener">Бесплатная диагностика с&nbsp;Ником</a>
+    <p class="hero-note final-note" data-slot="b12-note">Приходи, разберём твою ситуацию за&nbsp;15&nbsp;минут</p>
+    <p class="micro" data-slot="legal-hint">Пишешь мне в&nbsp;Telegram&nbsp;— я&nbsp;вижу твоё имя и&nbsp;ник и&nbsp;использую их&nbsp;только чтобы договориться о&nbsp;созвоне. <a href="politika/">Политика</a></p>
+  </div>
+</section>
+
+</main>
+
+<footer class="ftr">
+  <div class="wrap ftr-row">
+    <span data-slot="b13-footer">Ник Хьюстон, самозанятый (НПД). <span class="todo" data-todo>[ФИО], ИНН [ИНН]&nbsp;— нужно подтверждение Ника</span></span>
+    <span class="ftr-links"><a href="oferta/">Оферта</a><a href="politika/">Политика</a><a href="#" data-cookie-settings>Настройки cookie</a></span>
+  </div>
+</footer>
+
+<script src="js/hero.js?v=8"></script>
+<script src="js/main.js?v=8"></script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+Unbounded (заголовки) и Onest (текст): SIL Open Font License 1.1, Google Fonts. Сабсет: кириллица, латиница, знак ₽, основные знаки. Файлы переменные по весу.
+На первом экране (изолированный блок .ahero): Literata (заголовок) и Golos Text (текст героя), плюс Unbounded для логотипа. SIL OFL 1.1, Google Fonts, файлы OFL-literata.txt и OFL-golostext.txt. Сабсет тот же.

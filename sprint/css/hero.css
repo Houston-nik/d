@@ -1,0 +1,70 @@
+/* Анимированный первый экран «Практикум».
+   Стили изолированы префиксом .ahero (и html.ahero-anim для старта анимации).
+   Не протекают на остальные блоки лендинга. Шрифты Literata / Golos Text / Unbounded — только здесь.
+   Финальный кадр = макет v5. */
+/* Hero «Практикум», демо анимации. Финальный кадр = tests/hero-1440x900-v5.png.
+   Координаты, цвета и кегли: tests/src/hero-1440x900-v5.html (build_hero_v5.py). Анимация: tests/hero-motion-spec.md. */
+@font-face{font-family:"Literata";src:url(../fonts/Literata-var.woff2) format("woff2");font-weight:200 900;font-display:swap}
+@font-face{font-family:"Golos Text";src:url(../fonts/GolosText-var.woff2) format("woff2");font-weight:400 900;font-display:swap}
+@font-face{font-family:"Unbounded";src:url(../fonts/Unbounded-var.woff2) format("woff2");font-weight:200 900;font-display:swap}
+/* переменные и сброс только внутри героя; --pink героя (#D1149B) не подменяет кнопку остальных блоков */
+.ahero{--bg:#FBF9FF;--ink:#1B1633;--muted:#5D5779;--circle:#EEE8FF;--ring:#D9D0F7;--pink:#D1149B;box-sizing:border-box;background:var(--bg);color:var(--ink);font-family:"Golos Text",sans-serif;position:relative;overflow:hidden}
+.ahero *,.ahero *::before,.ahero *::after{box-sizing:border-box}
+.ahero img{max-width:none}
+.ahero p,.ahero h1,.ahero .note,.ahero .sub,.ahero .btn2,.ahero .nav,.ahero .brand{margin:0}
+
+
+/* ---------- Десктоп: сцена 1440×900 в координатах макета ---------- */
+.ahero{position:relative;overflow:hidden;height:calc(900px * var(--s,1));background:var(--bg)}
+.ahero .stage{position:absolute;left:calc(50% - 720px);top:0;width:1440px;height:900px}
+.ahero .stage.scaled{left:0;transform-origin:0 0;transform:scale(var(--s))}
+.ahero .brand{position:absolute;left:72px;top:60px;display:flex;align-items:center;gap:12px;font:600 22px/1 Unbounded,sans-serif;color:var(--ink);letter-spacing:normal}
+.ahero .brand img{width:44px;height:44px}
+.ahero .nav{position:absolute;right:80px;top:72px;font:500 20px/1 "Golos Text",sans-serif;color:var(--muted)}
+.ahero .hero-h1{position:absolute;left:76px;top:245px;font:700 84px/1.1 Literata,serif;letter-spacing:-.025em;color:var(--ink);white-space:nowrap;font-variation-settings:"opsz" 72}
+.ahero .sub{position:absolute;left:79px;top:462px;width:560px;font:400 26px/1.4 "Golos Text",sans-serif;color:var(--muted)}
+.ahero .btn2{position:absolute;left:80px;top:610px;height:84px;padding:0 44px;border-radius:999px;background:var(--pink);color:#fff;font:600 26px/84px "Golos Text",sans-serif;box-shadow:0 16px 30px rgba(209,20,155,.25);text-decoration:none;white-space:nowrap}
+.ahero .btn2:hover{background:#B80F87}
+.ahero .btn2:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
+.ahero .note{position:absolute;left:80px;width:522px;text-align:center;top:712px;font:400 20px/1.3 "Golos Text",sans-serif;color:var(--muted)}
+/* слова, которые подпирает стопка */
+.ahero .lw{display:inline-block;transform-origin:left bottom}
+html.ahero-anim .ahero .lw{will-change:transform}
+.ahero .w1{transform:translateY(-3px) rotate(-2.8deg);text-shadow:0 6px 10px rgba(60,40,120,.12)}
+.ahero .w2{transform:translateY(-2px) rotate(-3.5deg);text-shadow:0 8px 12px rgba(60,40,120,.16)}
+/* карточки (.paper стоит до .tc, как в v5: фон .tc перекрывает градиент) */
+.ahero .paper{background:linear-gradient(90deg,#F6F3FC 0,#fff 7%,#fff 93%,#F4F0FB 100%)}
+.ahero .tc{position:absolute;width:340px;height:150px;background:#fff;border:2px solid #E4DEF3;border-radius:18px;padding:28px 30px;box-shadow:0 8px 18px rgba(60,40,120,.08)}
+.ahero .tc b{display:block;font:600 28px/1.1 "Golos Text",sans-serif;color:var(--ink)}
+.ahero .tc span{display:block;margin-top:14px;font:400 22px/1 "Golos Text",sans-serif;color:var(--muted)}
+.ahero .tower{position:absolute;inset:0;pointer-events:none}
+.ahero .tower .tc{left:var(--x);top:var(--y);transform:rotate(var(--r,0deg));transform-origin:50% 50%}
+.ahero .tower .tc.top{transform-origin:0 0}
+.ahero .contact{position:absolute;left:700px;top:402px;width:56px;height:12px;border-radius:50%;background:radial-gradient(closest-side,rgba(60,40,120,.28),rgba(60,40,120,0));z-index:40}
+.ahero .fly{left:920px;top:160px;transform:rotate(-8deg);z-index:12;box-shadow:0 24px 40px rgba(60,40,120,.18)}
+.ahero .paper::after{content:"";position:absolute;inset:0;filter:url(#ahero-grain);background:#fff;mix-blend-mode:multiply;opacity:.9;pointer-events:none}
+.ahero .arr{position:absolute;left:1240px;top:150px;width:140px;z-index:13}
+.ahero .av{position:absolute;left:1090px;top:500px;width:290px;height:290px;border-radius:50%;z-index:7}
+.ahero .av::before{content:"";position:absolute;inset:6%;border-radius:50%;background:var(--circle);border:3px solid var(--ring);box-shadow:0 0 0 5px var(--bg),0 10px 24px rgba(60,40,120,.12)}
+.ahero .av img{position:absolute;left:12%;top:10%;width:76%;height:76%;object-fit:contain;filter:drop-shadow(0 6px 8px rgba(40,30,90,.18))}
+/* ---------- Анимация (только при .js-anim; без JS и при reduced-motion — статичный v5) ---------- */
+html.ahero-anim .ahero .w1, html.ahero-anim .ahero .w2{transform:none}
+html.ahero-anim .ahero .tower .tc{opacity:0;transform:translateY(60px) rotate(var(--r,0deg))}
+html.ahero-anim .ahero .tower.play .tc{animation:ahero-rise .32s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(.2s + (var(--n,7) - 1 - var(--i)) * .18s)}
+@keyframes ahero-rise{to{opacity:1;transform:translateY(0) rotate(var(--r,0deg))}}
+html.ahero-anim .ahero .contact{opacity:0}
+html.ahero-anim .ahero .tower.play .contact{animation:ahero-fade .2s ease-out forwards;animation-delay:calc(.2s + (var(--n,7) - 1) * .18s + .22s)}
+@keyframes ahero-fade{to{opacity:1}}
+html.ahero-anim .ahero .fly{opacity:0;transform:translate(-36px,28px) rotate(-8deg)}
+html.ahero-anim .ahero .play-fly .fly{animation:ahero-fly .4s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes ahero-fly{to{opacity:1;transform:translate(0,0) rotate(-8deg)}}
+html.ahero-anim .ahero .arr path{stroke-dasharray:1 1;stroke-dashoffset:1}
+html.ahero-anim .ahero .play-fly .arr-line{animation:ahero-draw .38s cubic-bezier(.4,0,.2,1) .2s forwards}
+html.ahero-anim .ahero .play-fly .arr-head{animation:ahero-draw .12s ease-out .58s forwards}
+@keyframes ahero-draw{to{stroke-dashoffset:0}}
+/* ---------- Мобильный (< 768): заголовок, строка, кнопка, картинка. Стопка под кнопкой, 4 карточки, наклон слов × 0.6 ---------- */
+@media (max-width:767px){.ahero{height:auto;min-height:100svh}.ahero .stage, .ahero .stage.scaled{position:relative;left:auto;width:auto;height:auto;transform:none;padding:20px 20px 28px}.ahero .brand, .ahero .nav, .ahero .hero-h1, .ahero .sub, .ahero .btn2, .ahero .note, .ahero .tower, .ahero .fly, .ahero .arr, .ahero .av{position:static}.ahero .brand{gap:10px;font-size:18px}.ahero .brand img{width:36px;height:36px}.ahero .nav{display:none}.ahero .hero-h1{margin-top:44px;font-size:min(44px,11.2vw);letter-spacing:-.025em}.ahero .w1{transform:translateY(-1.8px) rotate(-1.68deg)}.ahero .w2{transform:translateY(-1.2px) rotate(-2.1deg)}.ahero .sub{width:auto;margin-top:18px;font-size:17px;line-height:1.45}.ahero .btn2{display:block;margin-top:26px;height:60px;padding:0 16px;text-align:center;font-size:min(18px,4.7vw);line-height:60px;box-shadow:0 10px 22px rgba(209,20,155,.25)}.ahero .note{width:auto;margin-top:10px;font-size:15px}/* картинка: стопка 4 карточек слева, сотрудник справа, стрелка «передай» между ними */.ahero .pic{position:relative;height:250px;margin-top:30px}.ahero .tower{position:absolute;left:0;top:0;right:auto;bottom:auto;width:calc(100% - 104px);height:250px}.ahero .tower .tc{left:var(--mx);top:var(--my);width:calc(100% - 14px);height:104px;border-radius:14px;padding:19px 18px}.ahero .tower .tc:nth-child(-n+3){display:none}/* i = 6,5,4 скрыты: видно 4 карточки */.ahero .tc b{font-size:min(19px,4.8vw)}.ahero .tc span{font-size:15px;margin-top:10px}.ahero .contact{display:none}.ahero .fly{display:none}.ahero .av{position:absolute;left:auto;top:auto;right:0;bottom:10px;width:104px;height:104px}.ahero .av::before{box-shadow:0 0 0 4px var(--bg),0 8px 18px rgba(60,40,120,.12)}.ahero .arr{position:absolute;left:auto;right:26px;top:4px;width:54px;height:auto}html.ahero-anim .ahero .tower.play .tc{animation-delay:calc(.2s + (3 - var(--i)) * .18s)}html.ahero-anim .ahero .tower.play .contact{animation:none}}
+@media (max-width:767px) and (prefers-reduced-motion:reduce){html.ahero-anim .ahero .w1{transform:translateY(-1.8px) rotate(-1.68deg)}html.ahero-anim .ahero .w2{transform:translateY(-1.2px) rotate(-2.1deg)}}
+@media (prefers-reduced-motion:reduce){.ahero .tower .tc{opacity:1;animation:none!important}}
+.ahero .pic{position:absolute;inset:0}
+@media (max-width:767px){.ahero .pic{position:relative;inset:auto}}

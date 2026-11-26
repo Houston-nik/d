@@ -70,7 +70,10 @@
    Десктоп: стопка растёт снизу (новая карточка въезжает под стопку и поднимает её), верх стопки
    физически упирается в хвост «у» и толкает слово: 6-я карточка ≈ 40 % финального наклона, 7-я 100 %.
    Слово сидит на карточке (контакт ≤ 2 px), после толчка пружинит вверх и возвращается на карточку.
-   «рутину» повторяет движение «сотруднику» с задержкой 60 мс. Финал = статичный v5.
+   «рутину» повторяет движение «сотруднику» с задержкой 60 мс.
+   После финала держим кадр 3,5 с, плавно растворяем карточки (на десктопе слова возвращаются в ровное)
+   и запускаем цикл снова. Пауза, если вкладка скрыта или герой вне экрана.
+   reduced-motion и без JS — статичный финал, без цикла.
    Мобильный (< 768, стопка под кнопкой, контакта со словом нет): строки заголовка всегда ровные;
    куча из 12 карточек (mob-only) ступенькой: новая падает сверху и накрывает подпись, не заголовок;
    падение быстрее, общая длина ≈ 2,8 с. Подписи, которые не влезают целиком, скрываются.
@@ -150,37 +153,116 @@
     }
     window.__hero = { t: t, shift: mobile ? null : shift(t), p2: mobile ? 0 : wx(t), p1: mobile ? 0 : wx(t - LAG), push: mobile ? 0 : pushTarget(t) };
   }
-  function finish() {
+  var fly = hero.querySelector('.fly'), arr = hero.querySelector('.arr');
+  var DWELL = 3500, FADE = 560;                                    // после финала держим 3,5 с, затем 560 мс плавный сброс
+  var CYCLE = TEND + DWELL + FADE;
+  function easeInOut(u) { u = Math.min(1, Math.max(0, u)); return u * u * (3 - 2 * u); }
+
+  function clearInline() {
+    [w1, w2, contact].concat(cards).forEach(function (e) {
+      if (!e) return;
+      e.style.removeProperty('transform');
+      e.style.removeProperty('opacity');
+    });
+    if (fly) fly.style.removeProperty('opacity');
+    if (arr) arr.style.removeProperty('opacity');
+    tower.classList.remove('play');
+    pic.classList.remove('play-fly');
+    void pic.offsetHeight;
+  }
+
+  function fadeOut(u) {                                            // u: 0…1, карточки растворяются, слова на десктопе возвращаются в ровное
+    var p = 1 - easeInOut(u);
+    if (!mobile) {
+      tf(w2, W2, p); tf(w1, W1, p);
+      var s = shift(TEND);
+      cards.forEach(function (c) {
+        var r = c.style.getPropertyValue('--r') || '0deg';
+        c.style.opacity = p.toFixed(3);
+        c.style.transform = 'translateY(' + (s + 28 * (1 - p)).toFixed(3) + 'px) rotate(' + r + ')';
+      });
+      if (contact) contact.style.opacity = p.toFixed(3);
+    } else {
+      cards.forEach(function (c) { c.style.opacity = p.toFixed(3); });
+    }
+    if (fly) fly.style.opacity = p.toFixed(3);
+    if (arr) arr.style.opacity = p.toFixed(3);
+  }
+
+  function finishStatic() {                                        // только для ?t= заморозки на финале; цикл сюда не заходит
     root.classList.remove('ahero-anim');
-    [w1, w2, contact].concat(cards).forEach(function (e) { e.style.removeProperty('transform'); e.style.removeProperty('opacity'); });
-    tower.classList.remove('play'); pic.classList.remove('play-fly');
-    /* пересобрать слои картинки (карточки, стрелка, маскот) в том же кадре: иначе Chrome оставляет растр от анимации и края расходятся с v5 на 1 тон */
+    clearInline();
     pic.style.display = 'none'; void pic.offsetHeight; pic.style.removeProperty('display');
     if (typeof window.__aheroFitLabels === 'function') window.__aheroFitLabels();
     document.body.dataset.done = '1';
   }
 
+  var inView = true, visPaused = false, pausedAt = 0;
+  try {
+    var io = new IntersectionObserver(function (entries) {
+      inView = !!(entries[0] && entries[0].isIntersecting);
+    }, { threshold: 0.01 });
+    io.observe(hero);
+  } catch (err) { inView = true; }
+  function isActive() { return !document.hidden && inView; }
+  function pauseAnims() {
+    if (hero.getAnimations) hero.getAnimations({ subtree: true }).forEach(function (an) { try { an.pause(); } catch (e) {} });
+  }
+  function resumeAnims() {
+    if (hero.getAnimations) hero.getAnimations({ subtree: true }).forEach(function (an) { try { an.play(); } catch (e) {} });
+  }
+
   function run() {
-    var LANDED = liftEnd(N);                                       // последняя карточка встала, стопка остановилась
-    if (mobile) tower.classList.add('play');                       // мобильные карточки: CSS-анимация (спек)
-    if (freeze !== null) {                                         // отладочный стоп-кадр
+    var LANDED = liftEnd(N);
+    if (mobile) tower.classList.add('play');
+    if (freeze !== null) {                                         // отладочный стоп-кадр, без цикла
       if (freeze >= LANDED) pic.classList.add('play-fly');
+      if (freeze >= TEND) { frame(TEND); finishStatic(); document.body.dataset.frozen = '1'; return; }
       requestAnimationFrame(function () { requestAnimationFrame(function () {
         document.getAnimations().forEach(function (an) {
           var el = an.effect && an.effect.target, own = 0;
-          if (el && el.closest && !el.closest('.tower') && el.closest('.pic')) own = LANDED;   // летящая карточка и стрелка стартуют после посадки
+          if (el && el.closest && !el.closest('.tower') && el.closest('.pic')) own = LANDED;
           an.currentTime = Math.max(0, freeze - own); an.pause();
         });
         frame(freeze); if (typeof window.__aheroFitLabels === 'function') window.__aheroFitLabels(); document.body.dataset.frozen = '1';
       }); });
       return;
     }
-    var t0 = performance.now(), flew = false;
-    (function loop(now) {
+    var t0 = performance.now(), flew = false, marked = false;
+    (function tick(now) {
+      if (!isActive()) {
+        if (!visPaused) { visPaused = true; pausedAt = now; pauseAnims(); }
+        requestAnimationFrame(tick);
+        return;
+      }
+      if (visPaused) { t0 += now - pausedAt; visPaused = false; resumeAnims(); }
       var t = now - t0;
-      if (!flew && t >= LANDED) { pic.classList.add('play-fly'); flew = true; }
-      if (t >= TEND) { finish(); return; }
-      frame(t); requestAnimationFrame(loop);
+      if (t >= CYCLE) {
+        clearInline();
+        t0 = now;
+        flew = false;
+        if (mobile) tower.classList.add('play');
+        t = 0;
+      }
+      if (!flew && t >= LANDED && t < TEND + DWELL) { pic.classList.add('play-fly'); flew = true; }
+      if (t <= TEND) {
+        frame(t);
+        if (t >= TEND && !marked) {
+          marked = true;
+          document.body.dataset.done = '1';
+          if (typeof window.__aheroFitLabels === 'function') window.__aheroFitLabels();
+        }
+      } else if (t < TEND + DWELL) {
+        frame(TEND);
+        if (!marked) {
+          marked = true;
+          document.body.dataset.done = '1';
+          if (typeof window.__aheroFitLabels === 'function') window.__aheroFitLabels();
+        }
+      } else {
+        fadeOut((t - TEND - DWELL) / FADE);
+      }
+      requestAnimationFrame(tick);
     })(t0);
   }
   (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(run);

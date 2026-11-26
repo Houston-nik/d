@@ -16,13 +16,64 @@
   fit(); addEventListener('resize', fit);
 })();
 
+/* На мобиле скрыть текст карточки, если заголовок или подпись режется краем другой карточки,
+   низом .pic, стрелкой или маскотом. Замер — по финальным позициям (класс .measuring). */
+(function () {
+  var hero = document.querySelector('.ahero');
+  if (!hero) return;
+  var pic = hero.querySelector('.pic');
+  var av = hero.querySelector('.av');
+  var arr = hero.querySelector('.arr');
+  if (!pic) return;
+  var slack = 1;
+
+  function overlaps(a, b) {
+    return a.left < b.right - slack && a.right > b.left + slack && a.top < b.bottom - slack && a.bottom > b.top + slack;
+  }
+  function fullyInside(r, box) {
+    return r.top >= box.top - slack && r.bottom <= box.bottom + slack && r.left >= box.left - slack && r.right <= box.right + slack;
+  }
+  function boxAt(c, el) {
+    /* финальная позиция без transform анимации: offset* не учитывает translate/rotate */
+    var picR = pic.getBoundingClientRect();
+    var x = picR.left + c.offsetLeft + el.offsetLeft;
+    var y = picR.top + c.offsetTop + el.offsetTop;
+    return { left: x, top: y, right: x + el.offsetWidth, bottom: y + el.offsetHeight, width: el.offsetWidth, height: el.offsetHeight };
+  }
+  function fitLabels() {
+    if (!matchMedia('(max-width: 767px)').matches) return;
+    var cards = [].slice.call(hero.querySelectorAll('.tc.mob-only'));
+    var picR = pic.getBoundingClientRect();
+    var blockers = [av, arr].filter(Boolean).map(function (el) { return el.getBoundingClientRect(); });
+    cards.forEach(function (c) {
+      var b = c.querySelector('b');
+      var s = c.querySelector('span');
+      if (!b) return;
+      var br = boxAt(c, b);
+      var fitsX = b.scrollWidth <= b.clientWidth + 1;
+      var titleOk = br.width > 0 && br.height > 0 && fitsX && fullyInside(br, picR) && !blockers.some(function (blk) { return overlaps(br, blk); });
+      b.style.visibility = titleOk ? 'visible' : 'hidden';
+      if (s) {
+        var sr = boxAt(c, s);
+        var subOk = titleOk && sr.width > 0 && fullyInside(sr, picR) && !blockers.some(function (blk) { return overlaps(sr, blk); });
+        s.style.visibility = subOk ? 'visible' : 'hidden';
+      }
+    });
+  }
+  window.__aheroFitLabels = fitLabels;
+  function go() { fitLabels(); }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(go); else go();
+  addEventListener('resize', function () { fitLabels(); });
+})();
+
 /* 3. Анимация (v2, правка Дизайнера 26.11): слова стоят ровно, пока стопка до них не дошла.
    Десктоп: стопка растёт снизу (новая карточка въезжает под стопку и поднимает её), верх стопки
    физически упирается в хвост «у» и толкает слово: 6-я карточка ≈ 40 % финального наклона, 7-я 100 %.
    Слово сидит на карточке (контакт ≤ 2 px), после толчка пружинит вверх и возвращается на карточку.
    «рутину» повторяет движение «сотруднику» с задержкой 60 мс. Финал = статичный v5.
    Мобильный (< 768, стопка под кнопкой, контакта со словом нет): строки заголовка всегда ровные;
-   куча из 12 карточек (mob-only), падение быстрее, общая длина ≈ 2,8 с.
+   куча из 12 карточек (mob-only) ступенькой: новая падает сверху и накрывает подпись, не заголовок;
+   падение быстрее, общая длина ≈ 2,8 с. Подписи, которые не влезают целиком, скрываются.
    Отладка: ?t=1234 замораживает кадр на 1234 мс от старта (для кадров и замеров). */
 (function () {
   var root = document.documentElement;
@@ -31,7 +82,7 @@
   var mobile = matchMedia('(max-width: 767px)').matches;
   var K = 1;                                                       // наклон только на десктопе; на мобильном слова не крутим
   var W2 = { y: -2 * K, r: -3.5 * K }, W1 = { y: -3 * K, r: -2.8 * K }, LAG = 60;
-  var N = mobile ? 12 : 7, STEP = mobile ? 160 : 180, START = mobile ? 150 : 200, RISE = mobile ? 200 : 320, FLY = 400, ARROW = 600;
+  var N = mobile ? 12 : 7, STEP = mobile ? 160 : 180, START = mobile ? 120 : 200, RISE = mobile ? 200 : 320, FLY = 400, ARROW = 600;
   var P_LAST2 = 0.4;                                              // предпоследняя карточка: 40 % финала
   var tower = hero.querySelector('.tower'), pic = hero.querySelector('.pic');
   var w1 = hero.querySelector('.w1'), w2 = hero.querySelector('.w2'), contact = hero.querySelector('.contact');
@@ -105,6 +156,7 @@
     tower.classList.remove('play'); pic.classList.remove('play-fly');
     /* пересобрать слои картинки (карточки, стрелка, маскот) в том же кадре: иначе Chrome оставляет растр от анимации и края расходятся с v5 на 1 тон */
     pic.style.display = 'none'; void pic.offsetHeight; pic.style.removeProperty('display');
+    if (typeof window.__aheroFitLabels === 'function') window.__aheroFitLabels();
     document.body.dataset.done = '1';
   }
 
@@ -113,12 +165,15 @@
     if (mobile) tower.classList.add('play');                       // мобильные карточки: CSS-анимация (спек)
     if (freeze !== null) {                                         // отладочный стоп-кадр
       if (freeze >= LANDED) pic.classList.add('play-fly');
-      document.getAnimations().forEach(function (an) {
-        var el = an.effect && an.effect.target, own = 0;
-        if (el && el.closest && !el.closest('.tower') && el.closest('.pic')) own = LANDED;   // летящая карточка и стрелка стартуют после посадки
-        an.currentTime = Math.max(0, freeze - own); an.pause();
-      });
-      frame(freeze); document.body.dataset.frozen = '1'; return;
+      requestAnimationFrame(function () { requestAnimationFrame(function () {
+        document.getAnimations().forEach(function (an) {
+          var el = an.effect && an.effect.target, own = 0;
+          if (el && el.closest && !el.closest('.tower') && el.closest('.pic')) own = LANDED;   // летящая карточка и стрелка стартуют после посадки
+          an.currentTime = Math.max(0, freeze - own); an.pause();
+        });
+        frame(freeze); if (typeof window.__aheroFitLabels === 'function') window.__aheroFitLabels(); document.body.dataset.frozen = '1';
+      }); });
+      return;
     }
     var t0 = performance.now(), flew = false;
     (function loop(now) {

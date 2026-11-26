@@ -21,20 +21,21 @@
    физически упирается в хвост «у» и толкает слово: 6-я карточка ≈ 40 % финального наклона, 7-я 100 %.
    Слово сидит на карточке (контакт ≤ 2 px), после толчка пружинит вверх и возвращается на карточку.
    «рутину» повторяет движение «сотруднику» с задержкой 60 мс. Финал = статичный v5.
-   Мобильный: стопка под кнопкой, контакта со словом нет; слова ровные до 3-й карточки, 3-я ≈ 40 %, 4-я 100 %.
+   Мобильный (< 768, стопка под кнопкой, контакта со словом нет): строки заголовка всегда ровные;
+   куча из 12 карточек (mob-only), падение быстрее, общая длина ≈ 2,8 с.
    Отладка: ?t=1234 замораживает кадр на 1234 мс от старта (для кадров и замеров). */
 (function () {
   var root = document.documentElement;
   var hero = document.querySelector('.ahero');
   if (!hero || !root.classList.contains('ahero-anim')) return;               // reduced-motion: статичный v5
   var mobile = matchMedia('(max-width: 767px)').matches;
-  var K = mobile ? 0.6 : 1;                                       // спек: на мобильном наклон × 0.6
+  var K = 1;                                                       // наклон только на десктопе; на мобильном слова не крутим
   var W2 = { y: -2 * K, r: -3.5 * K }, W1 = { y: -3 * K, r: -2.8 * K }, LAG = 60;
-  var N = mobile ? 4 : 7, STEP = 180, START = 200, RISE = 320, FLY = 400, ARROW = 600;
+  var N = mobile ? 12 : 7, STEP = mobile ? 160 : 180, START = mobile ? 150 : 200, RISE = mobile ? 200 : 320, FLY = 400, ARROW = 600;
   var P_LAST2 = 0.4;                                              // предпоследняя карточка: 40 % финала
   var tower = hero.querySelector('.tower'), pic = hero.querySelector('.pic');
   var w1 = hero.querySelector('.w1'), w2 = hero.querySelector('.w2'), contact = hero.querySelector('.contact');
-  var cards = [].slice.call(tower.querySelectorAll('.tc')).sort(function (a, b) { return a.style.getPropertyValue('--i') - b.style.getPropertyValue('--i'); });
+  var cards = [].slice.call(tower.querySelectorAll(mobile ? '.tc.mob-only' : '.tc:not(.mob-only)')).sort(function (a, b) { return a.style.getPropertyValue('--i') - b.style.getPropertyValue('--i'); });
   var freeze = (function () { var m = /[?&]t=(\d+)/.exec(location.search); return m ? +m[1] : null; })();
 
   function bez(x1, y1, x2, y2) {                                   // cubic-bezier как в CSS
@@ -85,8 +86,8 @@
 
   function tf(el, f, p) { el.style.transform = 'translateY(' + (f.y * p).toFixed(3) + 'px) rotate(' + (f.r * p).toFixed(4) + 'deg)'; }
   function frame(t) {
-    tf(w2, W2, wx(t)); tf(w1, W1, wx(t - LAG));
     if (!mobile) {
+      tf(w2, W2, wx(t)); tf(w1, W1, wx(t - LAG));
       var s = shift(t);
       cards.forEach(function (c, i) {
         var k = i + 1, raw = (t - tk(k)) / RISE;
@@ -96,7 +97,7 @@
       });
       contact.style.opacity = ek(7, t).toFixed(3);
     }
-    window.__hero = { t: t, shift: mobile ? null : shift(t), p2: wx(t), p1: wx(t - LAG), push: pushTarget(t) };
+    window.__hero = { t: t, shift: mobile ? null : shift(t), p2: mobile ? 0 : wx(t), p1: mobile ? 0 : wx(t - LAG), push: mobile ? 0 : pushTarget(t) };
   }
   function finish() {
     root.classList.remove('ahero-anim');

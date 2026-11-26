@@ -62,9 +62,35 @@ html.ahero-anim .ahero .arr path{stroke-dasharray:1 1;stroke-dashoffset:1}
 html.ahero-anim .ahero .play-fly .arr-line{animation:ahero-draw .38s cubic-bezier(.4,0,.2,1) .2s forwards}
 html.ahero-anim .ahero .play-fly .arr-head{animation:ahero-draw .12s ease-out .58s forwards}
 @keyframes ahero-draw{to{stroke-dashoffset:0}}
-/* ---------- Мобильный (< 768): заголовок, строка, кнопка, картинка. Стопка под кнопкой, 4 карточки, наклон слов × 0.6 ---------- */
-@media (max-width:767px){.ahero{height:auto;min-height:100svh}.ahero .stage, .ahero .stage.scaled{position:relative;left:auto;width:auto;height:auto;transform:none;padding:20px 20px 28px}.ahero .brand, .ahero .nav, .ahero .hero-h1, .ahero .sub, .ahero .btn2, .ahero .note, .ahero .tower, .ahero .fly, .ahero .arr, .ahero .av{position:static}.ahero .brand{gap:10px;font-size:18px}.ahero .brand img{width:36px;height:36px}.ahero .nav{display:none}.ahero .hero-h1{margin-top:44px;font-size:min(44px,11.2vw);letter-spacing:-.025em}.ahero .w1{transform:translateY(-1.8px) rotate(-1.68deg)}.ahero .w2{transform:translateY(-1.2px) rotate(-2.1deg)}.ahero .sub{width:auto;margin-top:18px;font-size:17px;line-height:1.45}.ahero .btn2{display:block;margin-top:26px;height:60px;padding:0 16px;text-align:center;font-size:min(18px,4.7vw);line-height:60px;box-shadow:0 10px 22px rgba(209,20,155,.25)}.ahero .note{width:auto;margin-top:10px;font-size:15px}/* картинка: стопка 4 карточек слева, сотрудник справа, стрелка «передай» между ними */.ahero .pic{position:relative;height:250px;margin-top:30px}.ahero .tower{position:absolute;left:0;top:0;right:auto;bottom:auto;width:calc(100% - 104px);height:250px}.ahero .tower .tc{left:var(--mx);top:var(--my);width:calc(100% - 14px);height:104px;border-radius:14px;padding:19px 18px}.ahero .tower .tc:nth-child(-n+3){display:none}/* i = 6,5,4 скрыты: видно 4 карточки */.ahero .tc b{font-size:min(19px,4.8vw)}.ahero .tc span{font-size:15px;margin-top:10px}.ahero .contact{display:none}.ahero .fly{display:none}.ahero .av{position:absolute;left:auto;top:auto;right:0;bottom:10px;width:104px;height:104px}.ahero .av::before{box-shadow:0 0 0 4px var(--bg),0 8px 18px rgba(60,40,120,.12)}.ahero .arr{position:absolute;left:auto;right:26px;top:4px;width:54px;height:auto}html.ahero-anim .ahero .tower.play .tc{animation-delay:calc(.2s + (3 - var(--i)) * .18s)}html.ahero-anim .ahero .tower.play .contact{animation:none}}
-@media (max-width:767px) and (prefers-reduced-motion:reduce){html.ahero-anim .ahero .w1{transform:translateY(-1.8px) rotate(-1.68deg)}html.ahero-anim .ahero .w2{transform:translateY(-1.2px) rotate(-2.1deg)}}
+.ahero .tc.mob-only{display:none}
+/* ---------- Мобильный (< 768): заголовок, строка, кнопка, визуал. Стопка под кнопкой — 12 карточек «завал»; строки заголовка всегда ровные ---------- */
+@media (max-width:767px){
+  .ahero{height:auto;min-height:100svh;overflow:hidden;display:flex;flex-direction:column}
+  .ahero .stage, .ahero .stage.scaled{position:relative;left:auto;width:auto;height:auto;transform:none;padding:20px 20px 0;flex:1;display:flex;flex-direction:column;min-height:0}
+  .ahero .brand, .ahero .nav, .ahero .hero-h1, .ahero .sub, .ahero .btn2, .ahero .note, .ahero .tower, .ahero .fly, .ahero .arr, .ahero .av{position:static}
+  .ahero .brand{gap:10px;font-size:18px;flex-shrink:0}
+  .ahero .brand img{width:36px;height:36px}
+  .ahero .nav{display:none}
+  .ahero .hero-h1{margin-top:36px;font-size:min(44px,11.2vw);letter-spacing:-.025em;flex-shrink:0}
+  .ahero .w1,.ahero .w2{transform:none;text-shadow:none}
+  .ahero .sub{width:auto;margin-top:16px;font-size:17px;line-height:1.45;flex-shrink:0}
+  .ahero .btn2{display:block;margin-top:22px;height:60px;padding:0 16px;text-align:center;font-size:min(18px,4.7vw);line-height:60px;box-shadow:0 10px 22px rgba(209,20,155,.25);flex-shrink:0}
+  .ahero .note{width:auto;margin-top:10px;font-size:15px;flex-shrink:0}
+  .ahero .pic{position:relative;flex:1 1 auto;min-height:200px;height:auto;margin-top:20px;overflow:hidden}
+  .ahero .tower{position:absolute;left:0;top:0;right:auto;bottom:0;width:calc(100% - 100px);height:auto}
+  .ahero .tc.desk{display:none}
+  .ahero .tc.mob-only{display:block}
+  .ahero .tower .tc{left:var(--mx);top:var(--my);width:calc(100% - 16px);max-width:100%;height:88px;border-radius:14px;padding:15px 16px;box-sizing:border-box}
+  .ahero .tc b{font-size:min(17px,4.6vw);line-height:1.15}
+  .ahero .tc span{font-size:13px;margin-top:7px}
+  .ahero .contact{display:none}
+  .ahero .fly{display:none}
+  .ahero .av{position:absolute;left:auto;top:auto;right:0;bottom:20px;width:104px;height:104px}
+  .ahero .av::before{box-shadow:0 0 0 4px var(--bg),0 8px 18px rgba(60,40,120,.12)}
+  .ahero .arr{position:absolute;left:auto;right:24px;top:8px;width:54px;height:auto}
+  html.ahero-anim .ahero .tower.play .tc{animation:ahero-rise .2s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(.15s + (11 - var(--i)) * .16s)}
+  html.ahero-anim .ahero .tower.play .contact{animation:none}
+}
 @media (prefers-reduced-motion:reduce){.ahero .tower .tc{opacity:1;animation:none!important}}
 .ahero .pic{position:absolute;inset:0}
 @media (max-width:767px){.ahero .pic{position:relative;inset:auto}}

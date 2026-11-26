@@ -15,8 +15,8 @@
 <link rel="preload" href="fonts/Onest-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/Literata-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/GolosText-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/style.css?v=8">
-<link rel="stylesheet" href="css/hero.css?v=8">
+<link rel="stylesheet" href="css/style.css?v=9">
+<link rel="stylesheet" href="css/hero.css?v=9">
 <script>
 /* Класс ahero-anim ставится до первой отрисовки, чтобы не мигал финальный кадр. Без JS и при reduced-motion остаётся статичный v5. */
 if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('ahero-anim');
@@ -46,13 +46,25 @@ if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEl
   <p class="note" data-slot="b1-note">Приходи, разберём твою ситуацию за&nbsp;15&nbsp;минут</p>
   <div class="pic" data-slot="b1-image">
   <div class="tower" aria-hidden="true">
-    <div class="tc" style="--i:6;--r:0.5deg;--x:692px;--y:686px;z-index:24"></div>
-    <div class="tc" style="--i:5;--r:-0.9deg;--x:701px;--y:640px;z-index:25"></div>
-    <div class="tc" style="--i:4;--r:1.4deg;--x:694px;--y:593px;z-index:26"></div>
-    <div class="tc" style="--i:3;--r:-0.6deg;--x:702px;--y:547px;--mx:10px;--my:130px;z-index:27"></div>
-    <div class="tc" style="--i:2;--r:0.9deg;--x:693px;--y:501px;--mx:4px;--my:96px;z-index:28"></div>
-    <div class="tc" style="--i:1;--r:-1.2deg;--x:700px;--y:454px;--mx:9px;--my:62px;z-index:29"></div>
-    <div class="tc top" style="--i:0;--r:-3.5deg;--x:696px;--y:408px;--mx:6px;--my:28px;z-index:30"><b>Разобрать заявки</b><span>каждый день · час</span></div>
+    <div class="tc desk" style="--i:6;--r:0.5deg;--x:692px;--y:686px;z-index:24"></div>
+    <div class="tc desk" style="--i:5;--r:-0.9deg;--x:701px;--y:640px;z-index:25"></div>
+    <div class="tc desk" style="--i:4;--r:1.4deg;--x:694px;--y:593px;z-index:26"></div>
+    <div class="tc desk" style="--i:3;--r:-0.6deg;--x:702px;--y:547px;--mx:10px;--my:130px;z-index:27"></div>
+    <div class="tc desk" style="--i:2;--r:0.9deg;--x:693px;--y:501px;--mx:4px;--my:96px;z-index:28"></div>
+    <div class="tc desk" style="--i:1;--r:-1.2deg;--x:700px;--y:454px;--mx:9px;--my:62px;z-index:29"></div>
+    <div class="tc desk top" style="--i:0;--r:-3.5deg;--x:696px;--y:408px;--mx:6px;--my:28px;z-index:30"><b>Разобрать заявки</b><span>каждый день · час</span></div>
+    <div class="tc mob-only" style="--i:11;--r:2.2deg;--mx:4px;--my:440px;z-index:20"><b>Разобрать комментарии</b><span>за&nbsp;неделю</span></div>
+    <div class="tc mob-only" style="--i:10;--r:-0.7deg;--mx:8px;--my:400px;z-index:21"><b>Напомнить о&nbsp;созвоне</b><span>3&nbsp;клиента</span></div>
+    <div class="tc mob-only" style="--i:9;--r:3.4deg;--mx:18px;--my:362px;z-index:22"><b>Проверить посты</b><span>4&nbsp;площадки</span></div>
+    <div class="tc mob-only" style="--i:8;--r:-1.8deg;--mx:0px;--my:322px;z-index:23"><b>Согласовать текст</b><span>с&nbsp;клиентом</span></div>
+    <div class="tc mob-only" style="--i:7;--r:1.0deg;--mx:16px;--my:284px;z-index:24"><b>Собрать кейс</b><span>из&nbsp;чатов</span></div>
+    <div class="tc mob-only" style="--i:6;--r:-2.8deg;--mx:-4px;--my:244px;z-index:25"><b>Свести цифры</b><span>в&nbsp;таблицу</span></div>
+    <div class="tc mob-only" style="--i:5;--r:2.4deg;--mx:22px;--my:206px;z-index:26"><b>Написать отклики</b><span>8&nbsp;штук</span></div>
+    <div class="tc mob-only" style="--i:4;--r:-1.1deg;--mx:2px;--my:166px;z-index:27"><b>Отобрать заказы</b><span>утро, биржа</span></div>
+    <div class="tc mob-only" style="--i:3;--r:3.1deg;--mx:14px;--my:128px;z-index:28"><b>Собрать отчёт</b><span>за&nbsp;вчера</span></div>
+    <div class="tc mob-only" style="--i:2;--r:-2.2deg;--mx:-2px;--my:90px;z-index:29"><b>Закрыть почту</b><span>27&nbsp;писем</span></div>
+    <div class="tc mob-only" style="--i:1;--r:1.6deg;--mx:20px;--my:52px;z-index:30"><b>Ответить в&nbsp;Telegram</b><span>40&nbsp;сообщений</span></div>
+    <div class="tc mob-only top" style="--i:0;--r:-2.8deg;--mx:6px;--my:14px;z-index:31"><b>Разобрать заявки</b><span>каждый день · час</span></div>
     <div class="contact"></div>
   </div>
   <div class="tc fly paper" aria-hidden="true"><b>Разобрать заявки</b><span>каждый день · час</span></div>
@@ -249,7 +261,7 @@ if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEl
   </div>
 </footer>
 
-<script src="js/hero.js?v=8"></script>
-<script src="js/main.js?v=8"></script>
+<script src="js/hero.js?v=9"></script>
+<script src="js/main.js?v=9"></script>
 </body>
 </html>

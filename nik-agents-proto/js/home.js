@@ -3,14 +3,14 @@
   var E=NIK.esc,reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   NIK.load().then(function(D){
     var ALL=D.agents,A=NIK.ready(ALL),C=D.cases,TOTAL=ALL.length;
-    document.getElementById('heroSub').textContent=A.length+' '+NIK.agentWord(A.length)+', ежедневно выполняющих задачи на уровне реального сотрудника.';
+    document.getElementById('heroSub').textContent='30+ агентов, ежедневно выполняющих задачи на уровне реального сотрудника.';
     /* карусель */
     var wrap=document.getElementById('avsWrap');
-    wrap.innerHTML=A.map(function(a,i){return '<div class="swiper-slide" role="group" aria-roledescription="слайд" aria-label="'+E(a.name)+', '+(i+1)+' из '+A.length+'"><div class="av">'+NIK.layerFig(a)+'</div></div>'}).join('');
+    wrap.innerHTML=A.map(function(a,i){return '<div class="swiper-slide" role="group" aria-roledescription="слайд" aria-label="'+E(a.name)+', '+(i+1)+'"><div class="av">'+NIK.layerFig(a)+'</div></div>'}).join('');
     var now=document.getElementById('now');
     function show(i){
       var a=A[i];
-      now.innerHTML='<p class="cnt">'+(i+1)+' из '+A.length+'</p><h2>'+E(a.name)+'</h2><p class="dep">'+E(a.role)+'</p><p class="sk">'+E(a.skills_short)+'</p><a class="btn" href="'+NIK.agentUrl(a)+'" aria-label="Подробнее об агенте: '+E(a.name)+'">Подробнее</a>';
+      now.innerHTML='<p class="cnt">№ '+(i+1)+'</p><h2>'+E(a.name)+'</h2><p class="dep">'+E(a.role)+'</p><p class="sk">'+E(a.skills_short)+'</p><a class="btn" href="'+NIK.agentUrl(a)+'" aria-label="Подробнее об агенте: '+E(a.name)+'">Подробнее</a>';
     }
     var el=document.getElementById('avs');
     /* геометрия: кружки стоят друг за другом, наезжают на 30% диаметра, размер растёт к центру */
@@ -40,8 +40,8 @@
     measure();sync();sw.update();paint();NIK.initAvatarAnim(sw);
     window.__sw=sw;
     /* на главной только первый ряд, весь список на agents.html */
-    document.getElementById('agCount').textContent=A.length+' '+NIK.agentWord(A.length)+' в команде.';
-    document.getElementById('allBtn').textContent='Посмотреть всех '+A.length;
+    document.getElementById('agCount').textContent='30+ агентов в команде.';
+    document.getElementById('allBtn').textContent='Посмотреть всех 30+';
     document.getElementById('grid').innerHTML=A.slice(0,4).map(NIK.agentCard).join('');
     /* кейсы */
     var feed=document.getElementById('feed');
